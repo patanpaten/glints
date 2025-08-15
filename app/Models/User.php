@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -44,5 +47,53 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the role that owns the user.
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the company associated with the user.
+     */
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class);
+    }
+
+    /**
+     * Get the job seeker associated with the user.
+     */
+    public function jobSeeker(): HasOne
+    {
+        return $this->hasOne(JobSeeker::class);
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role->slug === 'admin';
+    }
+
+    /**
+     * Check if the user is a company.
+     */
+    public function isCompany(): bool
+    {
+        return $this->role->slug === 'company';
+    }
+
+    /**
+     * Check if the user is a job seeker.
+     */
+    public function isJobSeeker(): bool
+    {
+        return $this->role->slug === 'job-seeker';
     }
 }
