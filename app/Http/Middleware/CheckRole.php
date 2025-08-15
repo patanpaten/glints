@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class CheckRole
 {
@@ -26,15 +27,15 @@ class CheckRole
         $role = strtolower($role);
 
         // Get role from user's role relationship
-        if (!$user->role || strtolower($user->role->name) !== $role) {
+        if (!$user->role || strtolower($user->role->slug) !== $role) {
             // Redirect based on user's actual role
             if ($user->role) {
-                switch (strtolower($user->role->name)) {
+                switch (strtolower($user->role->slug)) {
                     case 'admin':
                         return redirect()->route('admin.dashboard');
                     case 'company':
                         return redirect()->route('company.dashboard');
-                    case 'job_seeker':
+                    case 'job-seeker':
                         return redirect()->route('jobseeker.dashboard');
                     default:
                         return redirect()->route('home');

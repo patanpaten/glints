@@ -79,7 +79,7 @@ Route::prefix('company')->name('company.')->middleware(['auth', 'role:company'])
 });
 
 // Job Seeker routes
-Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job_seeker'])->group(function () {
+Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-seeker'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [JobSeekerController::class, 'dashboard'])->name('dashboard');
     
