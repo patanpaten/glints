@@ -26,7 +26,7 @@ class ExperienceController extends Controller
         $this->jobSeekerService = $jobSeekerService;
         $this->experienceService = $experienceService;
         $this->middleware('auth');
-        $this->middleware('role:job_seeker');
+        $this->middleware('role:job-seeker');
     }
 
     /**

@@ -26,7 +26,7 @@ class EducationController extends Controller
         $this->jobSeekerService = $jobSeekerService;
         $this->educationService = $educationService;
         $this->middleware('auth');
-        $this->middleware('role:job_seeker');
+        $this->middleware('role:job-seeker');
     }
 
     /**

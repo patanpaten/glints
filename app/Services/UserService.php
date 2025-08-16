@@ -26,11 +26,7 @@ class UserService extends BaseService
      */
     public function createUser(array $data): User
     {
-        // Ensure password is hashed
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
+        // Password will be automatically hashed by the User model's cast
         return $this->repository->create($data);
     }
 
@@ -43,11 +39,7 @@ class UserService extends BaseService
      */
     public function updateUser(int $userId, array $data): User
     {
-        // Hash password if it's being updated
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
+        // Password will be automatically hashed by the User model's cast
         return $this->repository->update($userId, $data);
     }
 

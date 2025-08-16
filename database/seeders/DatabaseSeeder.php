@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             JobCategorySeeder::class,
             SkillSeeder::class,
+            PremiumFeatureSeeder::class,
         ]);
 
         // Create admin user
