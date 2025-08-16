@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -15,8 +13,6 @@ class AuthController extends Controller
 
     /**
      * AuthController constructor.
-     *
-     * @param UserService $userService
      */
     public function __construct(UserService $userService)
     {
@@ -25,8 +21,6 @@ class AuthController extends Controller
 
     /**
      * Show login form.
-     *
-     * @return \Illuminate\View\View
      */
     public function showLoginForm()
     {
@@ -35,48 +29,47 @@ class AuthController extends Controller
 
     /**
      * Handle login request.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()
+            return back()
                 ->withErrors($validator)
                 ->withInput($request->except('password'));
         }
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             $user = Auth::user();
-            
-            if ($user->isAdmin()) {
+            $role = $user->role?->slug; // aman kalau role null
+
+            if ($role === 'admin') {
                 return redirect()->intended(route('admin.dashboard'));
-            } elseif ($user->isCompany()) {
-                return redirect()->intended(route('company.dashboard'));
-            } else {
-                return redirect()->intended(route('jobseeker.dashboard'));
             }
+
+            if ($role === 'company') {
+                return redirect()->intended(route('company.dashboard'));
+            }
+
+            // default ke jobseeker/dashboard
+            return redirect()->intended(route('jobseeker.dashboard'));
         }
 
-        return redirect()->back()
-            ->withErrors(['email' => 'These credentials do not match our records.'])
+        return back()
+            ->withErrors(['email' => 'Email atau kata sandi tidak cocok.'])
             ->withInput($request->except('password'));
     }
 
     /**
      * Show registration form.
-     *
-     * @return \Illuminate\View\View
      */
     public function showRegistrationForm()
     {
@@ -85,48 +78,47 @@ class AuthController extends Controller
 
     /**
      * Handle registration request.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'role_id' => 'required|exists:roles,id',
+            'role_id'  => 'required|exists:roles,id',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()
+            return back()
                 ->withErrors($validator)
                 ->withInput($request->except('password', 'password_confirmation'));
         }
 
+        // Kirim password mentah ke service, model akan hash otomatis
         $user = $this->userService->createUser([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => $request->password,
-            'role_id' => $request->role_id,
+            'role_id'  => $request->role_id,
         ]);
 
         Auth::login($user);
+        $request->session()->regenerate();
 
+        // Redirect sesuai role
         if ($user->isCompany()) {
             return redirect()->route('company.profile.create');
-        } elseif ($user->isJobSeeker()) {
-            return redirect()->route('jobseeker.profile.create');
-        } else {
-            return redirect()->route('home');
         }
+
+        if ($user->isJobSeeker()) {
+            return redirect()->route('jobseeker.profile.create');
+        }
+
+        return redirect()->route('home');
     }
 
     /**
      * Log the user out.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
     {

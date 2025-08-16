@@ -14,35 +14,43 @@ class CheckRole
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string  $role
+     * @param  string|null  $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, $role = null)
     {
         if (!Auth::check()) {
             return redirect('login');
         }
 
         $user = Auth::user();
-        $role = strtolower($role);
-
-        // Get role from user's role relationship
-        if (!$user->role || strtolower($user->role->slug) !== $role) {
-            // Redirect based on user's actual role
-            if ($user->role) {
-                switch (strtolower($user->role->slug)) {
-                    case 'admin':
-                        return redirect()->route('admin.dashboard');
-                    case 'company':
-                        return redirect()->route('company.dashboard');
-                    case 'job-seeker':
-                        return redirect()->route('jobseeker.dashboard');
-                    default:
-                        return redirect()->route('home');
+        
+        // Ensure the user has the role relationship loaded
+        if ($role && !$user->relationLoaded('role')) {
+            $user->load('role');
+        }
+        
+        if ($role) {
+            $role = strtolower($role);
+            
+            // Get role from user's role relationship
+            if (!$user->role || strtolower($user->role->slug) !== $role) {
+                // Redirect based on user's actual role
+                if ($user->role) {
+                    switch (strtolower($user->role->slug)) {
+                        case 'admin':
+                            return redirect()->route('admin.dashboard');
+                        case 'company':
+                            return redirect()->route('company.dashboard');
+                        case 'job-seeker':
+                            return redirect()->route('jobseeker.dashboard');
+                        default:
+                            return redirect()->route('home');
+                    }
                 }
-            }
 
-            return redirect()->route('home')->with('error', 'You do not have permission to access this page.');
+                return redirect()->route('home')->with('error', 'You do not have permission to access this page.');
+            }
         }
 
         return $next($request);

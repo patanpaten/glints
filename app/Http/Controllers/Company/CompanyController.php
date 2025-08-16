@@ -165,4 +165,9 @@ class CompanyController extends Controller
         return redirect()->route('company.profile.edit')
             ->with('success', 'Company profile updated successfully!');
     }
+    public function create()
+{
+    return $this->createProfile();
+}
+
 }

@@ -26,7 +26,7 @@ class SkillController extends Controller
         $this->jobSeekerService = $jobSeekerService;
         $this->skillService = $skillService;
         $this->middleware('auth');
-        $this->middleware('role:job_seeker');
+        $this->middleware('role:job-seeker');
     }
 
     /**

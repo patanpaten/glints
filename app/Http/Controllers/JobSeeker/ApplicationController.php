@@ -31,8 +31,9 @@ class ApplicationController extends Controller
         $this->jobSeekerService = $jobSeekerService;
         $this->applicationService = $applicationService;
         $this->jobService = $jobService;
+        
         $this->middleware('auth');
-        $this->middleware('role:job_seeker');
+        $this->middleware('role:job-seeker');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Services\JobService;
 use App\Services\JobCategoryService;
 use App\Services\SkillService;
@@ -12,19 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
-    protected $jobService;
-    protected $jobCategoryService;
-    protected $skillService;
-    protected $companyService;
+    protected $jobService, $jobCategoryService, $skillService, $companyService;
 
-    /**
-     * JobController constructor.
-     *
-     * @param JobService $jobService
-     * @param JobCategoryService $jobCategoryService
-     * @param SkillService $skillService
-     * @param CompanyService $companyService
-     */
     public function __construct(
         JobService $jobService,
         JobCategoryService $jobCategoryService,
@@ -35,42 +25,38 @@ class JobController extends Controller
         $this->jobCategoryService = $jobCategoryService;
         $this->skillService = $skillService;
         $this->companyService = $companyService;
+
         $this->middleware('auth');
         $this->middleware('role:company');
     }
 
     /**
-     * Display a listing of the jobs.
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Ambil data company user login
      */
-    public function index()
+    private function getCompanyOrRedirect()
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
+        return $company;
+    }
+
+    public function index()
+    {
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         $jobs = $this->jobService->getPaginatedByCompanyId($company->id, 10);
 
         return view('company.jobs.index', compact('jobs', 'company'));
     }
 
-    /**
-     * Show the form for creating a new job.
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function create()
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         $categories = $this->jobCategoryService->all();
         $skills = $this->skillService->all();
@@ -78,20 +64,10 @@ class JobController extends Controller
         return view('company.jobs.create', compact('categories', 'skills', 'company'));
     }
 
-    /**
-     * Store a newly created job.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -113,44 +89,28 @@ class JobController extends Controller
         ]);
 
         $validated['company_id'] = $company->id;
-        $validated['is_active'] = $request->has('is_active');
-        $validated['is_featured'] = $request->has('is_featured');
+        $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_featured'] = $request->boolean('is_featured');
 
-        $skills = $request->input('skills', []);
+        $skills = $validated['skills'] ?? [];
+        unset($validated['skills']);
 
-        $jobData = $validated;
-        unset($jobData['skills']);
-
-        $job = $this->jobService->createJob($jobData);
+        $job = $this->jobService->createJob($validated);
 
         if (!empty($skills)) {
             $job->skills()->attach($skills);
         }
 
-        return redirect()->route('company.jobs.index')
-            ->with('success', 'Job created successfully!');
+        return redirect()->route('company.jobs.index')->with('success', 'Job created successfully!');
     }
 
-    /**
-     * Show the form for editing the job.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
-    public function edit($id)
+    public function edit(Job $job)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
-
-        $job = $this->jobService->findById($id);
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         if ($job->company_id !== $company->id) {
-            return redirect()->route('company.jobs.index')
-                ->with('error', 'You are not authorized to edit this job.');
+            return redirect()->route('company.jobs.index')->with('error', 'Unauthorized.');
         }
 
         $categories = $this->jobCategoryService->all();
@@ -160,27 +120,13 @@ class JobController extends Controller
         return view('company.jobs.edit', compact('job', 'categories', 'skills', 'selectedSkills', 'company'));
     }
 
-    /**
-     * Update the job.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Job $job)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
-
-        $job = $this->jobService->findById($id);
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         if ($job->company_id !== $company->id) {
-            return redirect()->route('company.jobs.index')
-                ->with('error', 'You are not authorized to update this job.');
+            return redirect()->route('company.jobs.index')->with('error', 'Unauthorized.');
         }
 
         $validated = $request->validate([
@@ -195,82 +141,50 @@ class JobController extends Controller
             'education_level' => 'required|string|max:100',
             'salary_range' => 'required|string|max:100',
             'vacancies' => 'required|integer|min:1',
-            'deadline' => 'required|date',
+            'deadline' => 'required|date|after_or_equal:today',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
             'skills' => 'nullable|array',
             'skills.*' => 'exists:skills,id',
         ]);
 
-        $validated['is_active'] = $request->has('is_active');
-        $validated['is_featured'] = $request->has('is_featured');
+        $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_featured'] = $request->boolean('is_featured');
 
-        $skills = $request->input('skills', []);
+        $skills = $validated['skills'] ?? [];
+        unset($validated['skills']);
 
-        $jobData = $validated;
-        unset($jobData['skills']);
-
-        $job = $this->jobService->updateJob($id, $jobData);
-
+        $this->jobService->updateJob($job->id, $validated);
         $job->skills()->sync($skills);
 
-        return redirect()->route('company.jobs.index')
-            ->with('success', 'Job updated successfully!');
+        return redirect()->route('company.jobs.index')->with('success', 'Job updated successfully!');
     }
 
-    /**
-     * Remove the job.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
-
-        $job = $this->jobService->findById($id);
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         if ($job->company_id !== $company->id) {
-            return redirect()->route('company.jobs.index')
-                ->with('error', 'You are not authorized to delete this job.');
+            return redirect()->route('company.jobs.index')->with('error', 'Unauthorized.');
         }
 
-        $this->jobService->deleteById($id);
+        $this->jobService->deleteById($job->id);
 
-        return redirect()->route('company.jobs.index')
-            ->with('success', 'Job deleted successfully!');
+        return redirect()->route('company.jobs.index')->with('success', 'Job deleted successfully!');
     }
 
-    /**
-     * Toggle job active status.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function toggleActive($id)
+    public function toggleActive(Job $job)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
-        
-        if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
-        }
-
-        $job = $this->jobService->findById($id);
+        $company = $this->getCompanyOrRedirect();
+        if ($company instanceof \Illuminate\Http\RedirectResponse) return $company;
 
         if ($job->company_id !== $company->id) {
-            return redirect()->route('company.jobs.index')
-                ->with('error', 'You are not authorized to update this job.');
+            return redirect()->route('company.jobs.index')->with('error', 'Unauthorized.');
         }
 
-        $this->jobService->toggleActive($id);
+        $this->jobService->toggleActive($job->id);
 
-        return redirect()->route('company.jobs.index')
-            ->with('success', 'Job status updated successfully!');
+        return redirect()->route('company.jobs.index')->with('success', 'Job status updated successfully!');
     }
 }
