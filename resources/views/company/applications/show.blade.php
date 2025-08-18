@@ -21,7 +21,7 @@
         <h6>Cover Letter:</h6>
         <p>{{ $application->cover_letter }}</p>
         <hr>
-        <a href="{{ route('company.applications.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('company.applicants.index') }}" class="btn btn-secondary">Back</a>
     </div>
 </div>
 @endsection

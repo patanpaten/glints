@@ -3,166 +3,85 @@
 namespace App\Repositories;
 
 use App\Models\Job;
-use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
-class JobRepository extends BaseRepository
+class JobRepository
 {
-    /**
-     * JobRepository constructor.
-     *
-     * @param Job $model
-     */
-    public function __construct(Job $model)
+    protected $model;
+
+    public function __construct(Job $job)
     {
-        parent::__construct($model);
+        $this->model = $job;
     }
 
-    /**
-     * Get jobs by company id.
-     *
-     * @param int $companyId
-     * @return Collection
-     */
-    public function getByCompanyId(int $companyId): Collection
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    public function getByCompanyId($companyId)
     {
         return $this->model->where('company_id', $companyId)->get();
     }
 
     /**
-     * Get paginated jobs by company id.
-     *
-     * @param int $companyId
-     * @param int $perPage
-     * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getPaginatedByCompanyId(int $companyId, int $perPage = 15)
-    {
-        return $this->model->where('company_id', $companyId)->paginate($perPage);
-    }
-
-    /**
-     * Get jobs by category id.
-     *
-     * @param int $categoryId
-     * @param int $perPage
-     * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getByCategory(int $categoryId, int $perPage = 15)
-    {
-        return $this->model->where('job_category_id', $categoryId)->paginate($perPage);
-    }
-
-    /**
-     * Search jobs by title or description.
-     *
-     * @param string $keyword
-     * @param int $perPage
-     * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function search(string $keyword, int $perPage = 15)
-    {
-        return $this->model->where('title', 'like', "%{$keyword}%")
-            ->orWhere('description', 'like', "%{$keyword}%")
-            ->orWhere('location', 'like', "%{$keyword}%")
-            ->paginate($perPage);
-    }
-
-    /**
-     * Get featured jobs.
-     *
-     * @param int $limit
-     * @return Collection
-     */
-    public function getFeaturedJobs(int $limit = 8): Collection
-    {
-        return $this->model->where('is_featured', true)
-            ->where('is_active', true)
-            ->with('company')
-            ->orderBy('created_at', 'desc')
-            ->limit($limit)
-            ->get();
-    }
-
-    /**
-     * Get latest jobs.
-     *
-     * @param int $limit
-     * @return Collection
-     */
-    public function getLatestJobs(int $limit = 10): Collection
-    {
-        return $this->model->where('is_active', true)
-            ->with('company', 'jobCategory')
-            ->orderBy('created_at', 'desc')
-            ->limit($limit)
-            ->get();
-    }
-
-    /**
-     * Get jobs by multiple filters.
+     * Ambil job dengan filter dinamis
      *
      * @param array $filters
-     * @param int $perPage
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getByFilters(array $filters, int $perPage = 15)
+    public function getByFilters(array $filters = [])
     {
-        $query = $this->model->where('is_active', true);
+        $query = $this->model->newQuery();
 
-        if (isset($filters['keyword']) && !empty($filters['keyword'])) {
-            $keyword = $filters['keyword'];
-            $query->where(function($q) use ($keyword) {
-                $q->where('title', 'like', "%{$keyword}%")
-                  ->orWhere('description', 'like', "%{$keyword}%");
+        // Filter company
+        if (!empty($filters['company_id'])) {
+            $query->where('company_id', $filters['company_id']);
+        }
+
+        // Filter status
+        if (!empty($filters['status']) && $filters['status'] !== 'all') {
+            $query->where('status', $filters['status']);
+        }
+
+        // Filter search (judul / deskripsi)
+        if (!empty($filters['search'])) {
+            $search = $filters['search'];
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('description', 'LIKE', "%{$search}%");
             });
         }
 
-        if (isset($filters['location']) && !empty($filters['location'])) {
-            $query->where('location', 'like', "%{$filters['location']}%");
+        // Filter tanggal posting
+        if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
+            $start = Carbon::parse($filters['start_date'])->startOfDay();
+            $end   = Carbon::parse($filters['end_date'])->endOfDay();
+            $query->whereBetween('created_at', [$start, $end]);
         }
 
-        if (isset($filters['category_id']) && !empty($filters['category_id'])) {
-            $query->where('job_category_id', $filters['category_id']);
-        }
-
-        if (isset($filters['employment_type']) && !empty($filters['employment_type'])) {
-            $query->where('employment_type', $filters['employment_type']);
-        }
-
-        if (isset($filters['experience_level']) && !empty($filters['experience_level'])) {
-            $query->where('experience_level', $filters['experience_level']);
-        }
-
-        if (isset($filters['skill_ids']) && !empty($filters['skill_ids'])) {
-            $query->whereHas('skills', function($q) use ($filters) {
-                $q->whereIn('skills.id', $filters['skill_ids']);
-            });
-        }
-
-        return $query->with('company', 'jobCategory')->paginate($perPage);
+        return $query->latest()->paginate(10);
     }
 
-    /**
-     * Count active jobs.
-     *
-     * @return int
-     */
-    public function countActive(): int
+    public function countByFilters(array $filters = [])
     {
-        return $this->model->where('is_active', true)->count();
+        return $this->getByFilters($filters)->total();
     }
 
-    /**
-     * Get recent jobs.
-     *
-     * @param int $limit
-     * @return Collection
-     */
-    public function getRecentJobs(int $limit = 5): Collection
+    public function getFeaturedJobs($limit = 8)
     {
-        return $this->model->with('company')
-            ->orderBy('created_at', 'desc')
-            ->limit($limit)
+        return $this->model
+            ->where('is_featured', true)
+            ->latest()
+            ->take($limit)
+            ->get();
+    }
+
+    public function getLatestJobs($limit = 10)
+    {
+        return $this->model
+            ->latest()
+            ->take($limit)
             ->get();
     }
 }

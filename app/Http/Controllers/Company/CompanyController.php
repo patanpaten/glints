@@ -15,13 +15,6 @@ class CompanyController extends Controller
     protected $jobService;
     protected $applicationService;
 
-    /**
-     * CompanyController constructor.
-     *
-     * @param CompanyService $companyService
-     * @param JobService $jobService
-     * @param ApplicationService $applicationService
-     */
     public function __construct(
         CompanyService $companyService,
         JobService $jobService,
@@ -35,27 +28,29 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display company dashboard.
-     *
-     * @return \Illuminate\View\View
+     * Dashboard perusahaan
      */
     public function dashboard()
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
+
         if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please complete your company profile first.');
+            // Kalau belum ada company profile, kasih data kosong ke view
+            return view('company.dashboard', [
+                'company' => null,
+                'recentJobs' => collect([]),
+                'totalJobs' => 0,
+                'activeJobs' => 0,
+                'totalApplications' => 0,
+                'showProfileReminder' => true
+            ]);
         }
 
+        // Kalau sudah ada profile, tampilkan data normal
         $recentJobs = $this->jobService->getByCompanyId($company->id)->take(5);
-        $totalJobs = $this->jobService->repository->model->where('company_id', $company->id)->count();
-        $activeJobs = $this->jobService->repository->model->where('company_id', $company->id)->where('is_active', true)->count();
-        $totalApplications = $this->applicationService->repository->model
-            ->whereHas('job', function($query) use ($company) {
-                $query->where('company_id', $company->id);
-            })
-            ->count();
+        $totalJobs = $this->jobService->countByCompany($company->id);
+        $activeJobs = $this->jobService->countActiveByCompany($company->id);
+        $totalApplications = $this->applicationService->countByCompany($company->id);
 
         return view('company.dashboard', compact(
             'company',
@@ -66,16 +61,14 @@ class CompanyController extends Controller
         ));
     }
 
+
     /**
-     * Show the form for creating a company profile.
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Tampilkan form create profile
      */
-    public function createProfile()
+    public function create()
     {
-        // Check if user already has a company profile
         $existingCompany = $this->companyService->getByUserId(Auth::id());
-        
+
         if ($existingCompany) {
             return redirect()->route('company.profile.edit')
                 ->with('info', 'You already have a company profile.');
@@ -85,44 +78,39 @@ class CompanyController extends Controller
     }
 
     /**
-     * Store a newly created company profile.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Simpan profile perusahaan baru
      */
-    public function storeProfile(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|string',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
-            'province' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
-            'phone' => 'required|string|max:20',
-            'website' => 'nullable|url|max:255',
-            'industry' => 'required|string|max:100',
+            'name'         => 'required|string|max:255',
+            'logo'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description'  => 'required|string',
+            'address'      => 'required|string',
+            'city'         => 'required|string|max:100',
+            'province'     => 'required|string|max:100',
+            'postal_code'  => 'required|string|max:20',
+            'phone'        => 'required|string|max:20',
+            'website'      => 'nullable|url|max:255',
+            'industry'     => 'required|string|max:100',
             'company_size' => 'required|string|max:50',
         ]);
 
         $validated['user_id'] = Auth::id();
 
-        $company = $this->companyService->createCompany($validated);
+        $this->companyService->createCompany($validated);
 
         return redirect()->route('company.dashboard')
             ->with('success', 'Company profile created successfully!');
     }
 
     /**
-     * Show the form for editing the company profile.
-     *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Edit profile perusahaan
      */
-    public function editProfile()
+    public function edit()
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
+
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please create your company profile first.');
@@ -132,31 +120,28 @@ class CompanyController extends Controller
     }
 
     /**
-     * Update the company profile.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Update profile perusahaan
      */
-    public function updateProfile(Request $request)
+    public function update(Request $request)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
+
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please create your company profile first.');
         }
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|string',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
-            'province' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
-            'phone' => 'required|string|max:20',
-            'website' => 'nullable|url|max:255',
-            'industry' => 'required|string|max:100',
+            'name'         => 'required|string|max:255',
+            'logo'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description'  => 'required|string',
+            'address'      => 'required|string',
+            'city'         => 'required|string|max:100',
+            'province'     => 'required|string|max:100',
+            'postal_code'  => 'required|string|max:20',
+            'phone'        => 'required|string|max:20',
+            'website'      => 'nullable|url|max:255',
+            'industry'     => 'required|string|max:100',
             'company_size' => 'required|string|max:50',
         ]);
 
@@ -165,9 +150,4 @@ class CompanyController extends Controller
         return redirect()->route('company.profile.edit')
             ->with('success', 'Company profile updated successfully!');
     }
-    public function create()
-{
-    return $this->createProfile();
-}
-
 }
