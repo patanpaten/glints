@@ -129,22 +129,22 @@
                 <h2 class="text-2xl font-bold text-gray-900 mb-8">Perusahaan Terpercaya</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=MCF" alt="MCF" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">MCF</div>
                     </div>
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=OPPO" alt="OPPO" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">OPPO</div>
                     </div>
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=A&W" alt="A&W" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">A&W</div>
                     </div>
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=Ruangguru" alt="Ruangguru" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Ruangguru</div>
                     </div>
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=Tokopedia" alt="Tokopedia" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Tokopedia</div>
                     </div>
                     <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="https://via.placeholder.com/120x60?text=Gojek" alt="Gojek" class="max-h-12">
+                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Gojek</div>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,9 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 flex justify-center">
-                    <img src="https://via.placeholder.com/300x600?text=App+Mockup" alt="Glints App" class="h-80 object-contain">
+                    <div class="bg-white rounded-xl shadow-lg h-80 w-40 flex items-center justify-center">
+                        <span class="text-gray-400">App Mockup</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,7 +192,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
                         <div class="flex items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" alt="User" class="w-12 h-12 rounded-full mr-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Andi Pratama</h4>
                                 <p class="text-sm text-gray-500">24 tahun, Web Developer</p>
@@ -207,7 +211,9 @@
                     </div>
                     <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
                         <div class="flex items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" alt="User" class="w-12 h-12 rounded-full mr-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Siti Nurhaliza</h4>
                                 <p class="text-sm text-gray-500">27 tahun, Marketing Manager</p>
@@ -224,7 +230,9 @@
                     </div>
                     <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
                         <div class="flex items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" alt="User" class="w-12 h-12 rounded-full mr-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
                             <div>
                                 <h4 class="font-medium text-gray-900">Budi Santoso</h4>
                                 <p class="text-sm text-gray-500">22 tahun, Fresh Graduate</p>

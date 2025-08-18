@@ -16,13 +16,6 @@ class ApplicationController extends Controller
     protected $jobService;
     protected $companyService;
 
-    /**
-     * ApplicationController constructor.
-     *
-     * @param ApplicationService $applicationService
-     * @param JobService $jobService
-     * @param CompanyService $companyService
-     */
     public function __construct(
         ApplicationService $applicationService,
         JobService $jobService,
@@ -31,28 +24,22 @@ class ApplicationController extends Controller
         $this->applicationService = $applicationService;
         $this->jobService = $jobService;
         $this->companyService = $companyService;
-        $this->middleware('auth');
-        $this->middleware('role:company');
+        $this->middleware(['auth', 'role:company']);
     }
 
     /**
-     * Display a listing of applications for a specific job.
-     *
-     * @param int $jobId
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * List applications for a job.
      */
     public function index($jobId)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
 
         $job = $this->jobService->findById($jobId);
-
-        if ($job->company_id !== $company->id) {
+        if (!$job || $job->company_id !== $company->id) {
             return redirect()->route('company.jobs.index')
                 ->with('error', 'You are not authorized to view applications for this job.');
         }
@@ -63,23 +50,18 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Display the specified application.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Show application detail.
      */
     public function show($id)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
 
         $application = $this->applicationService->findById($id, ['*'], ['job', 'jobSeeker']);
-
-        if ($application->job->company_id !== $company->id) {
+        if (!$application || $application->job->company_id !== $company->id) {
             return redirect()->route('company.jobs.index')
                 ->with('error', 'You are not authorized to view this application.');
         }
@@ -89,60 +71,45 @@ class ApplicationController extends Controller
 
     /**
      * Update application status.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateStatus(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
 
         $application = $this->applicationService->findById($id, ['*'], ['job']);
-
-        if ($application->job->company_id !== $company->id) {
+        if (!$application || $application->job->company_id !== $company->id) {
             return redirect()->route('company.jobs.index')
                 ->with('error', 'You are not authorized to update this application.');
         }
 
         $validated = $request->validate([
             'status' => 'required|in:pending,reviewed,shortlisted,rejected,hired',
-            'notes' => 'nullable|string',
+            'notes'  => 'nullable|string',
         ]);
 
-        $this->applicationService->updateStatus(
-            $id,
-            $validated['status'],
-            $validated['notes'] ?? null
-        );
+        $this->applicationService->updateStatus($id, $validated['status'], $validated['notes'] ?? null);
 
         return redirect()->route('company.applications.show', $id)
             ->with('success', 'Application status updated successfully!');
     }
 
     /**
-     * Download resume.
-     *
-     * @param int $id
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\RedirectResponse
+     * Download applicant resume.
      */
     public function downloadResume($id)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
 
         $application = $this->applicationService->findById($id, ['*'], ['job']);
-
-        if ($application->job->company_id !== $company->id) {
+        if (!$application || $application->job->company_id !== $company->id) {
             return redirect()->route('company.jobs.index')
                 ->with('error', 'You are not authorized to download this resume.');
         }
@@ -152,29 +119,25 @@ class ApplicationController extends Controller
                 ->with('error', 'Resume file not found.');
         }
 
-        return response()->download(Storage::disk('public')->path($application->resume));
+        return Storage::disk('public')->download($application->resume);
     }
 
     /**
-     * Display all applications for the company.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * Show all applications across company jobs.
      */
     public function all(Request $request)
     {
         $company = $this->companyService->getByUserId(Auth::id());
-        
         if (!$company) {
             return redirect()->route('company.profile.create')
                 ->with('error', 'Please complete your company profile first.');
         }
 
         $status = $request->input('status');
-        $jobId = $request->input('job_id');
+        $jobId  = $request->input('job_id');
 
         $query = $this->applicationService->repository->model
-            ->whereHas('job', function($q) use ($company) {
+            ->whereHas('job', function ($q) use ($company) {
                 $q->where('company_id', $company->id);
             })
             ->with(['job', 'jobSeeker']);
@@ -182,7 +145,6 @@ class ApplicationController extends Controller
         if ($status) {
             $query->where('status', $status);
         }
-
         if ($jobId) {
             $query->where('job_id', $jobId);
         }

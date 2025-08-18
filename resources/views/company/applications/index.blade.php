@@ -31,12 +31,12 @@
                         </td>
                         <td>{{ $application->created_at->diffForHumans() }}</td>
                         <td>
-                            <a href="{{ route('company.applications.show', ['id' => $application->id]) }}" 
+                            <a href="{{ route('company.applications.show', $application->id) }}" 
                                class="btn btn-sm btn-info">
                                 View
                             </a>
 
-                            <form action="{{ route('company.applications.update-status', ['id' => $application->id]) }}" 
+                            <form action="{{ route('company.applications.update-status', $application->id) }}" 
                                   method="POST" 
                                   class="d-inline">
                                 @csrf

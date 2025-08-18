@@ -50,6 +50,14 @@ Route::get('/jobs/category/{slug}', [JobController::class, 'byCategory'])->name(
 Route::get('/jobs/{slug}', [JobController::class, 'show'])->name('jobs.show');
 
 // ==========================
+// Premium (public)
+// ==========================
+Route::prefix('premium-features')->name('premium-features.')->group(function () {
+    Route::get('/', [PremiumFeatureController::class, 'index'])->name('index');
+    Route::get('/{feature}', [PremiumFeatureController::class, 'show'])->name('show');
+});
+
+// ==========================
 // Admin
 // ==========================
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
@@ -70,13 +78,19 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
     Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('dashboard');
 
     // Profile
-    Route::get('/profile/create', [CompanyController::class, 'create'])->name('profile.create');
-    Route::post('/profile', [CompanyController::class, 'store'])->name('profile.store');
-    Route::get('/profile/edit', [CompanyController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [CompanyController::class, 'update'])->name('profile.update');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/create', [CompanyController::class, 'create'])->name('create');
+        Route::post('/store', [CompanyController::class, 'store'])->name('store');
+        Route::get('/edit', [CompanyController::class, 'edit'])->name('edit');
+        Route::post('/update', [CompanyController::class, 'update'])->name('update');
+    });
+    // Direct profile route for sidebar link
+    Route::get('/profile', [CompanyController::class, 'edit'])->name('profile');
+
 
     // Jobs Management
     Route::resource('jobs', CompanyJobController::class)->except(['show']);
+    Route::get('/jobs/{job}/applications', [CompanyApplicationController::class, 'index'])->name('applications.index');
     Route::patch('/jobs/{job}/toggle-active', [CompanyJobController::class, 'toggleActive'])->name('jobs.toggle-active');
     Route::patch('/jobs/{job}/toggle-featured', [CompanyJobController::class, 'toggleFeatured'])->name('jobs.toggle-featured');
 
@@ -86,6 +100,8 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
     Route::get('/applications/{application}', [CompanyApplicationController::class, 'show'])->name('applications.show');
     Route::patch('/applications/{application}/status', [CompanyApplicationController::class, 'updateStatus'])->name('applications.update-status');
     Route::get('/applications/{application}/resume', [CompanyApplicationController::class, 'downloadResume'])->name('applications.download-resume');
+    // Direct applicants route for sidebar link
+    Route::get('/applicants', [CompanyApplicationController::class, 'all'])->name('applicants.index');
 
     // Analytics
     Route::get('/analytics', [AnalyticsController::class, 'companyDashboard'])->name('analytics.dashboard');
@@ -93,18 +109,22 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
     Route::get('/analytics/export', [AnalyticsController::class, 'export'])->name('analytics.export');
 
     // CV Search
-    Route::get('/cv-search', [CvSearchController::class, 'index'])->name('cv-search.index');
-    Route::post('/cv-search', [CvSearchController::class, 'search'])->name('cv-search.search');
-    Route::get('/cv-search/{cvSearch}/results', [CvSearchController::class, 'results'])->name('cv-search.results');
-    Route::get('/cv-search/result/{result}/profile', [CvSearchController::class, 'showProfile'])->name('cv-search.profile');
-    Route::get('/cv-search/suggestions', [CvSearchController::class, 'suggestions'])->name('cv-search.suggestions');
+    Route::prefix('cv-search')->name('cv-search.')->group(function () {
+        Route::get('/', [CvSearchController::class, 'index'])->name('index');
+        Route::post('/', [CvSearchController::class, 'search'])->name('search');
+        Route::get('/{cvSearch}/results', [CvSearchController::class, 'results'])->name('results');
+        Route::get('/result/{result}/profile', [CvSearchController::class, 'showProfile'])->name('profile');
+        Route::get('/suggestions', [CvSearchController::class, 'suggestions'])->name('suggestions');
+    });
 
-    // Premium Features
-    Route::get('/premium-features', [PremiumFeatureController::class, 'index'])->name('premium-features.index');
-    Route::get('/premium-features/{feature}', [PremiumFeatureController::class, 'show'])->name('premium-features.show');
-    Route::post('/premium-features/{feature}/subscribe', [PremiumFeatureController::class, 'subscribe'])->name('premium-features.subscribe');
-    Route::patch('/subscriptions/{subscription}/cancel', [PremiumFeatureController::class, 'cancel'])->name('subscriptions.cancel');
-    Route::get('/subscriptions/history', [PremiumFeatureController::class, 'history'])->name('subscriptions.history');
+    // Premium Features (khusus company)
+    Route::prefix('premium-features')->name('premium-features.')->group(function () {
+        Route::get('/', [PremiumFeatureController::class, 'index'])->name('index');
+        Route::get('/{feature}', [PremiumFeatureController::class, 'show'])->name('show');
+        Route::post('/{feature}/subscribe', [PremiumFeatureController::class, 'subscribe'])->name('subscribe');
+        Route::patch('/subscriptions/{subscription}/cancel', [PremiumFeatureController::class, 'cancel'])->name('subscriptions.cancel');
+        Route::get('/subscriptions/history', [PremiumFeatureController::class, 'history'])->name('subscriptions.history');
+    });
 });
 
 // ==========================
@@ -152,15 +172,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/jobs/{slug}/apply', [JobController::class, 'submitApplication'])->name('jobs.submit-application');
 
     // Chat
-    Route::get('/chat/{application}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('/chat/{application}/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::patch('/chat/{application}/read', [ChatController::class, 'markAsRead'])->name('chat.read');
-    Route::get('/chat/unread-count', [ChatController::class, 'getUnreadCount'])->name('chat.unread-count');
-    Route::get('/chat/conversations', [ChatController::class, 'getConversations'])->name('chat.conversations');
+    Route::prefix('chat')->name('chat.')->group(function () {
+        Route::get('/{application}', [ChatController::class, 'show'])->name('show');
+        Route::post('/{application}/send', [ChatController::class, 'send'])->name('send');
+        Route::patch('/{application}/read', [ChatController::class, 'markAsRead'])->name('read');
+        Route::get('/unread-count', [ChatController::class, 'getUnreadCount'])->name('unread-count');
+        Route::get('/conversations', [ChatController::class, 'getConversations'])->name('conversations');
+    });
 });
-
-// ==========================
-// Premium (public)
-// ==========================
-Route::get('/premium-features', [PremiumFeatureController::class, 'index'])->name('premium-features.index');
-Route::get('/premium-features/{feature}', [PremiumFeatureController::class, 'show'])->name('premium-features.show');

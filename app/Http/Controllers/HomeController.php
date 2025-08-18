@@ -42,7 +42,7 @@ class HomeController extends Controller
         $featuredCompanies = $this->companyService->getFeaturedCompanies(6);
         $popularCategories = $this->jobCategoryService->getPopularCategories(8);
 
-        return view('home', compact(
+        return view('pages.home', compact(
             'featuredJobs',
             'latestJobs',
             'featuredCompanies',
