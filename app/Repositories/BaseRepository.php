@@ -24,6 +24,16 @@ class BaseRepository
     }
 
     /**
+     * Get model instance.
+     *
+     * @return Model
+     */
+    public function getModel(): Model
+    {
+        return $this->model;
+    }
+
+    /**
      * Get all models.
      *
      * @param array $columns

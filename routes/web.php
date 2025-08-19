@@ -33,6 +33,10 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit');
 
+// Blog - redirect to external URL
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{article}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+
 // ==========================
 // Authentication
 // ==========================
@@ -48,6 +52,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/category/{slug}', [JobController::class, 'byCategory'])->name('jobs.category');
 Route::get('/jobs/{slug}', [JobController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{slug}/apply', [JobController::class, 'showApplyForm'])->name('jobs.apply');
+Route::post('/jobs/{slug}/apply', [JobController::class, 'apply'])->name('jobs.submit-application');
+
+// ==========================
+// Companies (public)
+// ==========================
+Route::get('/companies', [App\Http\Controllers\CompaniesController::class, 'index'])->name('companies.index');
+Route::get('/companies/{company}', [App\Http\Controllers\CompaniesController::class, 'show'])->name('companies.show');
 
 // ==========================
 // Premium (public)

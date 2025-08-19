@@ -50,13 +50,15 @@ class JobController extends Controller
             'category_id',
             'employment_type',
             'experience_level',
-            'skill_ids'
+            'skill_ids',
+            'salary_range',
+            'sort'
         ]);
-
-        $jobs = $this->jobService->getByFilters($filters, 15);
-        $categories = $this->jobCategoryService->all();
-        $popularSkills = $this->skillService->getPopularSkills(15);
-
+        
+        $jobs = $this->jobService->getJobs($filters);
+        $categories = $this->jobCategoryService->getAllCategories();
+        $popularSkills = $this->skillService->getPopularSkills();
+        
         return view('jobs.index', compact('jobs', 'categories', 'popularSkills', 'filters'));
     }
 
@@ -68,19 +70,14 @@ class JobController extends Controller
      */
     public function show(string $slug)
     {
-        $job = $this->jobService->repository->model
-            ->where('slug', $slug)
-            ->with(['company', 'jobCategory', 'skills'])
-            ->firstOrFail();
-
-        $relatedJobs = $this->jobService->repository->model
-            ->where('job_category_id', $job->job_category_id)
-            ->where('id', '!=', $job->id)
-            ->where('is_active', true)
-            ->with('company')
-            ->limit(4)
-            ->get();
-
+        $job = $this->jobService->findBySlug($slug);
+        
+        if (!$job) {
+            abort(404);
+        }
+        
+        $relatedJobs = $this->jobService->getRelatedJobs($job);
+        
         $hasApplied = false;
         if (Auth::check() && Auth::user()->isJobSeeker() && Auth::user()->jobSeeker) {
             $hasApplied = $this->applicationService->hasApplied(

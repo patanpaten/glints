@@ -49,16 +49,26 @@ class SkillService extends BaseService
     {
         return $this->repository->getByJobSeekerId($jobSeekerId);
     }
-
+    
     /**
-     * Get popular skills.
+     * Get popular skills based on job usage.
      *
      * @param int $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getPopularSkills(int $limit = 10)
+    public function getPopularSkills(int $limit = 20)
     {
-        return $this->repository->getPopularSkills($limit);
+        // Cek apakah repository memiliki metode getPopularSkills
+        if (method_exists($this->repository, 'getPopularSkills')) {
+            return $this->repository->getPopularSkills($limit);
+        }
+        
+        // Jika tidak, gunakan query langsung
+        return $this->repository->model
+            ->withCount('jobs')
+            ->orderByDesc('jobs_count')
+            ->take($limit)
+            ->get();
     }
 
     /**

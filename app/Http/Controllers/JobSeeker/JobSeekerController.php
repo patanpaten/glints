@@ -103,16 +103,14 @@ class JobSeekerController extends Controller
             'last_name' => 'required|string|max:100',
             'birth_date' => 'required|date|before:today',
             'phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
+            'birth_date' => 'required|date|before:today',
+            'phone' => 'required|string|max:20',
             'province' => 'required|string|max:100',
             'postal_code' => 'required|string|max:20',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'summary' => 'required|string',
             'current_position' => 'nullable|string|max:255',
-            'expected_salary' => 'nullable|numeric|min:0',
-        ]);
-
+            'current_position' => 'nullable|string|max:255',
         $validated['user_id'] = Auth::id();
 
         $jobSeeker = $this->jobSeekerService->createJobSeeker($validated);
@@ -156,20 +154,18 @@ class JobSeekerController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
             'birth_date' => 'required|date|before:today',
             'phone' => 'required|string|max:20',
             'address' => 'required|string',
             'city' => 'required|string|max:100',
             'province' => 'required|string|max:100',
             'postal_code' => 'required|string|max:20',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'current_position' => 'nullable|string|max:255',
             'summary' => 'required|string',
             'current_position' => 'nullable|string|max:255',
-            'expected_salary' => 'nullable|numeric|min:0',
         ]);
-
-        $this->jobSeekerService->updateJobSeeker($jobSeeker->id, $validated);
-
         return redirect()->route('jobseeker.profile.edit')
             ->with('success', 'Profile updated successfully!');
     }

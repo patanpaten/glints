@@ -71,6 +71,19 @@ class JobCategoryService extends BaseService
     {
         return $this->repository->getAllWithJobCount();
     }
+    
+    /**
+     * Get all categories with job count
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllCategories()
+    {
+        return $this->repository->getModel()
+            ->withCount('jobs')
+            ->orderBy('name')
+            ->get();
+    }
 
     /**
      * Get popular categories.

@@ -30,6 +30,10 @@ class ExperienceService extends BaseService
             ->orderBy('end_date', 'desc')
             ->orderBy('start_date', 'desc')
             ->get();
+            ->orderBy('is_current', 'desc')
+            ->orderBy('end_date', 'desc')
+            ->orderBy('start_date', 'desc')
+            ->get();
     }
 
     /**

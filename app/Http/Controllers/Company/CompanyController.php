@@ -51,7 +51,11 @@ class CompanyController extends Controller
         $totalJobs = $this->jobService->countByCompany($company->id);
         $activeJobs = $this->jobService->countActiveByCompany($company->id);
         $totalApplications = $this->applicationService->countByCompany($company->id);
-
+        $totalApplications = $this->applicationService->repository->model
+            ->whereHas('job', function($query) use ($company) {
+                $query->where('company_id', $company->id);
+            })
+            ->count();
         return view('company.dashboard', compact(
             'company',
             'recentJobs',

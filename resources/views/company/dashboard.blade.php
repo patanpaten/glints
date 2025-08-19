@@ -234,7 +234,7 @@
                         </div>
                         <p class="text-muted small mb-2">Tingkatkan pengalaman rekrutmen dengan aplikasi mobile kami.</p>
                         <div class="text-center mt-3">
-                            <img src="/qr-code.png" alt="QR Code" class="img-fluid" style="width: 150px;" onerror="this.src='https://via.placeholder.com/150'">
+                            <img src="/qr-code.png" alt="QR Code" class="img-fluid" style="width: 150px;" onerror="this.src='{{ asset('images/placeholder-qr.svg') }}'">
                         </div>
                     </div>
                 </div>

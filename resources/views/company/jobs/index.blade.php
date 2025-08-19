@@ -78,7 +78,7 @@
                 <!-- Info Lowongan -->
                 <div>
                     <h5 class="fw-bold mb-1">{{ $job->title }}</h5>
-                    <p class="small text-muted mb-1">📍 {{ $job->type ?? '-' }} - {{ $job->location ?? '-' }}</p>
+                    <p class="small text-muted mb-1">📍 {{ $job->employment_type ?? '-' }} - {{ $job->location ?? '-' }}</p>
                     <p class="small text-muted mb-0">
                         Aktif hingga: {{ optional($job->expired_at)->format('d M Y') ?? '-' }}
                     </p>

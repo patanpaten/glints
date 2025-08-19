@@ -185,7 +185,7 @@
                                 @if(count($recommendedJobs) > 0)
                                     <div class="list-group">
                                         @foreach($recommendedJobs as $job)
-                                            <a href="{{ route('jobs.show', $job->id) }}" class="list-group-item list-group-item-action">
+                                            <a href="{{ route('jobs.show', $job->id) }}" target="_blank" class="list-group-item list-group-item-action">
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h5 class="mb-1">{{ $job->title }}</h5>
                                                     <small>{{ $job->created_at->diffForHumans() }}</small>
