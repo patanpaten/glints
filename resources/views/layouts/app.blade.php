@@ -24,91 +24,90 @@
 </head>
 <body class="font-sans antialiased bg-gray-50">
     <!-- Header/Navbar -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="flex-shrink-0">
-                        <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-14 lg:h-20 w-auto">
-                    </a>
-                </div>
-                
-                <!-- Navigation Menu - Desktop -->
-                <nav class="hidden lg:flex items-center space-x-8 lg:ml-[-250px]">
-                    <a href="{{ route('jobs.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">LOWONGAN KERJA</a>
-                    <a href="{{ route('companies.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">PERUSAHAAN</a>
-                    <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">BLOG</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">EXPERTCLASS</a>
-                </nav>
-                
-                <!-- Right Side Action Buttons -->
-                <div class="flex items-center space-x-3">
-                    <!-- Download App Button -->
-                    <a href="#" class="hidden lg:flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium transition-colors duration-200">
-                        <span>UNDUH APP GLINTS</span>
-                    </a>
-                    
-                    <!-- Language/Region Selector -->
-                    <div class="hidden lg:flex items-center space-x-2">
-                        <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
-                        <span class="text-gray-600 text-sm">ID</span>
-                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
-                    </div>
-                    
-                    <!-- Additional Buttons -->
-                    <a href="#" class="hidden lg:flex items-center text-gray-600 hover:text-blue-600 text-sm font-medium transition-colors duration-200">
-                        DAFTAR
-                    </a>
-                    
-                    <a href="#" class="hidden lg:flex items-center text-gray-600 hover:text-blue-600 text-sm font-medium transition-colors duration-200">
-                        MASUK
-                    </a>
-                    
-                    <!-- For Company Button -->
-                    <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200">
-                        <span>UNTUK PERUSAHAAN</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                    </a>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button type="button" class="lg:hidden bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false" onclick="toggleMobileMenu()">
-                        <span class="sr-only">Open menu</span>
-                        <i class="fas fa-bars" id="mobile-menu-icon"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div class="lg:hidden hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
-                    <!-- Mobile Navigation Links -->
-                    <a href="{{ route('jobs.index') }}" class="block px-3 py-2 text-gray-600 hover:text-blue-600 font-normal text-sm">LOWONGAN KERJA</a>
-                    <a href="{{ route('companies.index') }}" class="block px-3 py-2 text-gray-600 hover:text-blue-600 font-normal text-sm">PERUSAHAAN</a>
-                    <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 text-gray-600 hover:text-blue-600 font-normal text-sm">BLOG</a>
-                    <a href="#" class="block px-3 py-2 text-gray-600 hover:text-blue-600 font-normal text-sm">EXPERTCLASS</a>
-                    
-                    <!-- Mobile Action Buttons -->
-                    <div class="pt-4 space-y-2">
-                        <a href="#" class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-md text-sm font-medium w-full">
-                            <i class="fas fa-download mr-2 text-sm"></i>
-                            <span>UNDUH APP GLINTS</span>
-                        </a>
-                        <a href="{{ route('register') }}" class="flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-3 rounded-md text-sm font-medium w-full">
-                            DAFTAR
-                        </a>
-                        <a href="#" class="flex items-center justify-center border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-4 py-3 rounded-md text-sm font-medium w-full">
-                            MASUK
-                        </a>
-                        <a href="{{ route('companies.index') }}" class="flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-3 rounded-md text-sm font-medium w-full">
-                            <span>UNTUK PERUSAHAAN</span>
-                            <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+              <div class="flex items-center space-x-6">
+                  <!-- Logo -->
+                  <a href="{{ route('home') }}" class="flex-shrink-0">
+                      <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-15 w-auto">
+                  </a>
+  
+                  <!-- Navigation Menu - Desktop -->
+                  <nav class="hidden md:flex items-center space-x-4">
+                      <a href="{{ route('jobs.index') }}" class="text-gray-700 hover:text-blue-600 text-sm font-medium transition-colors duration-200">LOWONGAN KERJA</a>
+                      <a href="{{ route('companies.index') }}" class="text-gray-700 hover:text-blue-600 text-sm font-medium transition-colors duration-200">PERUSAHAAN</a>
+                      <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 text-sm font-medium transition-colors duration-200">BLOG</a>
+                      <a href="#" class="text-gray-700 hover:text-blue-600 text-sm font-medium transition-colors duration-200">EXPERTCLASS</a>
+                  </nav>
+              </div>
+              
+              <!-- Right Side Action Buttons -->
+              <div class="flex items-center space-x-0">
+                  <!-- Download App Button -->
+                  <a href="#" class="hidden md:inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition-colors duration-200">
+                      UNDUH APP GLINTS
+                  </a>
+                  
+                  <!-- Language/Region Selector -->
+                  <div class="hidden md:flex items-center space-x-1 text-gray-600 px-2">
+                      <img src="{{ asset('images/indonesia.png') }}" alt="ID" class="w-4 h-4 rounded-full">
+                      <span class="text-sm font-medium">ID</span>
+                      <i class="fas fa-chevron-down text-xs"></i>
+                  </div>
+                  
+                  <!-- Auth Buttons -->
+                  <a href="{{ route('register') }}" class="hidden md:inline-flex items-center text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors duration-200">
+                      DAFTAR
+                  </a>
+                  
+                  <a href="{{ route('login') }}" class="hidden md:inline-flex items-center text-gray-700 hover:text-blue-600 px-2 py-2 text-sm font-medium transition-colors duration-200">
+                      MASUK
+                  </a>
+                  
+                  <!-- For Company Button -->
+                  <a href="{{ route('companies.index') }}" class="hidden md:inline-flex items-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-3 py-2 rounded text-sm font-medium transition-all duration-200">
+                      <span>UNTUK PERUSAHAAN</span>
+                      <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                  </a>
+                  
+                  <!-- Mobile Menu Button -->
+                  <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false" onclick="toggleMobileMenu()">
+                      <span class="sr-only">Open menu</span>
+                      <i class="fas fa-bars" id="mobile-menu-icon"></i>
+                  </button>
+              </div>
+          </div>
+          
+          <!-- Mobile Menu -->
+          <div class="md:hidden hidden" id="mobile-menu">
+              <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+                  <!-- Mobile Navigation Links -->
+                  <a href="{{ route('jobs.index') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">LOWONGAN KERJA</a>
+                  <a href="{{ route('companies.index') }}" class="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">PERUSAHAAN</a>
+                  <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">BLOG</a>
+                  <a href="#" class="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">EXPERTCLASS</a>
+                  
+                  <!-- Mobile Action Buttons -->
+                  <div class="pt-4 space-y-2">
+                      <a href="#" class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded text-sm font-medium w-full">
+                          UNDUH APP GLINTS
+                      </a>
+                      <a href="{{ route('register') }}" class="flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-3 rounded text-sm font-medium w-full">
+                          DAFTAR
+                      </a>
+                      <a href="{{ route('login') }}" class="flex items-center justify-center border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-3 rounded text-sm font-medium w-full">
+                          MASUK
+                      </a>
+                      <a href="{{ route('companies.index') }}" class="flex items-center justify-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-3 rounded text-sm font-medium w-full">
+                          <span>UNTUK PERUSAHAAN</span>
+                          <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
 
     <!-- Main Content -->
     <main>
@@ -136,7 +135,8 @@
 
     <!-- Info Glints Asia Pacific -->
     <div class="text-center lg:text-left">
-      <h4 class="text-white mb-3 font-poppins tracking-widest">Glints Asia Pacific</h4>
+      <h4 class="text-white mb-2 font-poppins tracking-widest">Glints Asia Pacific</h4>
+      <div class="bg-gray-800 px-3 py-1 rounded text-xs text-white mb-3 inline-block">TapLoker</div>
       
       <!-- Ikon Negara -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-4">
@@ -213,6 +213,9 @@
           <div class="flex flex-col space-y-3">
             <a href="#"><img src="/images/google-play-badge-id.png" class="h-12"></a> 
             <a href="#"><img src="/images/apple-store-badge-id.png" class="h-12"></a> 
+          </div>
+          <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center ml-2">
+            <i class="fab fa-whatsapp text-white text-xl"></i>
           </div>
         </div>
       </div>
