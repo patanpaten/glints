@@ -2,6 +2,18 @@
 
 @section('title', 'Glints - Platform Lowongan Kerja Terbesar di Indonesia')
 
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="text-center py-5">
+        <h1 class="fw-bold">Cari 40,000+ loker di Indonesia</h1>
+        <p class="text-muted">Temukan pekerjaan impianmu sekarang juga!</p>
+    </div>
+</div>
+@endsection
+
+
 @section('content')
     <!-- Hero Section -->
     <section class="bg-white py-12">
