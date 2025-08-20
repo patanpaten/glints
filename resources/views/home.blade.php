@@ -23,7 +23,7 @@
                                     <i class="fas fa-map-marker-alt text-gray-400"></i>
                                 </div>
                                 <select class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option>Semua Lokasi</option>
+                                    <option>Semua Kota/Provinsi</option>
                                     <option>Jakarta</option>
                                     <option>Bandung</option>
                                     <option>Surabaya</option>
