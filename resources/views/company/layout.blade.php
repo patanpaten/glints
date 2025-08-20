@@ -79,7 +79,7 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('company.dashboard') }}">
-                <img src="/images/logo dan teks glints.png" alt="Glints" style="height: 80px;">
+                <img src="/images/logohome.svg" alt="Glints" style="height: 80px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
