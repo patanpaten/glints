@@ -1,79 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Glints</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Register</h4>
-                    </div>
-                    <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+@extends('layouts.navbar-regis')
 
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
+@section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    body {
+        background: #f8f9fa;
+    }
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                            </div>
+    .register-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+    }
 
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                            </div>
+    .register-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #000;
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
 
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                            </div>
+    .register-card {
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        max-width: 350px;
+        width: 100%;
+        overflow: hidden;
+    }
 
-                            <div class="mb-3">
-                                <label for="password-confirm" class="form-label">Confirm Password</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+    .register-body {
+        padding: 30px 25px;
+        text-align: center;
+    }
 
-                            <div class="mb-3">
-                                <label for="role_id" class="form-label">Register as</label>
-                                <select id="role_id" class="form-select @error('role_id') is-invalid @enderror" name="role_id" required>
-                                    <option value="">Select Role</option>
-                                    @foreach(\App\Models\Role::where('slug', '!=', 'admin')->get() as $role)
-                                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 15px;
+    }
 
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
+    .social-icons img {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
 
-                            <div class="mt-3 text-center">
-                                <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    .divider-text {
+        color: #777;
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .email-link {
+        color: #007bff;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .email-link:hover {
+        text-decoration: underline;
+    }
+
+    .terms-box {
+        background: #f8f9fa;
+        padding: 12px;
+        font-size: 12px;
+        color: #555;
+        margin-top: 15px;
+    }
+
+    .terms-box a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .terms-box a:hover {
+        text-decoration: underline;
+    }
+
+    .register-footer {
+        border-top: 1px solid #e5e5e5;
+        padding: 15px 20px;
+        font-size: 13px;
+        color: #555;
+        text-align: center;
+    }
+
+    .register-footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .register-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="register-container">
+    <!-- Title outside card -->
+    <h1 class="register-title">Mari bergabung<br>dengan Glints</h1>
+
+    <div class="register-card">
+        <!-- Card Body -->
+        <div class="register-body">
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="#"><img src="{{ asset('images/google.png') }}" alt="Google"></a>
+                <a href="#"><img src="{{ asset('images/facebook.png') }}" alt="Facebook"></a>
+            </div>
+
+            <div class="divider-text">atau</div>
+
+            <!-- Email Register Link -->
+            <a href="#" class="email-link">Daftar dengan Email</a>
+
+            <!-- Terms -->
+            <div class="terms-box">
+                Dengan mendaftar, saya setuju dengan <a href="#">Ketentuan Layanan</a>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <!-- Card Footer -->
+        <div class="register-footer">
+            <p>Sudah punya akun Glints? <a href="#">Masuk</a></p>
+            <p>Untuk perusahaan, kunjungi <a href="#">laman</a> berikut.</p>
+        </div>
+    </div>
+</div>
+@endsection

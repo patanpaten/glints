@@ -25,7 +25,7 @@
 <body class="font-sans antialiased bg-gray-50">
     <!-- Header/Navbar -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-0 py-0">
+        <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center">
@@ -36,58 +36,40 @@
                 
                 <!-- Navigation Menu - Desktop -->
                 <nav class="hidden lg:flex items-center space-x-8 lg:ml-[-250px]">
-                    <a href="{{ route('jobs.index') }}" class="font-medium text-base transition-colors duration-200 hover:underline underline-offset-7 decoration-2">LOWONGAN KERJA</a>
-                    <a href="{{ route('companies.index') }}" class="font-medium text-BASR transition-colors duration-200 hover:underline underline-offset-7 decoration-2">PERUSAHAAN</a>
-                    <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer"   class="font-medium text-base transition-colors duration-200 hover:underline underline-offset-7 decoration-2">BLOG</a>
-                    <a href="#"  class="font-medium text-base transition-colors duration-200 hover:underline underline-offset-7 decoration-2">EXPERTCLASS</a>
+                    <a href="{{ route('jobs.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">LOWONGAN KERJA</a>
+                    <a href="{{ route('companies.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">PERUSAHAAN</a>
+                    <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">BLOG</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">EXPERTCLASS</a>
                 </nav>
                 
                 <!-- Right Side Action Buttons -->
                 <div class="flex items-center space-x-3">
                     <!-- Download App Button -->
-                    <a href="#" class="hidden lg:flex items-center bg-[#01579b] hover:bg-blue-700 text-white px-3 py-1.5 text-base transition-colors duration-200">
+                    <a href="#" class="hidden lg:flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium transition-colors duration-200">
                         <span>UNDUH APP GLINTS</span>
                     </a>
                     
                     <!-- Language/Region Selector -->
-                    <div class="relative hover:underline underline-offset-7 decoration-2">
-                      <button id="langBtn" 
-                              class="flex items-center space-x-1 text-black focus:outline-none">
-                          <i class="fas fa-globe"></i>
-                         <span class="text-base font-medium ml-1">ID</span>
-                        <i id="langIcon" class="fas fa-chevron-down text-sm ml-1"></i>
-
-                      </button>
-
-                      <!-- Dropdown -->
-                      <div id="langMenu" 
-                          class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                          <ul class="py-1 text-base text-black uppercase">
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a>
-                              </li>
-                              <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a>
-                              </li>
-                          </ul>
-                      </div>
+                    <div class="hidden lg:flex items-center space-x-2">
+                        <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
+                        <span class="text-gray-600 text-sm">ID</span>
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                     </div>
                     
                     <!-- Additional Buttons -->
-                    <a href="#" class="hidden lg:flex items-center text-base font-medium transition-colors duration-200 hover:underline underline-offset-7 decoration-2 ml-5">
+                    <a href="#" class="hidden lg:flex items-center text-gray-600 hover:text-blue-600 text-sm font-medium transition-colors duration-200">
                         DAFTAR
                     </a>
                     
-                    <a href="#" class="hidden lg:flex items-center text-base font-medium transition-colors duration-200 hover:underline underline-offset-7 decoration-2">
+                    <a href="#" class="hidden lg:flex items-center text-gray-600 hover:text-blue-600 text-sm font-medium transition-colors duration-200">
                         MASUK
                     </a>
                     
                     <!-- For Company Button -->
-                    <a href="{{ route('companies.index') }}" 
-                    class="flex items-center border border-blue-600 text-blue-600 hover:bg-[#01579b] hover:text-white px-4 py-2 text-sm font-medium transition-all duration-200">
-                      <span>UNTUK PERUSAHAAN</span>
-                      <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                  </a>
+                    <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200">
+                        <span>UNTUK PERUSAHAAN</span>
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
                     
                     <!-- Mobile Menu Button -->
                     <button type="button" class="lg:hidden bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false" onclick="toggleMobileMenu()">
@@ -154,7 +136,8 @@
 
     <!-- Info Glints Asia Pacific -->
     <div class="text-center lg:text-left">
-      <h4 class="text-white mb-3 font-poppins tracking-widest">Glints Asia Pacific</h4>
+      <h4 class="text-white mb-2 font-poppins tracking-widest">Glints Asia Pacific</h4>
+      <div class="bg-gray-800 px-3 py-1 rounded text-xs text-white mb-3 inline-block">TapLoker</div>
       
       <!-- Ikon Negara -->
       <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-4">
@@ -231,6 +214,9 @@
           <div class="flex flex-col space-y-3">
             <a href="#"><img src="/images/google-play-badge-id.png" class="h-12"></a> 
             <a href="#"><img src="/images/apple-store-badge-id.png" class="h-12"></a> 
+          </div>
+          <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center ml-2">
+            <i class="fab fa-whatsapp text-white text-xl"></i>
           </div>
         </div>
       </div>

@@ -1,107 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Glints</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
-        .card {
-            border-radius: 1rem;
+        
+        .login-container {
+            text-align: center;
+            color: white;
         }
-        .card-header {
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
+        
+        .login-container h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
-        .form-control.is-invalid {
-            border-color: #dc3545;
-            padding-right: 2.25rem;
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        
+        .login-container p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        
+        .btn-open-modal {
+            background: linear-gradient(135deg, #00d4aa 0%, #00a693 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.3);
+        }
+        
+        .btn-open-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 212, 170, 0.4);
+            color: white;
+        }
+        
+        .register-link {
+            margin-top: 24px;
+        }
+        
+        .register-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white text-center">
-                        <h4 class="mb-0">Login</h4>
-                    </div>
-                    <div class="card-body p-4">
-
-                        {{-- Alert umum --}}
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            {{-- Email --}}
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input id="email" type="email" 
-                                    class="form-control @error('email') is-invalid @enderror" 
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            {{-- Password --}}
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input id="password" type="password" 
-                                    class="form-control @error('password') is-invalid @enderror" 
-                                    name="password" required autocomplete="current-password">
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            {{-- Remember Me --}}
-                            <div class="mb-3 form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">Remember Me</label>
-                            </div>
-
-                            {{-- Submit --}}
-                            <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    Login
-                                </button>
-                            </div>
-
-                            {{-- Link register --}}
-                            <div class="text-center">
-                                <p class="mb-0">Don't have an account? 
-                                    <a href="{{ route('register') }}" class="text-primary fw-bold">Register</a>
-                                </p>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
+    <div class="login-container">
+        <h1>Selamat Datang di Glints</h1>
+        <p>Temukan peluang karir terbaik untuk masa depan Anda</p>
+        
+        <button type="button" class="btn-open-modal" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fas fa-sign-in-alt me-2"></i>
+            Masuk ke Akun Anda
+        </button>
+        
+        <div class="register-link">
+            <p>Belum punya akun? <a href="{{ route('register') }}">Daftar sekarang</a></p>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Include Login Modal -->
+    @include('auth.login-modal')
+    
+    <!-- Show modal automatically if there are errors -->
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+                // Show email form if there are errors
+                setTimeout(function() {
+                    showEmailForm();
+                }, 100);
+            });
+        </script>
+    @endif
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
