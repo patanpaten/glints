@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     
     <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
@@ -29,12 +30,12 @@
                 <!-- Logo -->
                 <div class="flex items-center">
                     <a href="{{ route('home') }}" class="flex-shrink-0">
-                        <img src="{{ asset('images/glinthome.png') }}" alt="Glints Logo" class="h-12">
+                        <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-14 lg:h-20 w-auto">
                     </a>
                 </div>
                 
                 <!-- Navigation Menu - Desktop -->
-                <nav class="hidden lg:flex items-center space-x-8">
+                <nav class="hidden lg:flex items-center space-x-8 lg:ml-[-250px]">
                     <a href="{{ route('jobs.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">LOWONGAN KERJA</a>
                     <a href="{{ route('companies.index') }}" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">PERUSAHAAN</a>
                     <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 font-normal text-sm transition-colors duration-200">BLOG</a>
@@ -43,9 +44,8 @@
                 
                 <!-- Right Side Action Buttons -->
                 <div class="flex items-center space-x-3">
-                    <!-- Download App Button - Blue Solid with Download Icon -->
+                    <!-- Download App Button -->
                     <a href="#" class="hidden lg:flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium transition-colors duration-200">
-                        <i class="fas fa-download mr-2 text-sm"></i>
                         <span>UNDUH APP GLINTS</span>
                     </a>
                     
@@ -65,7 +65,7 @@
                         MASUK
                     </a>
                     
-                    <!-- For Company Button - Blue Outline with Arrow -->
+                    <!-- For Company Button -->
                     <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200">
                         <span>UNTUK PERUSAHAAN</span>
                         <i class="fas fa-arrow-right ml-2 text-sm"></i>
@@ -115,235 +115,123 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-12">
-        <div class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 lg:grid-cols-6 gap-8">
-                <!-- Bagian Kiri - Glints Asia Pacific Info -->
-                <div class="lg:col-span-1">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3">
-                            <svg class="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-lg font-bold text-white">Glints <span class="text-blue-400">Asia Pacific</span></h2>
-                            <div class="bg-gray-800 px-2 py-1 rounded text-xs text-white mt-1">TapLoker</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-1 mb-4">
-                        <div class="w-3 h-3 bg-pink-400 rounded-full"></div>
-                        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
-                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div class="w-3 h-3 bg-red-600 rounded-full"></div>
-                        <div class="w-3 h-3 bg-red-700 rounded-full"></div>
-                    </div>
-                    <p class="text-gray-300 text-sm leading-relaxed">Secara resmi diluncurkan pada tahun 2015 di Singapura, Glints telah memberdayakan lebih dari 5 juta bakat dan 60.000 organisasi untuk mewujudkan potensi manusia mereka.</p>
-                </div>
-                
-                <!-- Untuk Pencari Kerja -->
-                <div>
-                    <h3 class="font-semibold text-white mb-4">Untuk Pencari Kerja</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Lokasi Pekerjaan</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Nama Perusahaan</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Kategori Pekerjaan</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Lowongan Kerja Populer</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Help Center</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Untuk Pemberi Kerja -->
-                <div>
-                    <h3 class="font-semibold text-white mb-4">Untuk Pemberi Kerja</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Untuk Pemberi Kerja</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">HR Tips</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Glints Platform</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Perekrutan</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Bakat Terkelola</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Perusahaan -->
-                <div>
-                    <h3 class="font-semibold text-white mb-4">Perusahaan</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Tentang Kami</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Hired Blog</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Inside Glints</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Tech Blog</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Careers</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Report Vulnerability</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Perjanjian Pengguna</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Kebijakan Privasi</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white text-sm">Syarat dan Ketentuan Layanan</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Terdaftar dan diawasi oleh -->
-                <div>
-                    <h3 class="font-semibold text-white mb-4">Terdaftar dan diawasi oleh</h3>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="bg-white rounded p-2 flex items-center justify-center">
-                            <div class="w-16 h-10 bg-blue-600 rounded flex items-center justify-center">
-                                <span class="text-white font-bold text-xs">KOMINFO</span>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded p-2 flex items-center justify-center">
-                            <div class="w-16 h-10 flex items-center justify-center">
-                                <span class="text-black font-bold text-xs text-center leading-tight">KEMENTERIAN<br>KETENAGAKERJAAN</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dapatkan Aplikasi Glints -->
-                <div>
-                    <h3 class="font-semibold text-white mb-4">Dapatkan Aplikasi Glints</h3>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-16 h-16 bg-white rounded flex items-center justify-center">
-                            <div class="w-12 h-12 border border-gray-300 bg-gray-100 flex items-center justify-center">
-                                <div class="grid grid-cols-5 gap-px">
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                    <div class="w-1 h-1 bg-white"></div>
-                                    <div class="w-1 h-1 bg-black"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col space-y-2">
-                            <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-xs">
-                                <i class="fab fa-google-play mr-2 text-lg"></i>
-                                <div>
-                                    <div class="text-xs">DAPATKAN DI</div>
-                                    <div class="font-bold">Google Play</div>
-                                </div>
-                            </a>
-                            <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-xs">
-                                <i class="fab fa-apple mr-2 text-lg"></i>
-                                <div>
-                                    <div class="text-xs">Download di</div>
-                                    <div class="font-bold">App Store</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                            <i class="fab fa-whatsapp text-white text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bagian Bawah -->
-            <div class="border-t border-gray-700 mt-8 pt-6">
-                <div class="flex flex-col lg:flex-row justify-between items-center">
-                    <!-- Social Media -->
-                    <div class="flex space-x-4 mb-4 lg:mb-0">
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-tiktok text-xl"></i>
-                        </a>
-                    </div>
-                    
-                    <!-- Copyright -->
-                    <div class="text-center lg:text-right">
-                        <p class="text-sm text-gray-400">&copy; 2025 PT. Glints Indonesia Group</p>
-                    </div>
-                </div>
-                
-                <!-- Terdaftar dan diawasi oleh -->
-                <div class="mt-6 pt-6 border-t border-gray-700">
-                    <div class="flex flex-col lg:flex-row justify-between items-center">
-                        <div class="mb-4 lg:mb-0">
-                            <h4 class="text-sm font-semibold text-white mb-3">Terdaftar dan diawasi oleh</h4>
-                            <div class="flex items-center space-x-4">
-                                <div class="bg-white rounded p-2">
-                                    <img src="/images/kominfo-logo.png" alt="KOMINFO" class="h-8 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                    <div class="text-blue-600 font-bold text-xs" style="display:none;">KOMINFO</div>
-                                </div>
-                                <div class="bg-white rounded p-2">
-                                    <img src="/images/kemnaker-logo.png" alt="KEMENTERIAN KETENAGAKERJAAN" class="h-8 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                    <div class="text-black font-bold text-xs text-center" style="display:none;">KEMENTERIAN<br>KETENAGAKERJAAN</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Dapatkan Aplikasi Glints -->
-                        <div class="text-center lg:text-right">
-                            <h4 class="text-sm font-semibold text-white mb-3">Dapatkan Aplikasi Glints</h4>
-                            <div class="flex items-center justify-center lg:justify-end space-x-3">
-                                <div class="w-16 h-16 bg-white rounded flex items-center justify-center">
-                                    <div class="w-12 h-12 border border-gray-300">
-                                        <!-- QR Code placeholder -->
-                                        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">QR</div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col space-y-2">
-                                    <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-xs">
-                                        <i class="fab fa-google-play mr-2"></i>
-                                        <div>
-                                            <div class="text-xs">DAPATKAN DI</div>
-                                            <div class="font-bold">Google Play</div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="bg-black text-white px-3 py-2 rounded flex items-center text-xs">
-                                        <i class="fab fa-apple mr-2"></i>
-                                        <div>
-                                            <div class="text-xs">Download di</div>
-                                            <div class="font-bold">App Store</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                    <i class="fab fa-whatsapp text-white text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
+  <!-- Footer -->
+<footer class="bg-gray-900 text-white relative overflow-hidden">
+  <!-- Background image -->
+  <img src="/images/footer_bg.webp" alt="Footer Background" class="absolute inset-0 w-full h-full object-cover opacity-90">
 
+  <div class="relative container mx-auto px-6 py-12">
+    <!-- Grid utama -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10">
+
+      <!-- Kolom Logo + Asia Pacific -->
+      <!-- Kolom Logo + Asia Pacific -->
+<div class="lg:col-span-2">
+  <div class="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-6 space-y-4 lg:space-y-0">
+    
+    <!-- Logo -->
+    <img src="/images/logof.svg" 
+         alt="Glints" 
+         class="max-h-[120px] w-auto">
+
+    <!-- Info Glints Asia Pacific -->
+    <div class="text-center lg:text-left">
+      <h4 class="text-white mb-3 font-poppins tracking-widest">Glints Asia Pacific</h4>
+      
+      <!-- Ikon Negara -->
+      <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-4">
+        <img src="/images/singapore.png" class="w-[23px] h-[23px] rounded-full">
+        <img src="/images/indonesia.png" class="w-[23px] h-[23px] rounded-full">
+        <img src="/images/malaysia.png" class="w-[23px] h-[23px] rounded-full">
+        <img src="/images/vietnam.png" class="w-[23px] h-[23px] rounded-full">
+        <img src="/images/china.png" class="w-[23px] h-[23px] rounded-full">
+        <img src="/images/hongkong.png" class="w-[23px] h-[23px] rounded-full">
+      </div>
+
+      <!-- Deskripsi -->
+      <p class="font-poppins text-white text-[15px] leading-relaxed tracking-wide">
+        Secara resmi diluncurkan pada tahun 2015 di Singapura, Glints telah memberdayakan lebih dari 5 juta bakat
+        dan 60.000 organisasi untuk mewujudkan potensi manusia mereka.
+      </p>
+    </div>
+  </div>
+</div>
+
+            
+      <!-- Kolom 2: Untuk Pencari Kerja -->
+      <div class="text-center lg:text-left">
+        <h3 class="font-semibold text-gray-400 text-[16px] mb-4">Untuk Pencari Kerja</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Lokasi Pekerjaan</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Nama Perusahaan</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Kategori Pekerjaan</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Lowongan Kerja Populer</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Help Center</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 3: Untuk Pemberi Kerja -->
+      <div class="text-center lg:text-left">
+        <h3 class="font-semibold text-gray-400 text-[16px] mb-4">Untuk Pemberi Kerja</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Untuk Pemberi Kerja</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">HR Tips</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Glints Platform</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Perekrutan</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Bakat Terkelola</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 4: Perusahaan -->
+      <div class="text-center lg:text-left">
+        <h3 class="font-semibold text-gray-400 text-[16px] mb-4">Perusahaan</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Tentang Kami</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Hired Blog</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Inside Glints</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Tech Blog</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Careers</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Report Vulnerability</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Perjanjian Pengguna</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Kebijakan Privasi</a></li>
+          <li><a href="#" class="text-[14px] font-poppins tracking-wide">Syarat & Ketentuan</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 5: Kominfo & App -->
+      <div class="text-center lg:text-left">
+        <h3 class="text-white text-[16px] mb-3 font-poppins tracking-wide">Terdaftar dan diawasi oleh</h3>
+        <div class="flex justify-center lg:justify-start items-center space-x-4 mb-6">
+          <img src="/images/kominfo2.webp" alt="Kominfo" class="h-12"> 
+          <img src="/images/kementerian2.webp" alt="Kemnaker" class="h-12"> 
+        </div>
+        <h3 class="text-white text-[15px] mb-3 font-poppins tracking-wide">Dapatkan Aplikasi Glints</h3>
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+          <div class="w-32 h-32 bg-white rounded flex items-center justify-center"> 
+            <img src="/images/mobile-app-download-qr-code-id-footer.webp" alt="QR Code" class="w-28 h-28 object-contain">
+          </div>
+          <div class="flex flex-col space-y-3">
+            <a href="#"><img src="/images/google-play-badge-id.png" class="h-12"></a> 
+            <a href="#"><img src="/images/apple-store-badge-id.png" class="h-12"></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="flex flex-wrap justify-center lg:justify-start gap-6 my-6">
+      <a href="#" class="text-white"><i class="fab fa-instagram text-[28px]"></i></a>
+      <a href="#" class="text-white"><i class="fab fa-youtube text-[28px]"></i></a>
+      <a href="#" class="text-white"><i class="fab fa-facebook text-[28px]"></i></a>
+      <a href="#" class="text-white"><i class="fab fa-linkedin text-[28px]"></i></a>
+      <a href="#" class="text-white"><i class="fas fa-envelope text-[28px]"></i></a>
+      <a href="#" class="text-white"><i class="fab fa-tiktok text-[28px]"></i></a>
+    </div>
+
+    <!-- Copyright -->
+    <p class="text-center lg:text-left text-white text-[14px] font-poppins tracking-wide">&copy; 2025 PT. Glints Indonesia Group</p>
+  </div>
+</footer>
 
     <!-- Scripts -->
     <script>
