@@ -8,7 +8,7 @@
     }
 
     .register-container {
-        min-height: calc(100vh - 200px);
+        min-height: calc(100vh -00px);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,6 +20,14 @@
         font-size: 28px;
         font-weight: 700;
         color: #000;
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+    .register-sub-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: rgb(88, 88, 88);
         text-align: center;
         margin-bottom: 20px;
         line-height: 1.3;
@@ -106,7 +114,8 @@
 
 <div class="register-container">
     <!-- Title outside card -->
-    <h1 class="register-title">Mari bergabung<br>dengan Glints</h1>
+    <h1 class="register-title">Selamat datang kembali!</h1>
+    <h1 class="register-sub-title">Masuk ke akun Glints Kamu</h1>
 
     <div class="register-card">
         <!-- Card Body -->
@@ -115,27 +124,21 @@
             <div class="social-icons">
                 <a href="#"><img src="{{ asset('images/google.png') }}" alt="Google"></a>
                 <a href="#"><img src="{{ asset('images/facebook.png') }}" alt="Facebook"></a>
+                <a href="#"><img src="{{ asset('images/linkedin.png') }}" alt="Facebook"></a>
             </div>
 
             <div class="divider-text">atau</div>
 
             <!-- Email Register Link -->
-            <a href="{{ route('register-email') }}" class="email-link">Daftar dengan Email</a>
-
-            <!-- Terms -->
-            <div class="terms-box">
-                Dengan mendaftar, saya setuju dengan <a href="#">Ketentuan Layanan</a>
-            </div>
+            <a href="{{ route('login-email') }}" class="email-link">Masuk dengan Email</a>
         </div>
 
         <!-- Card Footer -->
         <div class="register-footer">
-            <p>Sudah punya akun Glints? <a href="{{ route('login-regis') }}">Masuk</a></p>
+            <p>Tidak punya akun Glints? <a href="{{ route('register') }}">daftar</a></p>
             <p>Untuk perusahaan, kunjungi <a href="#">laman</a> berikut.</p>
         </div>
     </div>
 </div>
 
-<!-- Include Login Modal -->
-@include('auth.login-modal')
 @endsection

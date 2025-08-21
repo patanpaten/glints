@@ -449,7 +449,7 @@
                         DAFTAR
                     </a>
 
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                    <a href="{{ route('login') }}" data-bs-toggle="modal" data-bs-target="#loginModal"
                     class="ml-6 hidden lg:flex items-center text-black hover:underline 
                             underline-offset-4 decoration-2 decoration-black 
                             text-xs font-medium transition-colors duration-200">

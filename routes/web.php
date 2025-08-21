@@ -41,8 +41,18 @@ Route::get('/blog/{article}', [App\Http\Controllers\BlogController::class, 'show
 // Authentication
 // ==========================
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login-regis', function () {
+    return view('auth.login-regis');
+})->name('login-regis');
+
+Route::get('/login-email', function () {
+    return view('auth.login-email');
+})->name('login-email');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register-email', function () {
+    return view('auth.register-email');
+})->name('register-email');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
