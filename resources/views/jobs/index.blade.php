@@ -8,17 +8,46 @@
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <form action="{{ route('jobs.index') }}" method="GET" class="flex gap-2">
-                <div class="flex-1 relative">
-                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
-                    <input type="text" id="keyword" name="keyword" value="{{ request('keyword') }}" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500" placeholder="Cari posisi, perusahaan, atau skill">
+                
+                <!-- Input Keyword -->
+                <div class="flex-1 relative bg-blue-50 rounded-lg flex items-center">
+                    <i class="fas fa-search text-gray-500 ml-3"></i>
+                    <input 
+                        type="text" 
+                        id="keyword" 
+                        name="keyword" 
+                        value="{{ request('keyword') }}" 
+                        placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan" 
+                        class="w-full bg-transparent px-3 py-3 focus:outline-none"
+                    >
                 </div>
-                <div class="w-64 relative">
-                    <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
-                    <input type="text" id="location" name="location" value="{{ request('location') }}" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500" placeholder="Semua kota/provinsi">
+
+                <!-- Input Location -->
+                <div class="w-64 relative bg-blue-50 rounded-lg flex items-center">
+                    <i class="fas fa-map-marker-alt text-gray-500 ml-3"></i>
+                    <input 
+                        type="text" 
+                        id="location" 
+                        name="location" 
+                        value="{{ request('location') ?? 'All Cities/Provinces' }}" 
+                        placeholder="Tambahkan kota/provinsi" 
+                        class="w-full bg-transparent px-3 py-3 focus:outline-none"
+                    >
+                    @if(request('location'))
+                        <button type="button" onclick="document.getElementById('location').value=''" class="mr-3 text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    @endif
                 </div>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-                    Cari
+
+                <!-- Button -->
+                <button 
+                    type="submit" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition"
+                >
+                    CARI
                 </button>
+
             </form>
         </div>
     </div>
