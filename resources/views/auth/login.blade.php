@@ -19,8 +19,10 @@
     @if (session('login_from') === 'modal' && ($errors->has('email') || $errors->has('password')))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                loginModal.show();
+                var loginModal = document.getElementById('loginModal');
+                if (loginModal) {
+                    loginModal.style.display = 'flex';
+                }
             });
         </script>
     @endif

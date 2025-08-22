@@ -449,12 +449,21 @@
                         DAFTAR
                     </a>
 
-                    <a href="{{ route('login') }}" data-bs-toggle="modal" data-bs-target="#loginModal"
-                    class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                            underline-offset-4 decoration-2 decoration-black 
-                            text-xs font-medium transition-colors duration-200">
-                        MASUK
-                    </a>
+                    @if(request()->routeIs('login'))
+                        <a href="{{ route('login') }}"
+                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                underline-offset-4 decoration-2 decoration-black 
+                                text-xs font-medium transition-colors duration-200">
+                            MASUK
+                        </a>
+                    @else
+                        <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
+                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                underline-offset-4 decoration-2 decoration-black 
+                                text-xs font-medium transition-colors duration-200">
+                            MASUK
+                        </a>
+                    @endif
 
                     <!-- For Company Button (dipaksa ke kanan) -->
                     <div>
@@ -492,9 +501,15 @@
                 <hr class="border-white/40">
                 
                 <!-- Auth --> 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
-                    MASUK
-                </a> 
+                @if(request()->routeIs('login'))
+                    <a href="{{ route('login') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                        MASUK
+                    </a>
+                @else
+                    <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                        MASUK
+                    </a>
+                @endif 
                 <a href="{{ route('register') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                     DAFTAR
                 </a>

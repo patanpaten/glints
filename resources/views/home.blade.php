@@ -2,58 +2,65 @@
 
 @section('title', 'Glints - Platform Lowongan Kerja Terbesar di Indonesia')
 
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="text-center py-5">
-        <h1 class="fw-bold">Cari 40,000+ loker di Indonesia</h1>
-        <p class="text-muted">Temukan pekerjaan impianmu sekarang juga!</p>
-    </div>
-</div>
-@endsection
-
-
 @section('content')
     <!-- Hero Section -->
     <section class="bg-white py-12">
         <div class="container mx-auto px-4">
-                <!-- Search Bar -->
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-search text-gray-400"></i>
+            <div class="max-w-4xl mx-auto text-center mb-8">
+                <!-- Search Form -->
+                <form class="SearchSectionsc__Form-sc-js5c89-0 fMUdgD" action="{{ route('jobs.index') }}" method="GET">
+                    <h1 class="SearchSectionsc__Title-sc-js5c89-1 fcyPfe">Cari 40,000+ loker di Indonesia</h1>
+                    <div class="SearchSectionsc__Container-sc-js5c89-2 fnMmus">
+                        <div class="SearchSectionsc__FieldWrapper-sc-js5c89-3 kHnMMk">
+                            <div data-prefix="true" data-suffix="false" class="InputStyle__StyledContainer-sc-15z2mnd-0 uZcgU">
+                                <div class="InputStyle__StyledPrefixContainer-sc-15z2mnd-1 iKYIJd">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15Z"></path>
+                                    </svg>
                                 </div>
-                                <input type="text" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-orange-500 focus:border-orange-500" placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan">
+                                <input placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan" type="text" name="keyword" class="InputStyle__StyledInput-sc-15z2mnd-4 efLWzC" value="{{ request('keyword') }}" fdprocessedid="10652">
                             </div>
                         </div>
-                        <div class="w-full md:w-48">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-map-marker-alt text-gray-400"></i>
+                        <div class="SearchSectionsc__LocationFieldWrapper-sc-js5c89-4 jKKJYV">
+                            <div tabindex="-1" aria-controls="popover-gez8C7rCyRaiCGYikKG9y" aria-owns="popover-gez8C7rCyRaiCGYikKG9y" aria-expanded="false">
+                                <div width="100%" class="SelectStyle__ActivatorWrapper-sc-c6sc8m-1 fshVEV">
+                                    <div class="InputStyle__StyledContainer-sc-15z2mnd-0 SearchableSelectInputStyle__StyledContainer-sc-1oj168h-0 caYITs fbNcJg select-input-container" data-error="false" data-disabled="false" width="100%">
+                                        <div class="InputStyle__StyledPrefixContainer-sc-15z2mnd-1 iKYIJd">
+                                            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1377_1005)">
+                                                    <path d="M10 20.4921L4.69667 15.1888C3.64779 14.1399 2.93349 12.8035 2.64411 11.3486C2.35473 9.89379 2.50326 8.38579 3.07092 7.01535C3.63858 5.64491 4.59987 4.47358 5.83324 3.64947C7.0666 2.82536 8.51665 2.3855 10 2.3855C11.4834 2.3855 12.9334 2.82536 14.1668 3.64947C15.4001 4.47358 16.3614 5.64491 16.9291 7.01535C17.4968 8.38579 17.6453 9.89379 17.3559 11.3486C17.0665 12.8035 16.3522 14.1399 15.3033 15.1888L10 20.4921ZM14.125 14.0104C14.9408 13.1946 15.4963 12.1552 15.7213 11.0237C15.9463 9.89212 15.8308 8.71926 15.3892 7.6534C14.9477 6.58753 14.2 5.67652 13.2408 5.03557C12.2815 4.39462 11.1537 4.05252 10 4.05252C8.8463 4.05252 7.71851 4.39462 6.75924 5.03557C5.79997 5.67652 5.05229 6.58753 4.61076 7.6534C4.16923 8.71926 4.05368 9.89212 4.27871 11.0237C4.50374 12.1552 5.05926 13.1946 5.875 14.0104L10 18.1354L14.125 14.0104ZM10 11.5521C9.55798 11.5521 9.13405 11.3765 8.82149 11.0639C8.50893 10.7514 8.33334 10.3275 8.33334 9.88543C8.33334 9.44341 8.50893 9.01948 8.82149 8.70692C9.13405 8.39436 9.55798 8.21877 10 8.21877C10.442 8.21877 10.866 8.39436 11.1785 8.70692C11.4911 9.01948 11.6667 9.44341 11.6667 9.88543C11.6667 10.3275 11.4911 10.7514 11.1785 11.0639C10.866 11.3765 10.442 11.5521 10 11.5521Z" fill="#666666"></path>
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1377_1005">
+                                                        <rect width="20" height="20" fill="white" transform="translate(0 0.71875)"></rect>
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                        <div class="SearchableSelectInputStyle__StyledSelectedValue-sc-1oj168h-2 QbWBZ searchable-select">
+                                            <span class="SearchableSelectInputStyle__StyledSelected-sc-1oj168h-1 fJMxBI">Semua Kota/Provinsi</span>
+                                        </div>
+                                        <div class="InputStyle__StyledPrefixContainer-sc-15z2mnd-1 InputStyle__StyledSuffixContainer-sc-15z2mnd-2 SearchableSelectInputStyle__ClearSelectedContainer-sc-1oj168h-4 iKYIJd ieGlAT fINCTV">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="clear-icon" style="cursor: pointer;">
+                                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586Z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
-                                <select class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option>Semua Kota/Provinsi</option>
-                                    <option>Jakarta</option>
-                                    <option>Bandung</option>
-                                    <option>Surabaya</option>
-                                    <option>Yogyakarta</option>
-                                </select>
                             </div>
                         </div>
-                        <div class="w-full md:w-auto">
-                            <button type="submit" class="w-full md:w-auto bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                Cari
-                            </button>
-                        </div>
+                        <button data-icon="false" aria-label="Search button" type="submit" class="ButtonStyle__StyledButton-sc-8t0676-0 kJeuuE PrimaryButtonStyle__PrimaryButton-sc-1iczr6c-0 fcHdBX" fdprocessedid="4gpb7l">Cari</button>
                     </div>
-                </div>
+                </form>
             </div>
-            
-            <!-- Popular Categories -->
-            <div class="mt-8">
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Kategori Populer</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                     <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
                         <i class="fas fa-user-tie text-orange-500 text-xl mb-2"></i>
@@ -95,163 +102,19 @@
                         <i class="fas fa-graduation-cap text-orange-500 text-xl mb-2"></i>
                         <p class="text-sm font-medium text-gray-700">Fresh Graduate</p>
                     </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-            <h1 class="display-4 fw-bold mb-4">Find Your Dream Job Today</h1>
-            <p class="lead mb-5">Connect with top employers and discover opportunities that match your skills and aspirations.</p>
-            <form action="{{ route('jobs.index') }}" method="GET" class="row g-3 justify-content-center">
-                <div class="col-md-5">
-                    <input type="text" name="search" class="form-control form-control-lg" placeholder="Job title, keywords, or company">
-                </div>
-                <div class="col-md-3">
-                    <select name="category" class="form-select form-select-lg">
-                        <option value="">All Categories</option>
-                        @foreach(\App\Models\JobCategory::all() as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
-    </section>
-            </form>
-    <!-- Trusted Companies Section -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="text-2xl font-bold text-gray-900 mb-8">Perusahaan Terpercaya</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            <h2 class="text-center mb-5">Featured Jobs</h2>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <img src="{{ asset('images/placeholder-logo.svg') }}" alt="Ruangguru" class="max-h-12">
-                    </div>
-                        <div class="card h-100 shadow-sm">
-                        <img src="{{ asset('images/placeholder-logo.svg') }}" alt="Tokopedia" class="max-h-12">
-                                <h5 class="card-title">{{ $job->title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ $job->company->name }}</h6>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-primary">{{ $job->job_type }}</span>
-                                    <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h2 class="text-3xl font-bold text-white mb-4">Cari. Lamar. Dapat kerja.</h2>
-                            <div class="card-footer bg-transparent border-top-0">
-                                <a href="{{ route('jobs.show', $job->id) }}" target="_blank" class="btn btn-outline-primary w-100">View Details</a>
-                            <i class="fab fa-google-play text-2xl mr-3"></i>
-                            <div>
-                                <div class="text-xs">GET IT ON</div>
-                                <div class="text-sm font-medium">Google Play</div>
-                            </div>
-            <div class="text-center mt-4">
-                <a href="{{ route('jobs.index') }}" class="btn btn-outline-primary">View All Jobs</a>
-            </div>
-                        </a>
-                        <a href="#" class="bg-black text-white px-6 py-3 rounded-lg flex items-center">
-                            <i class="fab fa-apple text-2xl mr-3"></i>
-                            <div>
-                                <div class="text-xs">Download on the</div>
-                                <div class="text-sm font-medium">App Store</div>
-            <h2 class="text-center mb-5">Browse by Category</h2>
-                </div>
-                @foreach(\App\Models\JobCategory::withCount('jobs')->orderByDesc('jobs_count')->take(8)->get() as $category)
-                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Testimoni Pengguna</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="card feature-card h-100 text-center shadow-sm">
-                        <div class="flex items-center mb-4">
-                                    <i class="bi bi-briefcase fs-1 text-primary mb-3"></i>
-                                <p class="text-sm text-gray-500">24 tahun, Web Developer</p>
-                            </div>
-                        <p class="text-gray-600">"Berkat Glints, saya berhasil mendapatkan pekerjaan impian saya sebagai Web Developer di perusahaan teknologi terkemuka hanya dalam waktu 2 minggu!"</p>
-                        <div class="mt-4 flex text-orange-500">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="flex items-center mb-4">
-                            <img src="{{ asset('images/placeholder-user.svg') }}" alt="User" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h4 class="font-medium text-gray-900">Siti Nurhaliza</h4>
-                                <p class="text-sm text-gray-500">27 tahun, Marketing Manager</p>
-            <h2 class="text-center mb-5">Why Choose Glints?</h2>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                    <div class="card feature-card h-100 text-center shadow-sm">
-                        <div class="card-body">
-                            <i class="bi bi-search fs-1 text-primary mb-3"></i>
-                            <img src="{{ asset('images/placeholder-user.svg') }}" alt="User" class="w-12 h-12 rounded-full mr-4">
-                            <p class="card-text">Browse thousands of job listings from top companies across various industries.</p>
-                                <p class="text-sm text-gray-500">22 tahun, Fresh Graduate</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Sebagai fresh graduate, Glints sangat membantu saya menemukan pekerjaan pertama yang sesuai dengan latar belakang pendidikan saya. Proses lamarnya juga sangat mudah!"</p>
-                    <div class="card feature-card h-100 text-center shadow-sm">
-                        <div class="card-body">
-                            <i class="bi bi-person-badge fs-1 text-primary mb-3"></i>
-                            <i class="fas fa-star"></i>
-                            <p class="card-text">Create a comprehensive profile to showcase your skills and experience to employers.</p>
                 </div>
             </div>
         </div>
     </section>
-                    <div class="card feature-card h-100 text-center shadow-sm">
-                        <div class="card-body">
-                            <i class="bi bi-building fs-1 text-primary mb-3"></i>
-                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Cari Lowongan di Kota Besar Indonesia</h2>
-                            <p class="card-text">Post job openings and find qualified candidates for your company's positions.</p>
-                        <div class="relative w-full max-w-md">
-                            <!-- Simplified Indonesia Map with Dot Matrix -->
-                            <svg viewBox="0 0 400 200" class="w-full">
-                                <g fill="#FF750F" fill-opacity="0.2">
-                                    <!-- Simplified dot matrix representation of Indonesia -->
-                                    <!-- This is a placeholder - in a real implementation you would have actual coordinates -->
-                                    <circle cx="100" cy="100" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="110" cy="95" r="3" fill="#FF750F" fill-opacity="0.6"/>
-    <section class="py-5 bg-primary text-white text-center">
-                                    <circle cx="130" cy="105" r="3" fill="#FF750F" fill-opacity="0.6"/>
-            <h2 class="mb-4">Ready to Start Your Career Journey?</h2>
-            <p class="lead mb-4">Join thousands of job seekers who have found their dream jobs through Glints.</p>
-            <a href="{{ route('register') }}" class="btn btn-light btn-lg px-4 me-2">Sign Up Now</a>
-            <a href="{{ route('jobs.index') }}" class="btn btn-outline-light btn-lg px-4">Browse Jobs</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bogor</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bekasi</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Tangerang</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bandung</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Medan</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Malang</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Semarang</a>
-                <div class="col-md-4 mb-4">
-                    <h5>Glints</h5>
-                    <p>Your trusted platform for finding the perfect job match and advancing your career.</p>
-                </div>
-                <div class="col-md-2 mb-4">
-                    <h5>For Job Seekers</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('jobs.index') }}" class="text-white">Browse Jobs</a></li>
-                        <li><a href="#" class="text-white">Career Advice</a></li>
-                        <li><a href="#" class="text-white">Resume Tips</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 mb-4">
-                    <h5>For Employers</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('register') }}" class="text-white">Post a Job</a></li>
-                        <li><a href="#" class="text-white">Hiring Solutions</a></li>
-                        <li><a href="#" class="text-white">Pricing</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 mb-4">
-                    <h5>Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('about') }}" class="text-white">About Us</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white">Contact Us</a></li>
-                        <li><a href="#" class="text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 mb-4">
-                    <h5>Connect</h5>
-                    <div class="d-flex gap-3 fs-4">
-                    </div>
-                </div>
+
+    <!-- Call to Action -->
+    <section class="py-12 bg-primary text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4">Siap Memulai Perjalanan Karir Anda?</h2>
+            <p class="text-xl mb-6">Bergabunglah dengan ribuan pencari kerja yang telah menemukan pekerjaan impian mereka melalui Glints.</p>
+            <div class="space-x-4">
+                <a href="{{ route('register') }}" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-200">Daftar Sekarang</a>
+                <a href="{{ route('jobs.index') }}" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition duration-200">Jelajahi Lowongan</a>
             </div>
         </div>
     </section>
@@ -259,9 +122,123 @@
 
 @push('styles')
 <style>
-    /* Custom styles for homepage */
-    .feature-card:hover {
-        border-color: #FF750F;
+/* Custom styles for search form */
+.SearchSectionsc__Form-sc-js5c89-0.fMUdgD {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.SearchSectionsc__Title-sc-js5c89-1.fcyPfe {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 1rem;
+}
+
+.SearchSectionsc__Container-sc-js5c89-2.fnMmus {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+}
+
+.SearchSectionsc__FieldWrapper-sc-js5c89-3.kHnMMk {
+    flex: 1;
+}
+
+.SearchSectionsc__LocationFieldWrapper-sc-js5c89-4.jKKJYV {
+    width: 300px;
+}
+
+.InputStyle__StyledContainer-sc-15z2mnd-0.uZcgU {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    padding: 0.75rem;
+}
+
+.InputStyle__StyledPrefixContainer-sc-15z2mnd-1.iKYIJd {
+    margin-right: 0.75rem;
+    color: #666666;
+}
+
+.InputStyle__StyledPrefixContainer-sc-15z2mnd-1.iKYIJd svg {
+    width: 20px;
+    height: 20px;
+}
+
+.InputStyle__StyledInput-sc-15z2mnd-4.efLWzC {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    color: #1a202c;
+}
+
+.InputStyle__StyledInput-sc-15z2mnd-4.efLWzC::placeholder {
+    color: #a0aec0;
+}
+
+.SearchableSelectInputStyle__StyledContainer-sc-1oj168h-0.caYITs.fbNcJg {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+.SearchableSelectInputStyle__StyledSelectedValue-sc-1oj168h-2.QbWBZ {
+    flex: 1;
+    margin: 0 0.75rem;
+}
+
+.SearchableSelectInputStyle__StyledSelected-sc-1oj168h-1.fJMxBI {
+    color: #1a202c;
+    font-size: 1rem;
+}
+
+.ButtonStyle__StyledButton-sc-8t0676-0.kJeuuE.PrimaryButtonStyle__PrimaryButton-sc-1iczr6c-0.fcHdBX {
+    background: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.ButtonStyle__StyledButton-sc-8t0676-0.kJeuuE.PrimaryButtonStyle__PrimaryButton-sc-1iczr6c-0.fcHdBX:hover {
+    background: #2c5aa0;
+}
+
+.clear-icon {
+    width: 16px;
+    height: 16px;
+    color: #666666;
+}
+
+@media (max-width: 768px) {
+    .SearchSectionsc__Container-sc-js5c89-2.fnMmus {
+        flex-direction: column;
+        gap: 1rem;
     }
+    
+    .SearchSectionsc__LocationFieldWrapper-sc-js5c89-4.jKKJYV {
+        width: 100%;
+    }
+    
+    .SearchSectionsc__Title-sc-js5c89-1.fcyPfe {
+        font-size: 2rem;
+    }
+}
 </style>
 @endpush

@@ -92,6 +92,17 @@
       <div class="email-login">
         <a href="#" id="emailLoginBtn">Masuk dengan Email</a>
       </div>
+      
+      <!-- Modal Footer hanya di Step 1 -->
+      <div class="modal-footer">
+        <div class="footer-top">
+          <span>Tidak punya akun Glints?</span>
+          <a href="{{ route('register') }}">Daftar</a>
+        </div>
+        <div class="footer-bottom">
+          Untuk perusahaan, kunjungi <a href="#">laman</a> berikut.
+        </div>
+      </div>
     </div>
 
     <!-- Step 2 -->
@@ -117,50 +128,59 @@
       </div>
     </div>
 
-    <div class="modal-footer">
-      <div class="footer-top">
-        <span>Tidak punya akun Glints?</span>
-        <a href="#">Daftar</a>
-      </div>
-      <div class="footer-bottom">
-        Untuk perusahaan, kunjungi <a href="#">laman</a> berikut.
-      </div>
-    </div>
   </div>
 </div>
 
 <script>
-  const step1 = document.getElementById('loginStep1');
-  const step2 = document.getElementById('loginStep2');
-  const emailBtn = document.getElementById('emailLoginBtn');
-  const closeBtn = document.getElementById('closeModal');
-  const modal = document.getElementById('loginModal');
-  const modalContent = document.querySelector('.modal-content');
+  document.addEventListener('DOMContentLoaded', function() {
+    const step1 = document.getElementById('loginStep1');
+    const step2 = document.getElementById('loginStep2');
+    const emailBtn = document.getElementById('emailLoginBtn');
+    const closeBtn = document.getElementById('closeModal');
+    const modal = document.getElementById('loginModal');
+    const modalContent = document.querySelector('.modal-content');
 
-  emailBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    step1.style.display = 'none';
-    step2.style.display = 'block';
-    modalContent.classList.add('step2');
-  });
+    if (emailBtn && step1 && step2 && modalContent) {
+      emailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        step1.style.display = 'none';
+        step2.style.display = 'block';
+        modalContent.classList.add('step2');
+      });
+    }
 
-  closeBtn?.addEventListener('click', () => {
-    modal.style.display = 'none';
-    step2.style.display = 'none';
-    step1.style.display = 'block';
-    modalContent.classList.remove('step2');
-  });
+    if (closeBtn && modal && step1 && step2 && modalContent) {
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        step1.style.display = 'block';
+        step2.style.display = 'none';
+        modalContent.classList.remove('step2');
+      });
+    }
 
-  document.querySelectorAll('.toggle-password').forEach(icon => {
-    icon.addEventListener('click', () => {
-      const input = icon.previousElementSibling;
-      if (input?.type === 'password') {
-        input.type = 'text';
-        icon.textContent = '🙈';
-      } else {
-        input.type = 'password';
-        icon.textContent = '👁️';
-      }
+    // Close modal when clicking outside the modal content
+    if (modal && step1 && step2 && modalContent) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          step1.style.display = 'block';
+          step2.style.display = 'none';
+          modalContent.classList.remove('step2');
+        }
+      });
+    }
+
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const input = icon.previousElementSibling;
+        if (input && input.type === 'password') {
+          input.type = 'text';
+          icon.textContent = '🙈';
+        } else if (input) {
+          input.type = 'password';
+          icon.textContent = '👁️';
+        }
+      });
     });
   });
 </script>
