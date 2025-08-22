@@ -495,6 +495,154 @@ body:not(.bootstrap-modal) .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   display: block !important;
 }
 
+/* Mobile menu specific styles */
+.navbar-regis #mobile-menu.hidden {
+    display: none !important;
+}
+
+.navbar-regis #mobile-menu:not(.hidden) {
+    display: flex !important;
+}
+
+/* Mobile menu overlay and animation */
+.navbar-regis #mobile-menu {
+    backdrop-filter: blur(4px) !important;
+}
+
+.navbar-regis #mobile-menu > div {
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease-in-out !important;
+}
+
+.navbar-regis #mobile-menu:not(.hidden) > div {
+    transform: translateX(0) !important;
+}
+
+/* Mobile menu responsive width */
+@media (max-width: 640px) {
+    .navbar-regis #mobile-menu > div {
+        width: 100% !important;
+        max-width: 320px !important;
+    }
+}
+
+/* Mobile menu content styling */
+.navbar-regis #mobile-menu nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar-regis #mobile-menu nav a.bg-white\/20 {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Language dropdown in mobile */
+.navbar-regis #mobile-menu #lang-menu {
+    position: relative !important;
+    width: 100% !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Footer responsive utilities */
+footer {
+    min-height: auto !important;
+}
+
+footer .container {
+    max-width: 100% !important;
+}
+
+/* Footer grid responsive behavior */
+@media (max-width: 768px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    footer .md\:col-span-2 {
+        grid-column: span 1 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    footer .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* Footer text and link styling */
+footer a {
+    transition: color 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+footer a:hover {
+    color: #d1d5db !important;
+}
+
+/* Footer social media responsive */
+footer .fab, footer .fas {
+    transition: color 0.3s ease !important;
+}
+
+/* Footer images responsive */
+footer img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Navbar responsive utilities */
+@media (max-width: 1024px) {
+    .navbar-regis .lg\:flex {
+        display: none !important;
+    }
+    
+    .navbar-regis .lg\:hidden {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar-regis .lg\:flex {
+        display: flex !important;
+    }
+    
+    .navbar-regis .lg\:hidden {
+        display: none !important;
+    }
+}
+
+/* General responsive text utilities */
+@media (max-width: 640px) {
+    .text-xs {
+        font-size: 0.75rem !important;
+    }
+    
+    .text-sm {
+        font-size: 0.875rem !important;
+    }
+}
+
+@media (min-width: 640px) {
+    .sm\:text-sm {
+        font-size: 0.875rem !important;
+    }
+    
+    .sm\:text-base {
+        font-size: 1rem !important;
+    }
+    
+    .sm\:text-2xl {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:text-\[28px\] {
+        font-size: 28px !important;
+    }
+}
+
 /* Additional modal backdrop fix */
 .modal-backdrop {
   position: fixed !important;
