@@ -428,7 +428,7 @@
                         <button id="langBtn" 
                             class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
                                 border-b-3 border-transparent hover:border-black transition-all duration-200">
-                            <i class="fas fa-globe ml-3"></i>
+                            <i class="fas fa-globe"></i>
                             <span>ID</span>
                             <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
                         </button>
