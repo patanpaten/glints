@@ -63,10 +63,10 @@
     .login-field label { font-size: 14px; margin-bottom: 6px; display: block; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #777; font-size: 14px; pointer-events: none; transition: 0.2s ease all; background: #fff; padding: 0 4px; }
     .login-field input { width: 100%; padding: 14px 40px 14px 12px; border: 1px solid #ccc; background-color: white; font-size: 15px; box-sizing: border-box; transition: all 0.3s ease; }
     .login-field input:focus { border-color: #007bff; background-color:#fff; outline: none; }
-    .login-field input:focus + label, .login-field input:not(:placeholder-shown) + label { top: -8px; left: 8px; font-size: 12px; color: #007bff; }
+    .login-field input:focus + label, .login-field input:not(:placeholder-shown) + label { top: -1px; left: 8px; font-size: 12px; color: #007bff; }
     .error-message { font-size: 12px; color: red; margin-top: 4px; display: none; }
     .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #777; }
-    .btn-submit { width: 100%; padding: 12px; margin-bottom: 25px; background-color: rgb(230, 175, 24); box-shadow: 5px 5px 0 rgb(204, 12, 12); border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; }
+    .btn-submit { margin-top: 20px; width: 100%; padding: 12px; margin-bottom: 25px; background-color: rgb(230, 175, 24); box-shadow: 5px 5px 0 rgb(204, 12, 12); border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; }
     .btn-submit:hover { background-color: rgb(230, 175, 24); box-shadow: 5px 5px 0 rgb(0, 0, 0); }
     .back-link { display: block; margin-top: 10px; font-size: 13px; color: #007bff; cursor:pointer; text-align: left; text-decoration: none; }
   </style>
