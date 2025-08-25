@@ -4,339 +4,501 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="bg-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-8">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Cari 40,000+ loker di Indonesia</h1>
-                
-                <!-- Search Bar -->
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-search text-gray-400"></i>
-                                </div>
-                                <input type="text" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-orange-500 focus:border-orange-500" placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan">
-                            </div>
-                        </div>
-                        <div class="w-full md:w-48">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-map-marker-alt text-gray-400"></i>
-                                </div>
-                                <select class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option>Semua Lokasi</option>
-                                    <option>Jakarta</option>
-                                    <option>Bandung</option>
-                                    <option>Surabaya</option>
-                                    <option>Yogyakarta</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="w-full md:w-auto">
-                            <button type="submit" class="w-full md:w-auto bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                Cari
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Popular Categories -->
-            <div class="mt-8">
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-user-tie text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Admin & HR</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-bullhorn text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Marketing</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-cogs text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Operasional</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-truck text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Supply Chain & Logistik</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-chart-line text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Business Development & Sales</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-calculator text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Akuntansi & Keuangan</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-paint-brush text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Desain</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-newspaper text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Media & Komunikasi</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-laptop-code text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">IT</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-graduation-cap text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Fresh Graduate</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-briefcase text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">Aktif Merekrut</p>
-                    </a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-lg p-3 text-center hover:border-orange-500 hover:shadow-md transition duration-200">
-                        <i class="fas fa-home text-orange-500 text-xl mb-2"></i>
-                        <p class="text-sm font-medium text-gray-700">WFH/Remote</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="bg-gradient-to-b from-blue-50 to-white py-5">
+  <div class="container mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-4xl font-extrabold text-gray-900 leading-tight max-w-3xl mx-auto">
+      Cari 40,000+ Loker di Indonesia
+    </h1>
 
-    <!-- Urgent Hiring Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Dibutuhkan Segera</h2>
-                <div class="flex flex-wrap gap-3">
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Data Analyst</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Digital Marketing</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Customer Service</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Admin</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Desain Grafis</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Penulisan Konten</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Web Developer</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">UI/UX Designer</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Social Media Specialist</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Project Manager</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">HR Specialist</a>
-                    <a href="#" class="bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition duration-200">Content Creator</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Search Bar -->
+    <form class="flex items-center gap-3 w-full max-w-4xl mx-auto py-10">
+  <!-- Input keyword -->
+  <div class="flex-1">
+    <input 
+      type="text" 
+      placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan" 
+      class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
 
-    <!-- Trusted Companies Section -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="text-2xl font-bold text-gray-900 mb-8">Perusahaan Terpercaya</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">MCF</div>
-                    </div>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">OPPO</div>
-                    </div>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">A&W</div>
-                    </div>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Ruangguru</div>
-                    </div>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Tokopedia</div>
-                    </div>
-                    <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition duration-200">
-                        <div class="bg-gray-100 w-full h-12 flex items-center justify-center rounded">Gojek</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Dropdown lokasi -->
+  <div class="flex-1">
+    <select 
+      class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option>Semua Kota/Provinsi</option>
+      <option>Jakarta</option>
+      <option>Bandung</option>
+      <option>Surabaya</option>
+    </select>
+  </div>
 
-    <!-- App Promotion Section -->
-    <section class="py-12 bg-gradient-to-r from-yellow-400 to-blue-500">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h2 class="text-3xl font-bold text-white mb-4">Cari. Lamar. Dapat kerja.</h2>
-                    <h3 class="text-2xl font-bold text-white mb-6">Serba bisa di aplikasi!</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-black text-white px-6 py-3 rounded-lg flex items-center">
-                            <i class="fab fa-google-play text-2xl mr-3"></i>
-                            <div>
-                                <div class="text-xs">GET IT ON</div>
-                                <div class="text-sm font-medium">Google Play</div>
-                            </div>
-                        </a>
-                        <a href="#" class="bg-black text-white px-6 py-3 rounded-lg flex items-center">
-                            <i class="fab fa-apple text-2xl mr-3"></i>
-                            <div>
-                                <div class="text-xs">Download on the</div>
-                                <div class="text-sm font-medium">App Store</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="bg-white rounded-xl shadow-lg h-80 w-40 flex items-center justify-center">
-                        <span class="text-gray-400">App Mockup</span>
-                    </div>
-                </div>
-            </div>
+  <!-- Tombol -->
+  <button 
+    type="submit" 
+    class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
+  >
+    Cari
+  </button>
+</form>
+
+  </div>
+</section>
+
+<section class="py-10 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <!-- Judul -->
+    <h2 class="text-lg font-semibold text-gray-800 mb-6">
+      Kategori pekerjaan populer
+    </h2>
+
+    <!-- Grid semua kategori -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 max-w-6xl">
+      <!-- Kategori biasa -->
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Admin & HR
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Marketing
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Operasional
+      </a>
+      <!-- Aktif Merekrut -->
+      <a href="#" class="border border-red-400 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center gap-2 text-red-600 font-medium">
+        <i class="fas fa-fire"></i> Aktif Merekrut
+      </a>
+
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Supply Chain & Logistik
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Business Development & Sales
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Akuntansi & Keuangan
+      </a>
+      <!-- Remote -->
+      <a href="#" class="border border-yellow-400 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center gap-2 text-yellow-600 font-medium">
+        <i class="fas fa-globe"></i> WFH/Remote
+      </a>
+
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Desain
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        Media & Komunikasi
+      </a>
+      <a href="#" class="border border-gray-300 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center">
+        IT
+      </a>
+      <!-- Fresh Graduate -->
+      <a href="#" class="border border-blue-400 rounded-md py-3 px-2 text-center hover:shadow-md transition flex items-center justify-center gap-2 text-blue-600 font-medium">
+        <i class="fas fa-graduation-cap"></i> Fresh Graduate
+      </a>
+    </div>
+  </div>
+
+
+
+  <!-- WhatsApp Floating Button -->
+  <a
+    href="#"
+    class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg"
+  >
+    <i class="fab fa-whatsapp text-2xl"></i>
+  </a>
+</section>
+
+
+   <section class="py-10 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+      
+      <!-- Urgent Hiring -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Dibutuhkan Segera
+        </h2>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Data Analyst</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Digital Marketing</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Customer Service</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Admin</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Desain Grafis</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Penulisan Konten</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Web Developer</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">UI/UX Designer</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Social Media Specialist</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Project Manager</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HR Specialist</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Content Creator</span>
         </div>
-    </section>
+      </div>
+
+      <!-- Trusted Companies -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Perusahaan Terpercaya, merekrut
+        </h2>
+        <div class="flex items-center flex-wrap gap-6">
+          <img src="/images/megaCentralFinance.webp" alt="MCF" class="h-13 transition duration-200">
+          <img src="/images/oppo.webp" alt="OPPO" class="h-14 transition duration-200">
+          <img src="/images/restoranKasAmerica.webp" alt="A&W" class="h-13 transition duration-200">
+          <img src="images/ruangGuru.webp" alt="Ruangguru" class="h-13 transition duration-200">
+          <a href="#" class="text-blue-600 hover:underline text-sm">Lainnya...</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="bg-yellow-400">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch gap-12">
+
+      <!-- Left content -->
+      <div class="flex flex-col justify-center text-center lg:text-left py-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          Cepat. Mudah. Terupdate.
+        </h2>
+        <p class="text-lg text-gray-800 mb-2">
+          Ngobrolin lamaran kerja dengan HRD
+        </p>
+        <p class="text-xl font-semibold text-gray-900 mb-6">
+          #TinggalChatAja
+        </p>
+
+        <!-- QR Section -->
+        <div class="flex items-center justify-center lg:justify-start gap-4">
+          <!-- QR Code -->
+          <div class="w-28 h-28">
+            <img 
+              src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/yellowBanner/qrCode.webp" 
+              alt="QR Code" 
+              class="w-full h-full object-contain"
+            >
+          </div>
+          <!-- Scan to Download -->
+          <div class="w-36">
+            <img 
+              src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/yellowBanner/scanToDownload_ID.webp" 
+              alt="Scan to Download" 
+              class="w-full object-contain"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Phone Image -->
+      <div class="flex justify-center items-end">
+        <img 
+          src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/yellowBanner/phoneDesktop_ID.webp" 
+          alt="Phone App Preview" 
+          class="w-full max-w-md object-contain drop-shadow-2xl"
+        >
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+   <!-- App Promotion Section -->
+<section class="bg-[#0C1C3C] py-16 text-white">
+  <div class="container mx-auto px-6 text-center">
+
+    <!-- Title -->
+    <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+      Cari. Lamar. Dapat kerja. Serba bisa di aplikasi!
+    </h2>
+    <p class="text-lg text-blue-100 max-w-3xl mx-auto mb-12">
+      Maksimalkan pencarian kerja dengan rekomendasi loker khusus buat kamu, 
+      notifikasi loker baru, dan update status dari loker kamu — semua dalam genggamanmu.
+    </p>
+
+   <!-- Phone Images (horizontal row, sejajar bawah) -->
+<div class="flex justify-center items-end gap-8 mb-16">
+  <!-- Phone 1 -->
+  <div class="flex">
+    <img 
+      src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/blueBanner/phoneDesktop1_ID.webp" 
+      alt="Phone Preview 1" 
+      class="w-52 lg:w-60"
+    >
+  </div>
+
+  <!-- Phone 2 with gradient fade -->
+  <div class="relative flex">
+    <img 
+      src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/blueBanner/phoneDesktop2_ID.webp" 
+      alt="Phone Preview 2" 
+      class="w-52 lg:w-60"
+    >
+    <!-- Gradient Fade -->
+    <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#0C1C3C] to-transparent"></div>
+  </div>
+
+  <!-- Phone 3 -->
+  <div class="flex">
+    <img 
+      src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/blueBanner/phoneDesktop3_ID.webp" 
+      alt="Phone Preview 3" 
+      class="w-52 lg:w-60"
+    >
+  </div>
+</div>
+
+    <!-- Bottom Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 max-w-4xl mx-auto">
+      <!-- Left text -->
+      <div class="text-center lg:text-left">
+        <h3 class="text-xl font-bold mb-2">Dapatkan Aplikasi Glints</h3>
+        <p class="text-blue-100 text-sm">
+          Temukan pekerjaan dan karier impianmu dengan lebih banyak fitur di aplikasi.
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="flex flex-col items-center lg:items-start gap-3">
+        <img 
+          src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/blueBanner/qrCode.webp" 
+          alt="QR Code" 
+          class="w-28 h-28"
+        >
+        <button class="bg-yellow-400 text-blue-900 font-bold px-5 py-2 rounded">
+          SCAN UNTUK DOWNLOAD
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 
     <!-- Testimonials Section -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Testimoni Pengguna</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
-                                <i class="fas fa-user text-gray-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Andi Pratama</h4>
-                                <p class="text-sm text-gray-500">24 tahun, Web Developer</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Berkat Glints, saya berhasil mendapatkan pekerjaan impian saya sebagai Web Developer di perusahaan teknologi terkemuka hanya dalam waktu 2 minggu!"</p>
-                        <div class="mt-4 flex text-orange-500">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
-                                <i class="fas fa-user text-gray-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Siti Nurhaliza</h4>
-                                <p class="text-sm text-gray-500">27 tahun, Marketing Manager</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Platform yang sangat user-friendly dan memiliki banyak lowongan berkualitas. Saya menemukan pekerjaan yang sesuai dengan passion saya di bidang marketing."</p>
-                        <div class="mt-4 flex text-orange-500">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-200">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
-                                <i class="fas fa-user text-gray-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900">Budi Santoso</h4>
-                                <p class="text-sm text-gray-500">22 tahun, Fresh Graduate</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">"Sebagai fresh graduate, Glints sangat membantu saya menemukan pekerjaan pertama yang sesuai dengan latar belakang pendidikan saya. Proses lamarnya juga sangat mudah!"</p>
-                        <div class="mt-4 flex text-orange-500">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="bg-gray-50 py-16">
+  <div class="container mx-auto px-6 text-center">
 
-    <!-- Indonesia Map Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Cari Lowongan di Kota Besar Indonesia</h2>
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0 flex justify-center">
-                        <div class="relative w-full max-w-md">
-                            <!-- Simplified Indonesia Map with Dot Matrix -->
-                            <svg viewBox="0 0 400 200" class="w-full">
-                                <g fill="#FF750F" fill-opacity="0.2">
-                                    <!-- Simplified dot matrix representation of Indonesia -->
-                                    <!-- This is a placeholder - in a real implementation you would have actual coordinates -->
-                                    <circle cx="100" cy="100" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="110" cy="95" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="120" cy="100" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="130" cy="105" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="140" cy="100" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <circle cx="150" cy="95" r="3" fill="#FF750F" fill-opacity="0.6"/>
-                                    <!-- Jakarta - bigger dot -->
-                                    <circle cx="140" cy="100" r="5" fill="#FF750F" fill-opacity="1"/>
-                                    <!-- More dots would be added to form Indonesia's islands -->
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2">
-                        <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Jakarta</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Depok</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bogor</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bekasi</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Tangerang</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Bandung</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Medan</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Malang</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Semarang</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Surabaya</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Yogyakarta</a>
-                            <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Makassar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Title -->
+    <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+      4 juta talenta dapat kerja via Glints
+    </h2>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
+      Pelajari tips cari kerja di Glints dari mereka. Kalau mereka bisa, maka kamu juga!
+    </p>
 
-    <!-- Popular Searches Section -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pencarian Populer</h2>
-                
-                <!-- Tabs -->
-                <div class="border-b border-gray-200 mb-6">
-                    <nav class="-mb-px flex space-x-8">
-                        <a href="#" class="border-orange-500 text-orange-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Posisi Pekerjaan</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Kategori Pekerjaan</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Lokasi</a>
-                        <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Kata Kunci</a>
-                    </nav>
-                </div>
-                
-                <!-- Links -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Penulis</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Rekruter</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Customer Service</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker UI/UX Designer</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Backend Developer</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Digital Marketing</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Data Analyst</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Content Writer</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Graphic Designer</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Social Media Specialist</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Frontend Developer</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker HR Manager</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Project Manager</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Business Analyst</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Product Manager</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-500 text-sm">Loker Full Stack Developer</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Testimonials Grid -->
+    <div class="grid gap-8 md:grid-cols-3">
+
+      <!-- Card 1 -->
+      <a href="https://glints.com/id/lowongan/bangun-karier-sesuai-passion-jadi-penulis/?utm_source=website&utm_medium=testimonial&utm_campaign=talent-stories" 
+         target="_blank"
+         class="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl transition">
+        <img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/testimonials/user1.webp" 
+             alt="Testimonial user"
+             class="w-24 h-24 rounded-full object-cover mb-4">
+        <p class="text-gray-700 italic mb-4">
+          "Glints jadi platform cari kerja yang paling mudah & cepat buatku. Aku berhasil career switch ke bidang yang jadi passion-ku dan dapat kerja cuma dalam 4 hari."
+        </p>
+        <p class="text-sm text-gray-500 font-medium">
+          Windya A., 24 tahun <br> <span class="text-gray-700">Strategi Konten</span>
+        </p>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="https://glints.com/id/lowongan/sukses-berkarier-di-bidang-it/?utm_source=website&utm_medium=testimonial&utm_campaign=talent-stories" 
+         target="_blank"
+         class="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl transition">
+        <img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/testimonials/user2.webp" 
+             alt="Testimonial user"
+             class="w-24 h-24 rounded-full object-cover mb-4">
+        <p class="text-gray-700 italic mb-4">
+          "Lewat Glints, aku bisa dapat pekerjaan yang bikin aku puas dan orang tua bangga. Prosesnya cepat, cuma 4 hari aku langsung dihubungi rekruter."
+        </p>
+        <p class="text-sm text-gray-500 font-medium">
+          Dimas B Wicaksono, 26 tahun <br> <span class="text-gray-700">Senior Account Executive</span>
+        </p>
+      </a>
+
+      <!-- Card 3 -->
+      <div class="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl transition">
+        <img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/testimonials/user3.webp" 
+             alt="Testimonial user"
+             class="w-24 h-24 rounded-full object-cover mb-4">
+        <p class="text-gray-700 italic mb-4">
+          "Lewat Glints, aku berhasil mematahkan stigma jurusanku & berhasil dapat kerja sebelum lulus. Prosesnya cepat, aku diterima seminggu setelah interview."
+        </p>
+        <p class="text-sm text-gray-500 font-medium">
+          Ashalia T. Tasha, 21 tahun <br> <span class="text-gray-700">Komunikasi Pemasaran</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+   <!-- Map Section -->
+<section class="bg-white py-16">
+  <div class="container mx-auto px-6 text-center">
+
+    <!-- Title -->
+    <h2 class="text-3xl lg:text-4xl font-bold mb-8">
+      Temukan loker di kota besar atau sekitarmu
+    </h2>
+
+    <!-- Map Image -->
+    <div class="flex justify-center mb-8">
+      <img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/dst/homePage/mapSection/map.webp"
+           alt="Temukan loker di kota besar atau sekitarmu"
+           class="rounded-lg shadow-lg max-w-4xl w-full object-cover">
+    </div>
+
+    <!-- City Links -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-lg font-medium">
+      <a href="/id/job-location/indonesia/dki-jakarta" target="_blank" class="text-blue-600 hover:underline">Jakarta</a>
+      <a href="/id/job-location/indonesia/banten/tangerang" target="_blank" class="text-blue-600 hover:underline">Tangerang</a>
+      <a href="/id/job-location/indonesia/jawa-tengah/semarang" target="_blank" class="text-blue-600 hover:underline">Semarang</a>
+      <a href="/id/job-location/indonesia/jawa-barat/depok" target="_blank" class="text-blue-600 hover:underline">Depok</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bandung" target="_blank" class="text-blue-600 hover:underline">Bandung</a>
+      <a href="/id/job-location/indonesia/jawa-timur/surabaya" target="_blank" class="text-blue-600 hover:underline">Surabaya</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bogor" target="_blank" class="text-blue-600 hover:underline">Bogor</a>
+      <a href="/id/job-location/indonesia/sumatra-utara/medan" target="_blank" class="text-blue-600 hover:underline">Medan</a>
+      <a href="/id/job-location/indonesia/di-yogyakarta-jogja/yogyakarta-jogja" target="_blank" class="text-blue-600 hover:underline">Yogyakarta</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bekasi" target="_blank" class="text-blue-600 hover:underline">Bekasi</a>
+      <a href="/id/job-location/indonesia/jawa-timur/malang" target="_blank" class="text-blue-600 hover:underline">Malang</a>
+      <a href="/id/job-location/indonesia/sulawesi-selatan/makassar" target="_blank" class="text-blue-600 hover:underline">Makassar</a>
+    </div>
+
+  </div>
+</section>
+
+
+   <section class="bg-white py-10">
+  <div class="container mx-auto px-6">
+    <!-- Title -->
+    <h2 class="text-xl font-semibold mb-4">
+      Pencarian populer di Glints
+    </h2>
+
+    <!-- Tabs -->
+    <div class="border-b border-gray-200 mb-4">
+      <ul class="flex space-x-6">
+        <li>
+          <button 
+            class="tab-btn border-b-2 border-blue-500 text-blue-600 pb-2 font-medium"
+            data-tab="posisi">
+            Posisi Pekerjaan
+          </button>
+        </li>
+        <li>
+          <button 
+            class="tab-btn text-gray-600 hover:text-blue-600 pb-2 font-medium"
+            data-tab="kategori">
+            Kategori Pekerjaan
+          </button>
+        </li>
+        <li>
+          <button 
+            class="tab-btn text-gray-600 hover:text-blue-600 pb-2 font-medium"
+            data-tab="lokasi">
+            Lokasi
+          </button>
+        </li>
+        <li>
+          <button 
+            class="tab-btn text-gray-600 hover:text-blue-600 pb-2 font-medium"
+            data-tab="kata-kunci">
+            Kata Kunci
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div id="posisi" class="tab-content flex flex-wrap gap-x-2 gap-y-2 text-sm">
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Penulis
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Rekruter
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Customer Service
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Akuntan
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Manager Sales
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Sales Executive
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Account Manager
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker UI/UX Designer
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Editor Video &amp; Film
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Digital Marketing Manager
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Frontend Developer
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Backend Developer
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Android Developer
+  </a>
+  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+    Loker Desainer Grafis &amp; Brand
+  </a>
+  <a href="#" class="text-blue-600 hover:underline">Loker Manager Perkantoran</a>
+</div>
+
+
+    <!-- Tab content lain (kosong dulu, bisa diisi sesuai kebutuhan) -->
+    <div id="kategori" class="tab-content hidden">Kategori Pekerjaan</div>
+    <div id="lokasi" class="tab-content hidden">Lokasi</div>
+    <div id="kata-kunci" class="tab-content hidden">Kata Kunci</div>
+  </div>
+</section>
+
+<script>
+  // Tab interaktif
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // reset semua tab
+      tabs.forEach(t => t.classList.remove('border-blue-500', 'text-blue-600'));
+      tabs.forEach(t => t.classList.add('text-gray-600'));
+
+      // aktifkan tab yang diklik
+      tab.classList.add('border-blue-500', 'text-blue-600');
+      tab.classList.remove('text-gray-600');
+
+      // sembunyikan semua konten
+      contents.forEach(c => c.classList.add('hidden'));
+      
+      // tampilkan konten sesuai data-tab
+      document.getElementById(tab.dataset.tab).classList.remove('hidden');
+    });
+  });
+</script>
+
 @endsection
 
 @push('styles')
