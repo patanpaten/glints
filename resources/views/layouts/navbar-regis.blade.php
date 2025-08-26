@@ -399,15 +399,16 @@
 <body class="font-sans antialiased bg-gray-50">
     <!-- Header/Navbar -->
         <header class="bg-white border-b border-gray-300 sticky top-0 z-10">
-            <div class="w-full mx-auto px-25 py-0">
+            <div class="w-full mx-auto px-4 lg:px-25 py-0">
                 <div class="flex items-center justify-between">
                     
                     <!-- Logo -->
                     <div class="flex items-center">
                         <a href="{{ route('home') }}" class="flex-shrink-0">
-                            <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-14 lg:h-18 w-auto">
+                            <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-12 lg:h-14 w-auto">
                         </a>
                     </div>
+                    
                     <!-- Navigation Menu - Desktop -->
                     <nav class="hidden lg:flex items-center space-x-6 -ml-70">
                         <a href="{{ route('jobs.index') }}" class="text-black {{ request()->routeIs('jobs.index') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">LOWONGAN KERJA</a>
@@ -418,71 +419,69 @@
 
                     <!-- Right Side Action Buttons -->
                     <div class="flex items-center space-x-3">
-                    <!-- Download App Button -->
-                    <a href="#" class="hidden lg:flex items-center bg-[#0277bd] hover:bg-blue-700 text-white px-3 py-1.5 rounded-none text-xs font-medium transition-colors duration-200">
-                        <span>UNDUH APP GLINTS</span>
-                    </a>
+                        <!-- Download App Button -->
+                        <a href="#" class="hidden lg:flex items-center bg-[#0277bd] hover:bg-blue-700 text-white px-3 py-1.5 rounded-none text-xs font-medium transition-colors duration-200">
+                            <span>UNDUH APP GLINTS</span>
+                        </a>
 
-                    <!-- Language/Region Selector -->
-                    <div class="relative">
-                        <button id="langBtn" 
-                            class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
-                                border-b-3 border-transparent hover:border-black transition-all duration-200">
-                            <i class="fas fa-globe"></i>
-                            <span>ID</span>
-                            <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <!-- Dropdown -->
-                        <div id="langMenu" class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-none shadow-lg z-50">
-                            <ul class="py-1 text-xs text-black uppercase">
-                                <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a></li>
-                                <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a></li>
-                            </ul>
+                        <!-- Language/Region Selector -->
+                        <div class="relative">
+                            <button id="langBtn" 
+                                class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
+                                    border-b-3 border-transparent hover:border-black transition-all duration-200">
+                                <i class="fas fa-globe"></i>
+                                <span>ID</span>
+                                <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <!-- Dropdown -->
+                            <div id="langMenu" class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-none shadow-lg z-50">
+                                <ul class="py-1 text-xs text-black uppercase">
+                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a></li>
+                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a></li>
+                                </ul>
+                            </div>
+                        </div> 
+
+                        <!-- Additional Buttons -->
+                        <a href="{{ route('register') }}" 
+                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                underline-offset-4 decoration-2 decoration-black 
+                                text-xs font-medium transition-colors duration-200">
+                            DAFTAR
+                        </a>
+
+                        @if(request()->routeIs('login'))
+                            <a href="{{ route('login') }}"
+                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                    underline-offset-4 decoration-2 decoration-black 
+                                    text-xs font-medium transition-colors duration-200">
+                                MASUK
+                            </a>
+                        @else
+                            <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
+                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                    underline-offset-4 decoration-2 decoration-black 
+                                    text-xs font-medium transition-colors duration-200">
+                                MASUK
+                            </a>
+                        @endif
+
+                        <!-- For Company Button -->
+                        <div>
+                            <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-[#01579b] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-2.5 py-1.5 rounded-none text-xs font-medium transition-all duration-200">
+                                <span>UNTUK PERUSAHAAN</span>
+                                <i class="ml-5 fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
                         </div>
-                    </div> 
-
-                    <!-- Additional Buttons -->
-                    <a href="{{ route('register') }}" 
-                    class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                            underline-offset-4 decoration-2 decoration-black 
-                            text-xs font-medium transition-colors duration-200">
-                        DAFTAR
-                    </a>
-
-                    @if(request()->routeIs('login'))
-                        <a href="{{ route('login') }}"
-                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                underline-offset-4 decoration-2 decoration-black 
-                                text-xs font-medium transition-colors duration-200">
-                            MASUK
-                        </a>
-                    @else
-                        <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
-                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                underline-offset-4 decoration-2 decoration-black 
-                                text-xs font-medium transition-colors duration-200">
-                            MASUK
-                        </a>
-                    @endif
-
-                    <!-- For Company Button (dipaksa ke kanan) -->
-                    <div>
-                        <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-[#01579b] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-2.5 py-1.5 rounded-none text-xs font-medium transition-all duration-200">
-                            <span>UNTUK PERUSAHAAN</span>
-                            <i class="ml-5 fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+                        
+                        <!-- Mobile Menu Button -->
+                        <button onclick="toggleMobileMenu()" class="lg:hidden text-black text-2xl focus:outline-none ml-4 p-2">
+                            <i class="fas fa-bars"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="lg:hidden text-black text-2xl focus:outline-none">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        </header>
 
         <!-- Mobile Menu --> 
         <div id="mobile-menu" class="lg:hidden hidden fixed top-0 right-0 h-full w-72 bg-[#01579b] text-white shadow-lg z-50 overflow-y-auto"> 
@@ -571,42 +570,6 @@
     <!-- Scripts -->
 <script>
     function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('mobile-menu-icon');
-        if (mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.remove('hidden');
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-        } else {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-        }
-    }
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuButton = event.target.closest('button[onclick="toggleMobileMenu()"]');
-        if (!menuButton && !mobileMenu.contains(event.target)) {
-            mobileMenu.classList.add('hidden');
-            const menuIcon = document.getElementById('mobile-menu-icon');
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-        }
-    });
-
-    // Close mobile menu on window resize to desktop size
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 1024) {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('mobile-menu-icon');
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-        }
-    });
-    function toggleMobileMenu() {
         document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
@@ -618,6 +581,23 @@
         document.getElementById('current-lang').innerText = lang;
         document.getElementById('lang-menu').classList.add('hidden');
     }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuButton = event.target.closest('button[onclick="toggleMobileMenu()"]');
+        if (!menuButton && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    // Close mobile menu on window resize to desktop size
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 1024) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.add('hidden');
+        }
+    });
 </script>
     @stack('scripts')
 </body>

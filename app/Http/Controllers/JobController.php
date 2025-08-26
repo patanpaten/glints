@@ -59,7 +59,10 @@ class JobController extends Controller
         $categories = $this->jobCategoryService->getAllCategories();
         $popularSkills = $this->skillService->getPopularSkills();
         
-        return view('jobs.index', compact('jobs', 'categories', 'popularSkills', 'filters'));
+        // Add districts data to prevent undefined variable error
+        $districts = [];
+        
+        return view('jobs.index', compact('jobs', 'categories', 'popularSkills', 'filters', 'districts'));
     }
 
     /**

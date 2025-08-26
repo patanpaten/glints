@@ -395,9 +395,6 @@
         }
     </style>
 
-    <!-- App CSS --> 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
-
     <!-- Additional Styles --> 
     @stack('styles') 
 
@@ -406,15 +403,16 @@
     <body> 
         <!-- Header/Navbar -->
         <header class="bg-white border-b border-gray-300 sticky top-0 z-10">
-            <div class="w-full mx-auto px-25 py-0">
+            <div class="w-full mx-auto px-4 lg:px-25 py-0">
                 <div class="flex items-center justify-between">
                     
                     <!-- Logo -->
                     <div class="flex items-center">
                         <a href="{{ route('home') }}" class="flex-shrink-0">
-                            <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-14 lg:h-18 w-auto">
+                            <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-12 lg:h-14 w-auto">
                         </a>
                     </div>
+                    
                     <!-- Navigation Menu - Desktop -->
                     <nav class="hidden lg:flex items-center space-x-6 -ml-50">
                         <a href="{{ route('jobs.index') }}" class="text-black {{ request()->routeIs('jobs.index') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">LOWONGAN KERJA</a>
@@ -425,66 +423,63 @@
 
                     <!-- Right Side Action Buttons -->
                     <div class="flex items-center space-x-3">
-                    <!-- Download App Button -->
-                    <a href="#" class="hidden lg:flex items-center bg-[#0277bd] hover:bg-blue-700 text-white px-3 py-1.5 rounded-none text-xs font-medium transition-colors duration-200">
-                        <span>UNDUH APP GLINTS</span>
-                    </a>
+                        <!-- Download App Button -->
+                        <a href="#" class="hidden lg:flex items-center bg-[#0277bd] hover:bg-blue-700 text-white px-3 py-1.5 rounded-none text-xs font-medium transition-colors duration-200">
+                            <span>UNDUH APP GLINTS</span>
+                        </a>
 
-                    <!-- Language/Region Selector -->
-                    <div class="relative">
-                        <button id="langBtn" 
-                            class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
-                                border-b-3 border-transparent hover:border-black transition-all duration-200">
-                            <i class="fas fa-globe"></i>
-                            <span>ID</span>
-                            <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <!-- Dropdown -->
-                        <div id="langMenu" class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-none shadow-lg z-50">
-                            <ul class="py-1 text-xs text-black uppercase">
-                                <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a></li>
-                                <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a></li>
-                            </ul>
+                        <!-- Language/Region Selector -->
+                        <div class="relative">
+                            <button id="langBtn" 
+                                class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
+                                    border-b-3 border-transparent hover:border-black transition-all duration-200">
+                                <i class="fas fa-globe"></i>
+                                <span>ID</span>
+                                <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <!-- Dropdown -->
+                            <div id="langMenu" class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-none shadow-lg z-50">
+                                <ul class="py-1 text-xs text-black uppercase">
+                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a></li>
+                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a></li>
+                                </ul>
+                            </div>
+                        </div> 
+
+                        <!-- Additional Buttons -->
+                        <a href="{{ route('register') }}" 
+                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                underline-offset-4 decoration-2 decoration-black 
+                                text-xs font-medium transition-colors duration-200">
+                            DAFTAR
+                        </a>
+
+                        @if(request()->routeIs('login'))
+                            <a href="{{ route('login') }}"
+                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                    underline-offset-4 decoration-2 decoration-black 
+                                    text-xs font-medium transition-colors duration-200">
+                                MASUK
+                            </a>
+                        @else
+                            <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
+                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
+                                    underline-offset-4 decoration-2 decoration-black 
+                                    text-xs font-medium transition-colors duration-200">
+                                MASUK
+                            </a>
+                        @endif
+
+                        <!-- For Company Button -->
+                        <div>
+                            <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-[#01579b] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-2.5 py-1.5 rounded-none text-xs font-medium transition-all duration-200">
+                                <span>UNTUK PERUSAHAAN</span>
+                                <i class="ml-5 fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
                         </div>
-                    </div> 
-
-                    <!-- Additional Buttons -->
-                    <a href="{{ route('register') }}" 
-                    class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                            underline-offset-4 decoration-2 decoration-black 
-                            text-xs font-medium transition-colors duration-200">
-                        DAFTAR
-                    </a>
-
-                    @if(request()->routeIs('login'))
-                        <a href="{{ route('login') }}"
-                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                underline-offset-4 decoration-2 decoration-black 
-                                text-xs font-medium transition-colors duration-200">
-                            MASUK
-                        </a>
-                    @else
-                        <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
-                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                underline-offset-4 decoration-2 decoration-black 
-                                text-xs font-medium transition-colors duration-200">
-                            MASUK
-                        </a>
-                    @endif
-
-                    <!-- For Company Button (dipaksa ke kanan) -->
-                    <div>
-                        <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-[#01579b] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-2.5 py-1.5 rounded-none text-xs font-medium transition-all duration-200">
-                            <span>UNTUK PERUSAHAAN</span>
-                            <i class="ml-5 fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="lg:hidden text-black text-2xl focus:outline-none">
+                        
+                        <!-- Mobile Menu Button -->
+                        <button onclick="toggleMobileMenu()" class="lg:hidden text-black text-2xl focus:outline-none ml-4 p-2">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -686,37 +681,11 @@
     
 <!-- Scripts -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileBtn = document.getElementById('mobileBtn'); // kasih ID di tombol menu
-        const langBtn = document.getElementById('langBtn');
-        const langMenu = document.getElementById('langMenu');
-        const langIcon = document.getElementById('langIcon');
-        const currentLang = document.getElementById('current-lang'); // kalau mau update teks ID/EN
+    function toggleMobileMenu() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
 
-        // Toggle Mobile Menu
-        if (mobileBtn && mobileMenu) {
-            mobileBtn.addEventListener('click', function () {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!mobileBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-
-            // Close mobile menu on resize to desktop
-            window.addEventListener('resize', function () {
-                if (window.innerWidth >= 1024) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        }
-
-        // Toggle Language Dropdown
-        function toggleLang() {
+    function toggleLang() {
         document.getElementById('lang-menu').classList.toggle('hidden');
     }
 
@@ -724,7 +693,27 @@
         document.getElementById('current-lang').innerText = lang;
         document.getElementById('lang-menu').classList.add('hidden');
     }
-        
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const langBtn = document.getElementById('langBtn');
+        const langMenu = document.getElementById('langMenu');
+        const langIcon = document.getElementById('langIcon');
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (event) {
+            const menuButton = event.target.closest('button[onclick="toggleMobileMenu()"]');
+            if (!menuButton && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 1024) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
     });
 </script>
 
@@ -732,10 +721,6 @@
             @stack('scripts') 
             
             {{-- Bootstrap JS for Modal Only --}}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            
-            {{-- JS --}} 
-            <script src="{{ asset('js/app.js') }}"></script> 
-            @stack('scripts') 
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> 
 </body> 
 </html>
