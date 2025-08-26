@@ -42,7 +42,7 @@
                         Buat Akun
                     </a>
                     <div class="w-px h-8 bg-gray-300 mx-2"></div>
-                    <a href="{{ route('companies.index') }}" class="inline-flex items-center px-4 py-2.5 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-none transition-colors duration-200">
+                    <a href="{{ route('company.register') }}" class="inline-flex items-center px-4 py-2.5 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-none transition-colors duration-200">
                         Untuk Perusahaan
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -71,7 +71,7 @@
                     Buat Akun
                 </a>
                 <div class="w-full h-px bg-gray-300 my-2"></div>
-                <a href="{{ route('companies.index') }}" class="block w-full text-center px-4 py-2.5 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-none transition-colors duration-200">
+                <a href="{{ route('company.register') }}" class="block w-full text-center px-4 py-2.5 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-none transition-colors duration-200">
                     Untuk Perusahaan
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>

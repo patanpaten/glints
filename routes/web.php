@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Company\JobController as CompanyJobController;
 use App\Http\Controllers\Company\ApplicationController as CompanyApplicationController;
+use App\Http\Controllers\Company\Auth\LoginController as CompanyLoginController;
+use App\Http\Controllers\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\JobSeeker\EducationController;
 use App\Http\Controllers\JobSeeker\ExperienceController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PremiumFeatureController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CvSearchController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CompaniesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,26 +37,19 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit');
 
-// Blog - redirect to external URL
-Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{article}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{article}', [BlogController::class, 'show'])->name('blog.show');
 
 // ==========================
-// Authentication
+// Authentication (Jobseeker / Default User)
 // ==========================
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::get('/login-regis', function () {
-    return view('auth.login-regis');
-})->name('login-regis');
-
-Route::get('/login-email', function () {
-    return view('auth.login-email');
-})->name('login-email');
+Route::get('/login-regis', fn () => view('auth.login-regis'))->name('login-regis');
+Route::get('/login-email', fn () => view('auth.login-email'))->name('login-email');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::get('/register-email', function () {
-    return view('auth.register-email');
-})->name('register-email');
+Route::get('/register-email', fn () => view('auth.register-email'))->name('register-email');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -68,8 +65,8 @@ Route::post('/jobs/{slug}/apply', [JobController::class, 'apply'])->name('jobs.s
 // ==========================
 // Companies (public)
 // ==========================
-Route::get('/companies', [App\Http\Controllers\CompaniesController::class, 'index'])->name('companies.index');
-Route::get('/companies/{company}', [App\Http\Controllers\CompaniesController::class, 'show'])->name('companies.show');
+Route::get('/companies', [CompaniesController::class, 'index'])->name('companies.index');
+Route::get('/companies/{company}', [CompaniesController::class, 'show'])->name('companies.show');
 
 // ==========================
 // Premium (public)
@@ -84,18 +81,28 @@ Route::prefix('premium-features')->name('premium-features.')->group(function () 
 // ==========================
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-
-    // Premium Features Management
     Route::resource('premium-features', PremiumFeatureController::class)->only(['index','create','store']);
-
-    // Analytics
     Route::get('/analytics', [AnalyticsController::class, 'adminDashboard'])->name('analytics.dashboard');
 });
 
 // ==========================
-// Company
+// Company Auth (tanpa middleware auth:company)
 // ==========================
-Route::prefix('company')->name('company.')->middleware('auth')->group(function () {
+Route::prefix('company')->name('company.')->group(function () {
+    // Login
+    Route::get('/login', [CompanyLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [CompanyLoginController::class, 'login']);
+    Route::post('/logout', [CompanyLoginController::class, 'logout'])->name('logout');
+
+    // Register
+    Route::get('/register', [CompanyRegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [CompanyRegisterController::class, 'register']);
+});
+
+// ==========================
+// Company (hanya bisa diakses setelah login perusahaan)
+// ==========================
+Route::prefix('company')->name('company.')->middleware('auth:company')->group(function () {
     // Dashboard
     Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('dashboard');
 
@@ -106,9 +113,7 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
         Route::get('/edit', [CompanyController::class, 'edit'])->name('edit');
         Route::post('/update', [CompanyController::class, 'update'])->name('update');
     });
-    // Direct profile route for sidebar link
     Route::get('/profile', [CompanyController::class, 'edit'])->name('profile');
-
 
     // Jobs Management
     Route::resource('jobs', CompanyJobController::class)->except(['show']);
@@ -116,13 +121,11 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
     Route::patch('/jobs/{job}/toggle-active', [CompanyJobController::class, 'toggleActive'])->name('jobs.toggle-active');
     Route::patch('/jobs/{job}/toggle-featured', [CompanyJobController::class, 'toggleFeatured'])->name('jobs.toggle-featured');
 
-    // Applications (per job + global)
-    Route::get('/jobs/{job}/applications', [CompanyApplicationController::class, 'index'])->name('applications.index');
+    // Applications
     Route::get('/applications', [CompanyApplicationController::class, 'all'])->name('applications.all');
     Route::get('/applications/{application}', [CompanyApplicationController::class, 'show'])->name('applications.show');
     Route::patch('/applications/{application}/status', [CompanyApplicationController::class, 'updateStatus'])->name('applications.update-status');
     Route::get('/applications/{application}/resume', [CompanyApplicationController::class, 'downloadResume'])->name('applications.download-resume');
-    // Direct applicants route for sidebar link
     Route::get('/applicants', [CompanyApplicationController::class, 'all'])->name('applicants.index');
 
     // Analytics
@@ -154,33 +157,21 @@ Route::prefix('company')->name('company.')->middleware('auth')->group(function (
 // ==========================
 Route::prefix('jobseeker')->name('jobseeker.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [JobSeekerController::class, 'dashboard'])->name('dashboard');
-
-    // Profile
     Route::get('/profile', [JobSeekerController::class, 'showProfile'])->name('profile.show');
     Route::get('/profile/create', [JobSeekerController::class, 'createProfile'])->name('profile.create');
     Route::post('/profile', [JobSeekerController::class, 'storeProfile'])->name('profile.store');
     Route::get('/profile/edit', [JobSeekerController::class, 'editProfile'])->name('profile.edit');
     Route::put('/profile', [JobSeekerController::class, 'updateProfile'])->name('profile.update');
-
-    // Education
     Route::resource('education', EducationController::class)->only(['create','store','edit','update']);
-
-    // Experience
     Route::resource('experience', ExperienceController::class)->only(['create','store','edit','update']);
-
-    // Skills
     Route::resource('skills', SkillController::class)->only(['create','store','edit','update']);
     Route::get('/skills/search', [SkillController::class, 'search'])->name('skills.search');
-
-    // Applications
     Route::get('/applications', [JobSeekerApplicationController::class, 'index'])->name('applications.index');
     Route::get('/applications/{application}', [JobSeekerApplicationController::class, 'show'])->name('applications.show');
     Route::get('/jobs/{job}/apply', [JobSeekerApplicationController::class, 'create'])->name('applications.create');
     Route::post('/jobs/{job}/apply', [JobSeekerApplicationController::class, 'store'])->name('applications.store');
     Route::get('/applications/{application}/resume', [JobSeekerApplicationController::class, 'downloadResume'])->name('applications.download-resume');
     Route::patch('/applications/{application}/withdraw', [JobSeekerApplicationController::class, 'withdraw'])->name('applications.withdraw');
-
-    // Saved Jobs
     Route::get('/saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs', [SavedJobController::class, 'save'])->name('saved-jobs.save');
     Route::delete('/saved-jobs/{job}', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');

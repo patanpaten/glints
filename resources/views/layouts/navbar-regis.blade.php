@@ -398,90 +398,84 @@
 </head>
 <body class="font-sans antialiased bg-gray-50">
     <!-- Header/Navbar -->
-        <header class="bg-white border-b border-gray-300 sticky top-0 z-10">
-            <div class="w-full mx-auto px-4 lg:px-25 py-0">
-                <div class="flex items-center justify-between">
-                    
-                    <!-- Logo -->
-                    <div class="flex items-center">
-                        <a href="{{ route('home') }}" class="flex-shrink-0">
-                            <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-12 lg:h-14 w-auto">
-                        </a>
-                    </div>
-                    
-                    <!-- Navigation Menu - Desktop -->
-                    <nav class="hidden lg:flex items-center space-x-6 -ml-70">
-                        <a href="{{ route('jobs.index') }}" class="text-black {{ request()->routeIs('jobs.index') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">LOWONGAN KERJA</a>
-                        <a href="{{ route('companies.index') }}" class="text-black {{ request()->routeIs('companies.index') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">PERUSAHAAN</a>
-                        <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer" class="text-black {{ request()->Is('blog') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">BLOG</a>
-                        <a href="#" class="text-black {{ request()->Is('expertclass') ? 'active' : '' }} nav-link font-semibold text-xs transition-colors duration-200">EXPERTCLASS</a>
-                    </nav>
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-[1280px] mx-auto px-6">
+    <div class="flex items-center justify-between h-16">
+      
+      <!-- Logo -->
+      <div class="flex items-center mr-8">
+        <a href="{{ route('home') }}" class="flex-shrink-0 ml-2">
+          <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-15 w-auto">
+        </a>
+      </div>
 
-                    <!-- Right Side Action Buttons -->
-                    <div class="flex items-center space-x-3">
-                        <!-- Download App Button -->
-                        <a href="#" class="hidden lg:flex items-center bg-[#0277bd] hover:bg-blue-700 text-white px-3 py-1.5 rounded-none text-xs font-medium transition-colors duration-200">
-                            <span>UNDUH APP GLINTS</span>
-                        </a>
+      <!-- Menu Desktop -->
+      <nav class="hidden lg:flex items-center space-x-6 mr-auto">
+        <a href="{{ route('jobs.index') }}" 
+           class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobs.index') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+           Lowongan Kerja
+        </a>
+        <a href="{{ route('companies.index') }}" 
+           class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('companies.index') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+           Perusahaan
+        </a>
+        <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer"
+           class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->is('blog') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+           Blog
+        </a>
+        <a href="#"
+           class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->is('expertclass') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+           ExpertClass
+        </a>
+      </nav>
 
-                        <!-- Language/Region Selector -->
-                        <div class="relative">
-                            <button id="langBtn" 
-                                class="text-black focus:outline-none text-xs font-medium inline-flex items-center gap-1 
-                                    border-b-3 border-transparent hover:border-black transition-all duration-200">
-                                <i class="fas fa-globe"></i>
-                                <span>ID</span>
-                                <i id="langIcon" class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                            <!-- Dropdown -->
-                            <div id="langMenu" class="hidden absolute left-0 mt-2 w-36 bg-white border border-gray-200 rounded-none shadow-lg z-50">
-                                <ul class="py-1 text-xs text-black uppercase">
-                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">ENGLISH</a></li>
-                                    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">INDONESIAN</a></li>
-                                </ul>
-                            </div>
-                        </div> 
+      <!-- Actions -->
+      <div class="flex items-center space-x-4">
+        
+        <!-- Unduh App -->
+        <a href="#"
+           class="hidden lg:flex items-center bg-[#0277bd] hover:bg-[#01579b] text-white px-4 py-2 text-xs font-semibold tracking-wide transition">
+           Unduh App Glints
+        </a>
 
-                        <!-- Additional Buttons -->
-                        <a href="{{ route('register') }}" 
-                        class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                underline-offset-4 decoration-2 decoration-black 
-                                text-xs font-medium transition-colors duration-200">
-                            DAFTAR
-                        </a>
+        <!-- Language -->
+        <div class="relative hidden lg:block">
+          <button id="langBtn" 
+                  class="flex items-center text-xs font-semibold tracking-wide text-gray-700 border-b-2 border-transparent hover:border-black transition">
+            <i class="fas fa-globe mr-1"></i>
+            ID
+            <i class="fas fa-chevron-down ml-1 text-[10px]"></i>
+          </button>
+          <div id="langMenu" class="hidden absolute left-0 mt-2 w-32 bg-white border border-gray-200 shadow-md">
+            <a href="#" class="block px-3 py-2 text-xs hover:bg-gray-100">English</a>
+            <a href="#" class="block px-3 py-2 text-xs hover:bg-gray-100">Indonesian</a>
+          </div>
+        </div>
 
-                        @if(request()->routeIs('login'))
-                            <a href="{{ route('login') }}"
-                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                    underline-offset-4 decoration-2 decoration-black 
-                                    text-xs font-medium transition-colors duration-200">
-                                MASUK
-                            </a>
-                        @else
-                            <a href="#" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
-                            class="ml-6 hidden lg:flex items-center text-black hover:underline 
-                                    underline-offset-4 decoration-2 decoration-black 
-                                    text-xs font-medium transition-colors duration-200">
-                                MASUK
-                            </a>
-                        @endif
+        <!-- Daftar & Masuk -->
+        <a href="{{ route('register') }}" class="hidden lg:flex text-xs font-semibold tracking-wide text-gray-800 hover:underline underline-offset-4 decoration-2">
+          Daftar
+        </a>
+        <a href="{{ route('login') }}" onclick="document.getElementById('loginModal').style.display='flex'; return false;"
+           class="hidden lg:flex text-xs font-semibold tracking-wide text-gray-800 hover:underline underline-offset-4 decoration-2">
+          Masuk
+        </a>
 
-                        <!-- For Company Button -->
-                        <div>
-                            <a href="{{ route('companies.index') }}" class="hidden lg:flex items-center border border-[#01579b] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-2.5 py-1.5 rounded-none text-xs font-medium transition-all duration-200">
-                                <span>UNTUK PERUSAHAAN</span>
-                                <i class="ml-5 fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
-                        </div>
-                        
-                        <!-- Mobile Menu Button -->
-                        <button onclick="toggleMobileMenu()" class="lg:hidden text-black text-2xl focus:outline-none ml-4 p-2">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <!-- Untuk Perusahaan -->
+        <a href="{{ route('company.register') }}"
+           class="hidden lg:flex items-center border border-[#0277bd] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-3 py-1.5 text-xs font-semibold tracking-wide transition">
+          Untuk Perusahaan
+          <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-gray-800">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
 
         <!-- Mobile Menu --> 
         <div id="mobile-menu" class="lg:hidden hidden fixed top-0 right-0 h-full w-72 bg-[#01579b] text-white shadow-lg z-50 overflow-y-auto"> 
@@ -532,7 +526,7 @@
                 <hr class="border-white/40">
                 
                 <!-- Untuk Perusahaan --> 
-                <a href="{{ route('companies.index') }}" class="flex items-center justify-between px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                <a href="{{ route('company.register') }}" class="flex items-center justify-between px-2 py-2 rounded hover:bg-white/10 transition-colors">
                     <span>UNTUK PERUSAHAAN</span>
                     <i class="fas fa-arrow-right"></i>
                 </a> 
