@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modal Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     body { font-family: Arial, sans-serif; margin:0; padding:0; }
     .modal {
@@ -15,6 +16,7 @@
       background: rgba(0,0,0,0.5);
       padding-top: 80px;
       overflow-y: hidden;
+      z-index: 9999;
     }
     .modal-content {
       background: white;
@@ -24,6 +26,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: height 0.3s ease;
       margin: 20px;
+      border-radius: 6px;
     }
     .modal-content.step2 {
       min-height: 550px;
@@ -41,8 +44,8 @@
     .modal-body { padding: 20px; text-align: center; }
     #loginStep2 { display: none; text-align: center; padding: 20px; }
     #loginStep2 .login-field { text-align: left; }
-    #loginStep2 a { text-align: center; }
-    .modal-body h3 { font-size: 18px; margin-bottom: 20px; font-weight: semibold; text-align: left; }
+    #loginStep2 a { text-align: center; display: block; margin-bottom: 15px; }
+    .modal-body h3 { font-size: 18px; margin-bottom: 20px; font-weight: 600; text-align: left; }
     .social-login { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
     .google-logo { background: #fff; border-radius: 50%; padding: 8px; border: 1px solid #ddd; width: 48px; height: 48px; object-fit: contain; }
     .social-login img { width: 40px; height: 40px; object-fit: contain; cursor: pointer; }
@@ -65,7 +68,7 @@
     .login-field input:focus { border-color: #007bff; background-color:#fff; outline: none; }
     .login-field input:focus + label, .login-field input:not(:placeholder-shown) + label { top: -1px; left: 8px; font-size: 12px; color: #007bff; }
     .error-message { font-size: 12px; color: red; margin-top: 4px; display: none; }
-    .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #777; }
+    .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #777; background: none; border: none; }
     .btn-submit { margin-top: 20px; width: 100%; padding: 12px; margin-bottom: 25px; background-color: rgb(230, 175, 24); box-shadow: 5px 5px 0 rgb(204, 12, 12); border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; }
     .btn-submit:hover { background-color: rgb(230, 175, 24); box-shadow: 5px 5px 0 rgb(0, 0, 0); }
     .back-link { display: block; margin-top: 10px; font-size: 13px; color: #007bff; cursor:pointer; text-align: left; text-decoration: none; }
@@ -114,9 +117,11 @@
         <small class="error-message">Email wajib diisi</small>
       </div>
       <div class="login-field">
-        <input type="password" id="passwordInput" placeholder=" " required>
-        <label for="passwordInput">Kata sandi</label>
-        <span class="toggle-password">👁</span>
+        <input type="password" id="password" placeholder=" " required>
+        <label for="password">Kata sandi</label>
+        <button type="button" class="toggle-password" onclick="togglePassword()">
+          <i id="toggleIcon" class="fas fa-eye-slash"></i>
+        </button>
       </div>
       <a href="#">Lupa kata sandi?</a>
       <button class="btn-submit">MASUK</button>
@@ -132,57 +137,54 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const step1 = document.getElementById('loginStep1');
-    const step2 = document.getElementById('loginStep2');
-    const emailBtn = document.getElementById('emailLoginBtn');
-    const closeBtn = document.getElementById('closeModal');
-    const modal = document.getElementById('loginModal');
-    const modalContent = document.querySelector('.modal-content');
+  const modal = document.getElementById('loginModal');
+  const step1 = document.getElementById('loginStep1');
+  const step2 = document.getElementById('loginStep2');
+  const emailBtn = document.getElementById('emailLoginBtn');
+  const closeBtn = document.getElementById('closeModal');
+  const modalContent = document.querySelector('.modal-content');
 
-    if (emailBtn && step1 && step2 && modalContent) {
-      emailBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        step1.style.display = 'none';
-        step2.style.display = 'block';
-        modalContent.classList.add('step2');
-      });
-    }
+  function openModal() {
+    modal.style.display = 'flex';
+  }
 
-    if (closeBtn && modal && step1 && step2 && modalContent) {
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        step1.style.display = 'block';
-        step2.style.display = 'none';
-        modalContent.classList.remove('step2');
-      });
-    }
-
-    // Close modal when clicking outside the modal content
-    if (modal && step1 && step2 && modalContent) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.style.display = 'none';
-          step1.style.display = 'block';
-          step2.style.display = 'none';
-          modalContent.classList.remove('step2');
-        }
-      });
-    }
-
-    document.querySelectorAll('.toggle-password').forEach(icon => {
-      icon.addEventListener('click', () => {
-        const input = icon.previousElementSibling;
-        if (input && input.type === 'password') {
-          input.type = 'text';
-          icon.textContent = '🙈';
-        } else if (input) {
-          input.type = 'password';
-          icon.textContent = '👁️';
-        }
-      });
-    });
+  emailBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    step1.style.display = 'none';
+    step2.style.display = 'block';
+    modalContent.classList.add('step2');
   });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    step1.style.display = 'block';
+    step2.style.display = 'none';
+    modalContent.classList.remove('step2');
+  });
+
+  // Close modal when clicking outside
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      step1.style.display = 'block';
+      step2.style.display = 'none';
+      modalContent.classList.remove('step2');
+    }
+  });
+
+  function togglePassword() {
+    const input = document.getElementById("password");
+    const icon = document.getElementById("toggleIcon");
+    if (input.type === "password") {
+      input.type = "text";
+      icon.classList.remove("fa-eye-slash");
+      icon.classList.add("fa-eye");
+    } else {
+      input.type = "password";
+      icon.classList.remove("fa-eye");
+      icon.classList.add("fa-eye-slash");
+    }
+  }
 </script>
 </body>
 </html>
