@@ -34,10 +34,14 @@
                 </button>
 
                 <!-- Email -->
-                <button class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" /></svg>
+                <a href="{{ route('company.register.email.form') }}" 
+                class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M4 4h16v16H4z" />
+                    </svg>
                     Daftar dengan Email
-                </button>
+                </a>
+
             </div>
 
             <div class="flex items-center gap-2 my-6">

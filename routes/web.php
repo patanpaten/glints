@@ -10,6 +10,7 @@ use App\Http\Controllers\Company\JobController as CompanyJobController;
 use App\Http\Controllers\Company\ApplicationController as CompanyApplicationController;
 use App\Http\Controllers\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Company\Auth\RegisterController as CompanyRegisterController;
+use App\Http\Controllers\Company\Auth\CompanyRegisterEmailController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\JobSeeker\EducationController;
 use App\Http\Controllers\JobSeeker\ExperienceController;
@@ -193,3 +194,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/conversations', [ChatController::class, 'getConversations'])->name('conversations');
     });
 });
+
+
+
+// form register
+Route::get('/company/register-email', [CompanyRegisterEmailController::class, 'showRegisterForm'])
+     ->name('company.register.email.form');
+
+// proses register
+Route::post('/company/register-email', [CompanyRegisterEmailController::class, 'register'])
+     ->name('company.register.email');

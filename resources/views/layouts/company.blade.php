@@ -88,10 +88,10 @@
 
     {{-- Footer --}}
     <footer class="bg-gray-50 -mt-15 text-sm text-gray-700">
-        <div class="max-w-[770px] mx-auto px-4 py-6">
+        <div class="max-w-[770px] mx-auto px-4 py-20">
             
             {{-- Link atas --}}
-            <div class="flex flex-wrap gap-6 mb-20">
+            <div class="flex flex-wrap gap-6 mb-35">
                 <a href="#" class="text-black-600 underline">Saya adalah Pencari Kerja</a>
                 <a href="#" class="text-black-600 underline">Hubungi Bantuan</a>
             </div>
