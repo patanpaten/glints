@@ -64,7 +64,7 @@ class SkillService extends BaseService
         }
         
         // Jika tidak, gunakan query langsung
-        return $this->repository->model
+        return $this->repository->getModel()
             ->withCount('jobs')
             ->orderByDesc('jobs_count')
             ->take($limit)

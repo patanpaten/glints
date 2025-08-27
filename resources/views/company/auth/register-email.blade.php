@@ -27,35 +27,17 @@
                     Pasang Iklan Lowongan <br> Kerja Gratis!
                 </h2>
 
-                <form method="POST" action="{{ route('company.login') }}" class="space-y-3 mb-6">
+                <form method="POST" action="{{ route('company.register.email') }}" class="space-y-3 mb-6">
                     @csrf
 
                     {{-- Nama --}}
                     <div>
-                        <label for="nama" class="block text-sm font-medium text-gray-700">Nama Depan</label>
-                        <input id="nama" type="text"
-                            class="mt-1 w-full border rounded px-3 py-2 text-sm focus:ring focus:ring-blue-200 focus:border-blue-500 focus:outline-none @error('nama') border-red-500 @enderror"
-                            name="nama" value="{{ old('nama') }}" required autofocus
-                            placeholder="Ketik nama depan anda">
-                        @error('nama')
-                            <p class="text-xs text-red-500 mt-1">⚠ {{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Nomor HP --}}
-                    <div>
-                        <label for="nomor" class="block text-sm font-medium text-gray-700">No. HP</label>
-                        <div class="flex mt-1 border rounded focus-within:ring focus-within:ring-blue-200 focus-within:border-blue-500">
-                            <span class="flex items-center px-3 text-gray-600 bg-gray-50">
-                                +62
-                                 <span class="w-px h-5 bg-gray-400 ml-1"></span>
-                            </span>
-                            <input id="nomor" type="text"
-                                class="flex-1 px-3 py-2 text-sm focus:outline-none @error('nomor') border-red-500 @enderror"
-                                name="nomor" value="{{ old('nomor') }}" required autofocus
-                                placeholder="Ketik nomor HP anda">
-                        </div>
-                        @error('nomor')
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Perusahaan</label>
+                        <input id="name" type="text"
+                            class="mt-1 w-full border rounded px-3 py-2 text-sm focus:ring focus:ring-blue-200 focus:border-blue-500 focus:outline-none @error('name') border-red-500 @enderror"
+                            name="name" value="{{ old('name') }}" required autofocus
+                            placeholder="Ketik nama perusahaan anda">
+                        @error('name')
                             <p class="text-xs text-red-500 mt-1">⚠ {{ $message }}</p>
                         @enderror
                     </div>
@@ -68,6 +50,18 @@
                             name="email" value="{{ old('email') }}" required
                             placeholder="Masukkan email Anda">
                         @error('email')
+                            <p class="text-xs text-red-500 mt-1">⚠ {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Nomor HP --}}
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+                        <input id="phone" type="tel"
+                            class="mt-1 w-full border rounded px-3 py-2 text-sm focus:ring focus:ring-blue-200 focus:border-blue-500 focus:outline-none @error('phone') border-red-500 @enderror"
+                            name="phone" value="{{ old('phone') }}" required
+                            placeholder="Masukkan nomor HP perusahaan">
+                        @error('phone')
                             <p class="text-xs text-red-500 mt-1">⚠ {{ $message }}</p>
                         @enderror
                     </div>

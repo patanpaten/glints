@@ -36,7 +36,7 @@ class ApplicationService extends BaseService
             $data['status'] = 'pending';
         }
 
-        return $this->repository->create($data);
+        return $this->getRepository()->create($data);
     }
 
     /**
@@ -48,7 +48,7 @@ class ApplicationService extends BaseService
      */
     public function updateApplication(int $applicationId, array $data): Application
     {
-        $application = $this->repository->findById($applicationId);
+        $application = $this->getRepository()->findById($applicationId);
 
         // Handle resume upload if present
         if (isset($data['resume']) && $data['resume']) {
@@ -59,7 +59,7 @@ class ApplicationService extends BaseService
             $data['resume'] = $this->uploadResume($data['resume']);
         }
 
-        return $this->repository->update($applicationId, $data);
+        return $this->getRepository()->update($applicationId, $data);
     }
 
     /**
@@ -82,7 +82,7 @@ class ApplicationService extends BaseService
      */
     public function getByJobId(int $jobId)
     {
-        return $this->repository->getByJobId($jobId);
+        return $this->getRepository()->getByJobId($jobId);
     }
 
     /**
@@ -94,7 +94,7 @@ class ApplicationService extends BaseService
      */
     public function getPaginatedByJobId(int $jobId, int $perPage = 15)
     {
-        return $this->repository->getPaginatedByJobId($jobId, $perPage);
+        return $this->getRepository()->getPaginatedByJobId($jobId, $perPage);
     }
 
     /**
@@ -105,7 +105,7 @@ class ApplicationService extends BaseService
      */
     public function getByJobSeekerId(int $jobSeekerId)
     {
-        return $this->repository->getByJobSeekerId($jobSeekerId);
+        return $this->getRepository()->getByJobSeekerId($jobSeekerId);
     }
 
     /**
@@ -117,7 +117,7 @@ class ApplicationService extends BaseService
      */
     public function getPaginatedByJobSeekerId(int $jobSeekerId, int $perPage = 15)
     {
-        return $this->repository->getPaginatedByJobSeekerId($jobSeekerId, $perPage);
+        return $this->getRepository()->getPaginatedByJobSeekerId($jobSeekerId, $perPage);
     }
 
     /**
@@ -129,7 +129,7 @@ class ApplicationService extends BaseService
      */
     public function getByStatus(string $status, int $jobId = null)
     {
-        return $this->repository->getByStatus($status, $jobId);
+        return $this->getRepository()->getByStatus($status, $jobId);
     }
 
     /**
@@ -142,7 +142,7 @@ class ApplicationService extends BaseService
      */
     public function updateStatus(int $applicationId, string $status, string $notes = null): Application
     {
-        return $this->repository->updateStatus($applicationId, $status, $notes);
+        return $this->getRepository()->updateStatus($applicationId, $status, $notes);
     }
 
     /**
@@ -154,9 +154,24 @@ class ApplicationService extends BaseService
      */
     public function hasApplied(int $jobId, int $jobSeekerId): bool
     {
-        return $this->repository->model
+        return $this->getRepository()->getModel()
             ->where('job_id', $jobId)
             ->where('job_seeker_id', $jobSeekerId)
             ->exists();
+    }
+
+    /**
+     * Count applications by company id.
+     *
+     * @param int $companyId
+     * @return int
+     */
+    public function countByCompany(int $companyId): int
+    {
+        return $this->getRepository()->getModel()
+            ->whereHas('job', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->count();
     }
 }

@@ -1,4 +1,4 @@
-@extends('company.layout')
+@extends('company.app')
 
 @section('title', 'Edit Profile')
 

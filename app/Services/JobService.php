@@ -54,6 +54,19 @@ class JobService
         return $this->repository->countByFilters($filters);
     }
 
+    public function countByCompany($companyId)
+    {
+        return $this->repository->countByFilters(['company_id' => $companyId]);
+    }
+
+    public function countActiveByCompany($companyId)
+    {
+        return $this->repository->countByFilters([
+            'company_id' => $companyId,
+            'is_active' => true
+        ]);
+    }
+
     public function getFeaturedJobs($limit = 8)
     {
         return $this->repository->getFeaturedJobs($limit);
