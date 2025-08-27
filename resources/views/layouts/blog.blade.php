@@ -20,33 +20,76 @@
 <body class="font-sans antialiased bg-gray-50">
     <!-- Blog Navigation -->
     <nav class="bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+        <div class="max-w-1xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-21">
                 <!-- Logo and Navigation -->
-                <div class="flex items-center space-x-6">
+                <div class="flex items-center space-x-4">
                     <a href="{{ route('home') }}" class="flex items-center">
                         <img src="{{ asset('images/logo dan teks glints.png') }}" alt="Glints TapLoker" class="h-12 w-auto">
                     </a>
                     <div class="hidden lg:flex">
-                        <a href="{{ route('jobs.index') }}" class="text-gray-600 hover:text-gray-900 font-normal text-sm transition-colors duration-200">Lowongan Kerja</a>
+                        <a href="{{ route('jobs.index') }}" class="text-gray-600 hover:text-gray-900 font-bold text-sm transition-colors duration-200">Lowongan Kerja</a>
                     </div>
                 </div>
                 
                 <!-- Desktop Action Buttons -->
-                <div class="hidden lg:flex lg:items-center lg:space-x-3">
-                    <a href="#" class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-none transition-colors duration-200">
-                        <i class="fas fa-download mr-2"></i>
+                <div class="hidden lg:flex items-center space-x-3 button-group">
+                    <!-- Tombol Primary -->
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-sm font-bold subscribe">
                         Unduh App Glints
+                    </button>
+                
+                    <!-- Tombol Outline Primary -->
+                    <a href="{{ route('register') }}">
+                        <button class="border border-blue-600 text-blue-600 px-5 py-2 text-sm font-bold outline-primary">
+                            buat akun
+                        </button>
                     </a>
-                    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2.5 border border-blue-600 text-blue-600 hover:bg-blue-50 text-sm font-medium rounded-none transition-colors duration-200">
-                        Buat Akun
-                    </a>
-                    <div class="w-px h-8 bg-gray-300 mx-2"></div>
-                    <a href="{{ route('company.register') }}" class="inline-flex items-center px-4 py-2.5 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-none transition-colors duration-200">
-                        Untuk Perusahaan
-                        <i class="fas fa-arrow-right ml-2"></i>
+                
+                    <!-- Separator -->
+                    <span class="w-px h-6 bg-gray-300 separator"></span>
+                
+                    <!-- Tombol Outline Black -->
+                    <a href="{{ route('company.register') }}">
+                        <button class="border border-gray-400 text-gray-800 px-5 py-2 text-sm font-bold outline-black">
+                            untuk perusahaan <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
                     </a>
                 </div>
+                
+                <style>
+                    /* Meniru style Glints */
+                    .button-group button {
+                        font-family: inherit;
+                        text-transform: none;
+                        transition: all 0.2s ease-in-out;
+                    }
+                    .button-group .subscribe {
+                        background-color: #0070F3;
+                    }
+                    .button-group .outline-primary {
+                        border: 1px solid #0070F3;
+                        color: #0070F3;
+                        background-color: transparent;
+                    }
+                    .button-group .outline-primary:hover {
+                        background-color: #0070F3;
+                        color: white;
+                    }
+                    .button-group .outline-black {
+                        border: 1px solid #333;
+                        color: #333;
+                        background-color: transparent;
+                    }
+                    .button-group .outline-black:hover {
+                        background-color: #333;
+                        color: white;
+                    }
+                    .button-group .separator {
+                        background-color: #ddd;
+                    }
+                </style>
+                
                 
                 <!-- Mobile menu button -->
                 <div class="lg:hidden">
