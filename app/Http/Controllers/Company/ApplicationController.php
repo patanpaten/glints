@@ -136,7 +136,7 @@ class ApplicationController extends Controller
         $status = $request->input('status');
         $jobId  = $request->input('job_id');
 
-        $query = $this->applicationService->repository->model
+        $query = $this->applicationService->repository->getModel()
             ->whereHas('job', function ($q) use ($company) {
                 $q->where('company_id', $company->id);
             })

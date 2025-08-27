@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
             $table->string('industry')->nullable();
-            $table->integer('company_size')->nullable();
+            $table->string('company_size')->nullable();
             $table->timestamps();
         });
     }

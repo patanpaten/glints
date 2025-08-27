@@ -51,11 +51,6 @@ class CompanyController extends Controller
         $totalJobs = $this->jobService->countByCompany($company->id);
         $activeJobs = $this->jobService->countActiveByCompany($company->id);
         $totalApplications = $this->applicationService->countByCompany($company->id);
-        $totalApplications = $this->applicationService->repository->model
-            ->whereHas('job', function($query) use ($company) {
-                $query->where('company_id', $company->id);
-            })
-            ->count();
         return view('company.dashboard', compact(
             'company',
             'recentJobs',
@@ -87,22 +82,38 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'         => 'required|string|max:255',
-            'logo'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description'  => 'required|string',
-            'address'      => 'required|string',
-            'city'         => 'required|string|max:100',
-            'province'     => 'required|string|max:100',
-            'postal_code'  => 'required|string|max:20',
-            'phone'        => 'required|string|max:20',
-            'website'      => 'nullable|url|max:255',
-            'industry'     => 'required|string|max:100',
-            'company_size' => 'required|string|max:50',
+            'name'            => 'required|string|max:255',
+            'brandName'       => 'nullable|string|max:255',
+            'logo'            => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'employees_count' => 'required|string|max:50',
+            'industry'        => 'required|string|max:100',
+            'province'        => 'required|string|max:100',
+            'city'            => 'required|string|max:100',
+            'address'         => 'required|string',
         ]);
 
-        $validated['user_id'] = Auth::id();
+        // Map form fields to database fields
+        $companyData = [
+            'user_id'      => Auth::id(),
+            'name'         => $validated['name'],
+            'industry'     => $validated['industry'],
+            'province'     => $validated['province'],
+            'city'         => $validated['city'],
+            'address'      => $validated['address'],
+            'company_size' => $validated['employees_count'], // Map employees_count to company_size
+        ];
 
-        $this->companyService->createCompany($validated);
+        // Handle logo upload if present
+        if ($request->hasFile('logo')) {
+            $companyData['logo'] = $request->file('logo');
+        }
+
+        // Add brand name as description if provided
+        if (!empty($validated['brandName'])) {
+            $companyData['description'] = 'Brand Name: ' . $validated['brandName'];
+        }
+
+        $this->companyService->createCompany($companyData);
 
         return redirect()->route('company.dashboard')
             ->with('success', 'Company profile created successfully!');

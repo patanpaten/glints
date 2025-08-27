@@ -96,4 +96,14 @@ class BaseService
     {
         return $this->repository->deleteById($modelId);
     }
+
+    /**
+     * Get repository instance.
+     *
+     * @return BaseRepository
+     */
+    protected function getRepository(): BaseRepository
+    {
+        return $this->repository;
+    }
 }

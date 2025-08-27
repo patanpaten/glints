@@ -28,7 +28,7 @@ return [
 
         // Provider untuk perusahaan
         'companies' => [
-            'driver' => 'eloquent',
+            'driver' => 'company',
             'model' => App\Models\Company::class,
         ],
     ],

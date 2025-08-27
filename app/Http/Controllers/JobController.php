@@ -110,7 +110,7 @@ class JobController extends Controller
                 ->with('error', 'Only job seekers can apply for jobs.');
         }
 
-        $job = $this->jobService->repository->model
+        $job = $this->jobService->repository->getModel()
             ->where('slug', $slug)
             ->with('company')
             ->firstOrFail();
@@ -148,7 +148,7 @@ class JobController extends Controller
                 ->with('error', 'You must be logged in as a job seeker to apply for jobs.');
         }
 
-        $job = $this->jobService->repository->model
+        $job = $this->jobService->repository->getModel()
             ->where('slug', $slug)
             ->firstOrFail();
 

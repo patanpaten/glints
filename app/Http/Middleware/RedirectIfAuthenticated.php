@@ -23,9 +23,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                // Redirect based on user role
-                $user = Auth::user();
-                if ($user->role) {
+                // Handle company guard specifically
+                if ($guard === 'company') {
+                    return redirect()->route('company.dashboard');
+                }
+                
+                // Redirect based on user role for default guard
+                $user = Auth::guard($guard)->user();
+                if ($user && isset($user->role)) {
                     switch (strtolower($user->role->name)) {
                         case 'admin':
                             return redirect()->route('admin.dashboard');

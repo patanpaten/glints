@@ -59,9 +59,9 @@ class JobSeekerController extends Controller
         }
 
         $recentApplications = $this->applicationService->getByJobSeekerId($jobSeeker->id)->take(5);
-        $totalApplications = $this->applicationService->repository->model->where('job_seeker_id', $jobSeeker->id)->count();
-        $pendingApplications = $this->applicationService->repository->model->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
-        $shortlistedApplications = $this->applicationService->repository->model->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
+        $totalApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->count();
+        $pendingApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
+        $shortlistedApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
 
         return view('jobseeker.dashboard', compact(
             'jobSeeker',

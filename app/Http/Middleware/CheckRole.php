@@ -18,6 +18,17 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
+        // Check for company guard first
+        if (Auth::guard('company')->check()) {
+            $company = Auth::guard('company')->user();
+            $userRole = $company->user->role ?? null;
+            
+            if ($userRole && strtolower($userRole->name) === 'company' && strtolower($role) === 'company') {
+                return $next($request);
+            }
+        }
+        
+        // Check for default guard
         if (!Auth::check()) {
             return redirect('login');
         }

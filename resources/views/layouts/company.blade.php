@@ -62,21 +62,10 @@
     </nav>
 
 <script>
-    // Dropdown toggle
+    // Dropdown toggle - removed since we're using CSS hover instead
     document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('languageDropdownButton');
-        const menu = document.getElementById('languageDropdownMenu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Klik di luar dropdown -> close
-        document.addEventListener('click', (e) => {
-            if (!btn.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.add('hidden');
-            }
-        });
+        // Language dropdown functionality can be added here if needed
+        console.log('Company layout loaded');
     });
 </script>
 

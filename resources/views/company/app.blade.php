@@ -75,64 +75,155 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container-fluid px-4">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('company.dashboard') }}">
-                <img src="/images/logo dan teks glints.png" alt="Glints" style="height: 80px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+  <!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container-fluid px-4">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ route('company.dashboard') }}">
+      <img src="/images/logo dan teks glints.png" alt="Glints" style="height: 36px;">
+    </a>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.dashboard') ? 'active' : '' }}" href="{{ route('company.dashboard') }}">DASHBOARD</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.premium-features.*') ? 'active' : '' }}" href="{{ route('company.premium-features.index') }}">FITUR PREMIUM</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.cv-search.*') ? 'active' : '' }}" href="{{ route('company.cv-search.index') }}">CARI CV</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.analytics.*') ? 'active' : '' }}" href="{{ route('company.analytics.dashboard') }}">ANALYTICS</a>
-                    </li>
-                </ul>
-                
-                <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-chat position-relative">
-                        <i class="far fa-comment-alt"></i> CHAT
-                        <span class="badge rounded-pill">25</span>
-                    </button>
-                    <a href="{{ route('company.jobs.create') }}" class="btn btn-loker">
-                        <i class="fas fa-plus-circle"></i> PASANG LOKER
-                    </a>
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
-                            <div class="d-flex flex-column align-items-end">
-                                <span>Area</span>
-                                <span class="user-rating">⭐ 4.90</span>
-                            </div>
-                            <div class="user-avatar">A</div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('company.profile') }}">Profil</a></li>
-                            <li><a class="dropdown-item" href="#">Pengaturan</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left nav -->
+      <ul class="navbar-nav me-auto ms-4">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('company.dashboard') ? 'active fw-bold text-dark' : '' }}" href="{{ route('company.dashboard') }}">DASHBOARD</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('company.premium-features.*') ? 'active fw-bold text-dark' : '' }}" href="{{ route('company.premium-features.index') }}">FITUR PREMIUM</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('company.cv-search.*') ? 'active fw-bold text-dark' : '' }}" href="{{ route('company.cv-search.index') }}">CARI CV</a>
+        </li>
+      </ul>
+
+      <!-- Right nav -->
+      <div class="d-flex align-items-center gap-3">
+
+        <!-- Chat -->
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+          <i class="far fa-comment-alt"></i>
+          CHAT
+        </button>
+
+        <!-- Pasang Loker -->
+        <a href="{{ route('company.jobs.create') }}" class="btn btn-primary btn-sm fw-bold">
+          PASANG LOKER
+        </a>
+
+        <!-- Profile dropdown -->
+        <div class="dropdown">
+          <a class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
+            <!-- Avatar -->
+            <div class="rounded-circle bg-warning text-white fw-bold d-flex align-items-center justify-content-center" style="width:32px; height:32px;">
+              V
             </div>
+            <!-- Info -->
+            <div class="text-end small lh-1 align-items-left">
+              <div class="fw-semibold">Vinsmoke ...</div>
+              <div class="text-warning ">⭐ 0</div>
+            </div>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 280px;">
+  <!-- Header profil -->
+  <li class="px-3 py-2 d-flex align-items-center border-bottom">
+    <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center text-white fw-bold me-2" style="width:40px; height:40px;">
+      V
+    </div>
+    <div>
+      <div class="fw-semibold">Vinsmoke Sanji</div>
+      <small class="text-muted">Indonesia</small>
+    </div>
+    <span class="badge bg-light text-dark ms-auto">Gratis</span>
+  </li>
+
+  <!-- Status VIP -->
+  <li class="px-3 py-2 border-bottom">
+    <div class="text-muted small">Glints VIP: <span class="text-dark">Tidak Aktif</span></div>
+    <a href="#" class="fw-semibold text-primary small">Upgrade ke VIP</a>
+  </li>
+
+  <!-- Promo -->
+  <li class="px-3 py-2 border-bottom">
+    <div class="alert alert-warning p-2 mb-0 small">
+      <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
+    </div>
+  </li>
+
+  <!-- Credits -->
+  <li class="px-3 py-2 border-bottom">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="small">Glints Credits: <strong>0</strong></span>
+      <a href="#" class="small fw-semibold text-primary">Top Up</a>
+    </div>
+  </li>
+
+  <!-- Menu navigasi -->
+  <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
+  <li><a class="dropdown-item" href="{{ route('company.profile') }}">Profil Perusahaan</a></li>
+  <li><a class="dropdown-item" href="#">Tim Perusahaan</a></li>
+
+  <li><hr class="dropdown-divider"></li>
+
+  <!-- Logout -->
+  <li>
+    <form action="{{ route('logout') }}" method="POST">
+      @csrf
+      <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
+        <i class="fas fa-sign-out-alt"></i> Keluar
+      </button>
+    </form>
+  </li>
+</ul>
+
         </div>
-    </nav>
+
+        <!-- Garis pembatas -->
+        <div class="border-start" style="height: 24px;"></div>
+
+      <!-- Language dropdown -->
+<div class="dropdown">
+  <button 
+    class="btn btn-sm btn-light d-flex align-items-center gap-1" 
+    type="button" 
+    id="langDropdown" 
+    data-bs-toggle="dropdown" 
+    aria-expanded="false">
+    
+    <i class="fas fa-globe text-secondary"></i>
+    <span>ID</span>
+    <i class="fas fa-chevron-down small text-secondary"></i>
+  </button>
+
+  <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="langDropdown">
+    <li>
+      <a href="?lang=id" class="dropdown-item d-flex flex-column">
+        <span class="fw-bold">ID</span>
+        <small class="text-muted">Bahasa Indonesia</small>
+      </a>
+    </li>
+    <li>
+      <a href="?lang=en" class="dropdown-item d-flex flex-column">
+        <span class="fw-bold">EN</span>
+        <small class="text-muted">English</small>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+</nav>
+
+
 
     <!-- MAIN LAYOUT -->
     <div class="container-fluid">
