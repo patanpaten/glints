@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\JobRepository;
+use Illuminate\Support\Facades\Log;
 
 class JobService
 {
@@ -41,7 +42,17 @@ class JobService
             'status' => $status
         ], $filters);
 
-        return $this->repository->getByFilters($filters);
+        $result = $this->repository->getByFilters($filters);
+        
+        Log::debug('JobService getByCompanyAndStatus', [
+            'company_id' => $companyId,
+            'status' => $status,
+            'filters' => $filters,
+            'total_jobs' => $result->total(),
+            'current_page_count' => $result->count()
+        ]);
+        
+        return $result;
     }
 
     public function countByCompanyAndStatus($companyId, $status = null, $filters = [])
@@ -51,20 +62,43 @@ class JobService
             'status' => $status
         ], $filters);
 
-        return $this->repository->countByFilters($filters);
+        $count = $this->repository->countByFilters($filters);
+        
+        Log::debug('JobService countByCompanyAndStatus', [
+            'company_id' => $companyId,
+            'status' => $status,
+            'additional_filters' => $filters,
+            'count' => $count
+        ]);
+        
+        return $count;
     }
 
     public function countByCompany($companyId)
     {
-        return $this->repository->countByFilters(['company_id' => $companyId]);
+        $count = $this->repository->countByFilters(['company_id' => $companyId]);
+        
+        Log::debug('JobService countByCompany', [
+            'company_id' => $companyId,
+            'count' => $count
+        ]);
+        
+        return $count;
     }
 
     public function countActiveByCompany($companyId)
     {
-        return $this->repository->countByFilters([
+        $count = $this->repository->countByFilters([
             'company_id' => $companyId,
             'is_active' => true
         ]);
+        
+        Log::debug('JobService countActiveByCompany', [
+            'company_id' => $companyId,
+            'count' => $count
+        ]);
+        
+        return $count;
     }
 
     public function getFeaturedJobs($limit = 8)

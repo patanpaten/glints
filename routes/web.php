@@ -109,11 +109,20 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
 
     // Profile
     Route::prefix('profile')->name('profile.')->group(function () {
-        Route::get('/create', [CompanyController::class, 'create'])->name('create');
-        Route::post('/store', [CompanyController::class, 'store'])->name('store');
+        Route::post('/', [CompanyController::class, 'store'])->name('store');
         Route::get('/edit', [CompanyController::class, 'edit'])->name('edit');
-        Route::post('/update', [CompanyController::class, 'update'])->name('update');
+        Route::put('/', [CompanyController::class, 'update'])->name('update');
     });
+
+    // WhatsApp
+    Route::prefix('whatsapp')->name('whatsapp.')->group(function () {
+        Route::get('/', [CompanyController::class, 'whatsappForm'])->name('form');
+        Route::post('/', [CompanyController::class, 'saveWhatsapp'])->name('save');
+    });
+
+    // Logo Upload
+    Route::post('/logo/upload', [CompanyController::class, 'uploadLogo'])->name('logo.upload');
+
     Route::get('/profile', [CompanyController::class, 'edit'])->name('profile');
 
     // Jobs Management

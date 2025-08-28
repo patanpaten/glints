@@ -26,6 +26,8 @@ class Company extends Authenticatable
         'website',
         'industry',
         'company_size',
+        'credits',
+        'country',
     ];
 
     /**
@@ -42,6 +44,43 @@ class Company extends Authenticatable
     public function jobs(): HasMany
     {
         return $this->hasMany(Job::class);
+    }
+
+    /**
+     * Get the company subscriptions.
+     */
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(CompanySubscription::class);
+    }
+
+    /**
+     * Check if company has active VIP status.
+     */
+    public function isVip(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', 'active')
+            ->where('end_date', '>=', now())
+            ->exists();
+    }
+
+    /**
+     * Get company initials for avatar.
+     */
+    public function getInitialsAttribute(): string
+    {
+        $words = explode(' ', $this->name);
+        $initials = '';
+        
+        foreach ($words as $word) {
+            if (!empty($word)) {
+                $initials .= strtoupper(substr($word, 0, 1));
+                if (strlen($initials) >= 2) break;
+            }
+        }
+        
+        return $initials ?: 'C';
     }
 
     /**

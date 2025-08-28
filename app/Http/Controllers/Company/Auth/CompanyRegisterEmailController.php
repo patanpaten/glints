@@ -40,11 +40,10 @@ class CompanyRegisterEmailController extends Controller
             'role_id' => $companyRole->id,
         ]);
 
-        // Create company profile
+        // Create company profile with basic info
         $company = Company::create([
             'user_id' => $user->id,
             'name' => $request->name,
-            'phone' => $request->phone,
         ]);
 
         // Login as company

@@ -119,48 +119,57 @@
         </a>
 
         <!-- Profile dropdown -->
+        @auth('company')
         <div class="dropdown">
           <a class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
             <!-- Avatar -->
             <div class="rounded-circle bg-warning text-white fw-bold d-flex align-items-center justify-content-center" style="width:32px; height:32px;">
-              V
+              {{ Auth::guard('company')->user()->initials }}
             </div>
             <!-- Info -->
             <div class="text-end small lh-1 align-items-left">
-              <div class="fw-semibold">Vinsmoke ...</div>
-              <div class="text-warning ">⭐ 0</div>
+              <div class="fw-semibold">{{ Str::limit(Auth::guard('company')->user()->name, 10) }}...</div>
+              <div class="text-warning ">⭐ {{ Auth::guard('company')->user()->credits }}</div>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 280px;">
   <!-- Header profil -->
   <li class="px-3 py-2 d-flex align-items-center border-bottom">
     <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center text-white fw-bold me-2" style="width:40px; height:40px;">
-      V
+      {{ Auth::guard('company')->user()->initials }}
     </div>
     <div>
-      <div class="fw-semibold">Vinsmoke Sanji</div>
-      <small class="text-muted">Indonesia</small>
+      <div class="fw-semibold">{{ Auth::guard('company')->user()->name }}</div>
+      <small class="text-muted">{{ Auth::guard('company')->user()->country }}</small>
     </div>
-    <span class="badge bg-light text-dark ms-auto">Gratis</span>
+    <span class="badge {{ Auth::guard('company')->user()->isVip() ? 'bg-warning text-dark' : 'bg-light text-dark' }} ms-auto">
+      {{ Auth::guard('company')->user()->isVip() ? 'VIP' : 'Gratis' }}
+    </span>
   </li>
 
   <!-- Status VIP -->
   <li class="px-3 py-2 border-bottom">
-    <div class="text-muted small">Glints VIP: <span class="text-dark">Tidak Aktif</span></div>
-    <a href="#" class="fw-semibold text-primary small">Upgrade ke VIP</a>
+    <div class="text-muted small">Glints VIP: 
+      <span class="text-dark">{{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}</span>
+    </div>
+    @if(!Auth::guard('company')->user()->isVip())
+      <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small">Upgrade ke VIP</a>
+    @endif
   </li>
 
+  @if(!Auth::guard('company')->user()->isVip())
   <!-- Promo -->
   <li class="px-3 py-2 border-bottom">
     <div class="alert alert-warning p-2 mb-0 small">
       <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
     </div>
   </li>
+  @endif
 
   <!-- Credits -->
   <li class="px-3 py-2 border-bottom">
     <div class="d-flex justify-content-between align-items-center">
-      <span class="small">Glints Credits: <strong>0</strong></span>
+      <span class="small">Glints Credits: <strong>{{ Auth::guard('company')->user()->credits }}</strong></span>
       <a href="#" class="small fw-semibold text-primary">Top Up</a>
     </div>
   </li>
@@ -184,6 +193,13 @@
 </ul>
 
         </div>
+        @else
+        <!-- Login/Register buttons for non-authenticated users -->
+        <div class="d-flex gap-2">
+          <a href="{{ route('company.login') }}" class="btn btn-outline-primary btn-sm">Masuk</a>
+          <a href="{{ route('company.register') }}" class="btn btn-primary btn-sm">Daftar</a>
+        </div>
+        @endauth
 
         <!-- Garis pembatas -->
         <div class="border-start" style="height: 24px;"></div>
