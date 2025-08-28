@@ -26,7 +26,7 @@
                 <td>{{ $job->applications_count ?? 0 }}</td>
                 <td>
                     <a href="{{ route('company.jobs.show', $job->id) }}" class="btn btn-info btn-sm">Detail</a>
-                    <a href="{{ route('company.applications.index', $job->id) }}" class="btn btn-primary btn-sm">Pelamar</a>
+                    <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" class="btn btn-primary btn-sm">Pelamar</a>
                 </td>
             </tr>
             @endforeach

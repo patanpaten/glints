@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\ApplicationRepository;
 use App\Models\Application;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ApplicationService extends BaseService
 {
@@ -168,10 +169,16 @@ class ApplicationService extends BaseService
      */
     public function countByCompany(int $companyId): int
     {
-        return $this->getRepository()->getModel()
-            ->whereHas('job', function ($query) use ($companyId) {
-                $query->where('company_id', $companyId);
-            })
+        $count = $this->getRepository()->getModel()
+            ->join('job_listings', 'applications.job_id', '=', 'job_listings.id')
+            ->where('job_listings.company_id', $companyId)
             ->count();
+        
+        Log::debug('ApplicationService countByCompany', [
+            'company_id' => $companyId,
+            'total_applications' => $count
+        ]);
+        
+        return $count;
     }
 }

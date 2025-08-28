@@ -15,14 +15,14 @@ class JobController extends Controller
 
     public function __construct(JobService $jobService, CompanyService $companyService)
     {
-        $this->middleware(['auth', 'role:company']);
+        $this->middleware(['auth:company', 'role:company']);
         $this->jobService = $jobService;
         $this->companyService = $companyService;
     }
 
     public function index(Request $request)
     {
-    $company = $this->companyService->getByUserId(Auth::id());
+    $company = Auth::guard('company')->user();
 
     if (!$company) {
         return redirect()->route('company.profile.create')

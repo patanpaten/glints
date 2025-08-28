@@ -76,7 +76,7 @@ class CompanyService extends BaseService
      */
     protected function uploadLogo($logo): string
     {
-        $path = $logo->store('companies/logos', 'public');
+        $path = $logo->store('logos', 'public');
         return $path;
     }
 

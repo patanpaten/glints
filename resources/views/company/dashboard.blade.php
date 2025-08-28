@@ -9,13 +9,26 @@
     <div class="card mb-4 border-0 shadow-sm">
         <div class="card-body d-flex justify-content-between align-items-center p-4">
             <div class="d-flex align-items-center gap-3">
-                <div class="bg-light rounded p-2" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                    <img src="/images/areakerja.jpeg" class="img-fluid" alt="Area Kerja Logo">
+                <div class="position-relative">
+                    @if(Auth::guard('company')->user()->logo)
+                        <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}" 
+                             alt="{{ Auth::guard('company')->user()->name }}" 
+                             class="rounded" 
+                             style="width: 60px; height: 60px; object-fit: cover;">
+                    @else
+                        <div class="bg-primary rounded d-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 24px;">
+                            {{ Auth::guard('company')->user()->initials }}
+                        </div>
+                    @endif
                 </div>
                 <div>
-                    <h2 class="fw-bold fs-5 mb-0">{{ auth()->user()->company->name ?? 'Areakerja' }}</h2>
-                    <div class="d-flex align-items-center gap-1 mt-1">
+                    <h2 class="fw-bold fs-5 mb-0">{{ Auth::guard('company')->user()->name }}</h2>
+                    <div class="d-flex align-items-center gap-2 mt-1">
                         <span class="badge bg-success-subtle text-success"><i class="fas fa-check-circle"></i> Terverifikasi</span>
+                        @if(Auth::guard('company')->user()->isVip())
+                            <span class="badge bg-warning-subtle text-warning"><i class="fas fa-crown"></i> VIP</span>
+                        @endif
+                        <span class="text-muted small">{{ Auth::guard('company')->user()->country }}</span>
                     </div>
                 </div>
             </div>
@@ -57,121 +70,102 @@
                     <!-- TAB -->
                     <ul class="nav nav-tabs mb-4">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active fw-medium">Semua Loker <span class="badge rounded-pill bg-secondary ms-1">30</span></a>
+                            <a href="#" class="nav-link active fw-medium">Semua Loker <span class="badge rounded-pill bg-secondary ms-1">{{ $totalJobs }}</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Aktif <span class="badge rounded-pill bg-secondary ms-1">5</span></a>
+                            <a href="#" class="nav-link fw-medium">Aktif <span class="badge rounded-pill bg-secondary ms-1">{{ $activeJobs }}</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Nonaktif <span class="badge rounded-pill bg-secondary ms-1">25</span></a>
+                            <a href="#" class="nav-link fw-medium">Nonaktif <span class="badge rounded-pill bg-secondary ms-1">{{ $totalJobs - $activeJobs }}</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link fw-medium">Dalam Review <span class="badge rounded-pill bg-secondary ms-1">0</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Draft <span class="badge rounded-pill bg-secondary ms-1">35</span></a>
+                            <a href="#" class="nav-link fw-medium">Draft <span class="badge rounded-pill bg-secondary ms-1">0</span></a>
                         </li>
                     </ul>
 
-                    <!-- CARD LOWONGAN -->
-                    <div class="card mb-3 border shadow-sm">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h5 class="fw-bold">Admin Perkantoran (Intern)</h5>
-                                    <div class="d-flex align-items-center gap-2 text-muted small">
-                                        <span><i class="fas fa-map-marker-alt"></i> Kementren Kotagede, Yogyakarta, DI Yogyakarta</span>
-                                        <span class="mx-1">•</span>
-                                        <span>Aktif hingga: 28 Agu 2025</span>
+                    <!-- DAFTAR LOWONGAN DINAMIS -->
+
+                    {{-- DEBUG LOG --}}
+@php
+    \Log::info('[Dashboard] recentJobs count: ' . ($recentJobs ? $recentJobs->count() : 0));
+    if($recentJobs) {
+        foreach($recentJobs as $job) {
+            \Log::info('[Dashboard] Job: ' . $job->title . ' | Applications: ' . $job->applications->count());
+        }
+    }
+@endphp
+
+
+                    @if($recentJobs && $recentJobs->count() > 0)
+                        @foreach($recentJobs as $job)
+                        <div class="card mb-3 border shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h5 class="fw-bold">{{ $job->title }}</h5>
+                                        <div class="d-flex align-items-center gap-2 text-muted small">
+                                            <span><i class="fas fa-map-marker-alt"></i> {{ $job->location }}</span>
+                                            <span class="mx-1">•</span>
+                                            <span>{{ $job->employment_type }}</span>
+                                            @if($job->deadline)
+                                                <span class="mx-1">•</span>
+                                                <span>Aktif hingga: {{ $job->deadline->format('d M Y') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <span class="badge {{ $job->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                        {{ $job->is_active ? 'Aktif' : 'Nonaktif' }}
+                                    </span>
+                                </div>
+
+                                <div class="row mt-3 text-center">
+                                    <div class="col-md-4">
+                                        <p class="fw-bold mb-0">{{ $job->applications->where('status', 'interview')->count() }}</p>
+                                        <p class="text-muted small mb-1">Interview</p>
+                                        <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}" class="text-primary small fw-semibold">Lihat</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="fw-bold mb-0">{{ $job->applications->count() }}</p>
+                                        <p class="text-muted small mb-1">Total Pelamar</p>
+                                        <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" class="text-primary small fw-semibold">Lihat</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="fw-bold mb-0">{{ $job->applications->where('status', 'rejected')->count() }}</p>
+                                        <p class="text-muted small mb-1">Ditolak</p>
+                                        <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}" class="text-primary small fw-semibold">Lihat</a>
                                     </div>
                                 </div>
-                                <span class="badge bg-success">Aktif</span>
-                            </div>
 
-                            <div class="row mt-3 text-center">
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">149</p>
-                                    <p class="text-muted small mb-1">Chat Dimulai</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">806</p>
-                                    <p class="text-muted small mb-1">Terhubung</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">11</p>
-                                    <p class="text-muted small mb-1">Belum Sesuai</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex gap-2 mt-3">
-                                <button class="btn btn-outline-warning btn-sm"><i class="fas fa-bolt"></i> Boost Lowongan</button>
-                                <button class="btn btn-primary btn-sm">Kelola Kandidat</button>
-                                <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Recommended Talents</button>
-                                <div class="dropdown ms-auto">
-                                    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fas fa-trash me-2"></i> Hapus</a></li>
-                                    </ul>
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-outline-warning btn-sm"><i class="fas fa-bolt"></i> Boost Lowongan</button>
+                                    <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" class="btn btn-primary btn-sm">Kelola Kandidat</a>
+                                    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-users"></i> Recommended Talents</button>
+                                    <div class="dropdown ms-auto">
+                                        <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="{{ route('company.jobs.edit', $job->id) }}"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="deleteJob({{ $job->id }})"><i class="fas fa-trash me-2"></i> Hapus</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- CARD LOWONGAN -->
-                    <div class="card mb-3 border shadow-sm">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h5 class="fw-bold">Marketing Specialist</h5>
-                                    <div class="d-flex align-items-center gap-2 text-muted small">
-                                        <span><i class="fas fa-map-marker-alt"></i> Full-time - Jakarta</span>
-                                        <span class="mx-1">•</span>
-                                        <span>Aktif hingga: 15 Sep 2025</span>
-                                    </div>
-                                </div>
-                                <span class="badge bg-success">Aktif</span>
-                            </div>
-
-                            <div class="row mt-3 text-center">
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">72</p>
-                                    <p class="text-muted small mb-1">Chat Dimulai</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">341</p>
-                                    <p class="text-muted small mb-1">Terhubung</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <p class="fw-bold mb-0">5</p>
-                                    <p class="text-muted small mb-1">Belum Sesuai</p>
-                                    <a href="#" class="text-primary small fw-semibold">Lihat</a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex gap-2 mt-3">
-                                <button class="btn btn-outline-warning btn-sm"><i class="fas fa-bolt"></i> Boost Lowongan</button>
-                                <button class="btn btn-primary btn-sm">Kelola Kandidat</button>
-                                <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Recommended Talents</button>
-                                <div class="dropdown ms-auto">
-                                    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fas fa-trash me-2"></i> Hapus</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        @endforeach
+                    @else
+                        <div class="text-center py-5">
+                            <i class="fas fa-briefcase text-muted" style="font-size: 48px;"></i>
+                            <h5 class="text-muted mt-3">Belum Ada Lowongan</h5>
+                            <p class="text-muted">Mulai posting lowongan pertama Anda untuk menarik kandidat terbaik.</p>
+                            <a href="{{ route('company.jobs.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Buat Lowongan Baru
+                            </a>
                         </div>
-                    </div>
+                    @endif
 
                     <!-- PAGINATION -->
                     <div class="d-flex justify-content-center mt-4">
@@ -219,8 +213,13 @@
                                 <h6 class="mb-0 fw-bold">Terima Notifikasi di WhatsApp</h6>
                             </div>
                         </div>
-                        <p class="text-muted small mb-2">Selalu update tentang perusahaan Anda dengan fitur notifikasi melalui WhatsApp.</p>
-                        <a href="#" class="text-primary small fw-semibold">Kirim OTP</a>
+                        @if(Auth::guard('company')->user()->phone)
+                            <p class="text-muted small mb-2">WhatsApp sudah terhubung: {{ Auth::guard('company')->user()->phone }}</p>
+                            <span class="badge bg-success-subtle text-success"><i class="fas fa-check-circle"></i> Terhubung</span>
+                        @else
+                            <p class="text-muted small mb-2">Selalu update tentang perusahaan Anda dengan fitur notifikasi melalui WhatsApp.</p>
+                            <a href="{{ route('company.whatsapp.form') }}" class="text-primary small fw-semibold">Hubungkan WhatsApp</a>
+                        @endif
                     </div>
                     
                     <div class="p-3">
@@ -279,37 +278,40 @@
                     <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
                             <span>Total Pelamar</span>
-                            <span class="fw-bold">1,245</span>
+                            <span class="fw-bold">{{ number_format($totalApplications) }}</span>
                         </div>
                         <div class="progress" style="height: 8px;">
-                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{ $totalApplications > 0 ? min(($totalApplications / 100) * 10, 100) : 0 }}%" aria-valuenow="{{ $totalApplications }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     
                     <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Tingkat Respons</span>
-                            <span class="fw-bold">68%</span>
+                            <span>Total Lowongan</span>
+                            <span class="fw-bold">{{ $totalJobs }}</span>
                         </div>
                         <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ $totalJobs > 0 ? min(($totalJobs / 20) * 100, 100) : 0 }}%" aria-valuenow="{{ $totalJobs }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     
                     <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Tingkat Konversi</span>
-                            <span class="fw-bold">42%</span>
+                            <span>Lowongan Aktif</span>
+                            <span class="fw-bold">{{ $activeJobs }}</span>
                         </div>
                         <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $totalJobs > 0 ? ($activeJobs / $totalJobs) * 100 : 0 }}%" aria-valuenow="{{ $activeJobs }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     
-                    <a href="#" class="btn btn-link d-block text-center mt-3">Lihat Laporan Lengkap</a>
+                    <a href="{{ route('company.analytics.dashboard') }}" class="btn btn-link d-block text-center mt-3">Lihat Laporan Lengkap</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 @endsection

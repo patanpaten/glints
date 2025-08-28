@@ -23,7 +23,9 @@ class CompanyController extends Controller
         $this->companyService = $companyService;
         $this->jobService = $jobService;
         $this->applicationService = $applicationService;
-        $this->middleware('auth');
+
+        // Pastikan company login dengan guard company
+        $this->middleware('auth:company');
         $this->middleware('role:company');
     }
 
@@ -32,25 +34,24 @@ class CompanyController extends Controller
      */
     public function dashboard()
     {
-        $company = $this->companyService->getByUserId(Auth::id());
+        $company = Auth::guard('company')->user();
 
         if (!$company) {
-            // Kalau belum ada company profile, kasih data kosong ke view
-            return view('company.dashboard', [
-                'company' => null,
-                'recentJobs' => collect([]),
-                'totalJobs' => 0,
-                'activeJobs' => 0,
-                'totalApplications' => 0,
-                'showProfileReminder' => true
-            ]);
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
         }
 
-        // Kalau sudah ada profile, tampilkan data normal
+        // Check if profile is complete
+        if (empty($company->name) || empty($company->industry) || empty($company->city)) {
+            return redirect()->route('company.profile.edit')
+                ->with('info', 'Please complete your company profile first.');
+        }
+
         $recentJobs = $this->jobService->getByCompanyId($company->id)->take(5);
         $totalJobs = $this->jobService->countByCompany($company->id);
         $activeJobs = $this->jobService->countActiveByCompany($company->id);
         $totalApplications = $this->applicationService->countByCompany($company->id);
+
         return view('company.dashboard', compact(
             'company',
             'recentJobs',
@@ -61,26 +62,19 @@ class CompanyController extends Controller
     }
 
 
-    /**
-     * Tampilkan form create profile
-     */
-    public function create()
-    {
-        $existingCompany = $this->companyService->getByUserId(Auth::id());
-
-        if ($existingCompany) {
-            return redirect()->route('company.profile.edit')
-                ->with('info', 'You already have a company profile.');
-        }
-
-        return view('company.profile.create');
-    }
 
     /**
      * Simpan profile perusahaan baru
      */
     public function store(Request $request)
     {
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
+        }
+
         $validated = $request->validate([
             'name'            => 'required|string|max:255',
             'brandName'       => 'nullable|string|max:255',
@@ -92,31 +86,28 @@ class CompanyController extends Controller
             'address'         => 'required|string',
         ]);
 
-        // Map form fields to database fields
         $companyData = [
-            'user_id'      => Auth::id(),
             'name'         => $validated['name'],
             'industry'     => $validated['industry'],
             'province'     => $validated['province'],
             'city'         => $validated['city'],
             'address'      => $validated['address'],
-            'company_size' => $validated['employees_count'], // Map employees_count to company_size
+            'company_size' => $validated['employees_count'],
         ];
 
-        // Handle logo upload if present
+        // Handle logo upload - pass the file object to service
         if ($request->hasFile('logo')) {
             $companyData['logo'] = $request->file('logo');
         }
 
-        // Add brand name as description if provided
         if (!empty($validated['brandName'])) {
-            $companyData['description'] = 'Brand Name: ' . $validated['brandName'];
+            $companyData['description'] = $validated['brandName'];
         }
 
-        $this->companyService->createCompany($companyData);
+        $this->companyService->updateCompany($company->id, $companyData);
 
-        return redirect()->route('company.dashboard')
-            ->with('success', 'Company profile created successfully!');
+        return redirect()->route('company.whatsapp.form')
+            ->with('success', 'Company profile updated successfully!');
     }
 
     /**
@@ -124,11 +115,11 @@ class CompanyController extends Controller
      */
     public function edit()
     {
-        $company = $this->companyService->getByUserId(Auth::id());
+        $company = Auth::guard('company')->user();
 
         if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please create your company profile first.');
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
         }
 
         return view('company.profile.edit', compact('company'));
@@ -139,11 +130,11 @@ class CompanyController extends Controller
      */
     public function update(Request $request)
     {
-        $company = $this->companyService->getByUserId(Auth::id());
+        $company = Auth::guard('company')->user();
 
         if (!$company) {
-            return redirect()->route('company.profile.create')
-                ->with('error', 'Please create your company profile first.');
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
         }
 
         $validated = $request->validate([
@@ -160,9 +151,107 @@ class CompanyController extends Controller
             'company_size' => 'required|string|max:50',
         ]);
 
+        // Cek apakah perusahaan sudah memiliki nomor WhatsApp sebelumnya
+        $hadWhatsappBefore = !empty($company->phone);
+
+        // Handle logo upload - pass the file object to service
+        if ($request->hasFile('logo')) {
+            $validated['logo'] = $request->file('logo');
+        }
+
         $this->companyService->updateCompany($company->id, $validated);
 
-        return redirect()->route('company.profile.edit')
-            ->with('success', 'Company profile updated successfully!');
+        // Logika redirect berdasarkan kondisi nomor WhatsApp
+        // Jika sudah punya nomor WA sebelumnya (update dari dashboard) -> redirect ke dashboard
+        if ($hadWhatsappBefore) {
+            return redirect()->route('company.dashboard')
+                ->with('success', 'Company profile updated successfully!');
+        } else {
+            // Jika belum punya nomor WA sebelumnya (pertama kali daftar) -> redirect ke dashboard langsung
+            // karena nomor WA sudah diisi di form edit
+            return redirect()->route('company.dashboard')
+                ->with('success', 'Company profile updated successfully!');
+        }
+    }
+
+    /**
+     * Tampilkan form nomor WhatsApp
+     */
+    public function whatsappForm()
+    {
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
+        }
+
+        // Jika sudah ada nomor WhatsApp, redirect ke dashboard
+        if ($company->phone) {
+            return redirect()->route('company.dashboard')
+                ->with('info', 'WhatsApp sudah terhubung dengan nomor: ' . $company->phone);
+        }
+
+        return view('company.terhubung_wa', compact('company'));
+    }
+
+    /**
+     * Simpan nomor WhatsApp perusahaan
+     */
+    public function saveWhatsapp(Request $request)
+    {
+        $validated = $request->validate([
+            'phone' => 'required|string|max:20',
+        ]);
+
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
+        }
+
+        $this->companyService->updateCompany($company->id, [
+            'phone' => $validated['phone'],
+        ]);
+
+        return redirect()->route('company.dashboard')
+            ->with('success', 'Nomor WhatsApp berhasil disimpan!');
+    }
+
+    /**
+     * Upload logo perusahaan secara dinamis
+     */
+    public function uploadLogo(Request $request)
+    {
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
+        $request->validate([
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        try {
+            // Update logo menggunakan service
+            $this->companyService->updateCompany($company->id, [
+                'logo' => $request->file('logo')
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Logo berhasil diupload!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupload logo: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }
