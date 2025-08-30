@@ -12,26 +12,19 @@
 
     {{-- Body --}}
     <div class="p-6">
-        <form action="{{ route('company.profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <form id="company-form" action="{{ route('company.profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
             @method('PUT')
 
             {{-- Logo Upload --}}
-            <div class="flex items-center space-x-4">
-                <label class="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer bg-gray-50 hover:bg-gray-100">
-                    <span class="text-lg text-gray-500 font-bold">+</span>
+            <div class="flex flex-col items-start space-y-2">
+                <label class="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer bg-gray-50 hover:bg-gray-100 relative overflow-hidden">
+                    <span class="text-lg text-gray-500 font-bold" id="logo-placeholder">+</span>
                     <span class="text-xs text-gray-600">Unggah</span>
                     <input type="file" name="logo" id="logo-input" class="hidden" accept=".jpg,.jpeg,.png">
+                    <img id="logo-preview" src="{{ $company->logo ? asset('storage/'.$company->logo) : '' }}" 
+                         class="absolute inset-0 w-full h-full object-cover rounded-md border {{ $company->logo ? '' : 'hidden' }}">
                 </label>
-                <div id="logo-preview" class="w-20 h-20">
-                    @if($company->logo)
-                        <img src="{{ asset('storage/'.$company->logo) }}" class="w-20 h-20 object-cover rounded-md border" id="current-logo">
-                    @else
-                        <div class="w-20 h-20 bg-gray-100 rounded-md border flex items-center justify-center" id="no-logo">
-                            <span class="text-xs text-gray-400">No Logo</span>
-                        </div>
-                    @endif
-                </div>
                 <span class="text-sm text-gray-700">Logo Perusahaan</span>
             </div>
 
@@ -40,18 +33,19 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">
                     Nama Legal Perusahaan<span class="text-red-500">*</span>
                 </label>
-                <input type="text" name="name"
+                <input type="text" name="name" id="legal-name"
                        class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2"
                        value="{{ old('name', $company->name) }}" required>
             </div>
 
-            {{-- Deskripsi Perusahaan --}}
+            {{-- Nama Brand (otomatis terisi dari Nama Legal) --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                    Deskripsi Perusahaan<span class="text-red-500">*</span>
+                    Nama Brand<span class="text-red-500">*</span>
                 </label>
-                <textarea name="description" rows="3"
-                          class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2" required>{{ old('description', $company->description) }}</textarea>
+                <input type="text" name="brand" id="brand-name"
+                       class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2 bg-gray-50"
+                       value="{{ old('brand', $company->description) }}" readonly required>
             </div>
 
             {{-- Jumlah Karyawan --}}
@@ -75,7 +69,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">
                     Industri<span class="text-red-500">*</span>
                 </label>
-                <select name="industry"
+                <select id="industry" name="industry"
                         class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2" required>
                     <option value="">Belum dipilih</option>
                     <option value="IT" @selected(old('industry', $company->industry) == 'IT')>Teknologi Informasi</option>
@@ -85,8 +79,9 @@
                 </select>
             </div>
 
-            {{-- Lokasi --}}
-            <div class="space-y-4">
+            {{-- Lokasi (muncul kalau industri dipilih) --}}
+            <div id="location-section" class="space-y-4 hidden">
+                <h3>Lokasi</h3>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Provinsi<span class="text-red-500">*</span></label>
                     <input type="text" name="province"
@@ -104,39 +99,15 @@
                 <div>
                     <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap<span class="text-red-500">*</span></label>
                     <textarea id="address" name="address" rows="3"
-                              class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2" required>{{ old('address', $company->address) }}</textarea>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Kode Pos<span class="text-red-500">*</span></label>
-                    <input type="text" name="postal_code"
-                           class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2"
-                           value="{{ old('postal_code', $company->postal_code) }}" required>
-                </div>
-            </div>
-
-            {{-- Kontak --}}
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon<span class="text-red-500">*</span></label>
-                    <input type="text" name="phone"
-                           class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2"
-                           value="{{ old('phone', $company->phone) }}" required>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Website (Opsional)</label>
-                    <input type="url" name="website"
-                           class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2"
-                           value="{{ old('website', $company->website) }}" placeholder="https://">
+                              class="w-full rounded-md border border-gray-300 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm px-3 py-2">{{ old('address', $company->address) }}</textarea>
                 </div>
             </div>
 
             {{-- Button --}}
             <div class="flex justify-end">
-                <button type="submit"
-                        class="px-6 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2.5 rounded-md">
-                    Simpan Perubahan
+                <button type="submit" id="submit-btn"
+                        class="px-6 bg-blue-400 text-white text-sm font-medium py-2.5 rounded-md cursor-not-allowed" disabled>
+                    Buat Perusahaan
                 </button>
             </div>
         </form>
@@ -147,34 +118,69 @@
 document.addEventListener('DOMContentLoaded', function() {
     const logoInput = document.getElementById('logo-input');
     const logoPreview = document.getElementById('logo-preview');
-    
+    const logoPlaceholder = document.getElementById('logo-placeholder');
+    const industrySelect = document.getElementById('industry');
+    const locationSection = document.getElementById('location-section');
+    const legalNameInput = document.getElementById('legal-name');
+    const brandNameInput = document.getElementById('brand-name');
+    const form = document.getElementById('company-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    // Logo upload + preview
     logoInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         
         if (file) {
-            // Validasi tipe file
             const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
             if (!allowedTypes.includes(file.type)) {
                 alert('Hanya file JPG, JPEG, dan PNG yang diizinkan.');
                 logoInput.value = '';
                 return;
             }
-            
-            // Validasi ukuran file (max 2MB)
             if (file.size > 2 * 1024 * 1024) {
                 alert('Ukuran file maksimal 2MB.');
                 logoInput.value = '';
                 return;
             }
-            
-            // Buat preview
             const reader = new FileReader();
             reader.onload = function(e) {
-                logoPreview.innerHTML = `<img src="${e.target.result}" class="w-20 h-20 object-cover rounded-md border" id="preview-logo">`;
+                logoPreview.src = e.target.result;
+                logoPreview.classList.remove('hidden');
+                logoPlaceholder.classList.add('hidden');
             };
             reader.readAsDataURL(file);
         }
     });
+
+    // Nama Brand otomatis dari Nama Legal
+    legalNameInput.addEventListener('input', function() {
+        brandNameInput.value = legalNameInput.value;
+    });
+
+    // Show/hide lokasi sesuai industri
+    industrySelect.addEventListener('change', function() {
+        if (industrySelect.value) {
+            locationSection.classList.remove('hidden');
+        } else {
+            locationSection.classList.add('hidden');
+        }
+    });
+    if (industrySelect.value) locationSection.classList.remove('hidden');
+
+    // Validasi form untuk tombol submit
+    function checkFormValidity() {
+        if (form.checkValidity()) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('bg-blue-400', 'cursor-not-allowed');
+            submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('bg-blue-400', 'cursor-not-allowed');
+            submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
+        }
+    }
+    form.addEventListener('input', checkFormValidity);
+    checkFormValidity();
 });
 </script>
 

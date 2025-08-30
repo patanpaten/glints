@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="d-flex gap-2">
-                <a href="{{ route('company.profile') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('company.profile.edit2') }}" class="btn btn-outline-secondary">
                     <i class="fas fa-edit"></i> Edit Profil Perusahaan
                 </a>
                 <a href="{{ route('company.premium-features.index') }}" class="btn btn-outline-primary">

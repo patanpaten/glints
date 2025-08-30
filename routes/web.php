@@ -112,6 +112,8 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
         Route::post('/', [CompanyController::class, 'store'])->name('store');
         Route::get('/edit', [CompanyController::class, 'edit'])->name('edit');
         Route::put('/', [CompanyController::class, 'update'])->name('update');
+        Route::get('/edit2', [CompanyController::class, 'edit2'])->name('edit2');
+        Route::put('/update2', [CompanyController::class, 'update2'])->name('update2');
     });
 
     // WhatsApp
@@ -124,6 +126,11 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
     Route::post('/logo/upload', [CompanyController::class, 'uploadLogo'])->name('logo.upload');
 
     Route::get('/profile', [CompanyController::class, 'edit'])->name('profile');
+
+
+    Route::get('/company/{id}/edit2', [CompanyController::class, 'edit2'])->name('company.edit2');
+    Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
+
 
     // Jobs Management
     Route::resource('jobs', CompanyJobController::class)->except(['show']);
