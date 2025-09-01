@@ -466,7 +466,7 @@
                 </a>
 
                 <!-- Untuk Perusahaan -->
-                <a href="{{ route('company.register') }}"
+                <a href="{{ route('company.register') }}"  target="_blank"
                 class="hidden lg:flex items-center border border-[#0277bd] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-3 py-1.5 text-xs font-semibold tracking-wide transition">
                 Untuk Perusahaan
                 <i class="fas fa-arrow-right ml-2 text-[10px]"></i>

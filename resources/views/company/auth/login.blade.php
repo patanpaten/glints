@@ -6,16 +6,19 @@
         
         {{-- Sidebar Kiri --}}
         <div class="w-1/5 bg-[#DCEBFF] p-8 flex flex-col justify-center space-y-10">
-            <div class="flex flex-col items-center text-center gap-3">
-                <i class="fas fa-users text-blue-600 text-3xl"></i>
+            <div class="flex flex-col items-left text-left gap-3">
+                <i><img src="{{ asset('images/access-talents-icon.svg') }}" class="w-10 h-10 object-contain mb-2">
+            </i>
                 <p class="text-gray-800 text-sm font-medium leading-snug">Akses 9 Juta+ Talenta</p>
             </div>
-            <div class="flex flex-col items-center text-center gap-3">
-                 <i class="fas fa-comments text-blue-600 text-3xl"></i>
+            <div class="flex flex-col items-left text-left gap-3">
+                 <i><img src="{{ asset('images/chat-and-hire-icon.svg') }}" class="w-10 h-10 object-contain mb-2">
+            </i>
                 <p class="text-gray-800 text-sm font-medium leading-snug">Chat dan Rekrut Talenta Langsung</p>
             </div>
-            <div class="flex flex-col items-center text-center gap-3">
-                <i class="fas fa-magic text-blue-600 text-3xl"></i>
+            <div class="flex flex-col items-left text-left gap-3">
+                <i><img src="{{ asset('images/process-sparkling-icon.svg') }}" class="w-10 h-10 object-contain mb-2">
+            </i>
                 <p class="text-gray-800 text-sm font-medium leading-snug">Rekrutmen Cepat dengan Bantuan AI</p>
             </div>
         </div>
@@ -103,7 +106,31 @@
                 </form>
             </div>
         </div>
+    <!-- Floating QR Card -->
+    <div
+    class="fixed bottom-60 -right-3 bg-white rounded-xl shadow-lg p-5 w-30 flex flex-col items-center z-50"
+    >
+    <!-- QR Code -->
+    <img 
+        src="{{ asset('images/glints-web2-app-qr.png') }}" 
+        alt="Employer Web to App QR" 
+        class="w-18 h-18 object-contain mb-2"
+    >
 
+    <!-- Text -->
+    <p class="text-center text-gray-700 text-sm leading-tight">
+        Rekrut Cepat <br> dengan Glints App
+    </p>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a
+    href="#"
+    class="fixed bottom-22 right-3 bg-green-500 hover:bg-green-600 text-white 
+            w-15 h-15 flex items-center justify-center rounded-full shadow-lg z-50"
+    >
+    <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
     </div>
 </div>
 

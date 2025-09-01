@@ -44,13 +44,7 @@ class JobService
 
         $result = $this->repository->getByFilters($filters);
         
-        Log::debug('JobService getByCompanyAndStatus', [
-            'company_id' => $companyId,
-            'status' => $status,
-            'filters' => $filters,
-            'total_jobs' => $result->total(),
-            'current_page_count' => $result->count()
-        ]);
+
         
         return $result;
     }
@@ -64,12 +58,7 @@ class JobService
 
         $count = $this->repository->countByFilters($filters);
         
-        Log::debug('JobService countByCompanyAndStatus', [
-            'company_id' => $companyId,
-            'status' => $status,
-            'additional_filters' => $filters,
-            'count' => $count
-        ]);
+
         
         return $count;
     }
@@ -78,10 +67,7 @@ class JobService
     {
         $count = $this->repository->countByFilters(['company_id' => $companyId]);
         
-        Log::debug('JobService countByCompany', [
-            'company_id' => $companyId,
-            'count' => $count
-        ]);
+
         
         return $count;
     }
@@ -93,10 +79,7 @@ class JobService
             'is_active' => true
         ]);
         
-        Log::debug('JobService countActiveByCompany', [
-            'company_id' => $companyId,
-            'count' => $count
-        ]);
+
         
         return $count;
     }
