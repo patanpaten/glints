@@ -44,7 +44,8 @@ class JobRepository
     public function getByCompanyId($companyId)
     {
         return $this->model->where('company_id', $companyId)
-            ->with('company', 'jobCategory', 'applications')
+            ->with('company', 'jobCategory')
+            ->withCount('applications')
             ->get();
     }
 
@@ -254,12 +255,7 @@ class JobRepository
 
         $count = $query->count();
         
-        Log::debug('JobRepository countByFilters', [
-            'filters' => $filters,
-            'count' => $count,
-            'sql' => $query->toSql(),
-            'bindings' => $query->getBindings()
-        ]);
+
         
         return $count;
     }

@@ -98,16 +98,13 @@
       </a>
     </div>
   </div>
-
-
-
-  <!-- WhatsApp Floating Button -->
   <a
-    href="#"
-    class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg"
-  >
-    <i class="fab fa-whatsapp text-2xl"></i>
-  </a>
+  href="#"
+  class="fixed bottom-10 right-5 bg-green-500 hover:bg-green-600 text-white 
+         w-16 h-16 flex items-center justify-center rounded-full shadow-lg z-50"
+>
+  <i class="fab fa-whatsapp text-4xl"></i>
+</a>
 </section>
 
 
@@ -127,12 +124,13 @@
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Admin</span>
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Desain Grafis</span>
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Penulisan Konten</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Quality Assurance</span>
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Web Developer</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Human Resource (HRD)</span>
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">UI/UX Designer</span>
-          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Social Media Specialist</span>
-          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Project Manager</span>
-          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HR Specialist</span>
           <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Content Creator</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Product Manager</span>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Social Media Specialist</span>
         </div>
       </div>
 
@@ -361,19 +359,19 @@
     </div>
 
     <!-- City Links -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-lg font-medium">
-      <a href="/id/job-location/indonesia/dki-jakarta" target="_blank" class="text-blue-600 hover:underline">Jakarta</a>
-      <a href="/id/job-location/indonesia/banten/tangerang" target="_blank" class="text-blue-600 hover:underline">Tangerang</a>
-      <a href="/id/job-location/indonesia/jawa-tengah/semarang" target="_blank" class="text-blue-600 hover:underline">Semarang</a>
-      <a href="/id/job-location/indonesia/jawa-barat/depok" target="_blank" class="text-blue-600 hover:underline">Depok</a>
-      <a href="/id/job-location/indonesia/jawa-barat/bandung" target="_blank" class="text-blue-600 hover:underline">Bandung</a>
-      <a href="/id/job-location/indonesia/jawa-timur/surabaya" target="_blank" class="text-blue-600 hover:underline">Surabaya</a>
-      <a href="/id/job-location/indonesia/jawa-barat/bogor" target="_blank" class="text-blue-600 hover:underline">Bogor</a>
-      <a href="/id/job-location/indonesia/sumatra-utara/medan" target="_blank" class="text-blue-600 hover:underline">Medan</a>
-      <a href="/id/job-location/indonesia/di-yogyakarta-jogja/yogyakarta-jogja" target="_blank" class="text-blue-600 hover:underline">Yogyakarta</a>
-      <a href="/id/job-location/indonesia/jawa-barat/bekasi" target="_blank" class="text-blue-600 hover:underline">Bekasi</a>
-      <a href="/id/job-location/indonesia/jawa-timur/malang" target="_blank" class="text-blue-600 hover:underline">Malang</a>
-      <a href="/id/job-location/indonesia/sulawesi-selatan/makassar" target="_blank" class="text-blue-600 hover:underline">Makassar</a>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-sm font-medium">
+      <a href="/id/job-location/indonesia/dki-jakarta" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Jakarta</a>
+      <a href="/id/job-location/indonesia/banten/tangerang" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Tangerang</a>
+      <a href="/id/job-location/indonesia/jawa-tengah/semarang" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Semarang</a>
+      <a href="/id/job-location/indonesia/jawa-barat/depok" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Depok</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bandung" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Bandung</a>
+      <a href="/id/job-location/indonesia/jawa-timur/surabaya" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Surabaya</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bogor" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Bogor</a>
+      <a href="/id/job-location/indonesia/sumatra-utara/medan" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Medan</a>
+      <a href="/id/job-location/indonesia/di-yogyakarta-jogja/yogyakarta-jogja" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Yogyakarta</a>
+      <a href="/id/job-location/indonesia/jawa-barat/bekasi" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Bekasi</a>
+      <a href="/id/job-location/indonesia/jawa-timur/malang" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Malang</a>
+      <a href="/id/job-location/indonesia/sulawesi-selatan/makassar" target="_blank" class="text-blue-500 hover:text-blue-700 underline">Makassar</a>
     </div>
 
   </div>
@@ -422,56 +420,206 @@
     </div>
 
     <div id="posisi" class="tab-content flex flex-wrap gap-x-2 gap-y-2 text-sm">
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Penulis
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Rekruter
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Customer Service
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Akuntan
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Manager Sales
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Sales Executive
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Account Manager
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker UI/UX Designer
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Editor Video &amp; Film
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Digital Marketing Manager
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Frontend Developer
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Backend Developer
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Android Developer
   </a>
-  <a href="#" class="text-blue-600 hover:underline after:content-[','] last:after:content-['']">
+  <a href="#" class="underline after:content-[','] last:after:content-['']">
     Loker Desainer Grafis &amp; Brand
   </a>
-  <a href="#" class="text-blue-600 hover:underline">Loker Manager Perkantoran</a>
+  <a href="#" class="underline">Loker Manager Perkantoran</a>
 </div>
 
 
     <!-- Tab content lain (kosong dulu, bisa diisi sesuai kebutuhan) -->
-    <div id="kategori" class="tab-content hidden">Kategori Pekerjaan</div>
-    <div id="lokasi" class="tab-content hidden">Lokasi</div>
-    <div id="kata-kunci" class="tab-content hidden">Kata Kunci</div>
+    <div id="kategori" class="tab-content hidden gap-x-2 gap-y-2 text-sm">
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+    Loker Human Resources (HR)
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Admin
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Supply Chain & Logistik
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Hotel, Restaurant & Travel
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Marketing
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Legal, Consulting & Translation
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Finance
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Legal Services
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Kesehatan
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Konsultan
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Information Technology
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Desain
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Product Management
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Software Development
+    </a>
+    <a href="#" class="underline">Loker Web Development</a>
+    </div>
+
+    <div id="lokasi" class="tab-content hidden gap-x-2 gap-y-2 text-sm">
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+    Loker Jakarta
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Jakarta Selatan
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Jakarta Pusat
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Jakarta Barat
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Jakarta Utara
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Jakarta Timur
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Bandung
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Karawang
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Surabaya
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Medan
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Palembang
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Tangerang
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Bogor
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Pekanbaru
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Semarang
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Batam
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Makassar
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Sleman
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Malang
+    </a>
+    <a href="#" class="underline">Loker Sidoarjo</a>
+
+    </div>
+    <div id="kata-kunci" class="tab-content hidden gap-x-2 gap-y-2 text-sm">
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Project Based Online
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Work From Home Online
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Fresh Graduate
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        WFH/Remote
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker BUMN
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Supir Pribadi
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Asisten Virtual
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Copywriter
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Guru Online
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Ilustrator
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Wedding Organizer
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Data Entry
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Lulusan SMA
+    </a>
+    <a href="#" class="underline after:content-[','] last:after:content-['']">
+        Loker Freelance Writer
+    </a>
+    <a href="#" class="underline">Loker Model</a>
+
+    </div>
   </div>
 </section>
 

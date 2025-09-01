@@ -174,11 +174,6 @@ class ApplicationService extends BaseService
             ->where('job_listings.company_id', $companyId)
             ->count();
         
-        Log::debug('ApplicationService countByCompany', [
-            'company_id' => $companyId,
-            'total_applications' => $count
-        ]);
-        
         return $count;
     }
 }
