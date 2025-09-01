@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\BaseRepository;
+use App\Repositories\ExperienceRepository;
 use App\Models\Experience;
 
 class ExperienceService extends BaseService
@@ -10,9 +10,9 @@ class ExperienceService extends BaseService
     /**
      * ExperienceService constructor.
      *
-     * @param BaseRepository $repository
+     * @param ExperienceRepository $repository
      */
-    public function __construct(BaseRepository $repository)
+    public function __construct(ExperienceRepository $repository)
     {
         parent::__construct($repository);
     }
@@ -25,15 +25,7 @@ class ExperienceService extends BaseService
      */
     public function getByJobSeekerId(int $jobSeekerId)
     {
-        return Experience::where('job_seeker_id', $jobSeekerId)
-            ->orderBy('is_current', 'desc')
-            ->orderBy('end_date', 'desc')
-            ->orderBy('start_date', 'desc')
-            ->get();
-            ->orderBy('is_current', 'desc')
-            ->orderBy('end_date', 'desc')
-            ->orderBy('start_date', 'desc')
-            ->get();
+        return $this->repository->getByJobSeekerId($jobSeekerId);
     }
 
     /**

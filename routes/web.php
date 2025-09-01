@@ -172,7 +172,7 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
 // ==========================
 // Job Seeker
 // ==========================
-Route::prefix('jobseeker')->name('jobseeker.')->middleware('auth')->group(function () {
+Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-seeker'])->group(function () {
     Route::get('/dashboard', [JobSeekerController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [JobSeekerController::class, 'showProfile'])->name('profile.show');
     Route::get('/profile/create', [JobSeekerController::class, 'createProfile'])->name('profile.create');

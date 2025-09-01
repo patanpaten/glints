@@ -37,7 +37,7 @@ class CheckRole
         $role = strtolower($role);
 
         // Get role from user's role relationship
-        if (!$user->role || strtolower($user->role->name) !== $role) {
+        if (!$user->role || strtolower($user->role->slug) !== $role) {
             // Redirect based on user's actual role
             if ($user->role) {
                 switch (strtolower($user->role->name)) {
@@ -45,7 +45,7 @@ class CheckRole
                         return redirect()->route('admin.dashboard');
                     case 'company':
                         return redirect()->route('company.dashboard');
-                    case 'job_seeker':
+                    case 'job seeker':
                         return redirect()->route('jobseeker.dashboard');
                     default:
                         return redirect()->route('home');

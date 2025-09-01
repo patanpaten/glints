@@ -40,7 +40,11 @@
         </div>
         
         <!-- Submit Button -->
-        <button type="submit" class="btn-submit">MASUK</button>
+        <div class="login-btn-container">
+            <button type="submit" class="login-btn" data-cy="submit_btn_login">
+                MASUK
+            </button>
+        </div>
         
         <!-- Divider -->
         <div class="divider"><span>ATAU</span></div>

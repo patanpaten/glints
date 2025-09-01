@@ -42,11 +42,19 @@ class JobSeekerService extends BaseService
             $data['profile_picture'] = $this->uploadProfilePicture($data['profile_picture']);
         }
 
+        return $this->repository->create($data);
+    }
+
+    /**
+     * Update job seeker with profile picture upload.
+     *
+     * @param int $jobSeekerId
+     * @param array $data
+     * @return JobSeeker
      */
     public function updateJobSeeker(int $jobSeekerId, array $data): JobSeeker
     {
         $jobSeeker = $this->repository->findById($jobSeekerId);
-     * Update job seeker with profile picture upload.
         // Handle profile picture upload if present
         if (isset($data['profile_picture']) && $data['profile_picture']) {
             // Delete old profile picture if exists
@@ -65,6 +73,18 @@ class JobSeekerService extends BaseService
      * @param $profilePicture
      * @return string
      */
+    private function uploadProfilePicture($profilePicture): string
+    {
+        return $profilePicture->store('profile_pictures', 'public');
+    }
+
+    /**
+     * Search job seekers by name.
+     *
+     * @param string $name
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function searchByName(string $name)
     {
         return $this->repository->searchByName($name);
     }
@@ -77,6 +97,18 @@ class JobSeekerService extends BaseService
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getBySkill(int $skillId, int $perPage = 15)
+    {
+        return $this->repository->getBySkill($skillId, $perPage);
+    }
+
+    /**
+     * Get job seekers by salary range.
+     *
+     * @param int $minSalary
+     * @param int $maxSalary
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getBySalaryRange(int $minSalary, int $maxSalary)
     {
         return $this->repository->getBySalaryRange($minSalary, $maxSalary);
     }

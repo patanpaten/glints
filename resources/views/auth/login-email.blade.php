@@ -259,11 +259,13 @@
                                name="email" 
                                id="login-form-email" 
                                class="textfield-input" 
-                               placeholder=" "
-                               value="">
+                               placeholder=" " 
+                               value="{{ old('email') }}">
                         <label class="textfield-label">Alamat email</label>
                     </div>
-                    <p class="validation-error" data-cy="login-error-message">Email wajib diisi</p>
+                    @error('email')
+                        <p class="validation-error show" data-cy="login-error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Password Field -->
@@ -274,11 +276,14 @@
                                name="password" 
                                id="login-form-password" 
                                class="textfield-input" 
-                               placeholder=" "
+                               placeholder=" " 
                                value="">
                         <label class="textfield-label">Kata sandi</label>
                         <span class="icon-container" onclick="togglePassword()" id="password-toggle">👁</span>
                     </div>
+                    @error('password')
+                        <p class="validation-error show">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Forgot Password -->

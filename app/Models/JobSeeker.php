@@ -18,13 +18,16 @@ class JobSeeker extends Model
         'last_name',
         'birth_date',
         'phone',
-        'birth_date',
-        'phone',
+        'address',
+        'city',
         'province',
         'postal_code',
         'profile_picture',
         'summary',
         'current_position',
+        'expected_salary',
+        'resume',
+        'is_profile_complete',
     ];
 
     protected $casts = [

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\BaseRepository;
+use App\Repositories\EducationRepository;
 use App\Models\Education;
 
 class EducationService extends BaseService
@@ -10,9 +10,9 @@ class EducationService extends BaseService
     /**
      * EducationService constructor.
      *
-     * @param BaseRepository $repository
+     * @param EducationRepository $repository
      */
-    public function __construct(BaseRepository $repository)
+    public function __construct(EducationRepository $repository)
     {
         parent::__construct($repository);
     }
@@ -25,15 +25,7 @@ class EducationService extends BaseService
      */
     public function getByJobSeekerId(int $jobSeekerId)
     {
-        return Education::where('job_seeker_id', $jobSeekerId)
-            ->orderBy('is_current', 'desc')
-            ->orderBy('end_date', 'desc')
-            ->orderBy('start_date', 'desc')
-            ->get();
-            ->orderBy('is_current', 'desc')
-            ->orderBy('end_date', 'desc')
-            ->orderBy('start_date', 'desc')
-            ->get();
+        return $this->repository->getByJobSeekerId($jobSeekerId);
     }
 
     /**

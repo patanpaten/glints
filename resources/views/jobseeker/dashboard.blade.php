@@ -31,19 +31,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('jobseeker.education.edit') }}">
+                            <a class="nav-link text-white" href="{{ route('jobseeker.education.create') }}">
                                 <i class="bi bi-mortarboard me-2"></i>
                                 Education
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('jobseeker.experience.edit') }}">
+                            <a class="nav-link text-white" href="{{ route('jobseeker.experience.create') }}">
                                 <i class="bi bi-briefcase me-2"></i>
                                 Experience
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('jobseeker.skills.edit') }}">
+                            <a class="nav-link text-white" href="{{ route('jobseeker.skills.create') }}">
                                 <i class="bi bi-tools me-2"></i>
                                 Skills
                             </a>
@@ -238,7 +238,7 @@
                                     if (Auth::user()->jobSeeker && Auth::user()->jobSeeker->skills->count() > 0) {
                                         $profileCompletion += 20;
                                     } else {
-                                        $steps[] = ['route' => 'jobseeker.skills.edit', 'text' => 'Add Skills'];
+                                        $steps[] = ['route' => 'jobseeker.skills.create', 'text' => 'Add Skills'];
                                     }
                                     
                                     if (Auth::user()->jobSeeker && Auth::user()->jobSeeker->resume) {

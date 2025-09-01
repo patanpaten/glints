@@ -31,12 +31,12 @@ class RedirectIfAuthenticated
                 // Redirect based on user role for default guard
                 $user = Auth::guard($guard)->user();
                 if ($user && isset($user->role)) {
-                    switch (strtolower($user->role->name)) {
+                    switch (strtolower($user->role->slug)) {
                         case 'admin':
                             return redirect()->route('admin.dashboard');
                         case 'company':
                             return redirect()->route('company.dashboard');
-                        case 'job_seeker':
+                        case 'job-seeker':
                             return redirect()->route('jobseeker.dashboard');
                         default:
                             return redirect(RouteServiceProvider::HOME);

@@ -53,22 +53,39 @@ class JobSeekerController extends Controller
     {
         $jobSeeker = $this->jobSeekerService->getByUserId(Auth::id());
         
-        if (!$jobSeeker) {
-            return redirect()->route('jobseeker.profile.create')
-                ->with('error', 'Please complete your profile first.');
+        // Initialize default values for users without profile
+        $recentApplications = collect();
+        $totalApplications = 0;
+        $pendingApplications = 0;
+        $shortlistedApplications = 0;
+        $savedJobs = 0;
+        $recommendedJobs = collect();
+        
+        // If user has a profile, get their application data
+        if ($jobSeeker) {
+            $recentApplications = $this->applicationService->getByJobSeekerId($jobSeeker->id)->take(5);
+            $totalApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->count();
+            $pendingApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
+            $shortlistedApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
+            
+            // Get saved jobs count (assuming there's a saved_jobs table)
+            $savedJobs = \DB::table('saved_jobs')->where('job_seeker_id', $jobSeeker->id)->count();
+            
+            // Get recommended jobs (simple implementation - latest 5 jobs)
+            $recommendedJobs = \App\Models\Job::with('company')->latest()->take(5)->get();
+        } else {
+            // For users without profile, still show some recommended jobs
+            $recommendedJobs = \App\Models\Job::with('company')->latest()->take(5)->get();
         }
-
-        $recentApplications = $this->applicationService->getByJobSeekerId($jobSeeker->id)->take(5);
-        $totalApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->count();
-        $pendingApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
-        $shortlistedApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
 
         return view('jobseeker.dashboard', compact(
             'jobSeeker',
             'recentApplications',
             'totalApplications',
             'pendingApplications',
-            'shortlistedApplications'
+            'shortlistedApplications',
+            'savedJobs',
+            'recommendedJobs'
         ));
     }
 
@@ -103,14 +120,16 @@ class JobSeekerController extends Controller
             'last_name' => 'required|string|max:100',
             'birth_date' => 'required|date|before:today',
             'phone' => 'required|string|max:20',
-            'birth_date' => 'required|date|before:today',
-            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
             'province' => 'required|string|max:100',
             'postal_code' => 'required|string|max:20',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'summary' => 'required|string',
             'current_position' => 'nullable|string|max:255',
-            'current_position' => 'nullable|string|max:255',
+            'expected_salary' => 'nullable|string|max:50',
+        ]);
+
         $validated['user_id'] = Auth::id();
 
         $jobSeeker = $this->jobSeekerService->createJobSeeker($validated);

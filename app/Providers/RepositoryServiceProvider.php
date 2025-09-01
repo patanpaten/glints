@@ -11,6 +11,8 @@ use App\Repositories\JobSeekerRepository;
 use App\Repositories\ApplicationRepository;
 use App\Repositories\SkillRepository;
 use App\Repositories\JobCategoryRepository;
+use App\Repositories\EducationRepository;
+use App\Repositories\ExperienceRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ApplicationRepository::class, ApplicationRepository::class);
         $this->app->bind(SkillRepository::class, SkillRepository::class);
         $this->app->bind(JobCategoryRepository::class, JobCategoryRepository::class);
+        $this->app->bind(EducationRepository::class, EducationRepository::class);
+        $this->app->bind(ExperienceRepository::class, ExperienceRepository::class);
     }
 
     /**
