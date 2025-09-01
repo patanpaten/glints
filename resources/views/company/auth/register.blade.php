@@ -28,17 +28,16 @@
 
             <div class="mt-8 space-y-4">
                 <!-- Google -->
-                <button class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
-                    <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5" alt="Google">
+                <a href="#" 
+                class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
+                    <img src="{{ asset('images/google.png') }}" class="w-5 h-5" alt="Google">
                     Daftar dengan Google
-                </button>
+                </a>
 
                 <!-- Email -->
                 <a href="{{ route('company.register.email.form') }}" 
-                class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M4 4h16v16H4z" />
-                    </svg>
+                class="flex items-center justify-center gap-2 w-full py-3 border rounded-full  hover:bg-gray-50">
+                    <img src="{{ asset('images/email.jpg') }}" class="w-7 h-7 -ml-4" alt="Email">
                     Daftar dengan Email
                 </a>
 
@@ -52,10 +51,10 @@
 
             <div class="flex justify-center gap-6">
                 <button class="border rounded-full p-3 hover:bg-gray-50">
-                    <img src="https://www.svgrepo.com/show/448234/linkedin.svg" class="w-5 h-5" alt="LinkedIn">
+                    <img src="{{ asset('images/linkedin.png') }}" class="w-5 h-5" alt="LinkedIn">
                 </button>
                 <button class="border rounded-full p-3 hover:bg-gray-50">
-                    <img src="https://www.svgrepo.com/show/448224/facebook.svg" class="w-5 h-5" alt="Facebook">
+                    <img src="{{ asset('images/facebook.png') }}" class="w-5 h-5" alt="Facebook">
                 </button>
             </div>
 

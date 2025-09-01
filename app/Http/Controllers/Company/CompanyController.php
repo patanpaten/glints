@@ -140,38 +140,35 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name'         => 'required|string|max:255',
             'logo'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description'  => 'required|string',
+            'brand'        => 'required|string|max:255',
             'address'      => 'required|string',
             'city'         => 'required|string|max:100',
             'province'     => 'required|string|max:100',
-            'postal_code'  => 'required|string|max:20',
-            'phone'        => 'required|string|max:20',
-            'website'      => 'nullable|url|max:255',
             'industry'     => 'required|string|max:100',
             'company_size' => 'required|string|max:50',
         ]);
 
-        // Cek apakah perusahaan sudah memiliki nomor WhatsApp sebelumnya
-        $hadWhatsappBefore = !empty($company->phone);
+        // Prepare data for update
+        $updateData = [
+            'name'         => $validated['name'],
+            'description'  => $validated['brand'], // brand name disimpan di field description
+            'address'      => $validated['address'],
+            'city'         => $validated['city'],
+            'province'     => $validated['province'],
+            'industry'     => $validated['industry'],
+            'company_size' => $validated['company_size'],
+        ];
 
         // Handle logo upload - pass the file object to service
         if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo');
+            $updateData['logo'] = $request->file('logo');
         }
 
-        $this->companyService->updateCompany($company->id, $validated);
+        $this->companyService->updateCompany($company->id, $updateData);
 
-        // Logika redirect berdasarkan kondisi nomor WhatsApp
-        // Jika sudah punya nomor WA sebelumnya (update dari dashboard) -> redirect ke dashboard
-        if ($hadWhatsappBefore) {
-            return redirect()->route('company.dashboard')
-                ->with('success', 'Company profile updated successfully!');
-        } else {
-            // Jika belum punya nomor WA sebelumnya (pertama kali daftar) -> redirect ke dashboard langsung
-            // karena nomor WA sudah diisi di form edit
-            return redirect()->route('company.dashboard')
-                ->with('success', 'Company profile updated successfully!');
-        }
+        // Redirect ke halaman WhatsApp setelah berhasil simpan
+        return redirect()->route('company.whatsapp.form')
+            ->with('success', 'Company profile updated successfully!');
     }
 
     /**
@@ -254,4 +251,80 @@ class CompanyController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Edit profil perusahaan (edit2) - akses dari dashboard
+     */
+    public function edit2()
+    {
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
+        }
+
+        return view('company.profile.edit2', compact('company'));
+    }
+
+    /**
+     * Update profil perusahaan (update2) - redirect ke dashboard
+     */
+    public function update2(Request $request)
+    {
+        $company = Auth::guard('company')->user();
+
+        if (!$company) {
+            return redirect()->route('company.register')
+                ->with('error', 'Please register first.');
+        }
+
+        $validated = $request->validate([
+            'short_description' => 'required|string|max:500',
+            'office_address' => 'required|string|max:1000',
+            'industry' => 'required|string|max:100',
+            'website' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'description' => 'required|string|max:2000',
+            'culture' => 'nullable|string|max:2000',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'banner' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+        ]);
+
+        $updateData = [
+            'short_description' => $validated['short_description'],
+            'office_address' => $validated['office_address'],
+            'industry' => $validated['industry'],
+            'website' => $validated['website'],
+            'instagram' => $validated['instagram'],
+            'facebook' => $validated['facebook'],
+            'linkedin' => $validated['linkedin'],
+            'twitter' => $validated['twitter'],
+            'description' => $validated['description'],
+            'culture' => $validated['culture'],
+        ];
+
+        // Handle file uploads
+        if ($request->hasFile('logo')) {
+            $updateData['logo'] = $request->file('logo');
+        }
+        
+        if ($request->hasFile('banner')) {
+            $updateData['banner'] = $request->file('banner');
+        }
+        
+        if ($request->hasFile('photo')) {
+            $updateData['photo'] = $request->file('photo');
+        }
+
+        $this->companyService->updateCompany($company->id, $updateData);
+
+        return redirect()->route('company.dashboard')
+            ->with('success', 'Profil perusahaan berhasil diperbarui!');
+    }
+    
 }
