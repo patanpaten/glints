@@ -14,6 +14,16 @@ class JobService
         $this->repository = $repository;
     }
 
+    /**
+     * Get repository instance
+     *
+     * @return JobRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
     public function findById($id)
     {
         return $this->repository->find($id);
