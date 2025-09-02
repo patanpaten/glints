@@ -214,6 +214,33 @@
     object-fit: contain;
     cursor: pointer;
 }
+.login-btn-container {
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 25px;
+        background-color: rgb(230, 175, 24);
+        box-shadow: 5px 5px 0 rgb(204, 12, 12);
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .login-btn:hover {
+        background-color: rgb(230, 175, 24);
+        box-shadow: 5px 5px 0 rgb(0, 0, 0);
+    }
+
+    .login-btn span {
+        font-weight: 600;
+    }
 </style>
 
 <script>

@@ -276,4 +276,46 @@ class JobRepository
             ->take($limit)
             ->get();
     }
+
+    /**
+     * Create a new job
+     *
+     * @param array $data
+     * @return \App\Models\Job
+     */
+    public function create(array $data)
+    {
+        return $this->model->create($data);
+    }
+
+    /**
+     * Update a job
+     *
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public function update($id, array $data)
+    {
+        $job = $this->find($id);
+        if ($job) {
+            return $job->update($data);
+        }
+        return false;
+    }
+
+    /**
+     * Delete a job
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $job = $this->find($id);
+        if ($job) {
+            return $job->delete();
+        }
+        return false;
+    }
 }

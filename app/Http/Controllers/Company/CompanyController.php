@@ -212,8 +212,8 @@ class CompanyController extends Controller
             'phone' => $validated['phone'],
         ]);
 
-        return redirect()->route('company.dashboard')
-            ->with('success', 'Nomor WhatsApp berhasil disimpan!');
+        return redirect()->route('company.jobs.create')
+            ->with('success', 'Nomor WhatsApp berhasil disimpan! Silakan buat lowongan kerja pertama Anda.');
     }
 
     /**
