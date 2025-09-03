@@ -8,6 +8,8 @@ use App\Services\EducationService;
 use App\Services\ExperienceService;
 use App\Services\SkillService;
 use App\Services\ApplicationService;
+use App\Services\CompanyService;
+use App\Services\JobService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +20,8 @@ class JobSeekerController extends Controller
     protected $experienceService;
     protected $skillService;
     protected $applicationService;
+    protected $companyService;
+    protected $jobService;
 
     /**
      * JobSeekerController constructor.
@@ -27,19 +31,25 @@ class JobSeekerController extends Controller
      * @param ExperienceService $experienceService
      * @param SkillService $skillService
      * @param ApplicationService $applicationService
+     * @param CompanyService $companyService
+     * @param JobService $jobService
      */
     public function __construct(
         JobSeekerService $jobSeekerService,
         EducationService $educationService,
         ExperienceService $experienceService,
         SkillService $skillService,
-        ApplicationService $applicationService
+        ApplicationService $applicationService,
+        CompanyService $companyService,
+        JobService $jobService
     ) {
         $this->jobSeekerService = $jobSeekerService;
         $this->educationService = $educationService;
         $this->experienceService = $experienceService;
         $this->skillService = $skillService;
         $this->applicationService = $applicationService;
+        $this->companyService = $companyService;
+        $this->jobService = $jobService;
         $this->middleware('auth');
         $this->middleware('role:job-seeker');
     }
@@ -208,5 +218,67 @@ class JobSeekerController extends Controller
         $skills = $this->skillService->getByJobSeekerId($jobSeeker->id);
 
         return view('jobseeker.profile.show', compact('jobSeeker', 'educations', 'experiences', 'skills'));
+    }
+
+    /**
+     * Display companies list for job seekers.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function companies(Request $request)
+    {
+        $companies = $this->companyService->getAll($request->all());
+        
+        return view('jobseeker.companies.index', compact('companies'));
+    }
+
+    /**
+     * Display company detail for job seekers.
+     *
+     * @param string $slug
+     * @return \Illuminate\View\View
+     */
+    public function companyDetail($slug)
+    {
+        $company = $this->companyService->getBySlug($slug);
+        
+        if (!$company) {
+            abort(404);
+        }
+        
+        $jobs = $this->jobService->getByCompanyId($company->id);
+        
+        return view('jobseeker.companies.show', compact('company', 'jobs'));
+    }
+
+    /**
+     * Display jobs list for job seekers.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function jobs(Request $request)
+    {
+        $jobs = $this->jobService->getJobs($request->all());
+        
+        return view('jobseeker.jobs.index', compact('jobs'));
+    }
+
+    /**
+     * Display job detail for job seekers.
+     *
+     * @param \App\Models\Job $job
+     * @return \Illuminate\View\View
+     */
+    public function jobDetail($job)
+    {
+        $job = $this->jobService->findBySlug($job);
+        
+        if (!$job) {
+            abort(404);
+        }
+        
+        return view('jobseeker.jobs.show', compact('job'));
     }
 }

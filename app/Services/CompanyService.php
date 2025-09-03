@@ -134,4 +134,26 @@ class CompanyService extends BaseService
     {
         return $this->repository->getRecentCompanies($limit);
     }
+
+    /**
+     * Get all companies with filters.
+     *
+     * @param array $filters
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getAll(array $filters = [])
+    {
+        return $this->repository->getAll($filters);
+    }
+
+    /**
+     * Get company by slug.
+     *
+     * @param string $slug
+     * @return Company|null
+     */
+    public function getBySlug(string $slug): ?Company
+    {
+        return $this->repository->getBySlug($slug);
+    }
 }

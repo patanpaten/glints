@@ -87,4 +87,63 @@ class CompanyRepository extends BaseRepository
             ->limit($limit)
             ->get();
     }
+
+    /**
+     * Get all companies with filters.
+     *
+     * @param array $filters
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getAll(array $filters = [])
+    {
+        $query = $this->model->query();
+
+        // Apply search filter
+        if (!empty($filters['search'])) {
+            $query->where('name', 'like', '%' . $filters['search'] . '%');
+        }
+
+        // Apply location filter
+        if (!empty($filters['location'])) {
+            $query->where(function($q) use ($filters) {
+                $q->where('city', 'like', '%' . $filters['location'] . '%')
+                  ->orWhere('province', 'like', '%' . $filters['location'] . '%');
+            });
+        }
+
+        // Apply industry filter
+        if (!empty($filters['industry'])) {
+            $query->where('industry', $filters['industry']);
+        }
+
+        // Apply size filter
+        if (!empty($filters['size'])) {
+            switch ($filters['size']) {
+                case 'startup':
+                    $query->where('employee_count', '<=', 50);
+                    break;
+                case 'medium':
+                    $query->whereBetween('employee_count', [51, 200]);
+                    break;
+                case 'large':
+                    $query->where('employee_count', '>', 200);
+                    break;
+            }
+        }
+
+        return $query->withCount('jobs')
+                    ->orderBy('name')
+                    ->paginate(12);
+    }
+
+    /**
+     * Get company by slug.
+     *
+     * @param string $slug
+     * @return Company|null
+     */
+    public function getBySlug(string $slug): ?Company
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
 }

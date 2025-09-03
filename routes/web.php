@@ -192,6 +192,14 @@ Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-se
     Route::get('/saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs', [SavedJobController::class, 'save'])->name('saved-jobs.save');
     Route::delete('/saved-jobs/{job}', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');
+    
+    // Jobs routes for jobseeker
+    Route::get('/jobs', [JobSeekerController::class, 'jobs'])->name('jobs');
+    Route::get('/jobs/{job}', [JobSeekerController::class, 'jobDetail'])->name('jobs.show');
+    
+    // Companies routes for jobseeker
+    Route::get('/companies', [JobSeekerController::class, 'companies'])->name('companies');
+    Route::get('/companies/{slug}', [JobSeekerController::class, 'companyDetail'])->name('companies.show');
 });
 
 // ==========================

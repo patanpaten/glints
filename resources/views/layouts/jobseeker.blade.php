@@ -408,19 +408,19 @@
             
             <!-- Logo -->
             <div class="flex items-center mr-8">
-                <a href="{{ route('home') }}" class="flex-shrink-0 ml-2">
+                <a href="{{ route('jobseeker.dashboard') }}" class="flex-shrink-0 ml-2">
                 <img src="{{ asset('images/logohome.svg') }}" alt="Glints Logo" class="h-15 w-auto">
                 </a>
             </div>
 
             <!-- Menu Desktop -->
             <nav class="hidden lg:flex items-center space-x-6 mr-auto">
-                <a href="{{ route('jobs.index') }}" 
-                class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobs.index') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+                <a href="{{ route('jobseeker.jobs') }}" 
+                class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobseeker.jobs') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
                 Lowongan Kerja
                 </a>
-                <a href="{{ route('companies.index') }}" 
-                class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('companies.index') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+                <a href="{{ route('jobseeker.companies') }}" 
+                class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobseeker.companies') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
                 Perusahaan
                 </a>
                 <a href="{{ route('blog') }}" target="_blank" rel="noopener noreferrer"
@@ -487,13 +487,6 @@
                         </div>
                     </div>
                 @endguest
-
-                <!-- Untuk Perusahaan -->
-                <a href="{{ route('company.register') }}"
-                class="hidden lg:flex items-center border border-[#0277bd] text-[#0277bd] hover:bg-[#0277bd] hover:text-white px-3 py-1.5 text-xs font-semibold tracking-wide transition">
-                Untuk Perusahaan
-                <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
-                </a>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -534,7 +527,7 @@
                     <a href="{{ route('register') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                         DAFTAR
                     </a>
-                @else
+                    @else
                     <!-- User Mobile Menu -->
                     <div class="px-2 py-2 text-white font-semibold">
                         <i class="fas fa-user mr-2"></i>{{ Auth::user()->name }}
@@ -558,10 +551,10 @@
                 <hr class="border-white/40">
                 
                 <!-- Menu Utama -->
-                <a href="{{ route('jobs.index') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                <a href="{{ route('jobseeker.jobs') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                     LOWONGAN KERJA
                 </a> 
-                <a href="{{ route('companies.index') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                <a href="{{ route('jobseeker.companies') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                     PERUSAHAAN
                 </a> 
                 <a href="{{ route('blog') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
