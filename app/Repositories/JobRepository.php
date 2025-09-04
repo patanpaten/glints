@@ -71,7 +71,11 @@ class JobRepository
         
         // Filter status (for admin/company dashboard)
         if (!empty($filters['status']) && $filters['status'] !== 'all') {
-            $query->where('status', $filters['status']);
+            if ($filters['status'] === 'active') {
+                $query->where('is_active', true);
+            } elseif ($filters['status'] === 'inactive') {
+                $query->where('is_active', false);
+            }
         }
 
         // Filter search (judul / deskripsi)
@@ -182,7 +186,11 @@ class JobRepository
         
         // Filter status (for admin/company dashboard)
         if (!empty($filters['status']) && $filters['status'] !== 'all') {
-            $query->where('status', $filters['status']);
+            if ($filters['status'] === 'active') {
+                $query->where('is_active', true);
+            } elseif ($filters['status'] === 'inactive') {
+                $query->where('is_active', false);
+            }
         }
 
         // Filter search (judul / deskripsi)
@@ -260,14 +268,7 @@ class JobRepository
         return $count;
     }
 
-    public function getFeaturedJobs($limit = 8)
-    {
-        return $this->model
-            ->where('is_featured', true)
-            ->latest()
-            ->take($limit)
-            ->get();
-    }
+
 
     public function getLatestJobs($limit = 10)
     {

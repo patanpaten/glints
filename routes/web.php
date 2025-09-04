@@ -126,10 +126,19 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
     Route::post('/logo/upload', [CompanyController::class, 'uploadLogo'])->name('logo.upload');
 
     Route::get('/profile', [CompanyController::class, 'edit'])->name('profile');
+    Route::get('/profile/edit', [CompanyController::class, 'edit'])->name('profile.edit');
 
 
     Route::get('/company/{id}/edit2', [CompanyController::class, 'edit2'])->name('company.edit2');
     Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
+
+    // Step 2 - Pertanyaan Skrining
+    Route::get('/jobs/{job}/screening', [CompanyJobController::class, 'screening'])
+        ->name('jobs.screening');
+    Route::post('/jobs/{job}/screening', [CompanyJobController::class, 'storeScreening'])
+        ->name('jobs.screening.store');
+    Route::delete('/jobs/{job}/screening/{question}', [CompanyJobController::class, 'destroyScreening'])
+        ->name('jobs.screening.destroy');
 
 
     // Jobs Management
@@ -192,11 +201,11 @@ Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-se
     Route::get('/saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs', [SavedJobController::class, 'save'])->name('saved-jobs.save');
     Route::delete('/saved-jobs/{job}', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');
-    
+
     // Jobs routes for jobseeker
     Route::get('/jobs', [JobSeekerController::class, 'jobs'])->name('jobs');
     Route::get('/jobs/{job}', [JobSeekerController::class, 'jobDetail'])->name('jobs.show');
-    
+
     // Companies routes for jobseeker
     Route::get('/companies', [JobSeekerController::class, 'companies'])->name('companies');
     Route::get('/companies/{slug}', [JobSeekerController::class, 'companyDetail'])->name('companies.show');

@@ -94,10 +94,7 @@ class JobService
         return $count;
     }
 
-    public function getFeaturedJobs($limit = 8)
-    {
-        return $this->repository->getFeaturedJobs($limit);
-    }
+
 
     public function getLatestJobs($limit = 10)
     {

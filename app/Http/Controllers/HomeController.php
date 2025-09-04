@@ -37,7 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $featuredJobs = $this->jobService->getFeaturedJobs(8);
+        $featuredJobs = $this->jobService->getLatestJobs(8);
         $latestJobs = $this->jobService->getLatestJobs(10);
         $featuredCompanies = $this->companyService->getFeaturedCompanies(6);
         $popularCategories = $this->jobCategoryService->getPopularCategories(8);
