@@ -19,9 +19,9 @@
     @if (session('login_from') === 'modal' && ($errors->has('email') || $errors->has('password')))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var loginModal = document.getElementById('loginModal');
-                if (loginModal) {
-                    loginModal.style.display = 'flex';
+                var loginModalElement = document.getElementById('loginModal');
+                if (loginModalElement) {
+                    loginModalElement.style.display = 'flex';
                 }
             });
         </script>

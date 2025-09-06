@@ -3,187 +3,707 @@
 @section('title', 'Lowongan Kerja Terbaru di Indonesia | Glints')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="bg-white py-6 border-b border-gray-100">
+    <!-- Tab Navigation -->
+    <section class="bg-white border-b border-gray-100 sticky top-16 z-40">
         <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto">
-                <form action="{{ route('jobseeker.jobs') }}" method="GET" class="flex flex-col md:flex-row gap-3 items-stretch">
-
-                    <!-- Input Keyword -->
-                    <div class="flex-1">
-                        <div class="relative flex items-center border border-gray-300 rounded-lg bg-white px-11 py-2">
-                            <!-- Input -->
-                            <input type="text" id="keyword" name="keyword" value="{{ request('keyword') }}"
-                                placeholder="Cari Nama Pekerjaan, Skill, dan Perusahaan"
-                                aria-label="Cari Nama Pekerjaan, Skill, dan Perusahaan"
-                                class="flex-1 text-gray-900 text-sm focus:outline-none placeholder-gray-500">
-                            <!-- Icon Search -->
-                            <div class="absolute left-3 text-gray-500 pointer-events-none">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 100 100">
-                                    <path
-                                        d="M70 43c0-14.886-12.114-27-27-27S16 28.114 16 43s12.114 27 27 27 27-12.114 27-27zm30 49.308c0 4.206-3.486 7.692-7.692 7.692-2.044 0-4.027-.841-5.409-2.284L66.286 77.163c-7.031 4.868-15.445 7.452-23.978 7.452C18.93 84.615 0 65.685 0 42.308 0 18.93 18.93 0 42.308 0c23.377 0 42.307 18.93 42.307 42.308 0 8.533-2.584 16.947-7.452 23.978L97.776 86.9C99.16 88.281 100 90.264 100 92.308z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Input Location -->
-                    <div class="flex-1 md:w-64">
-                        <div class="relative flex items-center border border-gray-300 rounded-lg bg-white px-9 py-2">
-                            <!-- Input -->
-                            <input type="text" id="location" name="location"
-                                value="{{ request('location') ?? 'All Cities/Provinces' }}"
-                                placeholder="Tambahkan kota/provinsi" aria-label="Tambahkan kota/provinsi"
-                                class="flex-1 text-gray-900 text-sm focus:outline-none placeholder-gray-500">
-
-                            <!-- Start Icon -->
-                            <div class="absolute left-3 text-gray-500 pointer-events-none">
-                                <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 100 100">
-                                    <path
-                                        d="M24.491 10.268C31.485 3.423 39.893 0 49.714 0c9.822 0 18.23 3.423 25.224 10.268 6.994 6.845 10.49 15.104 10.49 24.777 0 7.738-2.976 17.038-8.928 27.901-5.952 10.864-11.905 19.792-17.857 26.786L49.714 100c-1.041-1.042-2.343-2.493-3.906-4.353-1.562-1.86-4.39-5.468-8.482-10.826-4.092-5.357-7.701-10.565-10.826-15.625-3.125-5.06-5.99-10.788-8.594-17.187C15.302 45.61 14 39.955 14 35.045c0-9.673 3.497-17.932 10.491-24.777zm16.072 33.705c2.53 2.381 5.58 3.572 9.151 3.572 3.572 0 6.585-1.228 9.04-3.683 2.456-2.456 3.684-5.395 3.684-8.817 0-3.423-1.228-6.362-3.684-8.817-2.455-2.456-5.468-3.683-9.04-3.683-3.571 0-6.585 1.227-9.04 3.683-2.455 2.455-3.683 5.394-3.683 8.817 0 3.422 1.19 6.398 3.571 8.928z" />
-                                </svg>
-                            </div>
-
-                            <!-- Clear Button -->
-                            @if (request('location'))
-                                <button type="button" onclick="clearLocation()"
-                                    class="absolute right-3 text-gray-400 hover:text-gray-600">
-                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 100 100">
+            <div class="max-w-7xl mx-auto">
+                <div
+                    class="TabsStyle__TabsContainer-sc-t1kk7p-0 fNRRdF horizontal-aries-tabs aries-tabs stylessc__JobTabList-sc-hzz5jk-0 iKiRnp">
+                    <div class="TabsStyle__TabsHeader-sc-t1kk7p-1 hQwlmT horizontal-tabs-header tabs-header bg-white">
+                        <ul class="horizontal-tabs-list tabs-list flex border-b border-gray-200" role="tablist">
+                            <li class="tab-FOR_YOU active horizontal-tab" role="tab" aria-selected="true"
+                                aria-controls="tab-item-FOR_YOU">
+                                <button type="button" data-tab="FOR_YOU"
+                                    class="flex items-center gap-2 px-4 py-3 text-blue-600 border-b-2 border-blue-600 font-medium hover:text-blue-700 transition-colors">
+                                    <!-- Icon -->
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 100 100">
                                         <path
-                                            d="M50 0C22.386 0 0 22.386 0 50s22.386 50 50 50 50-22.386 50-50S77.614 0 50 0zm25 68.75L68.75 75 50 56.25 31.25 75 25 68.75 43.75 50 25 31.25 31.25 25 50 43.75 68.75 25 75 31.25 56.25 50 75 68.75z" />
+                                            d="M65.02 83.54v3.812c0 3.035-2.228 5.559-5.128 5.989l-.94 3.464A4.311 4.311 0 0 1 54.79 100h-9.318a4.311 4.311 0 0 1-4.162-3.195l-.913-3.464a6.075 6.075 0 0 1-5.156-6.015v-3.813a3.667 3.667 0 0 1 3.679-3.68h22.422a3.707 3.707 0 0 1 3.679 3.706zm17.267-51.397a31.988 31.988 0 0 1-9.023 22.315 29.482 29.482 0 0 0-7.894 16.004 5.316 5.316 0 0 1-5.263 4.485H40.155c-2.604 0-4.86-1.88-5.236-4.458-.94-5.988-3.706-11.68-7.948-16.058-5.478-5.693-8.889-13.426-8.97-21.938A32.056 32.056 0 0 1 49.93 0c17.857-.134 32.357 14.312 32.357 32.142zM53.769 12.675a3.627 3.627 0 0 0-3.625-3.625c-12.781 0-23.2 10.392-23.2 23.2a3.627 3.627 0 0 0 3.625 3.626 3.627 3.627 0 0 0 3.625-3.625c0-8.808 7.17-15.95 15.95-15.95a3.61 3.61 0 0 0 3.626-3.626zM15.453 37.984a2.766 2.766 0 0 1-2.778 2.777H2.942a2.78 2.78 0 0 1-2.777-2.777 2.78 2.78 0 0 1 2.777-2.778h9.733a2.78 2.78 0 0 1 2.778 2.778zm82.222-2.769a2.78 2.78 0 0 1 2.778 2.778 2.78 2.78 0 0 1-2.778 2.778h-9.733a2.78 2.78 0 0 1-2.777-2.778 2.78 2.78 0 0 1 2.777-2.778h9.733zM21.11 61.111a2.745 2.745 0 0 1 3.91 0 2.77 2.77 0 0 1 0 3.93l-6.893 6.893a2.774 2.774 0 0 1-1.955.803 2.77 2.77 0 0 1-1.955-4.733l6.893-6.893zm64.12-45.432c-.72 0-1.42-.267-1.976-.802a2.77 2.77 0 0 1 0-3.93l6.893-6.894a2.77 2.77 0 0 1 3.93 0 2.77 2.77 0 0 1 0 3.93l-6.893 6.894a2.774 2.774 0 0 1-1.955.802zm-74.12-.823L4.198 7.963a2.77 2.77 0 0 1 0-3.93 2.77 2.77 0 0 1 3.93 0l6.893 6.893a2.77 2.77 0 0 1-1.955 4.732c-.7 0-1.42-.267-1.955-.802zm67.074 46.255l6.873 6.893a2.77 2.77 0 0 1-1.955 4.733c-.7 0-1.42-.268-1.955-.803l-6.893-6.893a2.77 2.77 0 0 1 0-3.93 2.77 2.77 0 0 1 3.93 0z">
+                                        </path>
                                     </svg>
+                                    <span>For You</span>
                                 </button>
-                            @endif
-                        </div>
+                            </li>
+                            <li class="tab-EXPLORE horizontal-tab" role="tab" aria-selected="false"
+                                aria-controls="tab-item-EXPLORE">
+                                <button type="button" data-tab="EXPLORE"
+                                    class="flex items-center gap-2 px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 100 100">
+                                        <path
+                                            d="M45.982 46.205c1.19-1.19 2.53-1.785 4.018-1.785s2.79.558 3.906 1.674C55.022 47.21 55.58 48.512 55.58 50s-.558 2.79-1.674 3.906C52.79 55.022 51.488 55.58 50 55.58s-2.79-.558-3.906-1.674C44.978 52.79 44.42 51.488 44.42 50s.52-2.753 1.562-3.795zm-31.25-31.473C24.554 4.911 36.31 0 50 0c13.69 0 25.446 4.91 35.268 14.732C95.089 24.554 100 36.31 100 50c0 13.69-4.91 25.446-14.732 35.268C75.446 95.089 63.69 100 50 100c-13.69 0-25.446-4.91-35.268-14.732C4.911 75.446 0 63.69 0 50c0-13.69 4.91-25.446 14.732-35.268zm46.206 46.206L79.91 20.089 39.062 39.063 20.09 79.91l40.849-18.974z">
+                                        </path>
+                                    </svg>
+                                    <span>Eksplor</span>
+                                </button>
+                            </li>
+                            <li class="tab-BOOKMARKED horizontal-tab" role="tab" aria-selected="false"
+                                aria-controls="tab-item-BOOKMARKED">
+                                <button type="button" data-tab="BOOKMARKED"
+                                    class="flex items-center gap-2 px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 100 100">
+                                        <polygon points="12 0 12 100 50 71.6603516 88 100 88 0"></polygon>
+                                    </svg>
+                                    <span>Bookmark</span>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-
-                    <!-- Search Button -->
-                    <button type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 min-w-[120px]">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 100 100">
-                            <path
-                                d="M70 43c0-14.886-12.114-27-27-27S16 28.114 16 43s12.114 27 27 27 27-12.114 27-27zm30 49.308c0 4.206-3.486 7.692-7.692 7.692-2.044 0-4.027-.841-5.409-2.284L66.286 77.163c-7.031 4.868-15.445 7.452-23.978 7.452C18.93 84.615 0 65.685 0 42.308 0 18.93 18.93 0 42.308 0c23.377 0 42.307 18.93 42.307 42.308 0 8.533-2.584 16.947-7.452 23.978L97.776 86.9C99.16 88.281 100 90.264 100 92.308z" />
-                        </svg>
-                        Cari
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Jobs Listing -->
-    <section class="py-8">
+    <!-- Tab Content -->
+    <section class="bg-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto">
-                <!-- Results Header -->
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold text-gray-900">
-                        @if(request('keyword') || request('location'))
-                            Hasil Pencarian Lowongan Kerja
-                        @else
-                            Lowongan Kerja Terbaru
-                        @endif
-                    </h1>
-                    <div class="text-sm text-gray-600">
-                        {{ $jobs->total() }} lowongan ditemukan
-                        <!-- Debug: {{ $jobs->count() }} items on current page -->
+            <div class="max-w-7xl mx-auto">
+                <!-- For You Tab Content -->
+                <div id="tab-content-FOR_YOU" class="tab-content active">
+                    <div
+                        class="Box__StyledBox-sc-pr7b7l-0 kgsHid Flex__StyledFlex-sc-11ryoct-0 evNJxH ForYouTabsc__ForYouTabHeading-sc-c9mqd3-9 dNjkyW py-6">
+                        <!-- Horizontal Layout: Header dan Banner sejajar -->
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                            <!-- Header Section -->
+                            <div
+                                class="Box__StyledBox-sc-pr7b7l-0 kgsHid Flex__StyledFlex-sc-11ryoct-0 evNJxH ForYouTabsc__JobListContainer-sc-c9mqd3-1 oUXoo flex-1">
+                                <div class="Box__StyledBox-sc-pr7b7l-0 kgsHid">
+                                    <h1
+                                        class="ForYouTabHeadersc__Heading-sc-vgyvm0-0 euPYjq text-xl font-bold text-gray-900 mb-2">
+                                        Pekerjaan yang direkomendasikan untuk kamu
+                                    </h1>
+                                    <div class="ForYouTabHeadersc__SubHeading-sc-vgyvm0-1 dSxxXt text-gray-600 text-sm">
+                                        Berdasarkan profil dan lamaran kamu
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+                            <!-- Banner Section -->
+                            <div
+                                class="Box__StyledBox-sc-pr7b7l-0 kgsHid 
+            Flex__StyledFlex-sc-11ryoct-0 evNJxH 
+            ForYouTabsc__JobItemContainer-sc-c9mqd3-6 gFFycQ 
+            lg:flex-shrink-0 lg:w-auto">
+
+                                <div
+                                    class="Box__StyledBox-sc-pr7b7l-0 lpdGcH 
+                ForYouTabHeadersc__ReminderBannerBox-sc-vgyvm0-5 cWBkij 
+                bg-amber-50 border border-amber-100 rounded-md p-4">
+
+                                    <div class="flex items-center gap-4">
+
+                                        <!-- Icon -->
+                                        <div class="flex-shrink-0">
+                                            <img src="https://glints.com/images/sad-face.svg" alt="Sad Face"
+                                                class="w-8 h-8">
+                                        </div>
+
+                                        <!-- Text & Button -->
+                                        <div class="flex justify-between items-center flex-1 gap-4">
+
+                                            <!-- Text -->
+                                            <div>
+                                                <h4 class="font-semibold text-gray-900 mb-1">
+                                                    Apakah hasilnya kurang relevan?
+                                                </h4>
+                                                <p class="text-gray-600 text-sm">
+                                                    Update minat dan preferensi kerjamu untuk rekomendasi yang lebih akurat.
+                                                    Tidak sampai 1 menit!
+                                                </p>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <a href="#"
+                                                class="text-blue-600 font-semibold hover:underline text-xs whitespace-nowrap">
+                                                UPDATE SEKARANG
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Job Cards -->
-                <div class="space-y-4">
-                    @forelse($jobs as $job)
-                        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
-                            <div class="flex items-start justify-between">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-4 mb-3">
-                                        <!-- Company Logo -->
-                                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-                                            @if($job->company && $job->company->logo)
-                                                <img src="{{ Storage::url($job->company->logo) }}" alt="{{ $job->company->name }}" class="w-full h-full object-cover">
-                                            @else
-                                                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 100 100">
-                                                    <path d="M20 20h60v60H20z"/>
+            <!-- Eksplor Tab Content -->
+            <div id="tab-content-EXPLORE" class="tab-content hidden">
+                <div class="py-6">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Jelajahi Semua Lowongan</h1>
+                    <div class="text-gray-600">Temukan peluang karir terbaik dari berbagai perusahaan</div>
+                </div>
+            </div>
+
+            <!-- Bookmark Tab Content -->
+            <div id="tab-content-BOOKMARKED" class="tab-content hidden">
+                <div class="py-6">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Lowongan Tersimpan</h1>
+                    <div class="text-gray-600">Kelola lowongan yang telah kamu simpan</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Download Banner (Hidden on desktop) -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 lg:hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-sm">Unduh Aplikasi Glints</p>
+                        <p class="text-xs opacity-90">Dapatkan notifikasi lowongan terbaru</p>
+                    </div>
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-medium transition">
+                    Unduh
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex gap-6">
+                <!-- 2 Column Layout: Job List (Left) and Job Detail (Right) -->
+                <div class="flex gap-6">
+                    <!-- Left Column: Job Listings -->
+                    <div class="w-1/2">
+                        <!-- Page Header -->
+                        <div class="mb-6">
+                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Lowongan Kerja</h1>
+                            <p class="text-gray-600">{{ $jobs->total() }} lowongan ditemukan</p>
+                        </div>
+
+                        <!-- Job Listings -->
+                        <div id="jobs-container" class="space-y-4 max-h-screen overflow-y-auto pr-4">
+                        @forelse($jobs as $job)
+                            <div onclick="showJobDetail({{ $job->id }})"
+                                class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow relative cursor-pointer job-card" data-job-id="{{ $job->id }}">
+                                <!-- Premium Employer Badge -->
+                                @if ($job->company->is_premium ?? false)
+                                    <div class="absolute top-4 right-4">
+                                        <span
+                                            class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                            PREMIUM EMPLOYER
+                                        </span>
+                                    </div>
+                                @endif
+
+                                <div class="flex items-start gap-4">
+                                    <!-- Company Logo -->
+                                    <div class="flex-shrink-0">
+                                        @if ($job->company->logo)
+                                            <img src="{{ Storage::url($job->company->logo) }}"
+                                                alt="{{ $job->company->name }}"
+                                                class="w-16 h-16 rounded-lg object-cover border border-gray-200">
+                                        @else
+                                            <div
+                                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                                <span class="text-white font-bold text-xl">
+                                                    {{ substr($job->company->name, 0, 1) }}
+                                                </span>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    <!-- Job Info -->
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <div class="flex-1">
+                                                <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600 mb-1">
+                                                    <a href="{{ route('jobseeker.jobs.show', $job) }}">
+                                                        {{ $job->title }}
+                                                    </a>
+                                                </h3>
+                                                <p class="text-gray-700 font-medium mb-1">{{ $job->company->name }}</p>
+                                                <p class="text-gray-500 text-sm flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    {{ $job->location }}
+                                                </p>
+                                            </div>
+
+                                            <!-- Bookmark Button -->
+                                            <button class="text-gray-400 hover:text-red-500 transition-colors p-2">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                                    </path>
                                                 </svg>
+                                            </button>
+                                        </div>
+
+                                        <!-- Salary Range -->
+                                        @if ($job->salary_min && $job->salary_max)
+                                            <div class="mb-3">
+                                                <span class="text-lg font-bold text-green-600">
+                                                    Rp {{ number_format($job->salary_min) }} -
+                                                    {{ number_format($job->salary_max) }}
+                                                </span>
+                                                <span class="text-gray-500 text-sm ml-2">per bulan</span>
+                                            </div>
+                                        @endif
+
+                                        <!-- Job Tags -->
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            @if($job->employment_type)
+                                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                                                    @switch($job->employment_type)
+                                                        @case('full-time')
+                                                            Penuh Waktu
+                                                            @break
+                                                        @case('part-time')
+                                                            Paruh Waktu
+                                                            @break
+                                                        @case('contract')
+                                                            Kontrak
+                                                            @break
+                                                        @case('internship')
+                                                            Magang
+                                                            @break
+                                                        @case('freelance')
+                                                            Freelance
+                                                            @break
+                                                        @default
+                                                            {{ ucfirst($job->employment_type) }}
+                                                    @endswitch
+                                                </span>
+                                            @endif
+                                            
+                                            @if($job->experience_level)
+                                                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                                                    @switch($job->experience_level)
+                                                        @case('lt1')
+                                                            Entry Level
+                                                            @break
+                                                        @case('1-3')
+                                                            1-3 Tahun
+                                                            @break
+                                                        @case('3-5')
+                                                            3-5 Tahun
+                                                            @break
+                                                        @case('5-10')
+                                                            5-10 Tahun
+                                                            @break
+                                                        @default
+                                                            {{ $job->experience_level }}
+                                                    @endswitch
+                                                </span>
+                                            @endif
+                                            
+                                            @if($job->work_system)
+                                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">
+                                                    @switch($job->work_system)
+                                                        @case('onsite')
+                                                            Work from Office
+                                                            @break
+                                                        @case('remote')
+                                                            Work from Home
+                                                            @break
+                                                        @case('hybrid')
+                                                            Hybrid
+                                                            @break
+                                                        @default
+                                                            {{ ucfirst($job->work_system) }}
+                                                    @endswitch
+                                                </span>
+                                            @endif
+                                            <!-- Hot Badge -->
+                                            @if ($loop->index < 3)
+                                                <span
+                                                    class="px-3 py-1 bg-red-500 text-white text-sm font-bold rounded-full animate-pulse">
+                                                    🔥 HOT
+                                                </span>
+                                            @endif
+                                            <!-- Actively Hiring Badge -->
+                                            @if ($loop->index % 2 == 0)
+                                                <span
+                                                    class="px-3 py-1 bg-green-500 text-white text-sm font-bold rounded-full">
+                                                    ✓ Aktif Merekrut
+                                                </span>
                                             @endif
                                         </div>
-                                        
-                                        <div class="flex-1">
-                                            <h3 class="text-lg font-semibold text-gray-900 mb-1">
-                                                <a href="{{ route('jobseeker.jobs.show', $job->slug) }}" class="hover:text-blue-600 transition-colors">
-                                                    {{ $job->title }}
-                                                </a>
-                                            </h3>
-                                            <p class="text-gray-600 text-sm">
-                                                {{ $job->company->name ?? 'Company' }} • {{ $job->location }}
+
+                                        <!-- Posted Time -->
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-gray-500 text-sm">
+                                                <span class="job-time"
+                                                    data-created="{{ $job->created_at->toISOString() }}">
+                                                    Diposting {{ $job->created_at->diffForHumans() }}
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
-                                    
-                                    <div class="mb-3">
-                                        <p class="text-gray-700 text-sm line-clamp-2">
-                                            {{ Str::limit($job->description, 150) }}
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="flex items-center gap-4 text-sm text-gray-500">
-                                        <span class="flex items-center gap-1">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 100 100">
-                                                <path d="M50 10c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm0 72c-17.673 0-32-14.327-32-32s14.327-32 32-32 32 14.327 32 32-14.327 32-32 32zm16-32H50V34c0-2.209-1.791-4-4-4s-4 1.791-4 4v20c0 2.209 1.791 4 4 4h20c2.209 0 4-1.791 4-4s-1.791-4-4-4z"/>
-                                            </svg>
-                                            {{ $job->employment_type }}
-                                        </span>
-                                        <span class="flex items-center gap-1">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 100 100">
-                                                <path d="M85 25H15c-2.761 0-5 2.239-5 5v40c0 2.761 2.239 5 5 5h70c2.761 0 5-2.239 5-5V30c0-2.761-2.239-5-5-5zM15 35h70v30H15V35zm70-5v5H15v-5h70z"/>
-                                            </svg>
-                                            @if($job->salary_min && $job->salary_max)
-                                                Rp {{ number_format($job->salary_min) }} - Rp {{ number_format($job->salary_max) }}
-                                            @else
-                                                Gaji Kompetitif
-                                            @endif
-                                        </span>
-                                        <span>{{ $job->created_at->diffForHumans() }}</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- Save Job Button -->
-                                <div class="ml-4">
-                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors" 
-                                            onclick="toggleSaveJob({{ $job->id }})">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 100 100">
-                                            <path d="M50 85L20 55V15h60v40L50 85z"/>
-                                        </svg>
-                                    </button>
                                 </div>
                             </div>
+                        @empty
+                            <div class="text-center py-16">
+                                <div
+                                    class="w-32 h-32 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Tidak ada lowongan ditemukan</h3>
+                                <p class="text-gray-500 mb-6">Coba ubah kata kunci atau filter pencarian Anda</p>
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                                    Reset Filter
+                                </button>
+                            </div>
+                        @endforelse
                         </div>
-                    @empty
-                        <div class="text-center py-12">
-                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="currentColor" viewBox="0 0 100 100">
-                                <path d="M50 10c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zm0 72c-17.673 0-32-14.327-32-32s14.327-32 32-32 32 14.327 32 32-14.327 32-32 32z"/>
-                            </svg>
-                            <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak ada lowongan ditemukan</h3>
-                            <p class="text-gray-500">Coba ubah kata kunci atau filter pencarian Anda.</p>
-                        </div>
-                    @endforelse
-                </div>
 
-                <!-- Pagination -->
-                @if($jobs->hasPages())
-                    <div class="mt-8">
-                        {{ $jobs->appends(request()->query())->links() }}
+                        <!-- Load More Button -->
+                        @if ($jobs->hasMorePages())
+                            <div class="text-center mt-8">
+                                <button id="load-more-btn"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2">
+                                    <span>Muat Lebih Banyak</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        @endif
+
+                        <!-- Traditional Pagination (fallback) -->
+                        @if ($jobs->hasPages())
+                            <div class="mt-8">
+                                {{ $jobs->links() }}
+                            </div>
+                        @endif
                     </div>
-                @endif
+
+                    <!-- Right Column: Job Detail -->
+                    <div class="w-1/2">
+                        <div id="job-detail-container" class="bg-white border border-gray-200 rounded-lg p-6 sticky top-6">
+                            <div id="job-detail-placeholder" class="text-center py-16">
+                                <div class="w-32 h-32 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8zM8 14v.01M12 14v.01M16 14v.01"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Pilih Lowongan</h3>
+                                <p class="text-gray-500">Klik pada lowongan di sebelah kiri untuk melihat detail lengkap</p>
+                            </div>
+
+                            <div id="job-detail-content" class="hidden">
+                                <!-- Job detail content will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <style>
+        .tab-content {
+            display: block;
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 
     <script>
-        function clearLocation() {
-            document.getElementById('location').value = 'All Cities/Provinces';
+        // Mobile Filter Toggle Functionality
+        function toggleMobileFilters() {
+            const mobileFilters = document.getElementById('mobile-filters');
+            const overlay = document.getElementById('mobile-filter-overlay');
+
+            if (mobileFilters.classList.contains('-translate-x-full')) {
+                // Show filters
+                mobileFilters.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Hide filters
+                mobileFilters.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
         }
-        
+
+        // Job Detail Functions
+        function showJobDetail(jobId) {
+            // Remove active state from all job cards
+            document.querySelectorAll('.job-card').forEach(card => {
+                card.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            });
+
+            // Add active state to clicked job card
+            const clickedCard = document.querySelector(`[data-job-id="${jobId}"]`);
+            if (clickedCard) {
+                clickedCard.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            }
+
+            // Hide placeholder and show loading
+            document.getElementById('job-detail-placeholder').classList.add('hidden');
+            document.getElementById('job-detail-content').classList.remove('hidden');
+            document.getElementById('job-detail-content').innerHTML = `
+                <div class="text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p class="text-gray-500">Memuat detail lowongan...</p>
+                </div>
+            `;
+
+            // Fetch job details (you can replace this with actual AJAX call)
+            setTimeout(() => {
+                loadJobDetail(jobId);
+            }, 500);
+        }
+
+        function loadJobDetail(jobId) {
+            // Find job data from the current page (in real implementation, you might fetch from server)
+            const jobCards = document.querySelectorAll('.job-card');
+            let jobData = null;
+            
+            jobCards.forEach(card => {
+                if (card.getAttribute('data-job-id') == jobId) {
+                    jobData = extractJobDataFromCard(card);
+                }
+            });
+
+            if (jobData) {
+                displayJobDetail(jobData);
+            }
+        }
+
+        function extractJobDataFromCard(card) {
+            const title = card.querySelector('h3 a').textContent.trim();
+            const company = card.querySelector('.text-gray-700.font-medium').textContent.trim();
+            const location = card.querySelector('.text-gray-500.text-sm').textContent.trim();
+            const salary = card.querySelector('.text-green-600')?.textContent.trim() || 'Gaji tidak disebutkan';
+            const tags = Array.from(card.querySelectorAll('.px-3.py-1')).map(tag => tag.textContent.trim());
+            const postedTime = card.querySelector('.job-time').textContent.trim();
+            const logo = card.querySelector('img')?.src || null;
+            const companyInitial = card.querySelector('.text-white.font-bold')?.textContent.trim() || company.charAt(0);
+            
+            return {
+                title,
+                company,
+                location,
+                salary,
+                tags,
+                postedTime,
+                logo,
+                companyInitial
+            };
+        }
+
+        function displayJobDetail(jobData) {
+            const detailContent = `
+                <div class="space-y-6">
+                    <!-- Job Header -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex items-start gap-4 mb-4">
+                            ${jobData.logo ? 
+                                `<img src="${jobData.logo}" alt="${jobData.company}" class="w-16 h-16 rounded-lg object-cover border border-gray-200">` :
+                                `<div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold text-xl">${jobData.companyInitial}</span>
+                                </div>`
+                            }
+                            <div class="flex-1">
+                                <h1 class="text-2xl font-bold text-gray-900 mb-2">${jobData.title}</h1>
+                                <p class="text-lg text-gray-700 font-medium mb-1">${jobData.company}</p>
+                                <p class="text-gray-500 flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    ${jobData.location}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="text-xl font-bold text-green-600">${jobData.salary}</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${jobData.tags.map(tag => `<span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">${tag}</span>`).join('')}
+                        </div>
+                        
+                        <p class="text-gray-500 text-sm">${jobData.postedTime}</p>
+                    </div>
+
+                    <!-- Job Description -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Deskripsi Pekerjaan</h2>
+                        <div class="prose prose-sm max-w-none text-gray-700">
+                            <p class="mb-4">Kami sedang mencari kandidat yang berpengalaman untuk bergabung dengan tim kami. Posisi ini menawarkan kesempatan untuk berkembang dalam lingkungan kerja yang dinamis dan inovatif.</p>
+                            
+                            <h3 class="font-semibold text-gray-900 mb-2">Tanggung Jawab:</h3>
+                            <ul class="list-disc list-inside space-y-1 mb-4">
+                                <li>Melaksanakan tugas sesuai dengan job description</li>
+                                <li>Berkolaborasi dengan tim untuk mencapai target</li>
+                                <li>Mengembangkan dan mengimplementasikan strategi</li>
+                                <li>Melakukan analisis dan pelaporan berkala</li>
+                            </ul>
+                            
+                            <h3 class="font-semibold text-gray-900 mb-2">Kualifikasi:</h3>
+                            <ul class="list-disc list-inside space-y-1 mb-4">
+                                <li>Pendidikan minimal S1 dari jurusan terkait</li>
+                                <li>Pengalaman kerja minimal 2 tahun di bidang yang sama</li>
+                                <li>Kemampuan komunikasi yang baik</li>
+                                <li>Menguasai tools dan software yang relevan</li>
+                            </ul>
+                            
+                            <h3 class="font-semibold text-gray-900 mb-2">Yang Kami Tawarkan:</h3>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Gaji kompetitif sesuai pengalaman</li>
+                                <li>Tunjangan kesehatan dan BPJS</li>
+                                <li>Lingkungan kerja yang supportif</li>
+                                <li>Kesempatan pengembangan karir</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <div class="border-t border-gray-200 pt-6">
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors">
+                            Lamar Sekarang
+                        </button>
+                        <button class="w-full mt-3 border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg font-medium transition-colors">
+                            Simpan Lowongan
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('job-detail-content').innerHTML = detailContent;
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Real-time timestamp updates
+            function updateTimestamps() {
+                const timeElements = document.querySelectorAll('.job-time');
+                timeElements.forEach(element => {
+                    const createdAt = element.getAttribute('data-created');
+                    if (createdAt) {
+                        const date = new Date(createdAt);
+                        const now = new Date();
+                        const diffInSeconds = Math.floor((now - date) / 1000);
+
+                        let timeAgo;
+                        if (diffInSeconds < 60) {
+                            timeAgo = 'Baru saja';
+                        } else if (diffInSeconds < 3600) {
+                            const minutes = Math.floor(diffInSeconds / 60);
+                            timeAgo = `${minutes} menit yang lalu`;
+                        } else if (diffInSeconds < 86400) {
+                            const hours = Math.floor(diffInSeconds / 3600);
+                            timeAgo = `${hours} jam yang lalu`;
+                        } else if (diffInSeconds < 2592000) {
+                            const days = Math.floor(diffInSeconds / 86400);
+                            timeAgo = `${days} hari yang lalu`;
+                        } else if (diffInSeconds < 31536000) {
+                            const months = Math.floor(diffInSeconds / 2592000);
+                            timeAgo = `${months} bulan yang lalu`;
+                        } else {
+                            const years = Math.floor(diffInSeconds / 31536000);
+                            timeAgo = `${years} tahun yang lalu`;
+                        }
+
+                        element.textContent = `Diposting ${timeAgo}`;
+                    }
+                });
+            }
+
+            // Update timestamps immediately and then every minute
+            updateTimestamps();
+            setInterval(updateTimestamps, 60000);
+
+            // Load More Functionality (if needed)
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    // Add load more functionality here
+                    console.log('Load more jobs');
+                });
+            }
+
+            // Tab Navigation Functionality
+            const tabItems = document.querySelectorAll('[role="tab"]');
+            const tabButtons = document.querySelectorAll('[role="tab"] button');
+
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    // Remove active state from all tabs
+                    tabItems.forEach(tab => {
+                        tab.classList.remove('active');
+                        tab.setAttribute('aria-selected', 'false');
+                        const tabButton = tab.querySelector('button');
+                        if (tabButton) {
+                            tabButton.classList.remove('text-blue-600', 'border-b-2',
+                                'border-blue-600');
+                            tabButton.classList.add('text-gray-600');
+                        }
+                    });
+
+                    // Add active state to clicked tab
+                    const parentTab = button.closest('[role="tab"]');
+                    if (parentTab) {
+                        parentTab.classList.add('active');
+                        parentTab.setAttribute('aria-selected', 'true');
+                        button.classList.remove('text-gray-600');
+                        button.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                    }
+
+                    // Show/hide tab content based on selected tab
+                    const tabId = button.getAttribute('data-tab');
+                    const allTabContents = document.querySelectorAll('.tab-content');
+
+                    // Hide all tab contents
+                    allTabContents.forEach(content => {
+                        content.classList.add('hidden');
+                        content.classList.remove('active');
+                    });
+
+                    // Show selected tab content
+                    const selectedContent = document.getElementById(`tab-content-${tabId}`);
+                    if (selectedContent) {
+                        selectedContent.classList.remove('hidden');
+                        selectedContent.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        function clearLocation() {
+            const locationElement = document.getElementById('location');
+            if (locationElement) {
+                locationElement.value = 'All Cities/Provinces';
+            }
+        }
+
         function toggleSaveJob(jobId) {
             // Implementation for saving/unsaving jobs
             console.log('Toggle save job:', jobId);
