@@ -57,123 +57,186 @@
         <!-- LOWONGAN (kiri) -->
         <div class="col-md-8">
             <div class="card mb-4 border-0 shadow-sm">
-                <div class="card-header bg-white border-0 py-3">Daftar Lowongan Kerja</div>
+                <div class="card-header bg-white border-0 py-3">
+                    <p class="fw-bold mb-0" style="color: #2D2D2D;">Daftar Lowongan Kerja</p>
+                </div>
                 <div class="card-body">
                     <!-- FILTER -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="position-relative w-50">
                             <input type="text" placeholder="Cari nama loker atau kata kunci"
-                                class="form-control ps-4">
-                            <i class="fas fa-search position-absolute" style="top: 12px; left: 12px;"></i>
+                                class="form-control" 
+                                style="height: 38px; border-radius: 6px; padding-left: 40px;">
+                            <i class="fas fa-search position-absolute" 
+                            style="top: 50%; left: 12px; transform: translateY(-50%); color: #666;"></i>
                         </div>
+
                         <div class="d-flex align-items-center gap-2">
-                            <span class="text-muted">Urutkan:</span>
-                            <select class="form-select">
-                                <option>Tanggal Diupdate</option>
-                                <option>Nama Pekerjaan</option>
-                            </select>
+                            <button class="btn btn-outline-secondary d-flex align-items-center" style="height: 38px; border-radius: 6px;">
+                                <i class="fas fa-sort me-2"></i>
+                                <span class="text-muted fw-bold me-2">Urutkan:</span>
+                                <span>Tanggal Diupdate</span>
+                            </button>
                         </div>
                     </div>
 
                     <!-- TAB -->
-                    <ul class="nav nav-tabs mb-4">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active fw-medium">Semua Loker <span class="badge rounded-pill bg-secondary ms-1">{{ $totalJobs }}</span></a>
+                    <ul class="nav nav-tabs mb-4" role="tablist" style="border-bottom: none;">
+                        <li class="nav-item" role="presentation">
+                            <a href="#" class="nav-link active d-flex align-items-center justify-content-between"
+                            style="color: #666;" role="tab">
+                                Semua Loker 
+                                <span class="badge rounded-pill" style="background-color: #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs }}</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Aktif <span class="badge rounded-pill bg-secondary ms-1">{{ $activeJobs }}</span></a>
+                        <li class="nav-item" role="presentation">
+                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
+                                Aktif 
+                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $activeJobs }}</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Nonaktif <span class="badge rounded-pill bg-secondary ms-1">{{ $totalJobs - $activeJobs }}</span></a>
+                        <li class="nav-item" role="presentation">
+                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
+                                Nonaktif 
+                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs - $activeJobs }}</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Dalam Review <span class="badge rounded-pill bg-secondary ms-1">0</span></a>
+                        <li class="nav-item" role="presentation">
+                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #017EB7;" role="tab">
+                                Dalam Review 
+                                <span class="badge rounded-pill" style="background-color: #d3d3d3; color:#017EB7; margin-left: 6px;">0</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link fw-medium">Draft <span class="badge rounded-pill bg-secondary ms-1">0</span></a>
+                        <li class="nav-item" role="presentation">
+                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
+                                Draft 
+                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">0</span>
+                            </a>
                         </li>
                     </ul>
 
-                    <!-- DAFTAR LOWONGAN DINAMIS -->
+                    {{-- DAFTAR LOWONGAN DINAMIS --}}
                     @if($recentJobs && $recentJobs->count() > 0)
                         @foreach($recentJobs as $job)
-                        <div class="card mb-3 border shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h5 class="fw-bold">{{ $job->title }}</h5>
-                                        <div class="d-flex align-items-center gap-2 text-muted small">
-                                            <span><i class="fas fa-map-marker-alt"></i> {{ $job->location }}</span>
-                                            <span class="mx-1">•</span>
-                                            <span>{{ $job->employment_type }}</span>
-                                            @if($job->deadline)
-                                                <span class="mx-1">•</span>
-                                                <span>Aktif hingga: {{ $job->deadline->format('d M Y') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <span class="badge {{ $job->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $job->is_active ? 'Aktif' : 'Nonaktif' }}
+                            <div class="card mb-3 border shadow-sm rounded-3 position-relative">
+
+                                {{-- Status di pojok kanan atas --}}
+                                <div class="position-absolute top-0 end-0 m-3 d-flex align-items-center gap-1">
+                                    <span class="badge bg-light text-dark border px-2 py-1 d-flex align-items-center gap-2">
+                                        <span class="fw-semibold">{{ $job->is_active ? 'Aktif' : 'Nonaktif' }}</span>
+                                        <span class="d-inline-block rounded-circle" 
+                                            style="width:12px; height:12px; background-color: {{ $job->is_active ? '#28a745' : '#6c757d' }};">
+                                        </span>
                                     </span>
                                 </div>
 
-                                <div class="row mt-3 text-center">
-                                    <div class="col-md-4">
-                                        <p class="fw-bold mb-0">{{ $job->interview_count ?? 0 }}</p>
-                                        <p class="text-muted small mb-1">Interview</p>
-                                        <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}" class="text-primary small fw-semibold">Lihat</a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p class="fw-bold mb-0">{{ $job->applications_count ?? 0 }}</p>
-                                        <p class="text-muted small mb-1">Total Pelamar</p>
-                                        <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" class="text-primary small fw-semibold">Lihat</a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p class="fw-bold mb-0">{{ $job->rejected_count ?? 0 }}</p>
-                                        <p class="text-muted small mb-1">Ditolak</p>
-                                        <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}" class="text-primary small fw-semibold">Lihat</a>
+                                <div class="card-body p-3">
+
+                                    {{-- Header + Statistik sejajar --}}
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+
+                                        {{-- Kiri: Judul + Detail --}}
+                                        <div class="me-3" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
+                                            <h5 class="fw-semibold mb-2 text-wrap">{{ $job->title }}</h5>
+                                            <div class="d-flex flex-column text-muted small gap-1 mt-4">
+                                                <span class="text-wrap">
+                                                    <i class="fas fa-clock me-1"></i> {{ $job->employment_type }}
+                                                </span>
+                                                <span class="text-wrap mt-2">
+                                                    <i class="fas fa-map-marker-alt me-1"></i> {{ $job->office_address }}
+                                                </span>
+                                                <span class="text-wrap mt-3">
+                                                    <i class="fas fa-calendar-alt me-1"></i> 
+                                                    Aktif hingga: {{ $job->created_at->addDays(30)->format('d M Y') }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+                                        {{-- Kanan: Statistik --}}
+                                        <div class="row text-center border rounded-2 py-2 mt-5" style="min-width: 620px; margin-right: 5px; me-10">
+                                            <div class="col-4 border-end">
+                                                <p class="fw-bold mb-0">{{ $job->chat_count ?? 0 }}</p>
+                                                <p class="text-muted small mb-1">Chat Dimulai</p>
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}" 
+                                                class="text-primary small fw-bold text-decoration-none">Lihat</a>
+                                            </div>
+                                            <div class="col-4 border-end">
+                                                <p class="fw-bold mb-0">{{ $job->applications_count ?? 0 }}</p>
+                                                <p class="text-muted small mb-1">Terhubung</p>
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" 
+                                                class="text-primary small fw-bold text-decoration-none">Lihat</a>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="fw-bold mb-0">{{ $job->rejected_count ?? 0 }}</p>
+                                                <p class="text-muted small mb-1">Belum Sesuai</p>
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}" 
+                                                class="text-primary small fw-bold text-decoration-none">Lihat</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="d-flex gap-2 mt-3">
-                                    <button class="btn btn-outline-warning btn-sm"><i class="fas fa-bolt"></i> Boost Lowongan</button>
-                                    <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" class="btn btn-primary btn-sm">Kelola Kandidat</a>
-                                    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-users"></i> Recommended Talents</button>
-                                    <div class="dropdown ms-auto">
-                                        <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown">
-                                            <i class="fas fa-ellipsis-v"></i>
+                                {{-- FOOTER: Action Buttons --}}
+                                <div class="card-footer bg-light border-top d-flex justify-content-between align-items-center py-2">
+
+                                    {{-- Kiri: Boost --}}
+                                    <div>
+                                        <button class="btn btn-outline-warning btn-sm fw-semibold">
+                                            <i class="fas fa-bolt me-1"></i> Boost Lowongan
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="{{ route('company.jobs.edit', $job->id) }}"><i class="fas fa-edit me-2"></i> Edit</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="deleteJob({{ $job->id }})"><i class="fas fa-trash me-2"></i> Hapus</a></li>
-                                        </ul>
+                                    </div>
+
+                                    {{-- Kanan: tombol lain --}}
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" 
+                                        class="btn btn-primary btn-sm fw-semibold">
+                                            Kelola Kandidat
+                                        </a>
+                                        <button class="btn btn-outline-secondary btn-sm fw-semibold">
+                                            Recommended Talents
+                                        </button>
+
+                                        {{-- Dropdown kanan --}}
+                                        <div class="dropdown">
+                                            <button class="btn btn-light btn-sm border d-flex align-items-center justify-content-center" 
+                                                    type="button" data-bs-toggle="dropdown"
+                                                    style="width:40px; height:30px;">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('company.jobs.edit', $job->id) }}">
+                                                        Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">Bagikan</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">Duplikat</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">Ekspor CSV</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                         
                         @endforeach
                     @else
                         <div class="text-center py-5">
-                            <i class="fas fa-briefcase text-muted" style="font-size: 48px;"></i>
-                            <h5 class="text-muted mt-3">Belum Ada Lowongan</h5>
-                            <p class="text-muted">Mulai posting lowongan pertama Anda untuk menarik kandidat terbaik.</p>
-                            <a href="{{ route('company.jobs.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Buat Lowongan Baru
-                            </a>
+                            <h5 class="text-muted mt-3">Belum memiliki item</h5>
                         </div>
                     @endif
 
                     <!-- PAGINATION -->
                     <div class="d-flex justify-content-center mt-4">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                            </ul>
-                        </nav>
+{{-- ini cuman tampil ketika ada loker, kalo gak ada loker yang tampil hanya yang atas --}}
+                        <p>Anda telah mencapai batas maksimal</p>
                     </div>
                 </div>
             </div>
