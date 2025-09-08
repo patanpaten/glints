@@ -48,21 +48,22 @@
                                     GLINTS VIP
                                 </span>
 
-                                <div class="form-check mt-2">
-                                    <input type="checkbox" class="form-check-input" id="glintsVipLocation" 
+                                <div class="form-check mt-2 fw-semibold">
+                                    {{-- <input type="checkbox" class="form-check-input" id="glintsVipLocation" 
                                         name="vip_location" value="1">
-                                    <label class="form-check-label fw-semibold" for="glintsVipLocation">
-                                        Pelamar wajib punya info domisili
+                                    <label class="form-check-label fw-semibold" for="glintsVipLocation"> --}}
+                                        Pertanyaan Skrining
                                     </label>
                                 </div>
 
                                 <div class="form-text">
                                     Beli Glints VIP untuk menggunakan fitur ini. 
-                                    <a href="#" class="text-primary">Upgrade ke VIP</a>
+                                    <a href="#" class="text-primary fw-bold text-decoration-none">Upgrade ke VIP</a>
                                 </div>
-                            
+                            <hr class="my-3">
 
-                <div class="mb-3">
+{{-- Belum bisa diskip, harus ngisi ini --}}
+                <div class="mb-3" style="filter: blur(1px);">
                     <label class="form-label fw-bold">Tambah Pertanyaan</label> <br>
                     <p class="text-muted">0/9 pertanyaan ditambahkan</p>
                     <select name="type" class="form-select" required>
@@ -78,11 +79,11 @@
                 </div>
 
 
-                <div class="alert alert-secondary mt-3 mb-0">
+                {{-- <div class="alert alert-secondary mt-3 mb-0">
                     <i class="bi bi-info-circle"></i>
                     (i) Pertanyaan skrining tidak dapat diubah setelah lowongan diposting.
                     Ini memastikan semua pelamar akan menerima pertanyaan yang sama.
-                </div>
+                </div> --}}
             </div>
 
 
