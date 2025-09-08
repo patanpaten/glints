@@ -12,7 +12,7 @@
             <div class="d-flex align-items-center">
 
                 {{-- Step 1 (Done) --}}
-                <div class="d-flex align-items-center text-success">
+                <div class="d-flex align-items-center">
                     <div class="rounded-circle bg-success text-white d-flex justify-content-center align-items-center" style="width:28px; height:28px;">
                         ✓
                     </div>
@@ -23,7 +23,7 @@
                 <div class="mx-3" style="width:60px; border-bottom:2px solid #ddd;"></div>
 
                 {{-- Step 2 (Active) --}}
-                <div class="d-flex align-items-center fw-bold text-primary">
+                <div class="d-flex align-items-center fw-bold">
                     <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width:28px; height:28px;">
                         2
                     </div>
@@ -41,10 +41,26 @@
             @csrf
 
             {{-- BOX PERTANYAAN --}}
-            <div class="border rounded p-3 mb-4 bg-light">
-                <span class="badge bg-warning text-dark mb-2">GLINTS VIP</span>
-                <h5 class="fw-bold">Pertanyaan Skrining</h5>
-                <p class="text-muted">Pilih pertanyaan untuk mengevaluasi pelamar selama proses penyaringan.</p>
+            {{-- GLINTS VIP --}}
+                            <div class="border border-warning p-3 rounded ">
+                                <span class="d-inline-flex align-items-center gap-1 bg-warning text-dark fw-semibold px-2 py-1 rounded">
+                                    <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    GLINTS VIP
+                                </span>
+
+                                <div class="form-check mt-2">
+                                    <input type="checkbox" class="form-check-input" id="glintsVipLocation" 
+                                        name="vip_location" value="1">
+                                    <label class="form-check-label fw-semibold" for="glintsVipLocation">
+                                        Pelamar wajib punya info domisili
+                                    </label>
+                                </div>
+
+                                <div class="form-text">
+                                    Beli Glints VIP untuk menggunakan fitur ini. 
+                                    <a href="#" class="text-primary">Upgrade ke VIP</a>
+                                </div>
+                            
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Tambah Pertanyaan</label> <br>
@@ -69,6 +85,11 @@
                 </div>
             </div>
 
+
+
+ {{-- FOOTER FIXED --}}
+                <div class="fixed-bottom bg-white border-top p-3 shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center">
             {{-- STATUS --}}
             <div class="mb-3">
                 <p class="mb-0 fw-bold">Status:
@@ -83,6 +104,9 @@
                 <a href="#" class="btn btn-outline-secondary">Sebelumnya</a>
                 <button type="submit" class="btn btn-primary">Pasang Loker</button>
             </div>
+
+            </div>
+                </div>
         </form>
     </div>
 </div>
