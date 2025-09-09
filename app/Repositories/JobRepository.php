@@ -38,7 +38,9 @@ class JobRepository
      */
     public function findBySlug(string $slug)
     {
-        return $this->model->where('slug', $slug)->first();
+        return $this->model->where('slug', $slug)
+            ->with(['company', 'jobCategory', 'skills'])
+            ->first();
     }
 
     public function getByCompanyId($companyId)
@@ -149,6 +151,17 @@ class JobRepository
         // Sorting
         if (!empty($filters['sort'])) {
             switch ($filters['sort']) {
+                case 'relevant':
+                    // Most Relevant: Premium companies first, then recent posts, then by relevance
+                    $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
+                          ->select('job_listings.*')
+                          ->orderByDesc('companies.is_premium')
+                          ->orderByDesc('companies.is_verified')
+                          ->orderByDesc('job_listings.created_at');
+                    break;
+                case 'latest':
+                    $query->latest();
+                    break;
                 case 'oldest':
                     $query->oldest();
                     break;
@@ -158,13 +171,22 @@ class JobRepository
                 case 'salary_low':
                     $query->orderBy('salary_min')->orderBy('salary_max');
                     break;
-                case 'newest':
                 default:
-                    $query->latest();
+                    // Default to relevant sorting
+                    $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
+                          ->select('job_listings.*')
+                          ->orderByDesc('companies.is_premium')
+                          ->orderByDesc('companies.is_verified')
+                          ->orderByDesc('job_listings.created_at');
                     break;
             }
         } else {
-            $query->latest();
+            // Default sorting when no sort parameter is provided
+            $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
+                  ->select('job_listings.*')
+                  ->orderByDesc('companies.is_premium')
+                  ->orderByDesc('companies.is_verified')
+                  ->orderByDesc('job_listings.created_at');
         }
 
         return $query->with('company', 'jobCategory', 'skills')->paginate(15);

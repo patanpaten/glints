@@ -416,8 +416,8 @@
 
             <!-- Menu Desktop -->
             <nav class="hidden lg:flex items-center space-x-6 mr-auto">
-                <a href="{{ route('jobseeker.jobs') }}" 
-                class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobseeker.jobs') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
+                <a href="{{ route('jobseeker.jobs.index') }}"
+                            class="text-xs font-semibold uppercase tracking-wide transition-all duration-200 border-b-2 {{ request()->routeIs('jobseeker.jobs.index') ? 'border-black text-black' : 'border-transparent text-gray-700 hover:border-black hover:text-black' }}">
                 Lowongan Kerja
                 </a>
                 <a href="{{ route('jobseeker.companies') }}" 
@@ -552,7 +552,7 @@
                 <hr class="border-white/40">
                 
                 <!-- Menu Utama -->
-                <a href="{{ route('jobseeker.jobs') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                <a href="{{ route('jobseeker.jobs.index') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                     LOWONGAN KERJA
                 </a> 
                 <a href="{{ route('jobseeker.companies') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">

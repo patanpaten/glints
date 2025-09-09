@@ -20,7 +20,7 @@
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900">{{ $job->title }}</h1>
                         <div class="flex items-center mt-1">
-                            <a href="{{ route('jobseeker.companies.show', $job->company->slug) }}" class="text-blue-600 hover:underline font-medium">{{ $job->company->name }}</a>
+                            <a href="{{ route('jobseeker.companies.show', $job->company->id) }}" class="text-blue-600 hover:underline font-medium">{{ $job->company->name }}</a>
                             @if($job->company->is_verified)
                                 <span class="ml-2 bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full">Verified</span>
                             @endif
@@ -139,14 +139,14 @@
                             </div>
                             @endif
                             
-                            @if($job->category)
+                            @if($job->jobCategory)
                             <div class="flex items-start">
                                 <svg class="w-5 h-5 text-gray-400 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 100 100">
                                     <path d="M20 20h60v60H20z"/>
                                 </svg>
                                 <div>
                                     <p class="text-sm font-medium text-gray-900">Kategori</p>
-                                    <p class="text-sm text-gray-600">{{ $job->category->name }}</p>
+                                    <p class="text-sm text-gray-600">{{ $job->jobCategory->name }}</p>
                                 </div>
                             </div>
                             @endif
@@ -168,7 +168,7 @@
 
 <script>
 function applyForJob(jobId) {
-    window.location.href = `{{ route('jobseeker.applications.create', '') }}/${jobId}`;
+    window.location.href = `{{ url('jobseeker/jobs') }}/${jobId}/apply`;
 }
 
 function saveJob(jobId) {

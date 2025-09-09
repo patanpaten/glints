@@ -59,10 +59,23 @@ class JobController extends Controller
         $categories = $this->jobCategoryService->getAllCategories();
         $popularSkills = $this->skillService->getPopularSkills();
         
-        // Add districts data to prevent undefined variable error
-        $districts = [];
+        // Add empty locations array to prevent undefined variable error
+        $locations = [];
         
-        return view('jobs.index', compact('jobs', 'categories', 'popularSkills', 'filters', 'districts'));
+        // Handle AJAX requests for infinite scroll
+        if ($request->ajax()) {
+            $jobsHtml = view('jobs.partials.job-cards', compact('jobs'))->render();
+            
+            return response()->json([
+                'html' => $jobsHtml,
+                'hasMorePages' => $jobs->hasMorePages(),
+                'nextPage' => $jobs->currentPage() + 1,
+                'currentPage' => $jobs->currentPage(),
+                'lastPage' => $jobs->lastPage()
+            ]);
+        }
+        
+        return view('jobs.index', compact('jobs', 'categories', 'popularSkills', 'filters', 'locations'));
     }
 
     /**

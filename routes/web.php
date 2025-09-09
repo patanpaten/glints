@@ -15,7 +15,7 @@ use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\JobSeeker\EducationController;
 use App\Http\Controllers\JobSeeker\ExperienceController;
 use App\Http\Controllers\JobSeeker\SkillController;
-use App\Http\Controllers\JobSeeker\ApplicationController as JobSeekerApplicationController;
+use App\Http\Controllers\JobSeeker\ApplicationController;
 use App\Http\Controllers\JobSeeker\SavedJobController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PremiumFeatureController;
@@ -192,24 +192,26 @@ Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-se
     Route::resource('experience', ExperienceController::class)->only(['create','store','edit','update']);
     Route::resource('skills', SkillController::class)->only(['create','store','edit','update']);
     Route::get('/skills/search', [SkillController::class, 'search'])->name('skills.search');
-    Route::get('/applications', [JobSeekerApplicationController::class, 'index'])->name('applications.index');
-    Route::get('/applications/{application}', [JobSeekerApplicationController::class, 'show'])->name('applications.show');
-    Route::get('/jobs/{job}/apply', [JobSeekerApplicationController::class, 'create'])->name('applications.create');
-    Route::post('/jobs/{job}/apply', [JobSeekerApplicationController::class, 'store'])->name('applications.store');
-    Route::get('/applications/{application}/resume', [JobSeekerApplicationController::class, 'downloadResume'])->name('applications.download-resume');
-    Route::patch('/applications/{application}/withdraw', [JobSeekerApplicationController::class, 'withdraw'])->name('applications.withdraw');
+    Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
+    Route::get('/applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
+    Route::get('/jobs/{job}/apply', [ApplicationController::class, 'create'])->name('applications.create');
+    Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/applications/{application}/resume', [ApplicationController::class, 'downloadResume'])->name('applications.download-resume');
+    Route::patch('/applications/{application}/withdraw', [ApplicationController::class, 'withdraw'])->name('applications.withdraw');
     Route::get('/saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs', [SavedJobController::class, 'save'])->name('saved-jobs.save');
     Route::delete('/saved-jobs/{job}', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');
 
     // Jobs routes for jobseeker
-    Route::get('/jobs', [JobSeekerController::class, 'jobs'])->name('jobs');
-    Route::get('/jobs/{job}', [JobSeekerController::class, 'jobDetail'])->name('jobs.show');
+    Route::get('/jobs', [JobSeekerController::class, 'jobs'])->name('jobs.index');
 
     // Companies routes for jobseeker
     Route::get('/companies', [JobSeekerController::class, 'companies'])->name('companies');
-    Route::get('/companies/{slug}', [JobSeekerController::class, 'companyDetail'])->name('companies.show');
+    Route::get('/companies/{company}', [JobSeekerController::class, 'companyDetail'])->name('companies.show');
 });
+
+// Job detail route (accessible without specific role)
+Route::get('/jobseeker/jobs/{slug}', [JobSeekerController::class, 'jobDetail'])->name('jobseeker.jobs.show');
 
 // ==========================
 // Apply (general, after login)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\JobSeeker;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Services\JobSeekerService;
 use App\Services\ApplicationService;
 use App\Services\JobService;
@@ -89,10 +90,10 @@ class ApplicationController extends Controller
     /**
      * Show the form for creating a new application.
      *
-     * @param int $jobId
+     * @param Job $job
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function create($jobId)
+    public function create(Job $job)
     {
         $jobSeeker = $this->jobSeekerService->getByUserId(Auth::id());
         
@@ -101,9 +102,7 @@ class ApplicationController extends Controller
                 ->with('error', 'Please complete your profile first.');
         }
 
-        $job = $this->jobService->findById($jobId);
-
-        if (!$job || !$job->is_active) {
+        if (!$job->is_active) {
             return redirect()->route('jobs.index')
                 ->with('error', 'Job not found or no longer active.');
         }

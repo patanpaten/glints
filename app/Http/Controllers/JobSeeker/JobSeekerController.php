@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\JobSeeker;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Services\JobSeekerService;
 use App\Services\EducationService;
 use App\Services\ExperienceService;
@@ -50,8 +51,8 @@ class JobSeekerController extends Controller
         $this->applicationService = $applicationService;
         $this->companyService = $companyService;
         $this->jobService = $jobService;
-        $this->middleware('auth');
-        $this->middleware('role:job-seeker');
+        $this->middleware('auth')->except(['jobDetail', 'jobs', 'companyDetail', 'companies']);
+        $this->middleware('role:job-seeker')->except(['jobDetail', 'jobs', 'companyDetail', 'companies']);
     }
 
     /**
@@ -236,17 +237,11 @@ class JobSeekerController extends Controller
     /**
      * Display company detail for job seekers.
      *
-     * @param string $slug
+     * @param Company $company
      * @return \Illuminate\View\View
      */
-    public function companyDetail($slug)
+    public function companyDetail(Company $company)
     {
-        $company = $this->companyService->getBySlug($slug);
-        
-        if (!$company) {
-            abort(404);
-        }
-        
         $jobs = $this->jobService->getByCompanyId($company->id);
         
         return view('jobseeker.companies.show', compact('company', 'jobs'));
@@ -266,14 +261,14 @@ class JobSeekerController extends Controller
     }
 
     /**
-     * Display job detail for job seekers.
+     * Show job detail
      *
-     * @param \App\Models\Job $job
+     * @param string $slug
      * @return \Illuminate\View\View
      */
-    public function jobDetail($job)
+    public function jobDetail($slug)
     {
-        $job = $this->jobService->findBySlug($job);
+        $job = $this->jobService->findBySlug($slug);
         
         if (!$job) {
             abort(404);

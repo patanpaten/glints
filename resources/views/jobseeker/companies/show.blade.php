@@ -58,7 +58,7 @@
                     <!-- Action Buttons -->
                     <div class="flex flex-wrap gap-3">
                         @if($jobs->count() > 0)
-                            <a href="{{ route('jobseeker.jobs', ['company' => $company->slug]) }}" 
+                            <a href="{{ route('jobseeker.jobs.index', ['company' => $company->slug]) }}" 
                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
                                 <i class="fas fa-briefcase mr-2"></i>View {{ $jobs->count() }} Open Positions
                             </a>
@@ -109,7 +109,7 @@
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-xl font-semibold text-gray-900">Open Positions ({{ $jobs->count() }})</h2>
-                            <a href="{{ route('jobseeker.jobs', ['company' => $company->slug]) }}" 
+                            <a href="{{ route('jobseeker.jobs.index', ['company' => $company->slug]) }}" 
                                class="text-blue-600 hover:text-blue-800 font-medium">
                                 View All Jobs <i class="fas fa-arrow-right ml-1"></i>
                             </a>

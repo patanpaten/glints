@@ -59,96 +59,21 @@
             <div class="max-w-7xl mx-auto">
                 <!-- For You Tab Content -->
                 <div id="tab-content-FOR_YOU" class="tab-content active">
-                    <div
-                        class="Box__StyledBox-sc-pr7b7l-0 kgsHid Flex__StyledFlex-sc-11ryoct-0 evNJxH ForYouTabsc__ForYouTabHeading-sc-c9mqd3-9 dNjkyW py-6">
-                        <!-- Horizontal Layout: Header dan Banner sejajar -->
-                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                            <!-- Header Section -->
-                            <div
-                                class="Box__StyledBox-sc-pr7b7l-0 kgsHid Flex__StyledFlex-sc-11ryoct-0 evNJxH ForYouTabsc__JobListContainer-sc-c9mqd3-1 oUXoo flex-1">
-                                <div class="Box__StyledBox-sc-pr7b7l-0 kgsHid">
-                                    <h1
-                                        class="ForYouTabHeadersc__Heading-sc-vgyvm0-0 euPYjq text-xl font-bold text-gray-900 mb-2">
-                                        Pekerjaan yang direkomendasikan untuk kamu
-                                    </h1>
-                                    <div class="ForYouTabHeadersc__SubHeading-sc-vgyvm0-1 dSxxXt text-gray-600 text-sm">
-                                        Berdasarkan profil dan lamaran kamu
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-
-                            <!-- Banner Section -->
-                            <div
-                                class="Box__StyledBox-sc-pr7b7l-0 kgsHid 
-            Flex__StyledFlex-sc-11ryoct-0 evNJxH 
-            ForYouTabsc__JobItemContainer-sc-c9mqd3-6 gFFycQ 
-            lg:flex-shrink-0 lg:w-auto">
-
-                                <div
-                                    class="Box__StyledBox-sc-pr7b7l-0 lpdGcH 
-                ForYouTabHeadersc__ReminderBannerBox-sc-vgyvm0-5 cWBkij 
-                bg-amber-50 border border-amber-100 rounded-md p-4">
-
-                                    <div class="flex items-center gap-4">
-
-                                        <!-- Icon -->
-                                        <div class="flex-shrink-0">
-                                            <img src="https://glints.com/images/sad-face.svg" alt="Sad Face"
-                                                class="w-8 h-8">
-                                        </div>
-
-                                        <!-- Text & Button -->
-                                        <div class="flex justify-between items-center flex-1 gap-4">
-
-                                            <!-- Text -->
-                                            <div>
-                                                <h4 class="font-semibold text-gray-900 mb-1">
-                                                    Apakah hasilnya kurang relevan?
-                                                </h4>
-                                                <p class="text-gray-600 text-sm">
-                                                    Update minat dan preferensi kerjamu untuk rekomendasi yang lebih akurat.
-                                                    Tidak sampai 1 menit!
-                                                </p>
-                                            </div>
-
-                                            <!-- Button -->
-                                            <a href="#"
-                                                class="text-blue-600 font-semibold hover:underline text-xs whitespace-nowrap">
-                                                UPDATE SEKARANG
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
+                    @include('jobseeker.jobs.for-you')
                 </div>
-            </div>
-
-            <!-- Eksplor Tab Content -->
-            <div id="tab-content-EXPLORE" class="tab-content hidden">
-                <div class="py-6">
-                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Jelajahi Semua Lowongan</h1>
-                    <div class="text-gray-600">Temukan peluang karir terbaik dari berbagai perusahaan</div>
+                
+                <!-- Explore Tab Content -->
+                <div id="tab-content-EXPLORE" class="tab-content">
+                    @include('jobseeker.jobs.explore', ['jobs' => $jobs])
                 </div>
-            </div>
-
-            <!-- Bookmark Tab Content -->
-            <div id="tab-content-BOOKMARKED" class="tab-content hidden">
-                <div class="py-6">
-                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Lowongan Tersimpan</h1>
-                    <div class="text-gray-600">Kelola lowongan yang telah kamu simpan</div>
+                
+                <!-- Bookmarked Tab Content -->
+                <div id="tab-content-BOOKMARKED" class="tab-content">
+                    @include('jobseeker.jobs.bookmarked')
                 </div>
-            </div>
-        </div>
-        </div>
-    </section>
+                
+            
+                            
 
     <!-- Mobile App Download Banner (Hidden on desktop) -->
     <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 lg:hidden">
@@ -172,250 +97,7 @@
 
 
 
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex gap-6">
-                <!-- 2 Column Layout: Job List (Left) and Job Detail (Right) -->
-                <div class="flex gap-6">
-                    <!-- Left Column: Job Listings -->
-                    <div class="w-1/2">
-                        <!-- Page Header -->
-                        <div class="mb-6">
-                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Lowongan Kerja</h1>
-                            <p class="text-gray-600">{{ $jobs->total() }} lowongan ditemukan</p>
-                        </div>
-
-                        <!-- Job Listings -->
-                        <div id="jobs-container" class="space-y-4 max-h-screen overflow-y-auto pr-4">
-                        @forelse($jobs as $job)
-                            <div onclick="showJobDetail({{ $job->id }})"
-                                class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow relative cursor-pointer job-card" data-job-id="{{ $job->id }}">
-                                <!-- Premium Employer Badge -->
-                                @if ($job->company->is_premium ?? false)
-                                    <div class="absolute top-4 right-4">
-                                        <span
-                                            class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                            PREMIUM EMPLOYER
-                                        </span>
-                                    </div>
-                                @endif
-
-                                <div class="flex items-start gap-4">
-                                    <!-- Company Logo -->
-                                    <div class="flex-shrink-0">
-                                        @if ($job->company->logo)
-                                            <img src="{{ Storage::url($job->company->logo) }}"
-                                                alt="{{ $job->company->name }}"
-                                                class="w-16 h-16 rounded-lg object-cover border border-gray-200">
-                                        @else
-                                            <div
-                                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                                <span class="text-white font-bold text-xl">
-                                                    {{ substr($job->company->name, 0, 1) }}
-                                                </span>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <!-- Job Info -->
-                                    <div class="flex-1 min-w-0">
-                                        <div class="flex items-start justify-between mb-3">
-                                            <div class="flex-1">
-                                                <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600 mb-1">
-                                                    <a href="{{ route('jobseeker.jobs.show', $job) }}">
-                                                        {{ $job->title }}
-                                                    </a>
-                                                </h3>
-                                                <p class="text-gray-700 font-medium mb-1">{{ $job->company->name }}</p>
-                                                <p class="text-gray-500 text-sm flex items-center gap-1">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                    {{ $job->location }}
-                                                </p>
-                                            </div>
-
-                                            <!-- Bookmark Button -->
-                                            <button class="text-gray-400 hover:text-red-500 transition-colors p-2">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-
-                                        <!-- Salary Range -->
-                                        @if ($job->salary_min && $job->salary_max)
-                                            <div class="mb-3">
-                                                <span class="text-lg font-bold text-green-600">
-                                                    Rp {{ number_format($job->salary_min) }} -
-                                                    {{ number_format($job->salary_max) }}
-                                                </span>
-                                                <span class="text-gray-500 text-sm ml-2">per bulan</span>
-                                            </div>
-                                        @endif
-
-                                        <!-- Job Tags -->
-                                        <div class="flex flex-wrap gap-2 mb-4">
-                                            @if($job->employment_type)
-                                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
-                                                    @switch($job->employment_type)
-                                                        @case('full-time')
-                                                            Penuh Waktu
-                                                            @break
-                                                        @case('part-time')
-                                                            Paruh Waktu
-                                                            @break
-                                                        @case('contract')
-                                                            Kontrak
-                                                            @break
-                                                        @case('internship')
-                                                            Magang
-                                                            @break
-                                                        @case('freelance')
-                                                            Freelance
-                                                            @break
-                                                        @default
-                                                            {{ ucfirst($job->employment_type) }}
-                                                    @endswitch
-                                                </span>
-                                            @endif
-                                            
-                                            @if($job->experience_level)
-                                                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-                                                    @switch($job->experience_level)
-                                                        @case('lt1')
-                                                            Entry Level
-                                                            @break
-                                                        @case('1-3')
-                                                            1-3 Tahun
-                                                            @break
-                                                        @case('3-5')
-                                                            3-5 Tahun
-                                                            @break
-                                                        @case('5-10')
-                                                            5-10 Tahun
-                                                            @break
-                                                        @default
-                                                            {{ $job->experience_level }}
-                                                    @endswitch
-                                                </span>
-                                            @endif
-                                            
-                                            @if($job->work_system)
-                                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">
-                                                    @switch($job->work_system)
-                                                        @case('onsite')
-                                                            Work from Office
-                                                            @break
-                                                        @case('remote')
-                                                            Work from Home
-                                                            @break
-                                                        @case('hybrid')
-                                                            Hybrid
-                                                            @break
-                                                        @default
-                                                            {{ ucfirst($job->work_system) }}
-                                                    @endswitch
-                                                </span>
-                                            @endif
-                                            <!-- Hot Badge -->
-                                            @if ($loop->index < 3)
-                                                <span
-                                                    class="px-3 py-1 bg-red-500 text-white text-sm font-bold rounded-full animate-pulse">
-                                                    🔥 HOT
-                                                </span>
-                                            @endif
-                                            <!-- Actively Hiring Badge -->
-                                            @if ($loop->index % 2 == 0)
-                                                <span
-                                                    class="px-3 py-1 bg-green-500 text-white text-sm font-bold rounded-full">
-                                                    ✓ Aktif Merekrut
-                                                </span>
-                                            @endif
-                                        </div>
-
-                                        <!-- Posted Time -->
-                                        <div class="flex items-center justify-between">
-                                            <p class="text-gray-500 text-sm">
-                                                <span class="job-time"
-                                                    data-created="{{ $job->created_at->toISOString() }}">
-                                                    Diposting {{ $job->created_at->diffForHumans() }}
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <div class="text-center py-16">
-                                <div
-                                    class="w-32 h-32 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Tidak ada lowongan ditemukan</h3>
-                                <p class="text-gray-500 mb-6">Coba ubah kata kunci atau filter pencarian Anda</p>
-                                <button
-                                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                                    Reset Filter
-                                </button>
-                            </div>
-                        @endforelse
-                        </div>
-
-                        <!-- Load More Button -->
-                        @if ($jobs->hasMorePages())
-                            <div class="text-center mt-8">
-                                <button id="load-more-btn"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2">
-                                    <span>Muat Lebih Banyak</span>
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        @endif
-
-                        <!-- Traditional Pagination (fallback) -->
-                        @if ($jobs->hasPages())
-                            <div class="mt-8">
-                                {{ $jobs->links() }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Right Column: Job Detail -->
-                    <div class="w-1/2">
-                        <div id="job-detail-container" class="bg-white border border-gray-200 rounded-lg p-6 sticky top-6">
-                            <div id="job-detail-placeholder" class="text-center py-16">
-                                <div class="w-32 h-32 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8zM8 14v.01M12 14v.01M16 14v.01"></path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Pilih Lowongan</h3>
-                                <p class="text-gray-500">Klik pada lowongan di sebelah kiri untuk melihat detail lengkap</p>
-                            </div>
-
-                            <div id="job-detail-content" class="hidden">
-                                <!-- Job detail content will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <style>
         .tab-content {
@@ -496,16 +178,18 @@
         }
 
         function extractJobDataFromCard(card) {
-            const title = card.querySelector('h3 a').textContent.trim();
+            const id = card.getAttribute('data-job-id');
+            const title = card.querySelector('h2').textContent.trim();
             const company = card.querySelector('.text-gray-700.font-medium').textContent.trim();
-            const location = card.querySelector('.text-gray-500.text-sm').textContent.trim();
-            const salary = card.querySelector('.text-green-600')?.textContent.trim() || 'Gaji tidak disebutkan';
-            const tags = Array.from(card.querySelectorAll('.px-3.py-1')).map(tag => tag.textContent.trim());
-            const postedTime = card.querySelector('.job-time').textContent.trim();
+            const location = card.querySelector('.text-gray-600').textContent.trim().replace('🗺️', '').trim();
+            const salary = card.querySelector('.text-green-600')?.textContent.trim() || 'Gaji akan dibahas saat interview';
+            const tags = Array.from(card.querySelectorAll('.px-2.py-1')).map(tag => tag.textContent.trim());
+            const postedTime = card.querySelector('.text-xs.text-gray-500').textContent.trim();
             const logo = card.querySelector('img')?.src || null;
-            const companyInitial = card.querySelector('.text-white.font-bold')?.textContent.trim() || company.charAt(0);
+            const companyInitial = company.charAt(0);
             
             return {
+                id,
                 title,
                 company,
                 location,
@@ -586,10 +270,10 @@
 
                     <!-- Apply Button -->
                     <div class="border-t border-gray-200 pt-6">
-                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors">
+                        <button onclick="applyToJob(${jobData.id})" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors">
                             Lamar Sekarang
                         </button>
-                        <button class="w-full mt-3 border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg font-medium transition-colors">
+                        <button onclick="toggleBookmark(${jobData.id})" class="w-full mt-3 border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg font-medium transition-colors">
                             Simpan Lowongan
                         </button>
                     </div>
@@ -597,6 +281,11 @@
             `;
             
             document.getElementById('job-detail-content').innerHTML = detailContent;
+        }
+
+        function applyToJob(jobId) {
+            // Redirect to application page
+            window.location.href = `/jobseeker/jobs/${jobId}/apply`;
         }
 
         // Event Listeners
@@ -708,5 +397,253 @@
             // Implementation for saving/unsaving jobs
             console.log('Toggle save job:', jobId);
         }
+
+        // Toggle filter section visibility
+        function toggleExploreFilterSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'none';
+                icon.style.transform = 'rotate(-90deg)';
+            }
+        }
+
+        // Update explore filters
+        function updateExploreFilters() {
+            // Get all filter values
+            const employmentTypes = Array.from(document.querySelectorAll('input[name="explore_employment_type[]"]:checked')).map(cb => cb.value);
+            const workSystems = Array.from(document.querySelectorAll('input[name="explore_work_system[]"]:checked')).map(cb => cb.value);
+            const locations = Array.from(document.querySelectorAll('input[name="explore_locations[]"]:checked')).map(cb => cb.value);
+            const experienceLevels = Array.from(document.querySelectorAll('input[name="explore_experience_level[]"]:checked')).map(cb => cb.value);
+            
+            // Apply filters to job list
+            searchExploreJobs();
+        }
+
+        // Clear all explore filters
+        function clearExploreFilters() {
+            // Uncheck all checkboxes
+            document.querySelectorAll('input[name^="explore_"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Reset search form
+            document.getElementById('explore-keyword').value = '';
+            document.getElementById('explore-location').value = '';
+            
+            // Refresh job list
+            searchExploreJobs();
+        }
+
+        // Explore tab functions
+        function toggleExploreFilters() {
+            const filters = document.getElementById('explore-desktop-filters');
+            filters.classList.toggle('hidden');
+        }
+
+        function searchExploreJobs() {
+            const form = document.getElementById('explore-search-form');
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
+            
+            // Add AJAX call to load jobs
+            fetch(`{{ route('jobseeker.jobs.index') }}?${params.toString()}&ajax=1`)
+                .then(response => response.json())
+                .then(data => {
+                    displayExploreJobs(data.jobs);
+                })
+                .catch(error => {
+                    console.error('Error loading jobs:', error);
+                });
+        }
+
+        function displayExploreJobs(jobs) {
+            const container = document.getElementById('explore-jobs-container');
+            
+            if (!jobs || jobs.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-search fa-3x text-gray-400 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Tidak Ada Lowongan Ditemukan</h3>
+                        <p class="text-gray-500">Coba ubah kata kunci atau filter pencarian Anda</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let jobsHtml = '';
+            jobs.forEach(job => {
+                jobsHtml += `
+                    <div class="job-card bg-white border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow" 
+                         data-job-id="${job.id}" onclick="showExploreJobDetail(this)">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-building text-gray-400"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 mb-1 truncate">${job.title}</h3>
+                                <p class="text-gray-600 text-sm mb-2">${job.company_name}</p>
+                                <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        ${job.location || 'Remote'}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-briefcase"></i>
+                                        ${job.employment_type || 'Full-time'}
+                                    </span>
+                                    ${job.salary_range ? `
+                                        <span class="flex items-center gap-1">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            ${job.salary_range}
+                                        </span>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = jobsHtml;
+        }
+
+        function showExploreJobDetail(card) {
+            // Remove highlight from other cards
+            document.querySelectorAll('#explore-jobs-container .job-card').forEach(c => {
+                c.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            });
+            
+            // Highlight selected card
+            card.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            
+            // Extract job data and display detail
+            const jobData = extractJobDataFromCard(card);
+            displayExploreJobDetail(jobData);
+        }
+
+        function displayExploreJobDetail(jobData) {
+            const placeholder = document.getElementById('explore-job-detail-placeholder');
+            const content = document.getElementById('explore-job-detail-content');
+            
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+            
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Header -->
+                    <div class="border-b pb-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-building text-gray-400 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-xl font-bold text-gray-900 mb-1">${jobData.title}</h2>
+                                <p class="text-gray-600 mb-2">${jobData.company}</p>
+                                <div class="flex flex-wrap gap-3 text-sm text-gray-500">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        ${jobData.location}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-briefcase"></i>
+                                        ${jobData.type || 'Full-time'}
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fas fa-clock"></i>
+                                        ${jobData.postedTime || 'Baru saja'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Description -->
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-3">Deskripsi Pekerjaan</h3>
+                        <div class="text-gray-700 text-sm leading-relaxed">
+                            <p>Kami sedang mencari kandidat yang berpengalaman untuk posisi ${jobData.title}. Kandidat ideal memiliki passion dalam bidang teknologi dan siap untuk berkontribusi dalam tim yang dinamis.</p>
+                            
+                            <h4 class="font-medium mt-4 mb-2">Tanggung Jawab:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Mengembangkan dan memelihara aplikasi web</li>
+                                <li>Berkolaborasi dengan tim lintas fungsi</li>
+                                <li>Memastikan kualitas kode dan performa aplikasi</li>
+                                <li>Mengikuti best practices dalam development</li>
+                            </ul>
+                            
+                            <h4 class="font-medium mt-4 mb-2">Kualifikasi:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Minimal 2 tahun pengalaman di bidang terkait</li>
+                                <li>Menguasai teknologi web modern</li>
+                                <li>Kemampuan komunikasi yang baik</li>
+                                <li>Mampu bekerja dalam tim</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Apply Button -->
+                    <div class="flex gap-3 pt-4 border-t">
+                        <button onclick="applyToJob(${jobData.id})" 
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition">
+                            Lamar Sekarang
+                        </button>
+                        <button onclick="toggleBookmark(${jobData.id})" 
+                                class="px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                            <i class="fas fa-bookmark text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Handle explore search form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const exploreForm = document.getElementById('explore-search-form');
+            if (exploreForm) {
+                exploreForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    searchExploreJobs();
+                });
+            }
+        });
     </script>
+
+    <!-- Mobile Filter Overlay -->
+    <div id="mobile-filter-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Mobile Filter Sidebar -->
+    <div id="mobile-filters" class="fixed top-0 left-0 h-full w-80 bg-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Filter Lowongan</h3>
+                <button onclick="toggleMobileFilters()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Filter Content -->
+            <div class="space-y-6">
+                <!-- Tipe Pekerjaan -->
+                <div>
+                    <h4 class="font-medium mb-3">Tipe Pekerjaan</h4>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" value="kontrak" class="mr-2" onchange="updateExploreFilters()">
+                            <span>Kontrak</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="magang" class="mr-2" onchange="updateExploreFilters()">
+                            <span>Magang</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="paruh_waktu" class="mr-2" onchange="updateExploreFilters()">
+                            <span>Paruh Waktu</span>
+                        </label>
 @endsection

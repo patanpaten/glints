@@ -170,7 +170,7 @@
                                     View Company
                                 </a>
                                 @if($company->jobs_count > 0)
-                                    <a href="{{ route('jobseeker.jobs', ['company' => $company->slug]) }}" 
+                                    <a href="{{ route('jobseeker.jobs.index', ['company' => $company->slug]) }}" 
                                        class="flex-1 bg-gray-100 text-gray-700 text-center py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                                         View Jobs
                                     </a>
