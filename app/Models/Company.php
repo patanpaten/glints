@@ -37,6 +37,15 @@ class Company extends Authenticatable
         'company_size',
         'credits',
         'country',
+        'email_notifications',
+        'application_notifications',
+        'marketing_notifications',
+    ];
+
+    protected $casts = [
+        'email_notifications' => 'boolean',
+        'application_notifications' => 'boolean',
+        'marketing_notifications' => 'boolean',
     ];
 
     /**
@@ -149,5 +158,13 @@ class Company extends Authenticatable
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    /**
+     * Check if this is a company (always true for Company model).
+     */
+    public function isCompany(): bool
+    {
+        return true;
     }
 }

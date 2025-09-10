@@ -22,7 +22,7 @@
         .navbar-brand {
             font-weight: bold;
             color: #0d6efd !important;
-            padding-top: 0;  
+            padding-top: 0;
             padding-bottom: 0;
         }
         .logo-navbar {
@@ -101,7 +101,7 @@
   <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
   <div class="container-fluid px-4">
-    
+
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" href="{{ route('company.dashboard') }}">
       <img src="/images/logo dan teks glints.png" alt="Glints" class="logo-navbar">
@@ -151,26 +151,26 @@
             <!-- Avatar -->
             <div class="position-relative">
                 @if(Auth::guard('company')->user()->logo)
-                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}" 
-                        alt="{{ Auth::guard('company')->user()->name }}" 
-                        class="rounded-circle" 
+                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}"
+                        alt="{{ Auth::guard('company')->user()->name }}"
+                        class="rounded-circle"
                         style="width: 30px; height: 30px; object-fit: cover;">
                 @else
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" 
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
                         style="width: 50px; height: 50px; font-size: 24px;">
                         {{ Auth::guard('company')->user()->initials }}
                     </div>
                 @endif
             </div>
-                    
+
             <!-- Info -->
             <div class="text-start small lh-1">
               <div class="fw-semibold">{{ Str::limit(Auth::guard('company')->user()->name, 10) }}...</div>
               <div class="d-flex align-items-center">
                 <!-- Bintang SVG -->
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="12" height="12" 
-                    fill="red" viewBox="0 0 24 24" 
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="12" height="12"
+                    fill="red" viewBox="0 0 24 24"
                     class="me-1">
                   <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
                 </svg>
@@ -186,12 +186,12 @@
         <li class="px-3 py-2 d-flex align-items-center border-bottom">
                       <div class="position-relative me-3">
                       @if(Auth::guard('company')->user()->logo)
-                          <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}" 
-                              alt="{{ Auth::guard('company')->user()->name }}" 
-                              class="rounded-circle" 
+                          <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}"
+                              alt="{{ Auth::guard('company')->user()->name }}"
+                              class="rounded-circle"
                               style="width: 50px; height: 50px; object-fit: cover;">
                       @else
-                          <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" 
+                          <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
                               style="width: 50px; height: 50px; font-size: 24px;">
                               {{ Auth::guard('company')->user()->initials }}
                           </div>
@@ -209,11 +209,11 @@
 
         <!-- Status VIP -->
         <li class="px-3 py-2 border-bottom">
-          <div class="text-muted small">Glints VIP: 
+          <div class="text-muted small">Glints VIP:
             <span class="text-dark">{{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}</span>
           </div>
           @if(!Auth::guard('company')->user()->isVip())
-            <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small">Upgrade ke VIP</a>
+            <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small text-decoration-none">Upgrade ke VIP</a>
           @endif
         </li>
 
@@ -230,13 +230,13 @@
         <li class="px-3 py-2 border-bottom">
           <div class="d-flex justify-content-between align-items-center">
             <span class="small">Glints Credits: <strong>{{ Auth::guard('company')->user()->credits }}</strong></span>
-            <a href="#" class="small fw-semibold text-primary">Top Up</a>
+            <a href="#" class="small fw-semibold text-primary text-decoration-none">Top Up</a>
           </div>
         </li>
 
         <!-- Menu navigasi -->
-        <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
-        <li><a class="dropdown-item" href="{{ route('company.profile') }}">Profil Perusahaan</a></li>
+        <li><a class="dropdown-item" href="{{ route('company.account-settings.index') }}">Pengaturan Akun</a></li>
+        <li><a class="dropdown-item" href="{{ route('company.profile.edit2') }}">Profil Perusahaan</a></li>
         <li><a class="dropdown-item" href="#">Tim Perusahaan</a></li>
 
         <li><hr class="dropdown-divider"></li>
@@ -266,13 +266,13 @@
 
       <!-- Language dropdown -->
     <div class="dropdown">
-      <button 
-        class="btn btn-sm btn-light d-flex align-items-center gap-1" 
-        type="button" 
-        id="langDropdown" 
-        data-bs-toggle="dropdown" 
+      <button
+        class="btn btn-sm btn-light d-flex align-items-center gap-1"
+        type="button"
+        id="langDropdown"
+        data-bs-toggle="dropdown"
         aria-expanded="false">
-        
+
         <i class="fas fa-globe text-secondary"></i>
         <span>ID</span>
         <i class="fas fa-chevron-down small text-secondary"></i>

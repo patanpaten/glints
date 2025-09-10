@@ -11,6 +11,7 @@ use App\Http\Controllers\Company\ApplicationController as CompanyApplicationCont
 use App\Http\Controllers\Company\Auth\LoginController as CompanyLoginController;
 use App\Http\Controllers\Company\Auth\RegisterController as CompanyRegisterController;
 use App\Http\Controllers\Company\Auth\CompanyRegisterEmailController;
+use App\Http\Controllers\Company\AccountSettingsController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\JobSeeker\EducationController;
 use App\Http\Controllers\JobSeeker\ExperienceController;
@@ -106,6 +107,14 @@ Route::prefix('company')->name('company.')->group(function () {
 Route::prefix('company')->name('company.')->middleware('auth:company')->group(function () {
     // Dashboard
     Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('dashboard');
+
+    // Account Settings
+    Route::prefix('account-settings')->name('account-settings.')->group(function () {
+        Route::get('/', [AccountSettingsController::class, 'index'])->name('index');
+        Route::put('/account', [AccountSettingsController::class, 'updateAccount'])->name('update-account');
+        Route::put('/password', [AccountSettingsController::class, 'updatePassword'])->name('update-password');
+        Route::put('/notifications', [AccountSettingsController::class, 'updateNotifications'])->name('update-notifications');
+    });
 
     // Profile
     Route::prefix('profile')->name('profile.')->group(function () {
