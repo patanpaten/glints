@@ -26,10 +26,15 @@ class CvSearchController extends Controller
         $categories = JobCategory::orderBy('name')->get();
         
         // Get recent searches
-        $recentSearches = CvSearch::where('company_id', Auth::user()->company->id)
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+        $company = Auth::user()->company;
+        $recentSearches = collect();
+        
+        if ($company) {
+            $recentSearches = CvSearch::where('company_id', $company->id)
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
+        }
 
         return view('cv-search.index', compact('skills', 'categories', 'recentSearches'));
     }
@@ -123,7 +128,7 @@ class CvSearchController extends Controller
 
         // Store search
         $cvSearch = CvSearch::create([
-            'company_id' => $company->id,
+            'company_id' => $company ? $company->id : null,
             'search_query' => $request->search_query,
             'filters' => $request->only(['skills', 'experience_min', 'experience_max', 'education_level', 'location', 'category_id']),
             'results_count' => count($scoredResults),
@@ -147,7 +152,8 @@ class CvSearchController extends Controller
      */
     public function results(CvSearch $cvSearch)
     {
-        if (!Auth::user()->isCompany() || $cvSearch->company_id !== Auth::user()->company->id) {
+        $company = Auth::user()->company;
+        if (!Auth::user()->isCompany() || !$company || $cvSearch->company_id !== $company->id) {
             abort(403);
         }
 
@@ -164,7 +170,8 @@ class CvSearchController extends Controller
      */
     public function showProfile(CvSearchResult $result)
     {
-        if (!Auth::user()->isCompany() || $result->cvSearch->company_id !== Auth::user()->company->id) {
+        $company = Auth::user()->company;
+        if (!Auth::user()->isCompany() || !$company || $result->cvSearch->company_id !== $company->id) {
             abort(403);
         }
 

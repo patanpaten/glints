@@ -11,9 +11,9 @@
             <div class="d-flex align-items-center gap-3">
                 <div class="position-relative">
                     @if(Auth::guard('company')->user()->logo)
-                        <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}" 
-                             alt="{{ Auth::guard('company')->user()->name }}" 
-                             class="rounded" 
+                        <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}"
+                             alt="{{ Auth::guard('company')->user()->name }}"
+                             class="rounded"
                              style="width: 60px; height: 60px; object-fit: cover;">
                     @else
                         <div class="bg-primary rounded d-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 24px;">
@@ -28,7 +28,6 @@
                         @if(Auth::guard('company')->user()->isVip())
                             <span class="badge bg-warning-subtle text-warning"><i class="fas fa-crown"></i> VIP</span>
                         @endif
-                        <span class="text-muted small">{{ Auth::guard('company')->user()->country }}</span>
                     </div>
                 </div>
             </div>
@@ -53,7 +52,7 @@
 
     <!-- BODY -->
     <div class="row">
-        
+
         <!-- LOWONGAN (kiri) -->
         <div class="col-md-8">
             <div class="card mb-4 border-0 shadow-sm">
@@ -65,9 +64,9 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="position-relative w-50">
                             <input type="text" placeholder="Cari nama loker atau kata kunci"
-                                class="form-control" 
+                                class="form-control"
                                 style="height: 38px; border-radius: 6px; padding-left: 40px;">
-                            <i class="fas fa-search position-absolute" 
+                            <i class="fas fa-search position-absolute"
                             style="top: 50%; left: 12px; transform: translateY(-50%); color: #666;"></i>
                         </div>
 
@@ -85,31 +84,31 @@
                         <li class="nav-item" role="presentation">
                             <a href="#" class="nav-link active d-flex align-items-center justify-content-between"
                             style="color: #666;" role="tab">
-                                Semua Loker 
+                                Semua Loker
                                 <span class="badge rounded-pill" style="background-color: #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs }}</span>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Aktif 
+                                Aktif
                                 <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $activeJobs }}</span>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Nonaktif 
+                                Nonaktif
                                 <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs - $activeJobs }}</span>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #017EB7;" role="tab">
-                                Dalam Review 
+                                Dalam Review
                                 <span class="badge rounded-pill" style="background-color: #d3d3d3; color:#017EB7; margin-left: 6px;">0</span>
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Draft 
+                                Draft
                                 <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">0</span>
                             </a>
                         </li>
@@ -119,22 +118,19 @@
                     @if($recentJobs && $recentJobs->count() > 0)
                         @foreach($recentJobs as $job)
                             <div class="card mb-3 border shadow-sm rounded-3 position-relative">
-
                                 {{-- Status di pojok kanan atas --}}
                                 <div class="position-absolute top-0 end-0 m-3 d-flex align-items-center gap-1">
                                     <span class="badge bg-light text-dark border px-2 py-1 d-flex align-items-center gap-2">
                                         <span class="fw-semibold">{{ $job->is_active ? 'Aktif' : 'Nonaktif' }}</span>
-                                        <span class="d-inline-block rounded-circle" 
+                                        <span class="d-inline-block rounded-circle"
                                             style="width:12px; height:12px; background-color: {{ $job->is_active ? '#28a745' : '#6c757d' }};">
                                         </span>
                                     </span>
                                 </div>
 
                                 <div class="card-body p-3">
-
                                     {{-- Header + Statistik sejajar --}}
                                     <div class="d-flex justify-content-between align-items-start flex-wrap">
-
                                         {{-- Kiri: Judul + Detail --}}
                                         <div class="me-3" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
                                             <h5 class="fw-semibold mb-2 text-wrap">{{ $job->title }}</h5>
@@ -146,31 +142,30 @@
                                                     <i class="fas fa-map-marker-alt me-1"></i> {{ $job->office_address }}
                                                 </span>
                                                 <span class="text-wrap mt-3">
-                                                    <i class="fas fa-calendar-alt me-1"></i> 
+                                                    <i class="fas fa-calendar-alt me-1"></i>
                                                     Aktif hingga: {{ $job->created_at->addDays(30)->format('d M Y') }}
                                                 </span>
                                             </div>
                                         </div>
 
-
                                         {{-- Kanan: Statistik --}}
-                                        <div class="row text-center border rounded-2 py-2 mt-5" style="min-width: 620px; margin-right: 5px; me-10">
+                                        <div class="row text-center border rounded-2 py-2 mt-5" style="min-width: 550px; margin-right: 5px; me-10">
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->chat_count ?? 0 }}</p>
                                                 <p class="text-muted small mb-1">Chat Dimulai</p>
-                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}" 
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->applications_count ?? 0 }}</p>
                                                 <p class="text-muted small mb-1">Terhubung</p>
-                                                <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" 
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4">
                                                 <p class="fw-bold mb-0">{{ $job->rejected_count ?? 0 }}</p>
                                                 <p class="text-muted small mb-1">Belum Sesuai</p>
-                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}" 
+                                                <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                         </div>
@@ -189,7 +184,7 @@
 
                                     {{-- Kanan: tombol lain --}}
                                     <div class="d-flex align-items-center gap-2">
-                                        <a href="{{ route('company.applications.index', ['job' => $job->id]) }}" 
+                                        <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                         class="btn btn-primary btn-sm fw-semibold">
                                             Kelola Kandidat
                                         </a>
@@ -199,7 +194,7 @@
 
                                         {{-- Dropdown kanan --}}
                                         <div class="dropdown">
-                                            <button class="btn btn-light btn-sm border d-flex align-items-center justify-content-center" 
+                                            <button class="btn btn-light btn-sm border d-flex align-items-center justify-content-center"
                                                     type="button" data-bs-toggle="dropdown"
                                                     style="width:40px; height:30px;">
                                                 <i class="fas fa-ellipsis-v"></i>
@@ -225,7 +220,6 @@
                                     </div>
                                 </div>
                             </div>
-                         
                         @endforeach
                     @else
                         <div class="text-center py-5">
@@ -271,12 +265,12 @@
                 style="background: linear-gradient(to bottom, #4b4b4b, #fbbf24); border-radius: 8px;">
             <div class="card-body d-flex align-items-center p-3">
                 <!-- Logo -->
-                <img src="{{ asset('images/glints-vip-icon.svg') }}" 
+                <img src="{{ asset('images/glints-vip-icon.svg') }}"
                     alt="Glints VIP Icon" style="width:150px; height:150px;" class="me-4  " />
                 <!-- Konten -->
                 <div>
                 <h6 class="fw-bold mb-2">Fitur baru: Glints VIP!</h6>
-                <p class="small mb-3 mb-2">Dapatkan fitur eksklusif untuk proses rekrutmen yang lebih cepat!</p>
+                <p class="small mb-3">Dapatkan fitur eksklusif untuk proses rekrutmen yang lebih cepat!</p>
                 <button class="btn btn-outline-light btn-sm fw-semibold px-3">
                     Upgrade ke VIP
                 </button>
@@ -290,7 +284,7 @@
             <div class="card-body p-3">
 
                 <div class="d-flex align-items-center gap-3">
-                
+
                 <!-- Bagian QR + label -->
                 <div class="text-center">
                     <!-- Label bubble -->
@@ -299,19 +293,19 @@
                     SCAN UNTUK DOWNLOAD
                     <!-- segitiga bawah -->
                     <div style="
-                        position: absolute; 
-                        bottom: -6px; left: 50%; 
+                        position: absolute;
+                        bottom: -6px; left: 50%;
                         transform: translateX(-50%);
-                        width: 0; height: 0; 
-                        border-left: 6px solid transparent; 
-                        border-right: 6px solid transparent; 
+                        width: 0; height: 0;
+                        border-left: 6px solid transparent;
+                        border-right: 6px solid transparent;
                         border-top: 6px solid white;">
                     </div>
                     </div>
 
                     <!-- QR Code box -->
                     <div class="bg-white rounded p-2 d-inline-block">
-                    <img src="{{ asset('images/glints-web2-app-qr.png') }}" 
+                    <img src="{{ asset('images/glints-web2-app-qr.png') }}"
                         alt="Employers App QR" width="120" height="120" class="p-2" />
                     </div>
                 </div>
@@ -320,7 +314,7 @@
                 <div>
                     <h6 class="fw-bold mb-1">Lebih Mudah di Aplikasi</h6>
                     <p class="small mb-3">Tingkatin pengalaman rekrutmenmu dengan Aplikasi Glints!</p>
-                    <a href="https://help.glints.com/hc/id-id/sections/29365279475993-Glints-App-for-Employers-FAQs" 
+                    <a href="https://help.glints.com/hc/id-id/sections/29365279475993-Glints-App-for-Employers-FAQs"
                     target="_blank" class="btn btn-outline-light btn-sm fw-semibold px-3">
                     Cara Menggunakan
                     </a>
@@ -328,11 +322,6 @@
                 </div>
             </div>
             </div>
-
-
-
-
-
         </div>
     </div>
 </div>

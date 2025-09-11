@@ -1,247 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Features - Glints</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        .feature-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .feature-card.featured {
-            border-color: #ffc107;
-            position: relative;
-        }
-        .feature-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #ffc107;
-            color: #000;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #007bff;
-        }
-        .price .currency {
-            font-size: 1rem;
-            vertical-align: top;
-        }
-        .price .period {
-            font-size: 1rem;
-            color: #6c757d;
-        }
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        .feature-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f8f9fa;
-        }
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-        .feature-list li i {
-            color: #28a745;
-            margin-right: 10px;
-        }
-        .subscription-status {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 10;
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">Glints</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('jobs.index') }}">Jobs</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
-                        </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                {{ Auth::user()->name }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                @if(Auth::user()->isCompany())
-                                    <li><a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('company.subscriptions.history') }}">My Subscriptions</a></li>
-                                @endif
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
+@extends('company.app')
 
-    <!-- Hero Section -->
-    <section class="py-5 bg-primary text-white text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Unlock Premium Features</h1>
-            <p class="lead mb-4">Take your hiring to the next level with our premium features designed for companies.</p>
-            @if(Auth::user() && Auth::user()->isCompany())
-                <a href="{{ route('company.subscriptions.history') }}" class="btn btn-light btn-lg">View My Subscriptions</a>
-            @else
-                <a href="{{ route('register') }}" class="btn btn-light btn-lg">Get Started</a>
-            @endif
-        </div>
-    </section>
+@section('title', 'Company Dashboard')
 
-    <!-- Features Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row">
-                @foreach($features as $feature)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card feature-card h-100 {{ $feature->name === 'Professional' ? 'featured' : '' }}">
-                            @if(Auth::user() && Auth::user()->isCompany())
-                                @php
-                                    $hasActiveSubscription = $feature->hasActiveSubscription(Auth::user()->company->id);
-                                @endphp
-                                @if($hasActiveSubscription)
-                                    <div class="subscription-status">
-                                        <span class="badge bg-success">Active</span>
+@section('content')
+<div class="container-fluid py-4">
+
+    <!-- HEADER PERUSAHAAN -->
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-body d-flex justify-content-between align-items-center p-4">
+            <h2 class="fw-bold mb-0" style="color: #2D2D2D;">Fitur Premium</h2>
+        </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="row">
+      <!-- LOWONGAN (kiri) -->
+        <div class="col-md-8">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-body">
+
+                    <!-- TABS -->
+                    <ul class="nav nav-tabs mb-3">
+                        <!-- Semua Fitur -->
+                        <li class="nav-item">
+                            <button class="nav-link active fw-semibold text-primary"
+                                    id="features-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#features"
+                                    type="button">
+                                Semua Fitur
+                            </button>
+                        </li>
+
+                        <!-- Dibeli -->
+                        <li class="nav-item">
+                            <button class="nav-link fw-semibold text-muted d-flex align-items-center gap-2"
+                                    id="purchases-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#purchases"
+                                    type="button">
+                                Dibeli 
+                                <span class="badge bg-light text-dark border rounded-pill px-2">0</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- TAB CONTENT -->
+                    <div class="tab-content">
+                        <!-- SEMUA FITUR -->
+                        <div class="tab-pane fade show active" id="features">
+                            <div class="row mt-3">
+                                <!-- Glints VIP -->
+                                <div class="col-12 mb-3">
+                                    <div class="border rounded p-3">
+                                        <p class="mb-2">
+                                            <span style="background-color:#fdfa3a;">
+                                                <span class="fw-semibold text-dark">Promo Terbatas!</span> <span class="text-dark">Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!</span>
+                                            </span>
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-start">
+                                                <img src="{{ asset('images/glints-vip-icon.svg') }}"
+                                                    alt="Glints VIP" class="me-3" style="width:60px; height:60px;">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">Glints VIP</h6>
+                                                    <p class="small text-muted mb-0">
+                                                        Ingin meningkatkan proses rekrutmen dengan fitur premium? Upgrade ke Glints VIP!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                        </div>
                                     </div>
-                                @endif
-                            @endif
-                            
-                            <div class="card-body text-center">
-                                <h4 class="card-title">{{ $feature->name }}</h4>
-                                <p class="card-text text-muted">{{ $feature->description }}</p>
-                                
-                                <div class="price mb-4">
-                                    <span class="currency">$</span>{{ number_format($feature->price, 2) }}
-                                    <span class="period">/ {{ $feature->duration_days }} days</span>
                                 </div>
-                                
-                                <ul class="feature-list text-start mb-4">
-                                    @foreach($feature->features as $featureItem)
-                                        <li>
-                                            <i class="bi bi-check-circle-fill"></i>
-                                            {{ $featureItem }}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                
-                                @if(Auth::user() && Auth::user()->isCompany())
-                                    @if($hasActiveSubscription)
-                                        <button class="btn btn-success w-100" disabled>
-                                            <i class="bi bi-check-circle"></i> Subscribed
-                                        </button>
-                                    @else
-                                        <form action="{{ route('company.premium-features.subscribe', $feature->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary w-100">
-                                                <i class="bi bi-star"></i> Subscribe Now
-                                            </button>
-                                        </form>
-                                    @endif
-                                @else
-                                    <a href="{{ route('register') }}" class="btn btn-primary w-100">
-                                        <i class="bi bi-person-plus"></i> Sign Up to Subscribe
-                                    </a>
-                                @endif
+
+                                <!-- Hot Job -->
+                                <div class="col-12 mb-3">
+                                    <div class="border rounded p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-start">
+                                                <img src="{{ asset('images/job-boost-icon.svg') }}"
+                                                    alt="Hot Job" class="me-3" style="width:60px; height:60px;">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">Hot Job</h6>
+                                                    <p class="small text-muted mb-0">
+                                                        Butuh lebih banyak pelamar? Boost lowongan kamu dengan hot job!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Recommended Talents -->
+                                <div class="col-12 mb-3">
+                                    <div class="border rounded p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-start">
+                                                <img src="{{ asset('images/recommended-talent-icon.svg') }}"
+                                                    alt="Recommended Talents" class="me-3" style="width:60px; height:60px;">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">Recommended Talents</h6>
+                                                    <p class="small text-muted mb-0">
+                                                        Kesulitan mendapatkan pelamar yang tepat? Coba Recommended Talent!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cari CV -->
+                                <div class="col-12 mb-3">
+                                    <div class="border rounded p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-start">
+                                                <img src="{{ asset('images/talent-seach-feature.svg') }}"
+                                                    alt="Cari CV" class="me-3" style="width:60px; height:60px;">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">Cari CV</h6>
+                                                    <p class="small text-muted mb-0">
+                                                        Kesulitan menemukan pelamar yang cocok? Cari di database Glints dan hubungi langsung!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIBELI -->
+                        <div class="tab-pane fade" id="purchases">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center py-5">
+                                <!-- Gambar / Icon -->
+                                <img src="{{ asset('images/sampah.gif') }}"
+                                    alt="Empty State"
+                                    class="mb-3" style="max-width: 200px;">
+
+                                <!-- Judul -->
+                                <h5 class="fw-bold">Belum memiliki item</h5>
+
+                                <!-- Deskripsi -->
+                                <p class="text-muted mb-3">
+                                    Anda belum membeli fitur apapun
+                                </p>
+
+                                <!-- Tombol Aksi -->
+                                <a href="{{ route('company.premium-features.index') }}" class="btn btn-primary">
+                                    Cek Fitur Premium
+                                </a>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+                    <!-- END TAB CONTENT -->
 
-    <!-- Benefits Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Why Choose Premium Features?</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="text-center">
-                        <i class="bi bi-graph-up-arrow fs-1 text-primary mb-3"></i>
-                        <h5>Better Hiring Results</h5>
-                        <p class="text-muted">Access advanced tools to find the perfect candidates faster and more efficiently.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="text-center">
-                        <i class="bi bi-people fs-1 text-primary mb-3"></i>
-                        <h5>Larger Talent Pool</h5>
-                        <p class="text-muted">Reach more qualified candidates with premium job posting features and CV search.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="text-center">
-                        <i class="bi bi-bar-chart fs-1 text-primary mb-3"></i>
-                        <h5>Detailed Analytics</h5>
-                        <p class="text-muted">Get insights into your job performance and candidate engagement with comprehensive analytics.</p>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-5 bg-dark text-white text-center">
-        <div class="container">
-            <h2 class="mb-4">Ready to Upgrade?</h2>
-            <p class="lead mb-4">Join thousands of companies that have improved their hiring process with Glints Premium.</p>
-            @if(Auth::user() && Auth::user()->isCompany())
-                <a href="{{ route('company.dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
-            @else
-                <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Start Free Trial</a>
-            @endif
+        <!-- SIDEBAR (kanan) -->
+        <div class="col-md-4">
+            <!-- GLINTS CREDITS CARD -->
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="fw-semibold text-dark">Glints Credits</span>
+                            <i class="fas fa-info-circle text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#F5282D" height="32" width="32" viewBox="0 0 24 24">
+                            <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
+                        </svg>
+                        <span class="fw-bold fs-5 text-dark">0</span>
+                    </div>
+                    <button class="btn btn-outline-secondary w-100 fw-semibold">
+                        Top Up
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAKET SAAT INI CARD -->
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body">
+                    <p class="fw-semibold text-dark mb-3">Paket Saat Ini</p>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="40" viewBox="0 0 24 24">
+                            <path d="M12 .5 16 8l7.5 4-7.5 4-4 7.5L8 16 .5 12 8 8l4-7.5Z"></path>
+                        </svg>
+                        <span class="fw-bold fs-6 text-dark">Standard</span>
+                    </div>
+                    <p class="text-muted small mb-3">0 / 5 lowongan sedang aktif</p>
+                    <a href="/upgrade-plan" class="btn btn-outline-secondary w-100 fw-semibold">
+                        Lihat Paket
+                    </a>
+                </div>
+            </div>
+
+            <!-- MENU FITUR -->
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="list-group list-group-flush">
+                    <a href="/features/history?tab=ORDER_HISTORY&prev=/features?tab=FEATURES"
+                       class="list-group-item list-group-item-action d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                            <path d="m16 2 5 5v13.992A1 1 0 0 1 20.007 22H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.998 2H16Zm-1 2H5v16h14V8h-4V4Zm-2 5v4h3v2h-5V9h2Z"></path>
+                        </svg>
+                        <span class="text-muted">Riwayat Pembayaran</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                        </svg>
+                    </a>
+                    <a href="/features/history?tab=ACTIVE_JOBS&prev=/features?tab=FEATURES"
+                       class="list-group-item list-group-item-action d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                            <path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4ZM4 16v3h16v-3H4Zm0-2h16V7H4v7ZM9 3v2h6V3H9Zm2 8h2v2h-2v-2Z"></path>
+                        </svg>
+                        <span class="text-muted">Loker Aktif</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                        </svg>
+                    </a>
+                    <a href="/features/history?tab=CREDIT_HISTORY&prev=/features?tab=FEATURES"
+                       class="list-group-item list-group-item-action d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                            <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
+                        </svg>
+                        <span class="text-muted">Riwayat Credits</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p>&copy; {{ date('Y') }} Glints. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    </div>
+</div>
+@endsection

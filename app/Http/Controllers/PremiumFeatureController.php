@@ -17,7 +17,7 @@ class PremiumFeatureController extends Controller
         $features = PremiumFeature::where('is_active', true)->get();
         
         $userSubscriptions = collect();
-        if (Auth::user()->isCompany()) {
+        if (Auth::user()->isCompany() && Auth::user()->company) {
             $userSubscriptions = CompanySubscription::where('company_id', Auth::user()->company->id)
                 ->with('premiumFeature')
                 ->get();
@@ -32,7 +32,7 @@ class PremiumFeatureController extends Controller
     public function show(PremiumFeature $feature)
     {
         $hasActiveSubscription = false;
-        if (Auth::user()->isCompany()) {
+        if (Auth::user()->isCompany() && Auth::user()->company) {
             $hasActiveSubscription = $feature->hasActiveSubscription(Auth::user()->company->id);
         }
 
@@ -44,7 +44,7 @@ class PremiumFeatureController extends Controller
      */
     public function subscribe(Request $request, PremiumFeature $feature)
     {
-        if (!Auth::user()->isCompany()) {
+        if (!Auth::user()->isCompany() || !Auth::user()->company) {
             abort(403, 'Only companies can subscribe to premium features.');
         }
 
@@ -71,7 +71,7 @@ class PremiumFeatureController extends Controller
      */
     public function cancel(CompanySubscription $subscription)
     {
-        if (!Auth::user()->isCompany() || $subscription->company_id !== Auth::user()->company->id) {
+        if (!Auth::user()->isCompany() || !Auth::user()->company || $subscription->company_id !== Auth::user()->company->id) {
             abort(403);
         }
 
@@ -85,7 +85,7 @@ class PremiumFeatureController extends Controller
      */
     public function history()
     {
-        if (!Auth::user()->isCompany()) {
+        if (!Auth::user()->isCompany() || !Auth::user()->company) {
             abort(403);
         }
 
