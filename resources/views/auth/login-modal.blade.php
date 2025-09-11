@@ -111,20 +111,29 @@
     <!-- Step 2 -->
     <div class="modal-body" id="loginStep2">
       <h3>Masuk ke Glints untuk melanjutkan</h3>
-      <div class="login-field">
-        <input type="email" id="emailInput" placeholder=" " required>
-        <label for="emailInput">Alamat email</label>
-        <small class="error-message">Email wajib diisi</small>
-      </div>
-      <div class="login-field">
-        <input type="password" id="password" placeholder=" " required>
-        <label for="password">Kata sandi</label>
-        <button type="button" class="toggle-password" onclick="togglePassword()">
-          <i id="toggleIcon" class="fas fa-eye-slash"></i>
-        </button>
-      </div>
-      <a href="#">Lupa kata sandi?</a>
-      <button class="btn-submit">MASUK</button>
+      <form id="loginForm">
+        @csrf
+        <input type="hidden" name="login_from" value="modal">
+        
+        <div class="login-field">
+          <input type="email" name="email" id="emailInput" placeholder=" " value="{{ old('email') }}" required>
+          <label for="emailInput">Alamat email</label>
+          <small class="error-message" id="emailError"></small>
+        </div>
+        
+        <div class="login-field">
+          <input type="password" name="password" id="password" placeholder=" " required>
+          <label for="password">Kata sandi</label>
+          <button type="button" class="toggle-password" onclick="togglePassword()">
+            <i id="toggleIcon" class="fas fa-eye-slash"></i>
+          </button>
+          <small class="error-message" id="passwordError"></small>
+        </div>
+        
+        <a href="#">Lupa kata sandi?</a>
+        <button type="submit" class="btn-submit" id="loginSubmitBtn">MASUK</button>
+      </form>
+      
       <div class="divider"><span>ATAU</span></div>
       <div class="social-login">
         <img src="{{ asset('images/google.png') }}" alt="Google" class="google-logo">
@@ -143,9 +152,20 @@
   const emailBtn = document.getElementById('emailLoginBtn');
   const closeBtn = document.getElementById('closeModal');
   const modalContent = document.querySelector('.modal-content');
+  const loginForm = document.getElementById('loginForm');
+  const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
 
   function openModal() {
     modal.style.display = 'flex';
+  }
+
+  function clearErrors() {
+    emailError.style.display = 'none';
+    emailError.textContent = '';
+    passwordError.style.display = 'none';
+    passwordError.textContent = '';
   }
 
   emailBtn.addEventListener('click', (e) => {
@@ -153,6 +173,7 @@
     step1.style.display = 'none';
     step2.style.display = 'block';
     modalContent.classList.add('step2');
+    clearErrors();
   });
 
   closeBtn.addEventListener('click', () => {
@@ -160,6 +181,8 @@
     step1.style.display = 'block';
     step2.style.display = 'none';
     modalContent.classList.remove('step2');
+    clearErrors();
+    loginForm.reset();
   });
 
   // Close modal when clicking outside
@@ -169,6 +192,58 @@
       step1.style.display = 'block';
       step2.style.display = 'none';
       modalContent.classList.remove('step2');
+      clearErrors();
+      loginForm.reset();
+    }
+  });
+
+  // Handle form submission
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearErrors();
+    
+    // Disable submit button
+    loginSubmitBtn.disabled = true;
+    loginSubmitBtn.textContent = 'MEMPROSES...';
+    
+    const formData = new FormData(loginForm);
+    
+    try {
+      const response = await fetch('{{ route("login") }}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') || document.querySelector('input[name="_token"]').value
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Login berhasil, redirect ke dashboard
+        window.location.href = data.redirect_url;
+      } else {
+        // Login gagal, tampilkan error
+        if (data.errors) {
+          if (data.errors.email) {
+            emailError.textContent = data.errors.email[0];
+            emailError.style.display = 'block';
+          }
+          if (data.errors.password) {
+            passwordError.textContent = data.errors.password[0];
+            passwordError.style.display = 'block';
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      emailError.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+      emailError.style.display = 'block';
+    } finally {
+      // Re-enable submit button
+      loginSubmitBtn.disabled = false;
+      loginSubmitBtn.textContent = 'MASUK';
     }
   });
 

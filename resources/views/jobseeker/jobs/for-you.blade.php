@@ -157,9 +157,12 @@
                                         </div>
                                         
                                         <!-- Bookmark Button -->
-                        <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" onclick="event.stopPropagation(); toggleBookmark({{ $job->id }})">
-                             <i class="far fa-bookmark text-lg"></i>
-                         </button>
+                        @php
+                            $isBookmarked = $savedJobs && $savedJobs->contains('id', $job->id);
+                        @endphp
+                        <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" onclick="event.stopPropagation(); toggleBookmark({{ $job->id }}, this)" title="{{ $isBookmarked ? 'Hapus dari bookmark' : 'Simpan lowongan' }}">
+                            <i class="{{ $isBookmarked ? 'fas' : 'far' }} fa-bookmark text-lg"></i>
+                        </button>
                                     </div>
                                 </div>
                             </div>

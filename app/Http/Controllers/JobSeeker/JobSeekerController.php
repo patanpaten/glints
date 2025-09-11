@@ -257,7 +257,13 @@ class JobSeekerController extends Controller
     {
         $jobs = $this->jobService->getJobs($request->all());
         
-        return view('jobseeker.jobs.index', compact('jobs'));
+        // Get saved jobs for authenticated job seeker
+        $savedJobs = collect();
+        if (auth()->check() && auth()->user()->jobSeeker) {
+            $savedJobs = auth()->user()->jobSeeker->savedJobs;
+        }
+        
+        return view('jobseeker.jobs.index', compact('jobs', 'savedJobs'));
     }
 
     /**

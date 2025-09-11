@@ -37,7 +37,15 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        $isModalLogin = $request->input('login_from') === 'modal';
+
         if ($validator->fails()) {
+            if ($isModalLogin) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
             return back()
                 ->withErrors($validator)
                 ->withInput($request->except('password'));
@@ -51,20 +59,36 @@ class AuthController extends Controller
             $user = Auth::user();
             $role = $user->role?->slug; // aman kalau role null
 
+            $redirectUrl = '';
             if ($role === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
+                $redirectUrl = route('admin.dashboard');
+            } elseif ($role === 'company') {
+                $redirectUrl = route('company.dashboard');
+            } else {
+                // default ke jobseeker/dashboard
+                $redirectUrl = route('jobseeker.dashboard');
             }
 
-            if ($role === 'company') {
-                return redirect()->intended(route('company.dashboard'));
+            if ($isModalLogin) {
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => $redirectUrl
+                ]);
             }
 
-            // default ke jobseeker/dashboard
-            return redirect()->intended(route('jobseeker.dashboard'));
+            return redirect()->intended($redirectUrl);
+        }
+
+        $errorMessage = 'Email atau kata sandi tidak cocok.';
+        if ($isModalLogin) {
+            return response()->json([
+                'success' => false,
+                'errors' => ['email' => [$errorMessage]]
+            ], 422);
         }
 
         return back()
-            ->withErrors(['email' => 'Email atau kata sandi tidak cocok.'])
+            ->withErrors(['email' => $errorMessage])
             ->withInput($request->except('password'));
     }
 

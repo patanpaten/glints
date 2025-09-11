@@ -398,6 +398,182 @@
             console.log('Toggle save job:', jobId);
         }
 
+        // Bookmark functionality
+        function toggleBookmark(jobId, buttonElement = null) {
+            // Check if user is authenticated
+            @guest
+                alert('Silakan login terlebih dahulu untuk menyimpan lowongan.');
+                window.location.href = '{{ route("login") }}';
+                return;
+            @endguest
+
+            // Show loading state
+            if (buttonElement) {
+                const originalContent = buttonElement.innerHTML;
+                buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                buttonElement.disabled = true;
+            }
+
+            // Check if job is already bookmarked
+            const isBookmarked = checkIfBookmarked(jobId);
+            const url = isBookmarked ? 
+                `{{ route('jobseeker.saved-jobs.unsave', ':jobId') }}`.replace(':jobId', jobId) :
+                `{{ route('jobseeker.saved-jobs.save') }}`;
+            const method = isBookmarked ? 'DELETE' : 'POST';
+            const data = isBookmarked ? {} : { job_id: jobId };
+
+            fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update saved jobs array dynamically
+                    const jobIdInt = parseInt(jobId);
+                    if (isBookmarked) {
+                        // Remove from saved jobs array
+                        savedJobsArray = savedJobsArray.filter(id => id !== jobIdInt);
+                    } else {
+                        // Add to saved jobs array
+                        savedJobsArray.push(jobIdInt);
+                    }
+                    
+                    // Update bookmark status
+                    updateBookmarkStatus(jobId, !isBookmarked);
+                    
+                    // Show success message
+                    showToast(data.message, 'success');
+                    
+                    // If we're on bookmarked tab and removing bookmark, remove the job card
+                    if (isBookmarked && isBookmarkedTabActive()) {
+                        removeJobCardFromBookmarked(jobId);
+                    }
+                    
+                    // If we just added a bookmark and we're on bookmarked tab, reload the tab content
+                    if (!isBookmarked && isBookmarkedTabActive()) {
+                        location.reload();
+                    }
+                } else {
+                    showToast(data.message || 'Terjadi kesalahan', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Terjadi kesalahan saat menyimpan lowongan', 'error');
+            })
+            .finally(() => {
+                // Restore button state
+                if (buttonElement) {
+                    const isNowBookmarked = !isBookmarked;
+                    buttonElement.innerHTML = isNowBookmarked ? 
+                        '<i class="fas fa-bookmark"></i>' : 
+                        '<i class="far fa-bookmark"></i>';
+                    buttonElement.disabled = false;
+                    
+                    // Update button classes
+                    if (isNowBookmarked) {
+                        buttonElement.classList.remove('btn-outline-secondary');
+                        buttonElement.classList.add('btn-outline-danger');
+                        buttonElement.title = 'Hapus dari bookmark';
+                    } else {
+                        buttonElement.classList.remove('btn-outline-danger');
+                        buttonElement.classList.add('btn-outline-secondary');
+                        buttonElement.title = 'Simpan lowongan';
+                    }
+                }
+            });
+        }
+
+        // Global variable to track saved jobs dynamically
+        let savedJobsArray = @json($savedJobs->pluck('id')->toArray() ?? []);
+
+        function checkIfBookmarked(jobId) {
+            // Check if job is in saved jobs list
+            return savedJobsArray.includes(parseInt(jobId));
+        }
+
+        function updateBookmarkStatus(jobId, isBookmarked) {
+            // Update all bookmark buttons for this job
+            const bookmarkButtons = document.querySelectorAll(`[onclick*="toggleBookmark(${jobId}"]`);
+            bookmarkButtons.forEach(button => {
+                const icon = button.querySelector('i');
+                if (icon) {
+                    if (isBookmarked) {
+                        icon.className = 'fas fa-bookmark';
+                        button.classList.remove('btn-outline-secondary');
+                        button.classList.add('btn-outline-danger');
+                        button.title = 'Hapus dari bookmark';
+                    } else {
+                        icon.className = 'far fa-bookmark';
+                        button.classList.remove('btn-outline-danger');
+                        button.classList.add('btn-outline-secondary');
+                        button.title = 'Simpan lowongan';
+                    }
+                }
+            });
+        }
+
+        function isBookmarkedTabActive() {
+            const bookmarkedTab = document.querySelector('[data-tab="BOOKMARKED"]');
+            return bookmarkedTab && bookmarkedTab.closest('[role="tab"]').classList.contains('active');
+        }
+
+        function removeJobCardFromBookmarked(jobId) {
+            const jobCard = document.querySelector(`#tab-content-BOOKMARKED .job-card [href*="${jobId}"]`);
+            if (jobCard) {
+                const cardElement = jobCard.closest('.job-card');
+                if (cardElement) {
+                    cardElement.style.transition = 'opacity 0.3s ease';
+                    cardElement.style.opacity = '0';
+                    setTimeout(() => {
+                        cardElement.remove();
+                        
+                        // Check if no more saved jobs
+                        const remainingCards = document.querySelectorAll('#tab-content-BOOKMARKED .job-card');
+                        if (remainingCards.length === 0) {
+                            const jobListings = document.querySelector('#tab-content-BOOKMARKED .job-listings');
+                            if (jobListings) {
+                                jobListings.innerHTML = `
+                                    <div class="text-center py-5">
+                                        <i class="fas fa-bookmark fa-3x text-muted mb-3"></i>
+                                        <h5 class="text-muted">Belum Ada Lowongan Tersimpan</h5>
+                                        <p class="text-muted">Simpan lowongan yang menarik untuk Anda dengan mengklik tombol bookmark</p>
+                                        <a href="#for-you" class="btn btn-primary" data-bs-toggle="tab">Jelajahi Lowongan</a>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }, 300);
+                }
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+            toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            toast.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 3000);
+        }
+
         // Toggle filter section visibility
         function toggleExploreFilterSection(sectionId) {
             const content = document.getElementById(sectionId + '-content');

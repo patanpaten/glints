@@ -77,6 +77,15 @@ class JobSeeker extends Model
     }
 
     /**
+     * Get the saved jobs for the job seeker.
+     */
+    public function savedJobs(): BelongsToMany
+    {
+        return $this->belongsToMany(Job::class, 'saved_jobs', 'job_seeker_id', 'job_id')
+            ->withTimestamps();
+    }
+
+    /**
      * Get the full name of the job seeker.
      */
     public function getFullNameAttribute(): string
