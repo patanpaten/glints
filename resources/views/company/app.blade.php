@@ -26,8 +26,8 @@
             padding-bottom: 0;
         }
         .logo-navbar {
-            height: 70px;     /* ukuran logo diperbesar */
-            width: auto;      /* proporsional */
+            height: 70px;
+            width: auto;
             object-fit: contain;
         }
         .navbar .nav-link {
@@ -35,7 +35,7 @@
             font-weight: 500;
             padding: 0.5rem 1rem;
             position: relative;
-            padding-bottom: 6px; /* kasih ruang buat garis bawah */
+            padding-bottom: 6px;
             transition: color 0.3s ease;
         }
         .navbar .nav-link.active {
@@ -78,21 +78,6 @@
         }
         .content-wrapper {
             padding: 20px;
-        }
-        .user-avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #666;
-        }
-        .user-rating {
-            font-size: 12px;
-            color: #666;
         }
     </style>
 </head>
@@ -150,111 +135,106 @@
           <a class="d-flex align-items-center gap-2 text-decoration-none text-dark dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
             <!-- Avatar -->
             <div class="position-relative">
-                @if(Auth::guard('company')->user()->logo)
-                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}"
-                        alt="{{ Auth::guard('company')->user()->name }}"
-                        class="rounded-circle"
+                @if(Auth::guard('company')->user()->user->profile_picture)
+                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->user->profile_picture) }}"
+                        alt="{{ Auth::guard('company')->user()->user->name }}"
+                        class="rounded-circle border"
                         style="width: 30px; height: 30px; object-fit: cover;">
                 @else
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
-                        style="width: 50px; height: 50px; font-size: 24px;">
-                        {{ Auth::guard('company')->user()->initials }}
+                    <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light text-muted"
+                        style="width: 30px; height: 30px; font-size: 14px;">
+                        <i class="fas fa-user"></i>
                     </div>
                 @endif
             </div>
 
             <!-- Info -->
             <div class="text-start small lh-1">
-              <div class="fw-semibold">{{ Str::limit(Auth::guard('company')->user()->name, 10) }}...</div>
+              <div class="fw-semibold">{{ Str::limit(Auth::guard('company')->user()->user->name, 10) }}...</div>
               <div class="d-flex align-items-center">
-                <!-- Bintang SVG -->
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="12" height="12"
                     fill="red" viewBox="0 0 24 24"
                     class="me-1">
                   <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
                 </svg>
-                <!-- Angka tetap hitam -->
-                <span class="text-dark">{{ Auth::guard('company')->user()->credits }}</span>
+                <span class="text-dark">{{ Auth::guard('company')->user()->user->credits }}</span>
               </div>
             </div>
-
-
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 280px;">
-        <!-- Header profil -->
-        <li class="px-3 py-2 d-flex align-items-center border-bottom">
-                      <div class="position-relative me-3">
-                      @if(Auth::guard('company')->user()->logo)
-                          <img src="{{ asset('storage/' . Auth::guard('company')->user()->logo) }}"
-                              alt="{{ Auth::guard('company')->user()->name }}"
-                              class="rounded-circle"
-                              style="width: 50px; height: 50px; object-fit: cover;">
-                      @else
-                          <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
-                              style="width: 50px; height: 50px; font-size: 24px;">
-                              {{ Auth::guard('company')->user()->initials }}
-                          </div>
-                      @endif
-                  </div>
-                  <div>
-                      <div class="fw-semibold">{{ Auth::guard('company')->user()->name }}</div>
-                      <small class="text-muted">{{ Auth::guard('company')->user()->country }}</small>
-                  </div>
+            <!-- Header profil -->
+            <li class="px-3 py-2 d-flex align-items-center border-bottom">
+              <div class="position-relative me-3">
+                @if(Auth::guard('company')->user()->user->profile_picture)
+                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->user->profile_picture) }}"
+                        alt="{{ Auth::guard('company')->user()->user->name }}"
+                        class="rounded-circle border"
+                        style="width: 50px; height: 50px; object-fit: cover;">
+                @else
+                    <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light text-muted"
+                        style="width: 50px; height: 50px; font-size: 20px;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                @endif
+              </div>
+              <div>
+                  <div class="fw-semibold">{{ Auth::guard('company')->user()->user->name }}</div>
+                  <small class="text-muted">{{ Auth::guard('company')->user()->user->country }}</small>
+              </div>
 
-          <span class="badge {{ Auth::guard('company')->user()->isVip() ? 'bg-warning text-dark' : 'bg-light text-dark' }} ms-auto">
-            {{ Auth::guard('company')->user()->isVip() ? 'VIP' : 'Gratis' }}
-          </span>
-        </li>
+              <span class="badge {{ Auth::guard('company')->user()->isVip() ? 'bg-warning text-dark' : 'bg-light text-dark' }} ms-auto">
+                 {{ Auth::guard('company')->user()->isVip() ? 'VIP' : 'Gratis' }}
+              </span>
+            </li>
 
-        <!-- Status VIP -->
-        <li class="px-3 py-2 border-bottom">
-          <div class="text-muted small">Glints VIP:
-            <span class="text-dark">{{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}</span>
-          </div>
-          @if(!Auth::guard('company')->user()->isVip())
-            <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small text-decoration-none">Upgrade ke VIP</a>
-          @endif
-        </li>
+            <!-- Status VIP -->
+            <li class="px-3 py-2 border-bottom">
+              <div class="text-muted small">Glints VIP:
+                <span class="text-dark">{{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}</span>
+              </div>
+              @if(!Auth::guard('company')->user()->isVip())
+                <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small text-decoration-none">Upgrade ke VIP</a>
+              @endif
+            </li>
 
-        @if(!Auth::guard('company')->user()->isVip())
-        <!-- Promo -->
-        <li class="px-3 py-2 border-bottom">
-          <div class="alert alert-warning p-2 mb-0 small">
-            <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
-          </div>
-        </li>
-        @endif
+            @if(!Auth::guard('company')->user()->isVip())
+            <!-- Promo -->
+            <li class="px-3 py-2 border-bottom">
+              <div class="alert alert-warning p-2 mb-0 small">
+                <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
+              </div>
+            </li>
+            @endif
 
-        <!-- Credits -->
-        <li class="px-3 py-2 border-bottom">
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="small">Glints Credits: <strong>{{ Auth::guard('company')->user()->credits }}</strong></span>
-            <a href="#" class="small fw-semibold text-primary text-decoration-none">Top Up</a>
-          </div>
-        </li>
+            <!-- Credits -->
+            <li class="px-3 py-2 border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small">Glints Credits: <strong>{{ Auth::guard('company')->user()->credits }}</strong></span>
+                <a href="#" class="small fw-semibold text-primary text-decoration-none">Top Up</a>
+              </div>
+            </li>
 
-        <!-- Menu navigasi -->
-        <li><a class="dropdown-item" href="{{ route('company.account-settings.index') }}">Pengaturan Akun</a></li>
-        <li><a class="dropdown-item" href="{{ route('company.profile.edit2') }}">Profil Perusahaan</a></li>
-        <li><a class="dropdown-item" href="#">Tim Perusahaan</a></li>
+            <!-- Menu navigasi -->
+            <li><a class="dropdown-item" href="{{ route('company.account-settings.index') }}">Pengaturan Akun</a></li>
+            <li><a class="dropdown-item" href="{{ route('company.profile.edit2') }}">Profil Perusahaan</a></li>
+            <li><a class="dropdown-item" href="#">Tim Perusahaan</a></li>
 
-        <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
 
-        <!-- Logout -->
-        <li>
-          <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
-              <i class="fas fa-sign-out-alt"></i> Keluar
-            </button>
-          </form>
-        </li>
-      </ul>
-
+            <!-- Logout -->
+            <li>
+              <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
+                  <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
+              </form>
+            </li>
+          </ul>
         </div>
         @else
-        <!-- Login/Register buttons for non-authenticated users -->
+        <!-- Login/Register buttons -->
         <div class="d-flex gap-2">
           <a href="{{ route('company.login') }}" class="btn btn-outline-primary btn-sm">Masuk</a>
           <a href="{{ route('company.register') }}" class="btn btn-primary btn-sm">Daftar</a>
@@ -264,41 +244,39 @@
         <!-- Garis pembatas -->
         <div class="border-start" style="height: 24px;"></div>
 
-      <!-- Language dropdown -->
-    <div class="dropdown">
-      <button
-        class="btn btn-sm btn-light d-flex align-items-center gap-1"
-        type="button"
-        id="langDropdown"
-        data-bs-toggle="dropdown"
-        aria-expanded="false">
+        <!-- Language dropdown -->
+        <div class="dropdown">
+          <button
+            class="btn btn-sm btn-light d-flex align-items-center gap-1"
+            type="button"
+            id="langDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fas fa-globe text-secondary"></i>
+            <span>ID</span>
+            <i class="fas fa-chevron-down small text-secondary"></i>
+          </button>
 
-        <i class="fas fa-globe text-secondary"></i>
-        <span>ID</span>
-        <i class="fas fa-chevron-down small text-secondary"></i>
-      </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="langDropdown">
+            <li>
+              <a href="?lang=id" class="dropdown-item d-flex flex-column">
+                <span class="fw-bold">ID</span>
+                <small class="text-muted">Bahasa Indonesia</small>
+              </a>
+            </li>
+            <li>
+              <a href="?lang=en" class="dropdown-item d-flex flex-column">
+                <span class="fw-bold">EN</span>
+                <small class="text-muted">English</small>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-      <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="langDropdown">
-        <li>
-          <a href="?lang=id" class="dropdown-item d-flex flex-column">
-            <span class="fw-bold">ID</span>
-            <small class="text-muted">Bahasa Indonesia</small>
-          </a>
-        </li>
-        <li>
-          <a href="?lang=en" class="dropdown-item d-flex flex-column">
-            <span class="fw-bold">EN</span>
-            <small class="text-muted">English</small>
-          </a>
-        </li>
-      </ul>
-    </div>
-
+      </div>
     </div>
   </div>
 </nav>
-
-
 
     <!-- MAIN LAYOUT -->
     <div class="container-fluid">
