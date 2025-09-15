@@ -3,9 +3,8 @@
 @section('title', 'Company Dashboard')
 
 @section('content')
-<div class="container-fluid py-4">
 
-    <!-- HEADER PERUSAHAAN -->
+<!-- HEADER PERUSAHAAN -->
     <div class="card mb-4 border-0 shadow-sm">
         <div class="card-body d-flex justify-content-between align-items-center p-4">
             <div class="d-flex align-items-center gap-3">
@@ -23,12 +22,25 @@
                 </div>
                 <div>
                     <h2 class="fw-bold fs-5 mb-0">{{ Auth::guard('company')->user()->name }}</h2>
-                    <div class="d-flex align-items-center gap-2 mt-1">
-                        <span class="badge bg-success-subtle text-success"><i class="fas fa-check-circle"></i> Terverifikasi</span>
-                        @if(Auth::guard('company')->user()->isVip())
-                            <span class="badge bg-warning-subtle text-warning"><i class="fas fa-crown"></i> VIP</span>
-                        @endif
-                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                    @if(Auth::guard('company')->user()->is_verified)
+                        <span class="badge bg-success-subtle text-success">
+                            <i class="fas fa-check-circle"></i> Terverifikasi
+                        </span>
+                    @else
+                    <svg viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg" 
+                            fill="#D4D5D8" height="20" width="20">
+                            <path d="m6 .167 5.478 1.217a.667.667 0 0 1 .522.65v6.659a4 4 0 0 1-1.781 3.328L6 14.833l-4.219-2.812A4 4 0 0 1 0 8.693V2.035c0-.313.217-.583.522-.651L6 .167ZM8.968 4.98l-3.3 3.3-1.885-1.886-.943.943 2.828 2.829 4.243-4.243-.943-.943Z"></path>
+                        </svg>
+                        <span class="text-muted fw-semibold">
+                            Belum Diverifikasi 
+                        </span>
+                        <span class="fw-semibold">
+                            -
+                        </span>
+                        <a href="#" class="text-primary fw-semibold text-decoration-none">Verifikasi Perusahaan</a>
+                    @endif
+                </div>
                 </div>
             </div>
             <div class="d-flex gap-2">
@@ -49,7 +61,8 @@
             </div>
         </div>
     </div>
-
+    
+<div class="container-fluid py-2">
     <!-- BODY -->
     <div class="row">
 

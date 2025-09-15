@@ -114,6 +114,7 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
         Route::put('/account', [AccountSettingsController::class, 'updateAccount'])->name('update-account');
         Route::put('/password', [AccountSettingsController::class, 'updatePassword'])->name('update-password');
         Route::put('/notifications', [AccountSettingsController::class, 'updateNotifications'])->name('update-notifications');
+        Route::put('/social-media', [AccountSettingsController::class, 'updateSocialMedia'])->name('update-social-media');
     });
 
     // Profile
