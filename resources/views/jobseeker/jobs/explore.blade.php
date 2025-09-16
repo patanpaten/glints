@@ -572,7 +572,7 @@
                                                         {{ $job->created_at->diffForHumans() }}
                                                     </span>
                                                 </div>
-                                                <button class="text-gray-400 hover:text-blue-500 transition-colors">
+                                                <button class="text-gray-400 hover:text-blue-500 transition-colors" onclick="event.stopPropagation(); bookmarkManager.toggleBookmark({{ $job->id }}, this)" title="Simpan lowongan">
                                                     <i class="far fa-bookmark text-sm"></i>
                                                 </button>
                                             </div>

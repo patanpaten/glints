@@ -21,9 +21,9 @@
                         <h1 class="text-2xl font-bold text-gray-900">{{ $job->title }}</h1>
                         <div class="flex items-center mt-1">
                             <a href="#" class="text-blue-600 hover:underline font-medium">{{ $job->company->name }}</a>
-                            @if($job->company->is_verified)
+                            {{-- @if($job->company->is_verified)
                                 <span class="ml-2 bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full">Verified</span>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>

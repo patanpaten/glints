@@ -39,15 +39,15 @@
                     @forelse($jobs as $job)
                         <div onclick="showJobDetail({{ $job->id }})"
                             class="border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-all duration-200 bg-white p-4 group cursor-pointer job-card" data-job-id="{{ $job->id }}">
-                            <!-- Premium Employer Badge -->
-                            @if($job->company && $job->company->is_premium)
+                            <!-- Premium Employer Badge - Disabled for now -->
+                            {{-- @if($job->company && $job->company->is_premium)
                                 <div class="mb-2">
                                     <span class="inline-flex items-center px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold rounded-full">
                                         <i class="fas fa-crown mr-1"></i>
                                         Premium Employer
                                     </span>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <div class="flex items-start gap-3">
                                 <!-- Company Logo -->
@@ -73,9 +73,9 @@
                                         <span class="text-sm font-medium text-gray-700">
                                             {{ $job->company->name ?? 'Company Name' }}
                                         </span>
-                                        @if($job->company && $job->company->is_verified)
+                                        {{-- @if($job->company && $job->company->is_verified)
                                             <i class="fas fa-check-circle text-blue-500 text-xs"></i>
-                                        @endif
+                                        @endif --}}
                                     </div>
 
                                     <!-- Location -->
@@ -160,7 +160,7 @@
                         @php
                             $isBookmarked = $savedJobs && $savedJobs->contains('id', $job->id);
                         @endphp
-                        <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" onclick="event.stopPropagation(); toggleBookmark({{ $job->id }}, this)" title="{{ $isBookmarked ? 'Hapus dari bookmark' : 'Simpan lowongan' }}">
+                        <button class="text-gray-400 hover:text-blue-500 transition-colors p-1" onclick="event.stopPropagation(); bookmarkManager.toggleBookmark({{ $job->id }}, this)" title="{{ $isBookmarked ? 'Hapus dari bookmark' : 'Simpan lowongan' }}">
                             <i class="{{ $isBookmarked ? 'fas' : 'far' }} fa-bookmark text-lg"></i>
                         </button>
                                     </div>

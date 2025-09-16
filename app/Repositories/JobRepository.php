@@ -152,12 +152,8 @@ class JobRepository
         if (!empty($filters['sort'])) {
             switch ($filters['sort']) {
                 case 'relevant':
-                    // Most Relevant: Premium companies first, then recent posts, then by relevance
-                    $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
-                          ->select('job_listings.*')
-                          ->orderByDesc('companies.is_premium')
-                          ->orderByDesc('companies.is_verified')
-                          ->orderByDesc('job_listings.created_at');
+                    // Most Relevant: Recent posts first
+                    $query->orderByDesc('job_listings.created_at');
                     break;
                 case 'latest':
                     $query->latest();
@@ -173,20 +169,12 @@ class JobRepository
                     break;
                 default:
                     // Default to relevant sorting
-                    $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
-                          ->select('job_listings.*')
-                          ->orderByDesc('companies.is_premium')
-                          ->orderByDesc('companies.is_verified')
-                          ->orderByDesc('job_listings.created_at');
+                    $query->orderByDesc('job_listings.created_at');
                     break;
             }
         } else {
             // Default sorting when no sort parameter is provided
-            $query->leftJoin('companies', 'job_listings.company_id', '=', 'companies.id')
-                  ->select('job_listings.*')
-                  ->orderByDesc('companies.is_premium')
-                  ->orderByDesc('companies.is_verified')
-                  ->orderByDesc('job_listings.created_at');
+            $query->orderByDesc('job_listings.created_at');
         }
 
         return $query->with('company', 'jobCategory', 'skills')->paginate(15);

@@ -32,21 +32,36 @@ class SavedJobController extends Controller
     /**
      * Display a listing of saved jobs.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $jobSeeker = $this->jobSeekerService->getByUserId(Auth::id());
         
         if (!$jobSeeker) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Please complete your profile first.']);
+            }
+            
             return redirect()->route('jobseeker.profile.create')
                 ->with('error', 'Please complete your profile first.');
         }
 
-        // Get saved jobs with pagination
-        $savedJobs = $jobSeeker->savedJobs()->paginate(10);
+        // Get saved jobs with related data
+        $savedJobs = $jobSeeker->savedJobs()->with('company')->get();
 
-        return view('jobseeker.saved_jobs.index', compact('jobSeeker', 'savedJobs'));
+        if ($request->ajax() || $request->get('ajax')) {
+            return response()->json([
+                'success' => true,
+                'savedJobs' => $savedJobs
+            ]);
+        }
+
+        // For regular requests, use pagination
+        $savedJobsPaginated = $jobSeeker->savedJobs()->with('company')->paginate(10);
+        
+        return view('jobseeker.saved_jobs.index', compact('jobSeeker') + ['savedJobs' => $savedJobsPaginated]);
     }
 
     /**
@@ -57,6 +72,11 @@ class SavedJobController extends Controller
      */
     public function save(Request $request)
     {
+        // Validate the request
+        $request->validate([
+            'job_id' => 'required|integer|exists:job_listings,id'
+        ]);
+        
         $jobSeeker = $this->jobSeekerService->getByUserId(Auth::id());
         
         if (!$jobSeeker) {
@@ -105,11 +125,16 @@ class SavedJobController extends Controller
      * Remove a saved job.
      *
      * @param Request $request
-     * @param int $jobId
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function unsave(Request $request, $jobId)
+    public function unsave(Request $request)
     {
+        // Validate the request
+        $request->validate([
+            'job_id' => 'required|integer|exists:job_listings,id'
+        ]);
+        
+        $jobId = $request->input('job_id');
         $jobSeeker = $this->jobSeekerService->getByUserId(Auth::id());
         
         if (!$jobSeeker) {

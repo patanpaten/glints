@@ -75,9 +75,9 @@ class JobSeekerController extends Controller
         // If user has a profile, get their application data
         if ($jobSeeker) {
             $recentApplications = $this->applicationService->getByJobSeekerId($jobSeeker->id)->take(5);
-            $totalApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->count();
-            $pendingApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
-            $shortlistedApplications = $this->applicationService->repository->getModel()->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
+            $totalApplications = $this->applicationService->getRepositoryInstance()->getModel()->where('job_seeker_id', $jobSeeker->id)->count();
+            $pendingApplications = $this->applicationService->getRepositoryInstance()->getModel()->where('job_seeker_id', $jobSeeker->id)->where('status', 'pending')->count();
+            $shortlistedApplications = $this->applicationService->getRepositoryInstance()->getModel()->where('job_seeker_id', $jobSeeker->id)->whereIn('status', ['shortlisted', 'hired'])->count();
             
             // Get saved jobs count (assuming there's a saved_jobs table)
             $savedJobs = \DB::table('saved_jobs')->where('job_seeker_id', $jobSeeker->id)->count();

@@ -106,4 +106,14 @@ class BaseService
     {
         return $this->repository;
     }
+
+    /**
+     * Get repository instance (public access).
+     *
+     * @return BaseRepository
+     */
+    public function getRepositoryInstance(): BaseRepository
+    {
+        return $this->repository;
+    }
 }

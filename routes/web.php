@@ -210,7 +210,7 @@ Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-se
     Route::patch('/applications/{application}/withdraw', [ApplicationController::class, 'withdraw'])->name('applications.withdraw');
     Route::get('/saved-jobs', [SavedJobController::class, 'index'])->name('saved-jobs.index');
     Route::post('/saved-jobs', [SavedJobController::class, 'save'])->name('saved-jobs.save');
-    Route::delete('/saved-jobs/{job}', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');
+    Route::delete('/saved-jobs', [SavedJobController::class, 'unsave'])->name('saved-jobs.unsave');
 
     // Jobs routes for jobseeker
     Route::get('/jobs', [JobSeekerController::class, 'jobs'])->name('jobs.index');

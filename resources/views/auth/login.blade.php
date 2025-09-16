@@ -6,9 +6,6 @@
             <div class="col-md-6">
                 {{-- Ini form login biasa (untuk /login) --}}
                 @include('auth.login-form')
-
-                {{-- Ini modal login (untuk navbar) --}}
-                @include('auth.login-modal')
             </div>
         </div>
     </div>

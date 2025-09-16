@@ -155,7 +155,7 @@ class ApplicationController extends Controller
 
         Log::info('[ApplicationController] Fetching all applications', ['company_id' => $company->id, 'status' => $status, 'job_id' => $jobId]);
 
-        $query = $this->applicationService->repository->getModel()
+        $query = $this->applicationService->getRepositoryInstance()->getModel()
             ->whereHas('job', function ($q) use ($company) {
                 $q->where('company_id', $company->id);
             })
