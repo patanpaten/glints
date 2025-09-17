@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
     <style>
@@ -162,76 +163,118 @@
               </div>
             </div>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 280px;">
-            <!-- Header profil -->
-            <li class="px-3 py-2 d-flex align-items-center border-bottom">
+          <ul class="dropdown-menu dropdown-menu-end shadow" 
+          style="min-width: 460px; border-radius: 10px;">
+
+          <!-- Header profil -->
+          <li class="px-3 py-3 d-flex align-items-center border-bottom">
               <div class="position-relative me-3">
-                @if(Auth::guard('company')->user()->user->profile_picture)
-                    <img src="{{ asset('storage/' . Auth::guard('company')->user()->user->profile_picture) }}"
-                        alt="{{ Auth::guard('company')->user()->user->name }}"
-                        class="rounded-circle border"
-                        style="width: 50px; height: 50px; object-fit: cover;">
-                @else
-                    <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light text-muted"
-                        style="width: 50px; height: 50px; font-size: 20px;">
-                        <i class="fas fa-user"></i>
-                    </div>
-                @endif
+                  @if(Auth::guard('company')->user()->user->profile_picture)
+                      <img src="{{ asset('storage/' . Auth::guard('company')->user()->user->profile_picture) }}"
+                          alt="{{ Auth::guard('company')->user()->user->name }}"
+                          class="rounded-circle border"
+                          style="width: 50px; height: 50px; object-fit: cover;">
+                  @else
+                      <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light text-muted"
+                          style="width: 50px; height: 50px; font-size: 20px;">
+                          <i class="fas fa-user"></i>
+                      </div>
+                  @endif
               </div>
               <div>
-                  <div class="fw-semibold">{{ Auth::guard('company')->user()->user->name }}</div>
+                  <div class="fw-semibold" style="letter-spacing:1px;">{{ Auth::guard('company')->user()->user->name }}</div>
                   <small class="text-muted">{{ Auth::guard('company')->user()->user->country }}</small>
               </div>
 
-              <span class="badge {{ Auth::guard('company')->user()->isVip() ? 'bg-warning text-dark' : 'bg-light text-dark' }} ms-auto">
-                 {{ Auth::guard('company')->user()->isVip() ? 'VIP' : 'Gratis' }}
-              </span>
-            </li>
-
-            <!-- Status VIP -->
-            <li class="px-3 py-2 border-bottom">
-              <div class="text-muted small">Glints VIP:
-                <span class="text-dark">{{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}</span>
-              </div>
-              @if(!Auth::guard('company')->user()->isVip())
-                <a href="{{ route('company.premium-features.index') }}" class="fw-semibold text-primary small text-decoration-none">Upgrade ke VIP</a>
+              <!-- Badge Gratis / VIP -->
+              @if(Auth::guard('company')->user()->isVip())
+                  <span class="badge bg-warning text-dark ms-auto px-3 py-1">VIP</span>
+              @else
+                  <span class="badge bg-dark text-white ms-auto px-3 py-1" style="letter-spacing:2px;">Gratis</span>
               @endif
-            </li>
+          </li>
 
-            @if(!Auth::guard('company')->user()->isVip())
-            <!-- Promo -->
-            <li class="px-3 py-2 border-bottom">
-              <div class="alert alert-warning p-2 mb-0 small">
-                <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
+         <!-- Status VIP -->
+          <li class="px-3 py-2 d-flex align-items-center">
+              <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="VIP Icon"
+              style="width:18px; height:18px; filter: grayscale(100%) contrast(100%);" class="me-2">
+
+
+
+              <div>
+                  <div class="text-muted small">
+                      Glints VIP: 
+                      <span class="text-dark">
+                          {{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}
+                      </span>
+                  </div>
+                  @if(!Auth::guard('company')->user()->isVip())
+                      <a href="{{ route('company.premium-features.index') }}" 
+                        class="fw-semibold text-primary small text-decoration-none" 
+                        style="letter-spacing:1px;">
+                          Upgrade ke VIP
+                      </a>
+                  @endif
               </div>
-            </li>
-            @endif
+          </li>
 
-            <!-- Credits -->
-            <li class="px-3 py-2 border-bottom">
+
+          <!-- Promo (hanya tampil jika tidak VIP) -->
+          @if(!Auth::guard('company')->user()->isVip())
+              <li class="px-3 py-0 ms-4">
+                  <div class="alert alert-warning p-2 mb-0 small" style="background-color:#ffeb3b;">
+                      <strong>Promo Terbatas!</strong> Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
+                  </div>
+              </li>
+          @endif
+
+          <!-- Credits -->
+          <li class="px-3 py-2">
               <div class="d-flex justify-content-between align-items-center">
-                <span class="small">Glints Credits: <strong>{{ Auth::guard('company')->user()->credits }}</strong></span>
-                <a href="#" class="small fw-semibold text-primary text-decoration-none">Top Up</a>
+                  <span class="small d-flex align-items-center gap-1">
+                      <i class="fas fa-star" style="color:#6c757d; font-size:18px;"></i>
+                      Glints Credits: {{ Auth::guard('company')->user()->credits }}
+                  </span>
               </div>
-            </li>
 
-            <!-- Menu navigasi -->
-            <li><a class="dropdown-item" href="{{ route('company.account-settings.index') }}">Pengaturan Akun</a></li>
-            <li><a class="dropdown-item" href="{{ route('company.profile.edit2') }}">Profil Perusahaan</a></li>
-            <li><a class="dropdown-item" href="#">Tim Perusahaan</a></li>
+              @if(!Auth::guard('company')->user()->isVip())
+                  <a href="{{ route('company.premium-features.index') }}" 
+                    class="small fw-semibold text-primary text-decoration-none d-block mt-1 ms-4" 
+                    style="letter-spacing:1px;">
+                      Top Up
+                  </a>
+              @endif
+          </li>
 
-            <li><hr class="dropdown-divider"></li>
+<!-- Menu navigasi -->
+<li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('company.account-settings.index') }}">
+        <i class="bi bi-gear"></i> Pengaturan Akun
+    </a>
+</li>
+<li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('company.profile.edit2') }}">
+        <i class="bi bi-building"></i> Profil Perusahaan
+    </a>
+</li>
+<li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+        <i class="bi bi-people"></i> Tim Perusahaan
+    </a>
+</li>
 
-            <!-- Logout -->
-            <li>
-              <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
-                  <i class="fas fa-sign-out-alt"></i> Keluar
-                </button>
-              </form>
-            </li>
-          </ul>
+<!-- Logout -->
+<li>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="dropdown-item d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-counterclockwise"></i> Keluar
+        </button>
+    </form>
+</li>
+
+      </ul>
+
         </div>
         @else
         <!-- Login/Register buttons -->

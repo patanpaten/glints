@@ -68,6 +68,46 @@
         color: #0d6efd;            /* Biru bootstrap */
         font-weight: 600;
     }
+
+    .btn-upload {
+        border: 2px solid #0d6efd; /* biru Bootstrap */
+        color: #0d6efd;
+        background: transparent;
+        font-weight: bold;
+        padding: 6px 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+    .btn-upload:hover {
+        background: #0d6efd;
+        color: #fff;
+    }
+    .btn-upload input[type="file"] {
+        display: none; /* sembunyikan input asli */
+    }
+    .form-group {
+        position: relative;
+    }
+    .form-group label.floating-label {
+        position: absolute;
+        top: -10px;
+        left: 12px;
+        background: #fff;
+        padding: 0 5px;
+        font-size: 12px;
+        color: #6c757d;
+    }
+    .form-control.custom-border {
+        border: 2px solid #ccc; /* abu-abu */
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .form-control.custom-border:focus {
+        border-color: #0d6efd; /* biru */
+        box-shadow: none;
+    }
 </style>
 
 
@@ -95,34 +135,51 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <input type="file" name="logo" class="form-control rounded-0 mb-2" accept=".jpg,.jpeg,.png">
+                                    <label class="btn-upload">
+                                        <i class="bi bi-upload"></i> UNGGAH
+                                        <input type="file" name="logo" accept=".jpg,.jpeg,.png">
+                                    </label>
+
                                     <small class="text-muted d-block">Format yang dapat diterima: <b>.jpg, .jpeg, .png</b></small>
                                     <small class="text-muted d-block">Ukuran yang disarankan: <b>120px x 120px</b></small>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Nama Depan --}}
-                        <div class="row mb-3">
+
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Nama Depan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control rounded-0" name="name" value="{{ old('name', $user->name ?? '') }}" placeholder="Masukkan nama depan Anda" required>
+                                <div class="form-group">
+                                    <label for="firstName" class="floating-label">Masukkan nama depan Anda</label>
+                                    <input type="text" 
+                                        class="form-control custom-border rounded-0" 
+                                        name="name" 
+                                        id="firstName"
+                                        value="{{ old('name', $user->name ?? '') }}" 
+                                        required>
+                                </div>
                             </div>
                         </div>
 
+
+
                         {{-- Nama Belakang --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Nama Belakang</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control rounded-0" name="last_name" value="{{ old('last_name', $user->last_name ?? '') }}" placeholder="Masukkan nama belakang Anda">
+                                <div class="form-group">
+                                    <label for="firstName" class="floating-label">Masukkan nama belakang Anda</label>
+                                    <input type="text" class="form-control custom-border rounded-0" name="last_name" value="{{ old('last_name', $user->last_name ?? '') }}" placeholder="Masukkan nama belakang Anda">
+                                </div>
                             </div>
                         </div>
 
                         {{-- Negara --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Negara</label>
                             <div class="col-sm-9">
-                                <select class="form-select rounded-0" name="country">
+                                <select class="form-select form-control custom-border rounded-0" name="country">
                                     <option value="">Pilih negara</option>
                                     <option value="Indonesia" {{ old('country', $user->country ?? '') == 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
                                     <option value="Malaysia" {{ old('country', $user->country ?? '') == 'Malaysia' ? 'selected' : '' }}>Malaysia</option>
@@ -132,26 +189,29 @@
                         </div>
 
                         {{-- Kota --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Kota</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control rounded-0" name="city" value="{{ old('city', $user->city ?? '') }}" placeholder="Masukkan kota tempat tinggal">
+                                <input type="text" class="form-control custom-border rounded-0" name="city" value="{{ old('city', $user->city ?? '') }}" placeholder="Masukkan kota tempat tinggal">
                             </div>
                         </div>
 
                         {{-- Jabatan --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Jabatan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control rounded-0" name="position" value="{{ old('position', $user->position ?? '') }}" placeholder="Masukkan jabatan Anda">
+                                <div class="form-group">
+                                    <label for="firstName" class="floating-label">Jabatan atau posisi Anda di perusahaan</label>
+                                    <input type="text" class="form-control custom-border rounded-0" name="position" value="{{ old('position', $user->position ?? '') }}" placeholder="Masukkan jabatan Anda">
+                                </div>
                             </div>
                         </div>
 
                         {{-- Kewarganegaraan --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Kewarganegaraan</label>
                             <div class="col-sm-9">
-                                <select class="form-select rounded-0" name="nationality">
+                                <select class="form-select form-control custom-border rounded-0" name="nationality">
                                     <option value="">Pilih kewarganegaraan</option>
                                     <option value="Indonesia" {{ old('nationality', $user->nationality ?? '') == 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
                                     <option value="Malaysia" {{ old('nationality', $user->nationality ?? '') == 'Malaysia' ? 'selected' : '' }}>Malaysia</option>
@@ -161,10 +221,10 @@
                         </div>
 
                         {{-- Bahasa Pilihan --}}
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                             <label class="col-sm-3 col-form-label fw-semibold">Bahasa Pilihan</label>
                             <div class="col-sm-9">
-                                <select class="form-select rounded-0" name="preferred_language">
+                                <select class="form-select form-control custom-border rounded-0" name="preferred_language">
                                     <option value="">Pilih bahasa</option>
                                     <option value="Bahasa Indonesia" {{ old('preferred_language', $user->preferred_language ?? '') == 'Bahasa Indonesia' ? 'selected' : '' }}>Bahasa Indonesia</option>
                                     <option value="English" {{ old('preferred_language', $user->preferred_language ?? '') == 'English' ? 'selected' : '' }}>English</option>
@@ -210,8 +270,11 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label fw-semibold">Alamat email baru</label>
                             <div class="col-sm-9">
-                                <input type="email" name="email" class="form-control rounded-0" value="{{ old('email', $company->user->email ?? '') }}" placeholder="Masukkan alamat email baru" required>
-                                <div class="invalid-feedback"></div>
+                                <div class="form-group">
+                                    <label for="firstName" class="floating-label">Masukan email baru Anda</label>
+                                    <input type="email" name="email" class="form-control custom-border rounded-0" value="{{ old('email', $company->user->email ?? '') }}" placeholder="Masukkan alamat email baru" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -230,21 +293,21 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label fw-semibold">Kata sandi lama</label>
                             <div class="col-sm-9">
-                                <input type="password" name="current_password" class="form-control rounded-0" placeholder="Masukkan kata sandi lama" required>
+                                <input type="password" name="current_password" class="form-control custom-border rounded-0" placeholder="Masukkan kata sandi lama" required>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label fw-semibold">Kata sandi baru</label>
                             <div class="col-sm-9">
-                                <input type="password" name="password" class="form-control rounded-0" placeholder="Masukkan kata sandi baru" required>
+                                <input type="password" name="password" class="form-control custom-border rounded-0" placeholder="Masukkan kata sandi baru" required>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label fw-semibold">Konfirmasi kata sandi</label>
                             <div class="col-sm-9">
-                                <input type="password" name="password_confirmation" class="form-control rounded-0" placeholder="Konfirmasi kata sandi anda" required>
+                                <input type="password" name="password_confirmation" class="form-control custom-border rounded-0" placeholder="Konfirmasi kata sandi anda" required>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -265,7 +328,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label fw-semibold">Whatsapp Number</label>
                             <div class="col-sm-9">
-                                <input type="tel" name="whatsapp" class="form-control rounded-0" value="{{ old('whatsapp', $company->phone ?? '') }}" placeholder="Masukkan nomor whatsapp baru">
+                                <input type="tel" name="whatsapp" class="form-control custom-border rounded-0" value="{{ old('whatsapp', $company->phone ?? '') }}" placeholder="Masukkan nomor whatsapp baru">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -460,9 +523,9 @@
                 <!-- Daftar alamat kantor -->
                 <div class="tab-pane fade" id="office-address">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0">Alamat Kantor</h5>
+                        <h5 class="fw-bold mb-0">Work Addresses</h5>
                         <a href="#" class="btn btn-primary btn-sm fw-bold">
-                            Tambah Alamat
+                            Tambah
                         </a>
                     </div>
                     <hr class="mt-0">
@@ -483,7 +546,7 @@
                                                 <small class="text-muted">{{ $company->address ?? 'Alamat belum diatur' }}</small>
                                             </td>
                                             <td class="text-end">
-                                                <a href="{{ route('company.profile.edit') }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                                                <a href="{{ route('company.profile.edit') }}" class="btn btn-outline-dark btn-sm px-4 fw-semibold">Edit</a>
                                             </td>
                                         </tr>
                                     @else
@@ -517,7 +580,7 @@
                     </div>
 
                     <!-- Tombol -->
-                    <button class="btn btn-primary fw-bold px-4 py-2 rounded-0">UBAH</button>
+                    <button class="btn btn-primary fw-bold px-4 py-2 rounded-0" style="width:200px;">UBAH</button>
                 </div>
 
                 <!-- Bantuan & Dukungan -->
