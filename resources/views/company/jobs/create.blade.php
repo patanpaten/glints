@@ -113,7 +113,7 @@
                                     </label>
                                     <div class="form-text">Pilih Bidang Kerja</div>
                                     <select name="job_category_id" class="form-select w-75" required>
-                                        <option value="">Pilih...</option>
+                                        <option value="">Belum dipilih</option>
                                         @foreach($jobCategories as $category)
                                             <option value="{{ $category->id }}"
                                                 {{ old('job_category_id') == $category->id ? 'selected' : '' }}>
@@ -183,10 +183,12 @@
 
                                 {{-- GLINTS VIP --}}
                                 <div class="border border-warning p-3 rounded">
-                                    <span class="d-inline-flex align-items-center gap-1 bg-warning fw-semibold px-2 py-1 rounded" style="color: #2D2D2D;">
-                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    <span class="d-inline-flex align-items-center gap-1 fw-semibold px-2 py-0 rounded-end-pill"
+                                        style="letter-spacing:2px; margin-left:-14px; background: linear-gradient(90deg, #fff7e6, #ffeeba); color: #2D2D2D;">
+                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="16" height="16">
                                         GLINTS VIP
                                     </span>
+
                                     <div class="form-check mt-2">
                                         <input type="checkbox" class="form-check-input" id="glintsVipLocation" name="vip_location" value="1">
                                         <label class="form-check-label fw-semibold" for="glintsVipLocation">
@@ -206,12 +208,12 @@
                         {{-- Deskripsi --}}
                         <div class="card shadow-sm mb-4 border-0 description-card">
                             <div class="card-header bg-white">
-                                <h6 class="fw-semibold mb-0">Deskripsi <span class="text-danger">*</span></h6>
+                                <h6 class="fw-semibold mb-0">Deskripsi Pekerjaan <span class="text-danger">*</span></h6>
                                 {{-- Helper text --}}
                                 <div class="form-text mb-3 p-3" style="font-size: 0.9rem;">
                                     • Bingung menulis apa?
                                     <a href="#" class="text-primary">Gunakan template</a><br>
-                                    • Dengan melanjutkan memposting lowongan ini, Yang Mulia menyatakan telah membaca
+                                    • Dengan melanjutkan memposting lowongan ini, Anda menyatakan telah membaca
                                     dan menyetujui
                                     <a href="#" class="text-primary">Ketentuan Lowongan Kerja</a>.
                                 </div>
@@ -269,8 +271,7 @@
                             <div class="card-header bg-white">
                                 <h6 class="fw-semibold mb-0">Gaji <span class="text-danger">*</span></h6>
                                 <p class="text-muted small mt-2">
-                                    Dengan menyertakan kisaran gaji yang jelas di lowongan pekerjaan Yang Mulia,
-                                    akan lebih mudah menarik kandidat yang sesuai dan menyederhanakan proses perekrutan.
+                                    Dengan menyertakan kisaran gaji yang jelas di lowongan pekerjaan Anda, Anda menarik kandidat yang sesuai dengan harapan Anda dan menyederhanakan proses perekrutan.
                                 </p>
                             </div>
                             <div class="card-body">
@@ -314,8 +315,9 @@
 
                                 {{-- GLINTS VIP --}}
                                 <div class="border border-warning p-3 rounded">
-                                    <span class="d-inline-flex align-items-center gap-1 bg-warning text-dark fw-semibold px-2 py-1 rounded">
-                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    <span class="d-inline-flex align-items-center gap-1 fw-semibold px-2 py-0 rounded-end-pill"
+                                        style="letter-spacing:2px; margin-left:-14px; background: linear-gradient(90deg, #fff7e6, #ffeeba); color: #2D2D2D;">
+                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="16" height="16">
                                         GLINTS VIP
                                     </span>
 
@@ -414,8 +416,9 @@
 
                                 {{-- GLINTS VIP --}}
                                 <div class="border border-warning p-3 rounded mb-3">
-                                    <span class="d-inline-flex align-items-center gap-1 bg-warning text-dark fw-semibold px-2 py-1 rounded">
-                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    <span class="d-inline-flex align-items-center gap-1 fw-semibold px-2 py-0 rounded-end-pill"
+                                        style="letter-spacing:2px; margin-left:-14px; background: linear-gradient(90deg, #fff7e6, #ffeeba); color: #2D2D2D;">
+                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="16" height="16">
                                         GLINTS VIP
                                     </span>
 
@@ -469,8 +472,9 @@
 
                                 {{-- GLINTS VIP - Foto Profil --}}
                                 <div class="border border-warning p-3 rounded mb-3">
-                                    <span class="d-inline-flex align-items-center gap-1 bg-warning text-dark fw-semibold px-2 py-1 rounded">
-                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    <span class="d-inline-flex align-items-center gap-1 fw-semibold px-2 py-0 rounded-end-pill"
+                                        style="letter-spacing:2px; margin-left:-14px; background: linear-gradient(90deg, #fff7e6, #ffeeba); color: #2D2D2D;">
+                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="16" height="16">
                                         GLINTS VIP
                                     </span>
 
@@ -489,8 +493,9 @@
 
                                 {{-- GLINTS VIP - CV --}}
                                 <div class="border border-warning p-3 rounded">
-                                    <span class="d-inline-flex align-items-center gap-1 bg-warning text-dark fw-semibold px-2 py-1 rounded">
-                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="14" height="14">
+                                    <span class="d-inline-flex align-items-center gap-1 fw-semibold px-2 py-0 rounded-end-pill"
+                                        style="letter-spacing:2px; margin-left:-14px; background: linear-gradient(90deg, #fff7e6, #ffeeba); color: #2D2D2D;">
+                                        <img src="{{ asset('images/glints-vip-icon.svg') }}" alt="Glints VIP" width="16" height="16">
                                         GLINTS VIP
                                     </span>
 
