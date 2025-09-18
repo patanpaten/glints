@@ -658,37 +658,5 @@
         const bookmarkManager = new BookmarkManager();
     </script>
 
-    <!-- Mobile Filter Overlay -->
-    <div id="mobile-filter-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
-
-    <!-- Mobile Filter Sidebar -->
-    <div id="mobile-filters" class="fixed top-0 left-0 h-full w-80 bg-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
-        <div class="p-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold">Filter Lowongan</h3>
-                <button onclick="toggleMobileFilters()" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile Filter Content -->
-            <div class="space-y-6">
-                <!-- Tipe Pekerjaan -->
-                <div>
-                    <h4 class="font-medium mb-3">Tipe Pekerjaan</h4>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="checkbox" value="kontrak" class="mr-2" onchange="updateExploreFilters()">
-                            <span>Kontrak</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" value="magang" class="mr-2" onchange="updateExploreFilters()">
-                            <span>Magang</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" value="paruh_waktu" class="mr-2" onchange="updateExploreFilters()">
-                            <span>Paruh Waktu</span>
-                        </label>
+            
 @endsection

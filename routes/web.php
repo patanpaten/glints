@@ -193,11 +193,21 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
 // ==========================
 Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-seeker'])->group(function () {
     Route::get('/dashboard', [JobSeekerController::class, 'dashboard'])->name('dashboard');
+    
+    // Old Profile Routes
     Route::get('/profile', [JobSeekerController::class, 'showProfile'])->name('profile.show');
     Route::get('/profile/create', [JobSeekerController::class, 'createProfile'])->name('profile.create');
     Route::post('/profile', [JobSeekerController::class, 'storeProfile'])->name('profile.store');
     Route::get('/profile/edit', [JobSeekerController::class, 'editProfile'])->name('profile.edit');
     Route::put('/profile', [JobSeekerController::class, 'updateProfile'])->name('profile.update');
+    
+    // New CRUD Profile Routes
+    Route::get('/profile/view', [App\Http\Controllers\JobSeeker\ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/new', [App\Http\Controllers\JobSeeker\ProfileController::class, 'create'])->name('profile.new');
+    Route::post('/profile/new', [App\Http\Controllers\JobSeeker\ProfileController::class, 'store'])->name('profile.save');
+    Route::get('/profile/{id}/edit', [App\Http\Controllers\JobSeeker\ProfileController::class, 'edit'])->name('profile.edit.id');
+    Route::put('/profile/{id}', [App\Http\Controllers\JobSeeker\ProfileController::class, 'update'])->name('profile.update.id');
+    Route::delete('/profile/picture', [App\Http\Controllers\JobSeeker\ProfileController::class, 'removeProfilePicture'])->name('profile.remove.picture');
     Route::resource('education', EducationController::class)->only(['create','store','edit','update']);
     Route::resource('experience', ExperienceController::class)->only(['create','store','edit','update']);
     Route::resource('skills', SkillController::class)->only(['create','store','edit','update']);

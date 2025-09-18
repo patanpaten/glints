@@ -478,7 +478,7 @@
                         <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-md">
                             @if(Auth::user()->isJobSeeker())
                                 <a href="{{ route('jobseeker.dashboard') }}" class="block px-3 py-2 text-xs hover:bg-gray-100">Dashboard</a>
-                                <a href="{{ route('jobseeker.profile.create') }}" class="block px-3 py-2 text-xs hover:bg-gray-100">My Profile</a>
+                                <a href="{{ route('jobseeker.profile.index') }}" class="block px-3 py-2 text-xs hover:bg-gray-100">My Profile</a>
                             @endif
                             <hr class="border-gray-200">
                             <form action="{{ route('logout') }}" method="POST">
@@ -537,7 +537,7 @@
                         <a href="{{ route('jobseeker.dashboard') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                             DASHBOARD
                         </a>
-                        <a href="{{ route('jobseeker.profile.create') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
+                        <a href="{{ route('jobseeker.profile.index') }}" class="px-2 py-2 rounded hover:bg-white/10 transition-colors">
                             MY PROFILE
                         </a>
                     @endif
