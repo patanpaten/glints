@@ -24,6 +24,7 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\CvSearchController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\Company\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,10 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
     Route::patch('/jobs/{job}/toggle-active', [CompanyJobController::class, 'toggleActive'])->name('jobs.toggle-active');
     Route::patch('/jobs/{job}/toggle-featured', [CompanyJobController::class, 'toggleFeatured'])->name('jobs.toggle-featured');
 
+    // Tim Perusahaan
+    Route::get('/tim', [TeamController::class, 'index'])->name('tim.index');
+    Route::post('/tim', [TeamController::class, 'store'])->name('tim.store');
+
     // Applications
     Route::get('/applications', [CompanyApplicationController::class, 'all'])->name('applications.all');
     Route::get('/applications/{application}', [CompanyApplicationController::class, 'show'])->name('applications.show');
@@ -193,14 +198,14 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
 // ==========================
 Route::prefix('jobseeker')->name('jobseeker.')->middleware(['auth', 'role:job-seeker'])->group(function () {
     Route::get('/dashboard', [JobSeekerController::class, 'dashboard'])->name('dashboard');
-    
+
     // Old Profile Routes
     Route::get('/profile', [JobSeekerController::class, 'showProfile'])->name('profile.show');
     Route::get('/profile/create', [JobSeekerController::class, 'createProfile'])->name('profile.create');
     Route::post('/profile', [JobSeekerController::class, 'storeProfile'])->name('profile.store');
     Route::get('/profile/edit', [JobSeekerController::class, 'editProfile'])->name('profile.edit');
     Route::put('/profile', [JobSeekerController::class, 'updateProfile'])->name('profile.update');
-    
+
     // New CRUD Profile Routes
     Route::get('/profile/view', [App\Http\Controllers\JobSeeker\ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/new', [App\Http\Controllers\JobSeeker\ProfileController::class, 'create'])->name('profile.new');

@@ -82,6 +82,7 @@
         }
     </style>
 </head>
+@stack('scripts')
 <body>
 
   <!-- NAVBAR -->
@@ -163,7 +164,7 @@
               </div>
             </div>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow" 
+          <ul class="dropdown-menu dropdown-menu-end shadow"
           style="min-width: 460px; border-radius: 10px;">
 
           <!-- Header profil -->
@@ -203,14 +204,14 @@
 
               <div>
                   <div class="text-muted small">
-                      Glints VIP: 
+                      Glints VIP:
                       <span class="text-dark">
                           {{ Auth::guard('company')->user()->isVip() ? 'Aktif' : 'Tidak Aktif' }}
                       </span>
                   </div>
                   @if(!Auth::guard('company')->user()->isVip())
-                      <a href="{{ route('company.premium-features.index') }}" 
-                        class="fw-semibold text-primary small text-decoration-none" 
+                      <a href="{{ route('company.premium-features.index') }}"
+                        class="fw-semibold text-primary small text-decoration-none"
                         style="letter-spacing:1px;">
                           Upgrade ke VIP
                       </a>
@@ -238,8 +239,8 @@
               </div>
 
               @if(!Auth::guard('company')->user()->isVip())
-                  <a href="{{ route('company.premium-features.index') }}" 
-                    class="small fw-semibold text-primary text-decoration-none d-block mt-1 ms-4" 
+                  <a href="{{ route('company.premium-features.index') }}"
+                    class="small fw-semibold text-primary text-decoration-none d-block mt-1 ms-4"
                     style="letter-spacing:1px;">
                       Top Up
                   </a>
@@ -258,7 +259,7 @@
     </a>
 </li>
 <li>
-    <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('company.tim.index') }}">
         <i class="bi bi-people"></i> Tim Perusahaan
     </a>
 </li>

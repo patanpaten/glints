@@ -65,7 +65,7 @@ class CompanySubscription extends Model
         if ($this->isExpired()) {
             return 0;
         }
-        
+
         return now()->diffInDays($this->end_date, false);
     }
 
