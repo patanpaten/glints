@@ -183,6 +183,9 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
         Route::get('/suggestions', [CvSearchController::class, 'suggestions'])->name('suggestions');
     });
 
+    // Pricing / Upgrade Plan
+    Route::get('/pricing', [PremiumFeatureController::class, 'pricing'])->name('pricing');
+
     // Premium Features (khusus company)
     Route::prefix('premium-features')->name('premium-features.')->group(function () {
         Route::get('/', [PremiumFeatureController::class, 'index'])->name('index');

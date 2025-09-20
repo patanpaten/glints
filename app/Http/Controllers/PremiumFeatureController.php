@@ -146,4 +146,10 @@ class PremiumFeatureController extends Controller
 
         return redirect()->route('admin.premium-features.index')->with('success', 'Premium feature created successfully.');
     }
+
+    public function pricing()
+    {
+        // untuk halaman paket/upgrade plan
+        return view('premium-features.paket-premium');
+    }
 }

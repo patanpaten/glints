@@ -22,7 +22,7 @@
         <div class="col-md-8">
             <h3 class="mb-2">Anggota Tim</h3>
             <p class="text-muted" style="font-size: 14px;">
-                Kami tahu perekrutan adalah tim effort dan kolaborasi selalu menjadi cara terbaik untuk melakukannya.
+                Kami tahu perekrutan adalah tim effort dan kolaborasi selalu menjadi cara terbaik untuk melakukannya.<br>
                 Tambahkan kolega Anda sebagai administrator atau rekruter ke akun perusahaan Anda.
             </p>
 
@@ -41,12 +41,13 @@
                         <tbody>
                             @forelse($members as $member)
                                 <tr>
-                                    <td>
-                                        <a href="#" class="text-decoration-none">+</a>
+                                    <td class="text-end">
+                                        <a href="#" class="text-decoration-none p-3">+</a>
                                     </td>
+
                                     <td>
                                         {{ $member->first_name ?? $member->name }} {{ $member->last_name ?? '' }}
-<br>
+                                        <br>
 
                                         <small>{{ $member->phone }}</small>
                                     </td>
@@ -111,9 +112,21 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <input type="password" name="password" class="form-control custom-border rounded-0" placeholder="Masukkan kata sandi anggota baru">
-                            <small class="text-muted" style="font-size: 12px;">Hanya diperlukan jika pengguna tidak memiliki akun.</small>
+                            <div class="input-group">
+                                <input type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-control custom-border rounded-0" 
+                                    placeholder="Masukkan kata sandi anggota baru">
+                                <button class="btn btn-outline-secondary rounded-0" type="button" onclick="togglePassword()">
+                                    <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted" style="font-size: 12px;">
+                                Hanya diperlukan jika pengguna tidak memiliki akun.
+                            </small>
                         </div>
+
                         <div class="mb-3">
                             <select name="role" class="form-select form-control custom-border rounded-0" required>
                                 <option value="">Pilih peran untuk anggota baru</option>
@@ -121,7 +134,7 @@
                                 <option value="RECRUITER">Recruiter</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 rounded-0 fw-bold">TAMBAHKAN ANGGOTA TIM</button>
+                        <button type="submit" class="btn btn-primary w-100  rounded-0 fw-bold">TAMBAHKAN ANGGOTA TIM</button>
                     </form>
                 </div>
             </div>
@@ -153,5 +166,19 @@ document.addEventListener("DOMContentLoaded", function () {
         cell.textContent = text;
     });
 });
+
+function togglePassword() {
+    const input = document.getElementById("password");
+    const icon = document.getElementById("toggleIcon");
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+}
 </script>
 @endpush
