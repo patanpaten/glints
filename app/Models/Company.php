@@ -90,14 +90,14 @@ class Company extends Authenticatable
     {
         $words = explode(' ', $this->name);
         $initials = '';
-        
+
         foreach ($words as $word) {
             if (!empty($word)) {
                 $initials .= strtoupper(substr($word, 0, 1));
                 if (strlen($initials) >= 2) break;
             }
         }
-        
+
         return $initials ?: 'C';
     }
 
@@ -167,4 +167,10 @@ class Company extends Authenticatable
     {
         return true;
     }
+
+    public function members()
+    {
+        return $this->hasMany(CompanyMember::class);
+    }
+
 }

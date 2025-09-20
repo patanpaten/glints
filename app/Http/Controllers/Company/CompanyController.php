@@ -312,11 +312,11 @@ class CompanyController extends Controller
         if ($request->hasFile('logo')) {
             $updateData['logo'] = $request->file('logo');
         }
-        
+
         if ($request->hasFile('banner')) {
             $updateData['banner'] = $request->file('banner');
         }
-        
+
         if ($request->hasFile('photo')) {
             $updateData['photo'] = $request->file('photo');
         }
@@ -326,5 +326,11 @@ class CompanyController extends Controller
         return redirect()->route('company.dashboard')
             ->with('success', 'Profil perusahaan berhasil diperbarui!');
     }
-    
+
+    public function timPerusahaan()
+    {
+        $company = Auth::guard('company')->user();
+        $applications = collect(); // Placeholder
+        return view('company.profile.tim_perusahaan', compact('company', 'applications'));
+    }
 }

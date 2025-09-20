@@ -58,7 +58,7 @@
         {{-- Tombol Aksi --}}
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div class="flex-grow-1 me-2">
-                <input type="text" class="form-control" 
+                <input type="text" class="form-control"
                     placeholder="Cari dengan nama atau posisi di tahap: Chat Dimulai">
             </div>
             <div class="d-flex gap-2">
@@ -104,7 +104,7 @@
                         <td>{{ $application->jobSeeker->gender ?? '-' }}</td>
                         <td>{{ $application->jobSeeker->last_active ?? '-' }}</td>
                         <td>
-                            <a href="{{ route('company.applications.show', $application->id) }}" 
+                            <a href="{{ route('company.applications.show', $application->id) }}"
                                class="btn btn-sm btn-outline-primary">
                                 Detail
                             </a>
@@ -114,7 +114,7 @@
                     <tr>
                         <td colspan="9">
                             <div class="text-center mt-4 p-5 border-0 bg-white">
-                                <img src="{{ asset('images/empety.gif') }}" 
+                                <img src="{{ asset('images/empety.gif') }}"
                                     alt="Empty" style="max-width:150px;" class="mb-3">
                                 <h5 class="fw-semibold">Belum ada pelamar di tahap skill & psikotes</h5>
                                 <p class="text-muted mb-1">
