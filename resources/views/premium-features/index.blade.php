@@ -196,9 +196,11 @@
                         <span class="fw-bold fs-6 text-dark">Standard</span>
                     </div>
                     <p class="text-muted small mb-3">0 / 5 lowongan sedang aktif</p>
-                    <a href="/upgrade-plan" class="btn btn-outline-secondary w-100 fw-semibold">
+                    <a href="{{ route('company.pricing') }}" class="btn btn-outline-secondary w-100 fw-semibold">
                         Lihat Paket
                     </a>
+
+
                 </div>
             </div>
 
