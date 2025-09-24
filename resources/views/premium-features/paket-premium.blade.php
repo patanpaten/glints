@@ -41,7 +41,7 @@
                 <h4 class="fw-bold text-dark mb-3">Gratis</h4>
 
                 <!-- Tombol disabled -->
-                <button class="btn btn-light text-muted fw-semibold w-100 mb-3" disabled>
+                <button class="btn fw-semibold w-100 mb-3 border" style="background-color:#dee2e6; color:#6c757d;" disabled>
                     Paket Anda Saat Ini
                 </button>
 
@@ -51,21 +51,23 @@
                 <p class="fw-semibold small mb-2">Terdapat:</p>
                 <ul class="list-unstyled text-start small mb-0">
                     <li class="d-flex align-items-center mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#6c757d" height="18" viewBox="0 0 24 24">
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
                                         7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
                                         1.414L11.003 16Z"></path>
                             </svg>
                         <span class="ms-2">5 slot loker</span>
                     </li>
-                    <li class="d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
-                                        1.414L11.003 16Z"></path>
-                            </svg>
-                        <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
+                    <li class="d-flex align-items-start mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                        fill="#6c757d" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
+                                10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                                5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
+                    </svg>
+                    <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -114,15 +116,16 @@
 
                         
 
-                        <li class="d-flex align-items-center mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
-                                        1.414L11.003 16Z"></path>
-                            </svg>
-                            <span class="ms-2">Dapatkan chat terbanyak dengan kandidat</span>
+                        <li class="d-flex align-items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                            fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
+                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                                    5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
+                        </svg>
+                        <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
                         </li>
+
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
@@ -222,15 +225,16 @@
                             <span class="ms-2">Unduh data lamaran</span>
                         </li>
 
-                        <li class="d-flex align-items-center mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
-                                        1.414L11.003 16Z"></path>
-                            </svg>
-                            <span class="ms-2">Dapatkan chat terbanyak dengan kandidat</span>
+                        <li class="d-flex align-items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                            fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
+                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                                    5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
+                        </svg>
+                        <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
                         </li>
+
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
@@ -297,8 +301,8 @@
                     <p class="text-muted small"><span class="fw-semibold">Unlimited Slot Aktif </span><br> Terbaik bagi rekruter yang terus-menerus merekrut dalam jumlah besar.</p><br><br><br>
                     <button class="btn btn-primary w-100 mt-3">Hubungi Sales</button>
                     <hr>
-                    <ul class="">
-                    <li class="fw-semibold">Terdapat :</li>
+                    <ul class="list-unstyled text-start small">
+                        <li class="fw-semibold">Terdapat :</li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
@@ -328,15 +332,16 @@
                             <span class="ms-2">Unduh data lamaran</span>
                         </li>
 
-                        <li class="d-flex align-items-center mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
-                                        1.414L11.003 16Z"></path>
+                        <li class="d-flex align-items-start mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                                fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
+                                        10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                                        5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
                             </svg>
-                            <span class="ms-2">Dapatkan chat terbanyak dengan kandidat</span>
-                        </li>
+                            <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
+                            </li>
+
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
@@ -382,8 +387,6 @@
                             </svg>
                             <span class="ms-2">Fitur Pesan Otomatis</span>
                         </li>
-
-
                     </ul>
 
                 </div>

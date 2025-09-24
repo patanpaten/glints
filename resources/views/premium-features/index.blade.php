@@ -205,40 +205,46 @@
             </div>
 
             <!-- MENU FITUR -->
-            <div class="card border-0 shadow-sm mb-3">
-                <div class="list-group list-group-flush">
-                    <a href="/features/history?tab=ORDER_HISTORY&prev=/features?tab=FEATURES"
-                       class="list-group-item list-group-item-action d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                            <path d="m16 2 5 5v13.992A1 1 0 0 1 20.007 22H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.998 2H16Zm-1 2H5v16h14V8h-4V4Zm-2 5v4h3v2h-5V9h2Z"></path>
-                        </svg>
-                        <span class="text-muted">Riwayat Pembayaran</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-                        </svg>
-                    </a>
-                    <a href="/features/history?tab=ACTIVE_JOBS&prev=/features?tab=FEATURES"
-                       class="list-group-item list-group-item-action d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                            <path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4ZM4 16v3h16v-3H4Zm0-2h16V7H4v7ZM9 3v2h6V3H9Zm2 8h2v2h-2v-2Z"></path>
-                        </svg>
-                        <span class="text-muted">Loker Aktif</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-                        </svg>
-                    </a>
-                    <a href="/features/history?tab=CREDIT_HISTORY&prev=/features?tab=FEATURES"
-                       class="list-group-item list-group-item-action d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                            <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
-                        </svg>
-                        <span class="text-muted">Riwayat Credits</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                            <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+<div class="card border-0 shadow-sm mb-3">
+    <div class="list-group list-group-flush">
+        <!-- Riwayat Pembayaran -->
+        <a href="{{ route('company.riwayat', ['tab' => 'ORDER_HISTORY']) }}"
+           class="list-group-item list-group-item-action d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                <path d="m16 2 5 5v13.992A1 1 0 0 1 20.007 22H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.998 2H16Zm-1 2H5v16h14V8h-4V4Zm-2 5v4h3v2h-5V9h2Z"></path>
+            </svg>
+            <span class="text-muted">Riwayat Pembayaran</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+            </svg>
+        </a>
+
+        <!-- Loker Aktif -->
+        <a href="{{ route('company.riwayat', ['tab' => 'ACTIVE_JOBS']) }}"
+           class="list-group-item list-group-item-action d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                <path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4ZM4 16v3h16v-3H4Zm0-2h16V7H4v7ZM9 3v2h6V3H9Zm2 8h2v2h-2v-2Z"></path>
+            </svg>
+            <span class="text-muted">Loker Aktif</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+            </svg>
+        </a>
+
+        <!-- Riwayat Credits -->
+        <a href="{{ route('company.riwayat', ['tab' => 'CREDIT_HISTORY']) }}"
+           class="list-group-item list-group-item-action d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
+                <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
+            </svg>
+            <span class="text-muted">Riwayat Credits</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
+                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
         </div>
     </div>
 </div>

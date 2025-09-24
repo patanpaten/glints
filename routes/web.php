@@ -183,6 +183,8 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
         Route::get('/suggestions', [CvSearchController::class, 'suggestions'])->name('suggestions');
     });
 
+    Route::get('/riwayat', [PremiumFeatureController::class, 'riwayat'])->name('riwayat');
+
     // Pricing / Upgrade Plan
     Route::get('/pricing', [PremiumFeatureController::class, 'pricing'])->name('pricing');
 
