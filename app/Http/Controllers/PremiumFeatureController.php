@@ -152,4 +152,9 @@ class PremiumFeatureController extends Controller
         // untuk halaman paket/upgrade plan
         return view('premium-features.paket-premium');
     }
+
+    public function riwayat()
+    {
+        return view('premium-features.riwayat'); // ini akan panggil file resources/views/company/riwayat.blade.php
+    }
 }
