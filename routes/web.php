@@ -25,6 +25,8 @@ use App\Http\Controllers\CvSearchController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\Company\TeamController;
+use App\Http\Controllers\GoogleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -197,6 +199,10 @@ Route::prefix('company')->name('company.')->middleware('auth:company')->group(fu
         Route::get('/subscriptions/history', [PremiumFeatureController::class, 'history'])->name('subscriptions.history');
     });
 });
+
+    Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 
 // ==========================
 // Job Seeker

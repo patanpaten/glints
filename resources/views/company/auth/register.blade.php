@@ -31,14 +31,15 @@
 
             <div class="mt-8 space-y-4">
                 <!-- Google -->
-                <a href="#" 
+                <a href="{{ route('google.login') }}"
                 class="flex items-center justify-center gap-2 w-full py-3 border rounded-full hover:bg-gray-50">
                     <img src="{{ asset('images/google.png') }}" class="w-5 h-5" alt="Google">
                     Daftar dengan Google
                 </a>
 
+
                 <!-- Email -->
-                <a href="{{ route('company.register.email.form') }}" 
+                <a href="{{ route('company.register.email.form') }}"
                 class="flex items-center justify-center gap-2 w-full py-3 border rounded-full  hover:bg-gray-50">
                     <img src="{{ asset('images/email.jpg') }}" class="w-7 h-7 -ml-4" alt="Email">
                     Daftar dengan Email
@@ -62,14 +63,14 @@
             </div>
 
             <p class="text-center text-xs text-gray-500 mt-6">
-                Dengan melanjutkan, anda menyetujui 
-                <a href="#" class="text-blue-600">Perjanjian Pengguna</a>, 
-                <a href="#" class="text-blue-600">Kebijakan Privasi</a>, 
+                Dengan melanjutkan, anda menyetujui
+                <a href="#" class="text-blue-600">Perjanjian Pengguna</a>,
+                <a href="#" class="text-blue-600">Kebijakan Privasi</a>,
                 dan <a href="#" class="text-blue-600">Syarat Ketentuan Layanan</a>.
             </p>
 
             <p class="text-center text-sm mt-6">
-                Sudah punya akun? 
+                Sudah punya akun?
                 <a href="{{ route('company.login') }}" class="text-blue-600">Login di sini</a>
             </p>
         </div>
@@ -78,9 +79,9 @@
     class="fixed bottom-60 -right-3 bg-white rounded-xl shadow-lg p-5 w-30 flex flex-col items-center z-50"
     >
     <!-- QR Code -->
-    <img 
-        src="{{ asset('images/glints-web2-app-qr.png') }}" 
-        alt="Employer Web to App QR" 
+    <img
+        src="{{ asset('images/glints-web2-app-qr.png') }}"
+        alt="Employer Web to App QR"
         class="w-18 h-18 object-contain mb-2"
     >
 
@@ -93,7 +94,7 @@
     <!-- WhatsApp Floating Button -->
     <a
     href="#"
-    class="fixed bottom-22 right-3 bg-green-500 hover:bg-green-600 text-white 
+    class="fixed bottom-22 right-3 bg-green-500 hover:bg-green-600 text-white
             w-15 h-15 flex items-center justify-center rounded-full shadow-lg z-50"
     >
     <i class="fab fa-whatsapp text-4xl"></i>
