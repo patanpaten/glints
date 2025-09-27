@@ -83,7 +83,7 @@
 
                     {{-- Social login --}}
                     <div class="flex justify-center space-x-3">
-                        <a href="#" class="border p-2 rounded-full hover:bg-gray-50">
+                        <a href="{{ route('google.login') }}" class="border p-2 rounded-full hover:bg-gray-50">
                             <img src="/images/google.png" alt="Google" class="w-5 h-5">
                         </a>
                         <a href="#" class="border p-2 rounded-full hover:bg-gray-50">
