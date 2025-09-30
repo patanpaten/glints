@@ -28,28 +28,28 @@
                             <i class="fas fa-check-circle"></i> Terverifikasi
                         </span>
                     @else
-                    <svg viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg" 
+                    <svg viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg"
                             fill="#D4D5D8" height="20" width="20">
                             <path d="m6 .167 5.478 1.217a.667.667 0 0 1 .522.65v6.659a4 4 0 0 1-1.781 3.328L6 14.833l-4.219-2.812A4 4 0 0 1 0 8.693V2.035c0-.313.217-.583.522-.651L6 .167ZM8.968 4.98l-3.3 3.3-1.885-1.886-.943.943 2.828 2.829 4.243-4.243-.943-.943Z"></path>
                         </svg>
                         <span class="text-muted fw-semibold">
-                            Belum Diverifikasi 
+                            Belum Diverifikasi
                         </span>
                         <span class="fw-semibold">
                             -
                         </span>
                         <!-- Tombol / Link -->
-                        <a href="#" 
-                        class="text-primary fw-semibold text-decoration-none" 
-                        data-bs-toggle="modal" 
+                        <a href="#"
+                        class="text-primary fw-semibold text-decoration-none"
+                        data-bs-toggle="modal"
                         data-bs-target="#verificationModal">
                         Verifikasi Perusahaan
                         </a>
 
                         <!-- Modal Verifikasi Perusahaan -->
                         <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
-                            <div class="modal-content rounded-3 shadow">
+                        <div class="modal-dialog modal-dialog-centered" style="max-width: 1100px;">
+                            <div class="modal-content rounded-3 shadow" style="min-height: 550px; max-height: 90vh;">
 
                             <!-- Header -->
                             <div class="modal-header border-0">
@@ -58,326 +58,479 @@
                             </div>
                             <div class="border-top"></div>
 
-                            <!-- Body (Scrollable) -->
-                            <div class="modal-body" style="max-height: 65vh; overflow-y: auto;">
-                                
-                                <!-- Banner Info -->
-                                <div class="alert d-flex align-items-center rounded-3 mb-4" 
-                                    role="alert" 
-                                    style="background-color:#f8f9fa; border:1px solid #dee2e6; color:#495057;">
-                                <i class="bi bi-info-circle me-2"></i>
-                                <span>Verifikasi memerlukan waktu 2 hari kerja</span>
-                                </div>
+                            <!-- Form Wrapper -->
+                            <form id="verificationForm">
+                                <!-- Body -->
+                                <div class="modal-body" style="max-height: 65vh; overflow-y: auto;">
 
                                 <p class="mb-3">Silakan pilih metode verifikasi untuk melanjutkan.</p>
 
                                 <!-- Pilihan Metode -->
                                 <div class="row g-3 mb-4">
-                                <!-- Pilihan Metode -->
-                                <div class="row g-3 mb-4">
-                                <!-- Opsi Dokumen Legal -->
-                                <div class="col-md-6">
-                                <div class="card border shadow-sm h-100">
-                                    <div class="card-body position-relative">
+                                    <!-- Opsi Dokumen Legal -->
+                                    <div class="col-md-6">
+                                    <div class="card border shadow-sm h-100 pilih-metode" data-metode="legal" style="cursor:pointer;">
+                                        <div class="card-body position-relative">
+                                        <!-- Direkomendasikan -->
+                                        <span class="badge position-absolute px-2 py-1 rounded-3"
+                                                style="background-color:#ff8000; color:#fff; top:-10px; left:15px; z-index:1; letter-spacing: 2px;">
+                                            Direkomendasikan
+                                        </span>
 
-                                    <!-- Direkomendasikan -->
-                                    <span class="badge position-absolute" 
-                                        style="background-color:#ff8000; color:#fff; top:-10px; left:15px; z-index:1;">
-                                    Direkomendasikan
-                                    </span>
-
-
-                                    <!-- Judul + Icon -->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <img src="{{ asset('images/verify-with-legal-documents-icon.svg') }}" 
-                                            class="me-2" width="40" height="40" />
-                                        <h6 class="fw-semibold mb-0">Verifikasi dengan Dokumen Legal</h6>
+                                        <!-- Judul + Icon -->
+                                        <div class="d-flex align-items-start mb-2">
+                                    <img src="{{ asset('images/verify-with-legal-documents-icon.svg') }}"
+                                        alt="Verifikasi Legal"
+                                        class="me-2" width="40" height="40">
+                                    <div>
+                                        <h6 class="fw-semibold mb-1">Verifikasi dengan Dokumen Legal</h6>
+                                        <p class="mb-0 text-muted">Untuk bisnis yang terdaftar legal sebagai PT atau CV</p>
+                                    </div>
                                     </div>
 
-                                    <hr class="my-2">
+                            <hr class="my-2">
 
-                                    <!-- Subjudul -->
-                                    <p class="small mb-2 text-muted fw-semibold">Anda akan mendapatkan:</p>
+                            <!-- Subjudul -->
+                            <p class="small mb-2 text-muted fw-semibold">Anda akan mendapatkan:</p>
 
-                                    <!-- 3 Item Sejajar -->
-                                    <div class="d-flex justify-content-between text-center">
-                                        <div>
-                                        <div class="fw-bold">5</div>
-                                        <div class="small text-muted">Loker aktif (Paket Standard)</div>
-                                        </div>
-                                        <div>
-                                        <div>✔</div>
-                                        <div class="small text-muted">Badge terverifikasi</div>
-                                        </div>
-                                        <div>
-                                        <div>🛒</div>
-                                        <div class="small text-muted">Fitur berbayar</div>
-                                        </div>
-                                    </div>
-
-                                    </div>
+                            <!-- 3 Item Sejajar -->
+                            <div class="d-flex justify-content-between text-center">
+                                <!-- Item 1 -->
+                                <div class="flex-fill text-start">
+                                <div class="fw-bold fs-6">5</div>
+                                <div class="small text-muted">Loker aktif (Paket Standard)</div>
                                 </div>
+                                <!-- Item 2 -->
+                                <div class="flex-fill text-start">
+                                <img src="{{ asset('images/company-verified-badge.svg') }}"
+                                    alt="Badge Terverifikasi"
+                                    width="25" height="25">
+                                <div class="small text-muted">Badge terverifikasi</div>
                                 </div>
 
-
-                                <!-- Opsi Bukti Kepemilikan -->
-                                <div class="col-md-6">
-                                <div class="card border shadow-sm h-100">
-                                    <div class="card-body position-relative">
-
-                                    <!-- Judul + Icon -->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <img src="{{ asset('images/verify-with-proof-of-ownership-icon.svg') }}" 
-                                            class="me-2" width="40" height="40" />
-                                        <h6 class="fw-semibold mb-0">Verifikasi dengan Bukti Kepemilikan</h6>
-                                    </div>
-
-                                    <hr class="my-2">
-
-                                    <!-- Subjudul -->
-                                    <p class="small mb-2 text-muted fw-semibold">Anda akan mendapatkan:</p>
-
-                                    <!-- 3 Item Sejajar -->
-                                    <div class="d-flex justify-content-between text-center">
-                                        <div>
-                                        <div class="fw-bold">3</div>
-                                        <div class="small text-muted">Loker aktif (Paket Standard)</div>
-                                        </div>
-                                        <div>
-                                        <div>🛒</div>
-                                        <div class="small text-muted">Fitur berbayar</div>
-                                        </div>
-                                    </div>
-
-                                    </div>
+                                <!-- Item 3 -->
+                                <div class="flex-fill text-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="#666666" width="25" height="25">
+                                    <path d="M4.005 16V4h-2V2h3a1 1 0 0 1
+                                            1 1v12h12.438l2-8H8.005V5h13.72a1
+                                            1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5.004a1
+                                            1 0 0 1-1-1Zm2 7a2 2 0 1 1
+                                            0-4 2 2 0 0 1 0 4Zm12 0a2 2 0 1 1
+                                            0-4 2 2 0 0 1 0 4Z"></path>
+                                </svg>
+                                <div class="small text-muted">Fitur berbayar</div>
                                 </div>
-                                </div>
-                                </div>
-
-                                {{-- <!-- Form & Sidebar verifikasi dengan dokumen legal -->
-                                <div class="row g-3">
-                                <!-- Sidebar Kiri -->
-                                <div class="col-md-4">
-                                    <div class="card border-1 shadow-sm">
-                                    <div class="card-body">
-                                        <h6 class="fw-semibold mb-3">Dibutuhkan</h6>
-                                        <ul class="list-unstyled small mb-0">
-                                        <li>NPWP Perusahaan</li>
-                                        <li>Nomor NPWP Perusahaan</li>
-                                        <li>NIB Perusahaan <span class="text-muted">(Opsional)</span></li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                <!-- Form Kanan -->
-                                <div class="col-md-8">
-                                    <div class="card border-1 shadow-sm">
-                                    <div class="card-body">
-                                        <form>
-                                        <!-- Custom Input File NPWP -->
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">Upload NPWP Perusahaan <span class="text-danger">*</span></label><br>
-                                            <input type="file" id="uploadNPWP" accept=".pdf,.jpg,.jpeg,.png" hidden>
-                                            <label for="uploadNPWP" class="btn btn-outline-secondary d-inline-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 24 24">
-                                                <path d="M3 19h18v2H3v-2Zm10-9v8h-2v-8H4l8-8 8 8h-7Z"/>
-                                            </svg>
-                                            Pilih File
-                                            </label>
-                                            <small class="text-muted d-block mt-2">
-                                            <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | 
-                                            <span class="fw-semibold">Ukuran maksimum:</span> 10MB
-                                            </small>
-                                        </div>
-
-                                        <!-- Nomor NPWP -->
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">Nomor NPWP Perusahaan <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control">
-                                        </div>
-
-                                        <!-- NIB -->
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">13 Digit NIB Perusahaan - <span class="text-muted">Opsional</span></label>
-                                            <input type="text" class="form-control">
-                                            <small class="text-muted d-block mt-1">
-                                            Melampirkan NIB anda akan mempercepat verifikasi
-                                            </small>
-                                        </div>
-
-                                        <!-- Dokumen Tambahan -->
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">Dokumen Tambahan</label><br>
-                                            <input type="file" id="extraDocs" accept=".pdf,.jpg,.jpeg,.png" hidden>
-                                            <label for="extraDocs" class="btn btn-outline-secondary d-inline-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 24 24">
-                                                <path d="M3 19h18v2H3v-2Zm10-9v8h-2v-8H4l8-8 8 8h-7Z"/>
-                                            </svg>
-                                            Pilih File (Maks: 5)
-                                            </label>
-                                            <small class="text-muted d-block mt-2">
-                                            <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | 
-                                            <span class="fw-semibold">Ukuran maksimum:</span> 10MB
-                                            </small>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div> --}}
-
-
-                                <!-- Form & Sidebar verifikasi dengan bukti kepemilikan -->
-                                <div class="row g-3">
-                                <!-- Sidebar Kiri -->
-                                <div class="col-md-3">
-                                    <div class="card border-1 shadow-sm">
-                                    <div class="card-body">
-                                        <h6 class="fw-semibold mb-3">Dibutuhkan</h6>
-                                        <ul class="list-unstyled small mb-0">
-                                        <li>Verifikasi WhatsApp</li>
-                                        <li>KTP/NPWP Pribadi</li>
-                                        <li>Nomor KTP/NPWP Pribadi</li>
-                                        <li>NIB Pribadi (Opsional)</li>
-                                        <li>Foto Aktivitas Bisnis Online/Offline</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                <!-- Form Kanan -->
-                                <div class="col-md-9">
-                                <div class="card border-1 shadow-sm">
-                                    <div class="card-body">
-                                    <form>
-
-                                        <!-- Verifikasi WhatsApp -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">Verifikasi WhatsApp <span class="text-danger">*</span></label>
-                                        <div class="alert alert-light border d-flex align-items-center p-2 mb-0">
-                                            <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                            <span>Status Verifikasi: <strong class="text-success"><br>Terverifikasi</strong></span>
-                                        </div>
-                                        </div>
-
-                                        <!-- Pilih Salah Satu: NPWP / KTP -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">Pilih Salah Satu <span class="text-danger">*</span></label>
-                                        <div class="d-flex gap-3">
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="identityType" id="npwp" checked>
-                                            <label class="form-check-label" for="npwp">NPWP Pribadi</label>
-                                            </div>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="identityType" id="ktp">
-                                            <label class="form-check-label" for="ktp">KTP Pribadi</label>
-                                            </div>
-                                        </div>
-                                        </div>
-
-                                        <!-- Upload NPWP/KTP -->
-                                        <div class="mb-3">
-                                        <input type="file" id="uploadIdentity" accept=".pdf,.jpg,.jpeg,.png" hidden>
-                                        <label for="uploadIdentity" class="btn btn-outline-secondary d-inline-flex align-items-center">
-                                            <i class="bi bi-upload me-2"></i>Pilih File
-                                        </label>
-                                        <small class="text-muted d-block mt-2">
-                                            <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | 
-                                            <span class="fw-semibold">Ukuran maksimum:</span> 10MB
-                                        </small>
-                                        </div>
-
-                                        <!-- Nomor NPWP -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">Nomor NPWP Pribadi <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control">
-                                        </div>
-
-                                        <!-- NIB -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">NIB Pribadi</label>
-                                        <input type="text" class="form-control">
-                                        <small class="text-muted d-block mt-1">
-                                            Melampirkan NIB anda akan mempercepat verifikasi
-                                        </small>
-                                        </div>
-
-                                        <!-- Pilih Salah Satu: Aktivitas Bisnis -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">Pilih Salah Satu <span class="text-danger">*</span></label>
-                                        <div class="d-flex gap-3">
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="businessProof" id="online" checked>
-                                            <label class="form-check-label" for="online">Foto Aktivitas Bisnis Online (Min 2)</label>
-                                            </div><br>
-                                            <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="businessProof" id="offline">
-                                            <label class="form-check-label" for="offline">Foto Aktivitas Bisnis Offline (Min 2)</label>
-                                            </div>
-                                        </div>
-                                        </div>
-
-                                        <!-- Upload Foto Aktivitas -->
-                                        <div class="mb-3">
-                                        <div class="d-flex gap-2 flex-wrap">
-                                            <label class="border rounded d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
-                                            <i class="bi bi-plus-lg fs-4"></i>
-                                            <span class="small">Unggah</span>
-                                            <input type="file" accept=".jpg,.jpeg,.png" hidden>
-                                            </label>
-                                            <label class="border rounded d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
-                                            <i class="bi bi-plus-lg fs-4"></i>
-                                            <span class="small">Unggah</span>
-                                            <input type="file" accept=".jpg,.jpeg,.png" hidden>
-                                            </label>
-                                            <label class="border rounded d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
-                                            <i class="bi bi-plus-lg fs-4"></i>
-                                            <span class="small">Unggah</span>
-                                            <input type="file" accept=".jpg,.jpeg,.png" hidden>
-                                            </label>
-                                            <label class="border rounded d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
-                                            <i class="bi bi-plus-lg fs-4"></i>
-                                            <span class="small">Unggah</span>
-                                            <input type="file" accept=".jpg,.jpeg,.png" hidden>
-                                            </label>
-                                        </div>
-                                        <small class="text-muted d-block mt-2">
-                                            <span class="fw-semibold">Format yang diterima:</span> jpg, jpeg, png | 
-                                            <span class="fw-semibold">Ukuran maksimum:</span> 10MB
-                                        </small>
-                                        </div>
-
-                                        <!-- Dokumen Tambahan -->
-                                        <div class="mb-3">
-                                        <label class="form-label fw-semibold">Dokumen Tambahan</label><br>
-                                        <input type="file" id="extraDocs" accept=".pdf,.jpg,.jpeg,.png" multiple hidden>
-                                        <label for="extraDocs" class="btn btn-outline-secondary d-inline-flex align-items-center">
-                                            <i class="bi bi-upload me-2"></i>Pilih File (Maks: 5)
-                                        </label>
-                                        <small class="text-muted d-block mt-2">
-                                            <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | 
-                                            <span class="fw-semibold">Ukuran maksimum:</span> 10MB
-                                        </small>
-                                        </div>
-
-                                    </form>
-                                    </div>
-                                </div>
-                                </div>
-
-                                </div>
-
-                            </div> <!-- /modal-body -->
                             </div>
-                            <!-- Footer (Sticky di bawah) -->
-                            <div class="modal-footer border-0">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batalkan</button>
-                                <button type="submit" class="btn btn-secondary" disabled>Kirim</button>
                             </div>
                         </div>
                         </div>
+
+
+                    <!-- Opsi Bukti Kepemilikan -->
+                    <div class="col-md-6">
+                    <div class="card border shadow-sm h-100 pilih-metode" data-metode="ownership" style="cursor:pointer;">
+                        <div class="card-body position-relative">
+                        <!-- Judul + Icon -->
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="{{ asset('images/verify-with-proof-of-ownership-icon.svg') }}"
+                                class="me-2" width="40" height="40" />
+                                <div>
+                                    <h6 class="fw-semibold mb-0">Verifikasi dengan Bukti Kepemilikan</h6>
+                                    <p>Untuk bisnis perorangan atau usaha perseorangan</p>
+                                </div>
+
                         </div>
+                        <hr class="my-2">
+                        <!-- Subjudul -->
+                        <p class="small mb-2 text-muted fw-semibold">Anda akan mendapatkan:</p>
+                        <!-- 2 Item Sejajar -->
+                        <div class="d-flex justify-content-between text-center">
+                            <!-- Item 1 -->
+                            <div class="flex-fill text-start">
+                            <div class="fw-bold fs-6">3</div>
+                            <div class="small text-muted">Loker aktif (Paket Standard)</div>
+                            </div>
+                            <div class="flex-fill text-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="#666666" width="25" height="25">
+                                <path d="M4.005 16V4h-2V2h3a1 1 0 0 1
+                                        1 1v12h12.438l2-8H8.005V5h13.72a1
+                                        1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5.004a1
+                                        1 0 0 1-1-1Zm2 7a2 2 0 1 1
+                                        0-4 2 2 0 0 1 0 4Zm12 0a2 2 0 1 1
+                                        0-4 2 2 0 0 1 0 4Z"></path>
+                            </svg>
+                            <div class="small text-muted">Fitur berbayar</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- FORM DOKUMEN LEGAL -->
+                <div id="formLegal" class="d-none">
+                    <div class="row g-3">
+
+                    <!-- Form kanan -->
+                    <div class="col-md-8">
+                        <div class="card border shadow-sm">
+                        <div class="card-body">
+                            <!-- NPWP -->
+                            <div class="mb-3">
+                            <label class="form-label fw-semibold">Upload NPWP Perusahaan <span class="text-danger">*</span></label><br>
+                            <input type="file" id="uploadNPWP" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            <label for="uploadNPWP" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                                <i class="bi bi-upload me-2"></i>Pilih File
+                            </label>
+                            <small class="text-muted d-block mt-2">
+                                <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | <span class="fw-semibold">Ukuran maksimum:</span> 10MB
+                            </small>
+                            </div>
+
+                            <!-- Nomor NPWP -->
+                            <div class="mb-3">
+                            <label class="form-label fw-semibold">Nomor NPWP Perusahaan <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" style="width: 500px;">
+                            </div>
+
+                            <!-- NIB -->
+                            <div class="mb-3">
+                            <label class="form-label fw-semibold">13 Digit NIB Perusahaan - <span class="text-muted">Opsional</span></label>
+                            <input type="text" class="form-control" style="width: 500px;">
+                            <small class="text-muted d-block mt-1">Melampirkan NIB anda akan mempercepat verifikasi</small>
+                            </div>
+
+                            <!-- Dokumen Tambahan -->
+                            <div class="mb-3">
+                            <label class="form-label fw-semibold">Dokumen Tambahan</label><br>
+                            <input type="file" id="extraDocsLegal" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            <label for="extraDocsLegal" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                                <i class="bi bi-upload me-2"></i>Pilih File (Maks: 5)
+                            </label>
+                            <small class="text-muted d-block mt-2">
+                                <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | <span class="fw-semibold">Ukuran maksimum:</span> 10MB
+                            </small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Kiri (versi baru dengan ikon dari inspeksi) -->
+                    <div class="col-md-4">
+                    <div class="card border shadow-sm">
+                        <div class="card-body">
+
+                        <!-- Card Tutorial -->
+                        <div class="card border-1 mb-3" style="border-radius: 5px; background-color:#f5f5f5;">
+                        <div class="card-body d-flex align-items-start">
+                            <!-- Gambar -->
+                            <img src="{{ asset('images/tutorial-card-image.jpg') }}" alt="Tutorial"
+                                width="48" height="48" class="me-3">
+
+                            <!-- Konten -->
+                            <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <p class="fw-semibold mb-0">Lihat Tutorial</p>
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" fill="#666666">
+                                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364
+                                        6.364-1.414-1.414 4.95-4.95Z"></path>
+                                </svg>
+                            </div>
+                            <p class="text-muted small mb-0">
+                                Pelajari cara mengunduh PDF NPWP yang resmi dari situs pemerintah.
+                            </p>
+                            <a href="#" class="stretched-link"></a>
+                            </div>
+                        </div>
+                        </div>
+
+                    <!-- Persyaratan NPWP -->
+                    <h6 class="fw-semibold mb-3">Persyaratan NPWP Perusahaan</h6>
+
+                    <!-- Checklist hijau -->
+                    <div class="d-flex align-items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#198754" class="me-2 flex-shrink-0">
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2
+                                12 2s10 4.477 10 10-4.477 10-10
+                                10Zm0-2a8 8 0 1 0 0-16 8 8 0 0
+                                0 0 16Zm-.997-4L6.76 11.757l1.414-1.414
+                                2.829 2.829 5.657-5.657 1.414
+                                1.414L11.003 16Z"></path>
+                        </svg>
+                        <p class="text-muted small mb-0">
+                        Hanya file PDF asli yang diunduh dari
+                        <a href="https://djponline.pajak.go.id" class="text-decoration-none" target="_blank">DJP Online</a>
+                        atau <a href="https://coretaxdjp.pajak.go.id" class="text-decoration-none" target="_blank">Coretax</a>
+                        yang diterima.
+                        </p>
+                    </div>
+                <hr>
+                    <!-- Silang kuning -->
+                    <div class="d-flex align-items-start mb-2">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F5A623" class="me-2 flex-shrink-0">
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477
+                                2 12 2s10 4.477 10 10-4.477
+                                10-10 10Zm0-2a8 8 0 1 0 0-16.001A8
+                                8 0 0 0 12 20Zm0-9.414 2.828-2.829
+                                1.415 1.415L13.414 12l2.829
+                                2.828-1.415 1.415L12 13.414l-2.828
+                                2.829-1.415-1.415L10.586 12
+                                7.757 9.172l1.415-1.415L12
+                                10.586Z"></path>
+                        </svg>
+                        <p class="text-muted small mb-0">
+                        File NPWP hasil scan atau foto tidak akan diterima.
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="d-flex align-items-start mb-2">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F5A623" class="me-2 flex-shrink-0">
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477
+                                2 12 2s10 4.477 10 10-4.477
+                                10-10 10Zm0-2a8 8 0 1 0 0-16.001A8
+                                8 0 0 0 12 20Zm0-9.414 2.828-2.829
+                                1.415 1.415L13.414 12l2.829
+                                2.828-1.415 1.415L12 13.414l-2.828
+                                2.829-1.415-1.415L10.586 12
+                                7.757 9.172l1.415-1.415L12
+                                10.586Z"></path>
+                        </svg>
+                        <p class="text-muted small mb-0">
+                        Untuk melakukan verifikasi dengan NPWP Pribadi atau NPWP Perseroan Perorangan, gunakan metode <a href="#" class="text-decoration-none" target="_blank">Bukti Kepemilikan</a>
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="d-flex align-items-start mb-2">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" fill="#F5A623" class="me-2 flex-shrink-0">
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477
+                            2 12 2s10 4.477 10 10-4.477
+                            10-10 10Zm0-2a8 8 0 1 0 0-16.001A8
+                            8 0 0 0 12 20Zm0-9.414 2.828-2.829
+                            1.415 1.415L13.414 12l2.829
+                            2.828-1.415 1.415L12 13.414l-2.828
+                            2.829-1.415-1.415L10.586 12
+                            7.757 9.172l1.415-1.415L12
+                            10.586Z"></path>
+                </svg>
+                <p class="text-muted mb-0" style="font-size: 14px;">
+                    Jika akun perusahaan Anda menggunakan nama brand, unggah Dashboard Social Media Manager atau sertifikat HAKI (Hak Cipta) untuk memverifikasi kepemilikan.
+                </p>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+
+            </div>
+          </div>
+
+          <!-- FORM BUKTI KEPEMILIKAN -->
+          <div id="formOwnership" class="d-none">
+            <div class="row g-3">
+
+              <!-- Form Kiri -->
+              <div class="col-md-9">
+                <div class="card border shadow-sm">
+                  <div class="card-body">
+                    <!-- WA -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Verifikasi WhatsApp <span class="text-danger">*</span></label>
+                      <div class="alert alert-light border d-flex align-items-center p-2 mb-0">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        <span>Status Verifikasi: <strong class="text-success"><br>Terverifikasi</strong></span>
+                      </div>
+                    </div>
+
+                    <!-- Pilih Salah Satu -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Pilih Salah Satu <span class="text-danger">*</span></label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="identityType" id="npwp" checked>
+                          <label class="form-check-label" for="npwp">NPWP Pribadi</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="identityType" id="ktp">
+                          <label class="form-check-label" for="ktp">KTP Pribadi</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Upload NPWP/KTP -->
+                    <div class="mb-3">
+                      <input type="file" id="uploadIdentity" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                      <label for="uploadIdentity" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                        <i class="bi bi-upload me-2"></i>Pilih File
+                      </label>
+                      <small class="text-muted d-block mt-2">
+                        <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | <span class="fw-semibold">Ukuran maksimum:</span> 10MB
+                      </small>
+                    </div>
+
+                    <!-- Nomor NPWP -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Nomor NPWP Pribadi <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" style="width: 500px;">
+                    </div>
+
+                    <!-- NIB -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">NIB Pribadi</label>
+                      <input type="text" class="form-control" style="width: 500px;">
+                      <small class="text-muted d-block mt-1">Melampirkan NIB anda akan mempercepat verifikasi</small>
+                    </div>
+
+                    <!-- Aktivitas Bisnis -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Pilih Salah Satu <span class="text-danger">*</span></label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="businessProof" id="online" checked>
+                          <label class="form-check-label" for="online">Foto Aktivitas Bisnis Online (Min 2)</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="businessProof" id="offline">
+                          <label class="form-check-label" for="offline">Foto Aktivitas Bisnis Offline (Min 2)</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Upload Foto Aktivitas -->
+                    <div class="mb-3">
+                      <div class="d-flex gap-2 flex-wrap">
+                        <label class="border d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
+                          <i class="bi bi-plus-lg fs-4 fw-semibold"></i>
+                          <span class="small fw-semibold">Unggah</span>
+                          <input type="file" accept=".jpg,.jpeg,.png" hidden>
+                        </label>
+                        <label class="border d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
+                          <i class="bi bi-plus-lg fs-4 fw-semibold"></i>
+                          <span class="small fw-semibold">Unggah</span>
+                          <input type="file" accept=".jpg,.jpeg,.png" hidden>
+                        </label>
+                        <label class="border d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
+                          <i class="bi bi-plus-lg fs-4 fw-semibold"></i>
+                          <span class="small fw-semibold">Unggah</span>
+                          <input type="file" accept=".jpg,.jpeg,.png" hidden>
+                        </label>
+                        <label class="border d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
+                          <i class="bi bi-plus-lg fs-4 fw-semibold"></i>
+                          <span class="small fw-semibold">Unggah</span>
+                          <input type="file" accept=".jpg,.jpeg,.png" hidden>
+                        </label>
+                        <label class="border d-flex flex-column justify-content-center align-items-center p-4 flex-fill text-muted" style="min-width:100px; cursor:pointer;">
+                          <i class="bi bi-plus-lg fs-4 fw-semibold"></i>
+                          <span class="small fw-semibold">Unggah</span>
+                          <input type="file" accept=".jpg,.jpeg,.png" hidden>
+                        </label>
+                      </div>
+                      <small class="text-muted d-block mt-2">
+                        <span class="fw-semibold">Format yang dapat diterima:</span> jpg, jpeg, png | <span class="fw-semibold">Ukuran maksimum:</span> 10MB
+                      </small>
+                    </div>
+
+                    <!-- Dokumen Tambahan -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Dokumen Tambahan</label><br>
+                      <input type="file" id="extraDocsOwnership" accept=".pdf,.jpg,.jpeg,.png" multiple hidden>
+                      <label for="extraDocsOwnership" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                        <i class="bi bi-upload me-2"></i>Pilih File (Maks: 5)
+                      </label>
+                      <small class="text-muted d-block mt-2">
+                        <span class="fw-semibold">Format yang dapat diterima:</span> pdf, jpg, jpeg, png | <span class="fw-semibold">Ukuran maksimum:</span> 10MB
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Sidebar Kanan -->
+              <div class="col-md-3">
+                <div class="card border shadow-sm">
+                  <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Dibutuhkan</h6>
+                    <ul class="list-unstyled small mb-0 text-muted fs-7">
+                      <li>Verifikasi WhatsApp</li>
+                      <li>KTP/NPWP Pribadi</li>
+                      <li>Nomor KTP/NPWP Pribadi</li>
+                      <li>NIB Pribadi (Opsional)</li>
+                      <li>Foto Aktivitas Bisnis Online/Offline</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /modal-body -->
+
+        <!-- Footer -->
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-outline-dark fw-semibold" style="letter-spacing: 1px;" data-bs-dismiss="modal">Batalkan</button>
+          <button type="submit" class="btn btn-secondary fw-semibold" id="btnSubmit" style="letter-spacing: 1px;" disabled>Kirim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style> 
+    .card-active {
+  border: 1px solid #0d6efd !important;  /* biru Bootstrap */
+  background-color: #e7f1ff !important;  /* biru muda */
+  transition: all 0.2s ease-in-out;
+}
+
+</style>
+
+<script>
+  const metodeCards = document.querySelectorAll('.pilih-metode');
+  const formLegal = document.getElementById('formLegal');
+  const formOwnership = document.getElementById('formOwnership');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  // fungsi pilih metode
+  function pilihMetode(metode) {
+    // reset semua card
+    metodeCards.forEach(c => c.classList.remove('card-active'));
+
+    // sembunyikan semua form
+    formLegal.classList.add('d-none');
+    formOwnership.classList.add('d-none');
+
+    // tampilkan sesuai pilihan
+    if (metode === 'legal') {
+      document.querySelector('[data-metode="legal"]').classList.add('card-active');
+      formLegal.classList.remove('d-none');
+    } else if (metode === 'ownership') {
+      document.querySelector('[data-metode="ownership"]').classList.add('card-active');
+      formOwnership.classList.remove('d-none');
+    }
+
+    // aktifkan tombol submit
+    btnSubmit.removeAttribute('disabled');
+  }
+
+  // event listener klik
+  metodeCards.forEach(card => {
+    card.addEventListener('click', function() {
+      pilihMetode(this.getAttribute('data-metode'));
+    });
+  });
+
+  // default: tampilkan form legal saat load
+  window.addEventListener('DOMContentLoaded', () => {
+    pilihMetode('legal');
+  });
+</script>
+
+
+
+
                     @endif
                 </div>
                 </div>
@@ -400,7 +553,7 @@
             </div>
         </div>
     </div>
-    
+
 <div class="container-fluid py-2">
     <!-- BODY -->
     <div class="row">
@@ -605,7 +758,12 @@
                             <div>
                                 <h6 class="mb-1 fw-bold">Verifikasi Diperlukan</h6>
                                 <p class="text-muted small mb-2">Verifikasi perusahaan Anda untuk posting lowongan pekerjaan dan dapatkan akses ke banyak fitur.</p>
-                                <button class="btn btn-outline-primary btn-sm">Verifikasi Perusahaan</button>
+                                <a href="#"
+                                class="btn btn-outline-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#verificationModal">
+                                Verifikasi Perusahaan
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -623,12 +781,62 @@
                 <div>
                 <h6 class="fw-bold mb-2">Fitur baru: Glints VIP!</h6>
                 <p class="small mb-3">Dapatkan fitur eksklusif untuk proses rekrutmen yang lebih cepat!</p>
-                <button class="btn btn-outline-light btn-sm fw-semibold px-3">
+                <button class="btn btn-outline-light btn-sm fw-semibold px-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#verifikasiModal">
                     Upgrade ke VIP
                 </button>
+
                 </div>
             </div>
             </div>
+
+            <!-- Modal Verifikasi Perusahaan -->
+            <div class="modal fade" id="verifikasiModal" tabindex="-1" aria-labelledby="verifikasiLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 650px;">
+                <div class="modal-content rounded-3 shadow border-0">
+
+                <!-- Header -->
+                <div class="modal-header" style="border-top: 1px solid #dee2e6;">
+                    <h5 class="modal-title fw-bold" id="verifikasiLabel">Verifikasi Perusahaan Diperlukan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body text-start px-4">
+                    <!-- Progress Icon -->
+                    <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+                    <img src="{{ asset('images/company-unverified-badge.svg') }}"
+                        alt="Belum Diverifikasi"
+                        style="width: 76px; height: 76px;">
+                    <img src="{{ asset('images/company-verification-arrow.svg') }}"
+                        alt="Arrow"
+                        style="width: 60px; height: 60px;">
+                    <img src="{{ asset('images/company-verified-badge.svg') }}"
+                        alt="Sudah Diverifikasi"
+                        style="width: 76px; height: 76px;">
+                    </div>
+
+                    <p class="mb-3">
+                    Perusahaan Anda perlu diverifikasi agar dapat membeli fitur premium ini.
+                    </p>
+                    <p class="mb-0">
+                    Harap pastikan anda mengunggah dokumen yang diperlukan; jika memiliki pertanyaan,
+                    hubungi tim support kami melalui
+                    <a href="mailto:hello@glints.com" class="text-primary text-decoration-none">hello@glints.com</a>
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer" style="border-top: 1px solid #dee2e6;">
+                    <button type="button" class="btn btn-outline-secondary fw-semibold" data-bs-dismiss="modal">Tutup</button>
+                    <a href="{{ route('company.account-settings.index') }}" class="btn btn-primary fw-semibold">Verifikasi Perusahaan</a>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
 
             <!-- APP QR CODE CARD -->
             <div class="card border-0 shadow-sm mb-3 text-white"
