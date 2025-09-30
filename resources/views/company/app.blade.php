@@ -85,6 +85,32 @@
 @stack('scripts')
 <body>
 
+    <!-- BANNER PERINGATAN (tengah) -->
+<div class="alert alert-warning d-flex justify-content-center align-items-center border-0 rounded-0 mb-0 py-3 px-4 text-center"
+     role="alert" style="background-color:#f8e1bc; color:#333; font-size:14px;">
+
+  <!-- Icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F48620" class="me-2"
+       viewBox="0 0 24 24">
+    <path d="M12 22C6.477 22 2 17.523 2 12S6.477
+             2 12 2s10 4.477 10 10-4.477 10-10
+             10Zm-1-7v2h2v-2h-2Zm0-8v6h2V7h-2Z">
+    </path>
+  </svg>
+
+  <!-- Text + Action -->
+<span class="fw-semibold" style="font-size:17px;">
+  Verifikasi perusahaan anda untuk posting lowongan pekerjaan dan dapatkan akses ke banyak fitur.
+  <a href="#"
+    class="fw-semibold text-primary text-decoration-none ms-1"
+    data-bs-toggle="modal"
+    data-bs-target="#verificationModal">
+    Verifikasi Perusahaan
+    </a>
+</span>
+
+</div>
+
   <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
   <div class="container-fluid px-4">
