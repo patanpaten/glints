@@ -102,6 +102,7 @@
 <span class="fw-semibold" style="font-size:17px;">
   Verifikasi perusahaan anda untuk posting lowongan pekerjaan dan dapatkan akses ke banyak fitur.
   <a href="#"
+    style="letter-spacing: 1px;"
     class="fw-semibold text-primary text-decoration-none ms-1"
     data-bs-toggle="modal"
     data-bs-target="#verificationModal">
@@ -144,13 +145,13 @@
       <div class="d-flex align-items-center gap-3">
 
         <!-- Chat -->
-        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+        <button class="btn btn-outline-dark btn-sm d-flex align-items-center gap-1 fw-bold" style="letter-spacing: 1px;">
           <i class="far fa-comment-alt"></i>
           CHAT
         </button>
 
         <!-- Pasang Loker -->
-        <a href="{{ route('company.jobs.create') }}" class="btn btn-primary btn-sm fw-bold">
+        <a href="{{ route('company.jobs.create') }}" class="btn btn-primary btn-sm fw-bold" style="letter-spacing: 1px;">
           PASANG LOKER
         </a>
 

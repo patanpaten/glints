@@ -41,28 +41,26 @@
                 <h4 class="fw-bold text-dark mb-3">Gratis</h4>
 
                 <!-- Tombol disabled -->
-                <button class="btn fw-semibold w-100 mb-3 border" style="background-color:#dee2e6; color:#6c757d;" disabled>
+                <button class="btn fw-bold w-100 border" style="letter-spacing: 1px; background-color:#dee2e6; color:#6c757d;" disabled>
                     Paket Anda Saat Ini
                 </button>
-
-                <hr class="my-0">
-
+                <hr>
                 <!-- List Fitur -->
                 <p class="fw-semibold small mb-2">Terdapat:</p>
                 <ul class="list-unstyled text-start small mb-0">
                     <li class="d-flex align-items-center mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#6c757d" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                         <span class="ms-2">5 slot loker</span>
                     </li>
                     <li class="d-flex align-items-start mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                         fill="#6c757d" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
-                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
-                                10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10
+                                10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656
                                 5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
                     </svg>
                     <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
@@ -91,14 +89,14 @@
                     <p class="text-muted small"><span class="fw-semibold">6-10 Slot Aktif </span><br> Perekrutan fleksibel untuk bisnis yang sedang berkembang.</p>
                     <p class="text-muted small">Mulai dari</p>
                     <h3 class="fw-bold text-dark">Rp 630.000</h3>
-                    <button class="btn btn-primary w-100 mt-3">Pilih Paket</button>
+                    <button class="btn btn-primary w-100 mt-3 fw-bold" style="letter-spacing: 1px;">Pilih Paket</button>
                     <hr>
                     <ul class="list-unstyled text-start small">
                         <li class="fw-semibold">Terdapat :</li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Unlimited slot loker</span>
@@ -106,21 +104,21 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">VIP Membership</span>
                         </li>
 
-                        
+
 
                         <li class="d-flex align-items-start mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                             fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
-                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10
+                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656
                                     5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
                         </svg>
                         <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
@@ -128,45 +126,45 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Master Admin</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Dashboard Analytics</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Akses riwayat lamaran</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Lamaran Terdahulu</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Pesan Otomatis</span>
@@ -192,14 +190,14 @@
 
                     <p class="text-muted small"><span class="fw-semibold">20 Slot Aktif </span><br> Dirancang untuk kebutuhan perekrutan massal dan cepat.</p><br><br>
                     <h3 class="fw-bold text-dark">Rp 4.350.000</h3>
-                    <button class="btn btn-primary w-100 mt-3">Pilih Paket</button>
+                    <button class="btn btn-primary w-100 mt-3 fw-bold" style="letter-spacing: 1px;">Pilih Paket</button>
                     <hr>
                     <ul class="list-unstyled text-start small">
                         <li class="fw-semibold">Terdapat :</li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Unlimited slot loker</span>
@@ -207,9 +205,9 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">VIP Membership</span>
@@ -217,19 +215,19 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Unduh data lamaran</span>
                         </li>
 
                         <li class="d-flex align-items-start mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                             fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
-                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10
+                                    10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656
                                     5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
                         </svg>
                         <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
@@ -237,45 +235,45 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Master Admin</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Dashboard Analytics</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Akses riwayat lamaran</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Lamaran Terdahulu</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Pesan Otomatis</span>
@@ -299,14 +297,14 @@
                     </div>
 
                     <p class="text-muted small"><span class="fw-semibold">Unlimited Slot Aktif </span><br> Terbaik bagi rekruter yang terus-menerus merekrut dalam jumlah besar.</p><br><br><br>
-                    <button class="btn btn-primary w-100 mt-3">Hubungi Sales</button>
+                    <button class="btn btn-primary w-100 mt-3 fw-bold" style="letter-spacing: 1px;">Hubungi Sales</button>
                     <hr>
                     <ul class="list-unstyled text-start small">
                         <li class="fw-semibold">Terdapat :</li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Unlimited slot loker</span>
@@ -314,9 +312,9 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">VIP Membership</span>
@@ -324,19 +322,19 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Unduh data lamaran</span>
                         </li>
 
                         <li class="d-flex align-items-start mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                 fill="#0BAEEC" viewBox="0 0 24 24" class="flex-shrink-0 mt-1">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 
-                                        10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10
+                                        10-4.477 10-10 10Zm-.997-6 7.07-7.071-1.414-1.414-5.656
                                         5.657-2.829-2.829-1.414 1.414L11.003 16Z"/>
                             </svg>
                             <span class="ms-2">Chat terbatas ke kandidat per lowongan</span>
@@ -344,45 +342,45 @@
 
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Master Admin</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Dashboard Analytics</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Akses riwayat lamaran</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Lamaran Terdahulu</span>
                         </li>
                         <li class="d-flex align-items-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#0BAEEC" height="18" viewBox="0 0 24 24">
-                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 
-                                        4.477 10 10-4.477 10-10 10Zm-.997-6 
-                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 
+                                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10
+                                        4.477 10 10-4.477 10-10 10Zm-.997-6
+                                        7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414
                                         1.414L11.003 16Z"></path>
                             </svg>
                             <span class="ms-2">Fitur Pesan Otomatis</span>
@@ -399,9 +397,9 @@
     <div class="text-center mt-5">
         <p class="fw-semibold mb-3">Butuh Paket yang Fleksibel?</p>
         <p class="text-muted small">Tim sales kami siap membantu menemukan dan merancang paket yang sesuai untuk Anda.</p>
-        
+
         <!-- Tombol Hubungi Sales -->
-        <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center gap-2 mx-auto"
+        <button class="btn btn-outline-dark fw-bold d-flex justify-content-center align-items-center gap-2 mx-auto" style="letter-spacing: 1px;"
                 data-bs-toggle="modal" data-bs-target="#hubungiSalesModal">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24" class="d-block">
                 <path d="M16.8 19 14 22.5 11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2ZM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1Z"></path>
@@ -414,7 +412,7 @@
         <!-- Ganti modal-lg jadi default biar lebih kecil -->
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 620px;">
             <div class="modal-content rounded-3 shadow" style="min-height: 400px; max-height: 85vh;">
-            
+
             <!-- Header -->
             <div class="modal-header flex-column align-items-start text-start">
                 <h5 class="modal-title fw-bold" id="hubungiSalesLabel">Permohonan Bantuan</h5>
@@ -475,7 +473,7 @@
                 <!-- Textarea dengan counter -->
                 <div class="mb-3">
                     <label class="form-label">Jelaskan Kebutuhan Anda</label>
-                    <textarea class="form-control border-1  border-secondary" rows="4" maxlength="300" style="min-height: 170px;" 
+                    <textarea class="form-control border-1  border-secondary" rows="4" maxlength="300" style="min-height: 170px;"
                             placeholder="Jelaskan berapa loker yang ingin Anda pasang per bulan atau kebutuhan rekrutmen lainnya"
                             oninput="document.getElementById('charCount').textContent = this.value.length + ' / 300';"></textarea>
                     <div class="d-flex justify-content-end">
@@ -487,8 +485,8 @@
 
             <!-- Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary fw-semibold" data-bs-dismiss="modal">Batalkan</button>
-                <button type="button" class="btn btn-primary fw-semibold">Kirim</button>
+                <button type="button" class="btn btn-outline-dark fw-semibold" style="letter-spacing: 1px;" data-bs-dismiss="modal">Batalkan</button>
+                <button type="button" class="btn btn-primary fw-semibold" style="letter-spacing: 1px;">Kirim</button>
             </div>
             </div>
         </div>

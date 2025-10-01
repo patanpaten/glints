@@ -39,7 +39,7 @@
                                     data-bs-toggle="tab"
                                     data-bs-target="#purchases"
                                     type="button">
-                                Dibeli 
+                                Dibeli
                                 <span class="badge bg-light text-dark border rounded-pill px-2">0</span>
                             </button>
                         </li>
@@ -179,7 +179,7 @@
                         </svg>
                         <span class="fw-bold fs-5 text-dark">0</span>
                     </div>
-                    <button class="btn btn-outline-secondary w-100 fw-semibold">
+                    <button class="btn btn-outline-dark w-100 fw-semibold">
                         Top Up
                     </button>
                 </div>
@@ -196,7 +196,7 @@
                         <span class="fw-bold fs-6 text-dark">Standard</span>
                     </div>
                     <p class="text-muted small mb-3">0 / 5 lowongan sedang aktif</p>
-                    <a href="{{ route('company.pricing') }}" class="btn btn-outline-secondary w-100 fw-semibold">
+                    <a href="{{ route('company.pricing') }}" class="btn btn-outline-dark w-100 fw-semibold">
                         Lihat Paket
                     </a>
 

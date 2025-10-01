@@ -40,6 +40,7 @@
                         </span>
                         <!-- Tombol / Link -->
                         <a href="#"
+                        style="letter-spacing: 1px;"
                         class="text-primary fw-semibold text-decoration-none"
                         data-bs-toggle="modal"
                         data-bs-target="#verificationModal">
@@ -53,7 +54,7 @@
 
                             <!-- Header -->
                             <div class="modal-header border-0">
-                                <h5 class="modal-title fw-semibold" id="verificationModalLabel">Verifikasi Perusahaan</h5>
+                                <h5 class="modal-title fw-semibold" style="letter-spacing: 1px;" id="verificationModalLabel">Verifikasi Perusahaan</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                             </div>
                             <div class="border-top"></div>
@@ -478,7 +479,7 @@
   </div>
 </div>
 
-<style> 
+<style>
     .card-active {
   border: 1px solid #0d6efd !important;  /* biru Bootstrap */
   background-color: #e7f1ff !important;  /* biru muda */
@@ -536,14 +537,14 @@
                 </div>
             </div>
             <div class="d-flex gap-2">
-                <a href="{{ route('company.profile.edit2') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                <a href="{{ route('company.profile.edit2') }}" class="btn btn-outline-dark d-flex align-items-center gap-2 fw-semibold" style="letter-spacing: 1px;">
                 <svg viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="currentColor">
                     <path d="M10.345 4.667H17.5a.833.833 0 0 1 .833.833v11.667A.833.833 0 0 1 17.5 18h-15a.833.833 0 0 1-.833-.833V3.833A.833.833 0 0 1 2.5 3h6.178l1.667 1.667ZM10 11.333a2.083 2.083 0 1 0 0-4.166 2.083 2.083 0 0 0 0 4.166ZM6.667 15.5h6.666a3.333 3.333 0 1 0-6.666 0Z"></path>
                 </svg>
                 Edit Profil Perusahaan
                 </a>
 
-                <a href="{{ route('company.premium-features.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('company.premium-features.index') }}" class="btn btn-outline-dark fw-semibold" style="letter-spacing: 1px;">
                 <svg viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="currentColor">
                     <path d="M15.833 18.833H4.167a2.5 2.5 0 0 1-2.5-2.5V3a.833.833 0 0 1 .833-.833h11.667A.833.833 0 0 1 15 3v10h3.333v3.333a2.5 2.5 0 0 1-2.5 2.5ZM15 14.667v1.666a.834.834 0 0 0 1.667 0v-1.666H15ZM5 6.333V8h6.667V6.333H5Zm0 3.334v1.666h6.667V9.667H5ZM5 13v1.667h4.167V13H5Z"></path>
                 </svg>
@@ -562,7 +563,7 @@
         <div class="col-md-8">
             <div class="card mb-4 border-0 shadow-sm">
                 <div class="card-header bg-white border-0 py-3">
-                    <p class="fw-bold mb-0" style="color: #2D2D2D;">Daftar Lowongan Kerja</p>
+                    <p class="fw-bold mb-0" style="color: #2D2D2D; letter-spacing: 1px;">Daftar Lowongan Kerja</p>
                 </div>
                 <div class="card-body">
                     <!-- FILTER -->
@@ -657,19 +658,19 @@
                                         <div class="row text-center border rounded-2 py-2 mt-5" style="min-width: 550px; margin-right: 5px; me-10">
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->chat_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Chat Dimulai</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Chat Dimulai</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->applications_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Terhubung</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Terhubung</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4">
                                                 <p class="fw-bold mb-0">{{ $job->rejected_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Belum Sesuai</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Belum Sesuai</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
@@ -682,18 +683,18 @@
 
                                     {{-- Kiri: Boost --}}
                                     <div>
-                                        <button class="btn btn-outline-warning btn-sm fw-semibold">
+                                        <button class="btn btn-outline-warning btn-sm fw-semibold" style="letter-spacing: 1px;">
                                             <i class="fas fa-bolt me-1"></i> Boost Lowongan
                                         </button>
                                     </div>
 
                                     {{-- Kanan: tombol lain --}}
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center gap-2" style="letter-spacing: 1px;">
                                         <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                         class="btn btn-primary btn-sm fw-semibold">
                                             Kelola Kandidat
                                         </a>
-                                        <button class="btn btn-outline-secondary btn-sm fw-semibold">
+                                        <button class="btn btn-outline-secondary btn-sm fw-semibold" style="letter-spacing: 1px;">
                                             Recommended Talents
                                         </button>
 
@@ -760,6 +761,7 @@
                                 <p class="text-muted small mb-2">Verifikasi perusahaan Anda untuk posting lowongan pekerjaan dan dapatkan akses ke banyak fitur.</p>
                                 <a href="#"
                                 class="btn btn-outline-primary btn-sm"
+                                style="letter-spacing: 1px;"
                                 data-bs-toggle="modal"
                                 data-bs-target="#verificationModal">
                                 Verifikasi Perusahaan
@@ -782,6 +784,7 @@
                 <h6 class="fw-bold mb-2">Fitur baru: Glints VIP!</h6>
                 <p class="small mb-3">Dapatkan fitur eksklusif untuk proses rekrutmen yang lebih cepat!</p>
                 <button class="btn btn-outline-light btn-sm fw-semibold px-3"
+                        style="letter-spacing: 1px;"
                         data-bs-toggle="modal"
                         data-bs-target="#verifikasiModal">
                     Upgrade ke VIP
@@ -798,7 +801,7 @@
 
                 <!-- Header -->
                 <div class="modal-header" style="border-top: 1px solid #dee2e6;">
-                    <h5 class="modal-title fw-bold" id="verifikasiLabel">Verifikasi Perusahaan Diperlukan</h5>
+                    <h5 class="modal-title fw-bold" id="verifikasiLabel" style="letter-spacing: 1px;">Verifikasi Perusahaan Diperlukan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -829,8 +832,8 @@
 
                 <!-- Footer -->
                 <div class="modal-footer" style="border-top: 1px solid #dee2e6;">
-                    <button type="button" class="btn btn-outline-secondary fw-semibold" data-bs-dismiss="modal">Tutup</button>
-                    <a href="{{ route('company.account-settings.index') }}" class="btn btn-primary fw-semibold">Verifikasi Perusahaan</a>
+                    <button type="button" class="btn btn-outline-secondary fw-semibold" style="letter-spacing: 1px;" data-bs-dismiss="modal">Tutup</button>
+                    <a href="{{ route('company.account-settings.index') }}" class="btn btn-primary fw-semibold" style="letter-spacing: 1px;">Verifikasi Perusahaan</a>
                 </div>
 
                 </div>
@@ -875,7 +878,7 @@
                     <h6 class="fw-bold mb-1">Lebih Mudah di Aplikasi</h6>
                     <p class="small mb-3">Tingkatin pengalaman rekrutmenmu dengan Aplikasi Glints!</p>
                     <a href="https://help.glints.com/hc/id-id/sections/29365279475993-Glints-App-for-Employers-FAQs"
-                    target="_blank" class="btn btn-outline-light btn-sm fw-semibold px-3">
+                    target="_blank" class="btn btn-outline-light btn-sm fw-semibold px-3" style="letter-spacing: 1px;">
                     Cara Menggunakan
                     </a>
                 </div>
