@@ -27,7 +27,7 @@
             <div class="flex items-center space-x-4">
 
                 {{-- Tombol Masuk --}}
-                <a href="{{ route('company.login') }}" 
+                <a href="#"
                 class="px-4 py-1.5 border rounded text-xs font-medium hover:bg-gray-100">
                     Hubungi Bantuan
                 </a>
