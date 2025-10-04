@@ -38,29 +38,60 @@
                 <div class="card-body">
 
                     <!-- TABS -->
-                    <ul class="nav nav-tabs mb-3">
-                        <li class="nav-item">
-                            <a class="nav-link fw-semibold {{ $activeTab == 'loker' ? 'active text-primary' : 'text-muted' }}"
-                               data-bs-toggle="tab"
-                               href="#loker">
-                                Loker Aktif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-semibold {{ $activeTab == 'pembayaran' ? 'active text-primary' : 'text-muted' }}"
-                               data-bs-toggle="tab"
-                               href="#pembayaran">
-                                Riwayat Pembayaran
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-semibold {{ $activeTab == 'credit' ? 'active text-primary' : 'text-muted' }}"
-                               data-bs-toggle="tab"
-                               href="#credit">
-                                Riwayat Credit
-                            </a>
-                        </li>
-                    </ul>
+<ul class="nav nav-tabs mb-3 border-bottom">
+    <!-- Loker Aktif -->
+    <li class="nav-item">
+        <a class="nav-link fw-semibold px-3 {{ $activeTab == 'loker' ? 'active' : '' }}"
+           data-bs-toggle="tab"
+           href="#loker">
+            Loker Aktif
+        </a>
+    </li>
+
+    <!-- Riwayat Pembayaran -->
+    <li class="nav-item">
+        <a class="nav-link fw-semibold px-3 {{ $activeTab == 'pembayaran' ? 'active' : '' }}"
+           data-bs-toggle="tab"
+           href="#pembayaran">
+            Riwayat Pembayaran
+        </a>
+    </li>
+
+    <!-- Riwayat Credit -->
+    <li class="nav-item">
+        <a class="nav-link fw-semibold px-3 {{ $activeTab == 'credit' ? 'active' : '' }}"
+           data-bs-toggle="tab"
+           href="#credit">
+            Riwayat Credit
+        </a>
+    </li>
+</ul>
+
+<style>
+    /* Tab default */
+    .nav-tabs .nav-link {
+        color: #6c757d; /* abu */
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+    /* Hover */
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd; /* biru bootstrap */
+        background-color: rgba(13, 110, 253, 0.05);
+        border-radius: 6px 6px 0 0;
+    }
+
+    /* Aktif */
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        border: none;
+        border-bottom: 3px solid #0d6efd;
+        background-color: transparent;
+        border-radius: 0;
+    }
+</style>
+
 
                     <!-- TAB CONTENT -->
                     <div class="tab-content">

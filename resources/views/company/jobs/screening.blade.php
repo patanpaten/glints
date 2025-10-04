@@ -49,7 +49,7 @@
                                 </span>
 
                                 <div class="form-check mt-2 fw-semibold">
-                                    {{-- <input type="checkbox" class="form-check-input" id="glintsVipLocation" 
+                                    {{-- <input type="checkbox" class="form-check-input" id="glintsVipLocation"
                                         name="vip_location" value="1">
                                     <label class="form-check-label fw-semibold" for="glintsVipLocation"> --}}
                                         Pertanyaan Skrining
@@ -57,13 +57,13 @@
                                 </div>
 
                                 <div class="form-text">
-                                    Beli Glints VIP untuk menggunakan fitur ini. 
+                                    Beli Glints VIP untuk menggunakan fitur ini.
                                     <a href="#" class="text-primary fw-bold text-decoration-none">Upgrade ke VIP</a>
                                 </div>
                             <hr class="my-3">
 
 {{-- Belum bisa diskip, harus ngisi ini --}}
-                <div class="mb-3" style="filter: blur(1px);">
+                <div class="mb-3">
                     <label class="form-label fw-bold">Tambah Pertanyaan</label> <br>
                     <p class="text-muted">0/9 pertanyaan ditambahkan</p>
                     <select name="type" class="form-select" required>

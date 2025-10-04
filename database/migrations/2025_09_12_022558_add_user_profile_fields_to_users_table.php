@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('position')->nullable()->after('city');
             $table->string('nationality')->nullable()->after('position');
             $table->string('preferred_language')->nullable()->after('nationality');
-            $table->string('avatar')->nullable()->after('preferred_language');
+            $table->string('profile_picture')->nullable()->after('preferred_language');
         });
     }
 
@@ -35,7 +35,7 @@ return new class extends Migration
                 'position',
                 'nationality',
                 'preferred_language',
-                'avatar'
+                'profile_picture'
             ]);
         });
     }

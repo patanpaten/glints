@@ -231,11 +231,11 @@
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .SearchSectionsc__LocationFieldWrapper-sc-js5c89-4.jKKJYV {
         width: 100%;
     }
-    
+
     .SearchSectionsc__Title-sc-js5c89-1.fcyPfe {
         font-size: 2rem;
     }

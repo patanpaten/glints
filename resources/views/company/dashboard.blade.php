@@ -40,6 +40,7 @@
                         </span>
                         <!-- Tombol / Link -->
                         <a href="#"
+                        style="letter-spacing: 1px;"
                         class="text-primary fw-semibold text-decoration-none"
                         data-bs-toggle="modal"
                         data-bs-target="#verificationModal">
@@ -53,7 +54,7 @@
 
                             <!-- Header -->
                             <div class="modal-header border-0">
-                                <h5 class="modal-title fw-semibold" id="verificationModalLabel">Verifikasi Perusahaan</h5>
+                                <h5 class="modal-title fw-semibold" style="letter-spacing: 1px;" id="verificationModalLabel">Verifikasi Perusahaan</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                             </div>
                             <div class="border-top"></div>
@@ -478,12 +479,76 @@
   </div>
 </div>
 
-<style> 
+<style>
     .card-active {
   border: 1px solid #0d6efd !important;  /* biru Bootstrap */
   background-color: #e7f1ff !important;  /* biru muda */
   transition: all 0.2s ease-in-out;
 }
+
+.btn-outline-secondary {
+  border-radius: 6px;
+  height: 38px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* biru tipis */
+  border-color: #0d6efd; /* border biru */
+  color: #6e6f70;
+}
+
+.custom-input::placeholder {
+  color: #6c757d;       /* abu-abu bootstrap */
+  font-weight: 600;     /* semi-bold */
+  opacity: 0.7;         /* agak samar */
+}
+
+/* Hilangkan border bawaan Bootstrap */
+.custom-tabs {
+  border-bottom: none;
+}
+
+.custom-tabs .nav-link {
+  color: #666;
+  font-weight: 500;
+  border: none;
+  background: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+    cursor: pointer; 
+}
+
+.custom-tabs .nav-link .badge {
+  background-color: #d3d3d3;
+  color: #363636;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.custom-tabs .nav-link.active {
+  color: #017EB7;
+}
+
+.custom-tabs .nav-link.active .badge {
+  background-color: #e6f4fa; /* biru tipis */
+  color: #017EB7;
+}
+
+/* Garis bawah tipis hanya untuk tab aktif */
+.custom-tabs .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #017EB7;
+  border-radius: 1px;
+}
+
 
 </style>
 
@@ -536,14 +601,14 @@
                 </div>
             </div>
             <div class="d-flex gap-2">
-                <a href="{{ route('company.profile.edit2') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                <a href="{{ route('company.profile.edit2') }}" class="btn btn-outline-dark d-flex align-items-center gap-2 fw-semibold" style="letter-spacing: 1px;">
                 <svg viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="currentColor">
                     <path d="M10.345 4.667H17.5a.833.833 0 0 1 .833.833v11.667A.833.833 0 0 1 17.5 18h-15a.833.833 0 0 1-.833-.833V3.833A.833.833 0 0 1 2.5 3h6.178l1.667 1.667ZM10 11.333a2.083 2.083 0 1 0 0-4.166 2.083 2.083 0 0 0 0 4.166ZM6.667 15.5h6.666a3.333 3.333 0 1 0-6.666 0Z"></path>
                 </svg>
                 Edit Profil Perusahaan
                 </a>
 
-                <a href="{{ route('company.premium-features.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('company.premium-features.index') }}" class="btn btn-outline-dark fw-semibold" style="letter-spacing: 1px;">
                 <svg viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="currentColor">
                     <path d="M15.833 18.833H4.167a2.5 2.5 0 0 1-2.5-2.5V3a.833.833 0 0 1 .833-.833h11.667A.833.833 0 0 1 15 3v10h3.333v3.333a2.5 2.5 0 0 1-2.5 2.5ZM15 14.667v1.666a.834.834 0 0 0 1.667 0v-1.666H15ZM5 6.333V8h6.667V6.333H5Zm0 3.334v1.666h6.667V9.667H5ZM5 13v1.667h4.167V13H5Z"></path>
                 </svg>
@@ -562,62 +627,70 @@
         <div class="col-md-8">
             <div class="card mb-4 border-0 shadow-sm">
                 <div class="card-header bg-white border-0 py-3">
-                    <p class="fw-bold mb-0" style="color: #2D2D2D;">Daftar Lowongan Kerja</p>
+                    <p class="fw-bold mb-0 fs-4" style="color: #2D2D2D; letter-spacing: 1px;">
+                        Daftar Lowongan Kerja
+                        </p>
+
                 </div>
                 <div class="card-body">
                     <!-- FILTER -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="position-relative w-50">
-                            <input type="text" placeholder="Cari nama loker atau kata kunci"
-                                class="form-control"
+                            <input type="text"
+                                placeholder="Cari nama loker atau kata kunci"
+                                class="form-control custom-input"
                                 style="height: 38px; border-radius: 6px; padding-left: 40px;">
+
                             <i class="fas fa-search position-absolute"
                             style="top: 50%; left: 12px; transform: translateY(-50%); color: #666;"></i>
                         </div>
 
                         <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-outline-secondary d-flex align-items-center" style="height: 38px; border-radius: 6px;">
-                                <i class="fas fa-sort me-2"></i>
-                                <span class="text-muted fw-bold me-2">Urutkan:</span>
-                                <span>Tanggal Diupdate</span>
-                            </button>
+                        <button class="btn btn-outline-secondary d-flex align-items-center px-3 py-2" style="border-radius: 6px; height: 38px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" class="me-2">
+                            <path d="M12 8H8.001L8 20H6V8H2l5-5 5 5Zm10 8-5 5-5-5h4V4h2v12h4Z"></path>
+                            </svg>
+                            <span class="fw-bold text-muted me-2">Urutkan:</span>
+                            <span>Tanggal Diupdate</span>
+                        </button>
                         </div>
+
                     </div>
 
-                    <!-- TAB -->
-                    <ul class="nav nav-tabs mb-4" role="tablist" style="border-bottom: none;">
-                        <li class="nav-item" role="presentation">
-                            <a href="#" class="nav-link active d-flex align-items-center justify-content-between"
-                            style="color: #666;" role="tab">
-                                Semua Loker
-                                <span class="badge rounded-pill" style="background-color: #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs }}</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Aktif
-                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $activeJobs }}</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Nonaktif
-                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">{{ $totalJobs - $activeJobs }}</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #017EB7;" role="tab">
-                                Dalam Review
-                                <span class="badge rounded-pill" style="background-color: #d3d3d3; color:#017EB7; margin-left: 6px;">0</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a href="#" class="nav-link d-flex align-items-center justify-content-between" style="color: #666;" role="tab">
-                                Draft
-                                <span class="badge rounded-pill" style="background-color:  #d3d3d3; color: #363636; margin-left: 6px;">0</span>
-                            </a>
-                        </li>
+                    <!-- Tab Header -->
+                    <ul class="nav nav-tabs custom-tabs mb-4 border-bottom" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-semua" role="tab">
+                        Semua Loker
+                        <span class="badge">1</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-aktif" role="tab">
+                        Aktif
+                        <span class="badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-aktif" role="tab">
+                        Nonaktif
+                        <span class="badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-aktif" role="tab">
+                        Dalam Review
+                        <span class="badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-review" role="tab">
+                        Semua Draft
+                        <span class="badge">1</span>
+                        </a>
+                    </li>
                     </ul>
+                
 
                     {{-- DAFTAR LOWONGAN DINAMIS --}}
                     @if($recentJobs && $recentJobs->count() > 0)
@@ -639,37 +712,38 @@
                                         {{-- Kiri: Judul + Detail --}}
                                         <div class="me-3" style="max-width: 200px; word-wrap: break-word; white-space: normal;">
                                             <h5 class="fw-semibold mb-2 text-wrap">{{ $job->title }}</h5>
-                                            <div class="d-flex flex-column text-muted small gap-1 mt-4">
+                                            <div class="d-flex flex-column text-muted small gap-2 mt-4">
                                                 <span class="text-wrap">
                                                     <i class="fas fa-clock me-1"></i> {{ $job->employment_type }}
                                                 </span>
-                                                <span class="text-wrap mt-2">
+                                                <span class="text-wrap">
                                                     <i class="fas fa-map-marker-alt me-1"></i> {{ $job->office_address }}
                                                 </span>
-                                                <span class="text-wrap mt-3">
+                                                <span class="text-wrap">
                                                     <i class="fas fa-calendar-alt me-1"></i>
                                                     Aktif hingga: {{ $job->created_at->addDays(30)->format('d M Y') }}
                                                 </span>
                                             </div>
+
                                         </div>
 
                                         {{-- Kanan: Statistik --}}
                                         <div class="row text-center border rounded-2 py-2 mt-5" style="min-width: 550px; margin-right: 5px; me-10">
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->chat_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Chat Dimulai</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Chat Dimulai</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'interview']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4 border-end">
                                                 <p class="fw-bold mb-0">{{ $job->applications_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Terhubung</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Terhubung</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
                                             <div class="col-4">
                                                 <p class="fw-bold mb-0">{{ $job->rejected_count ?? 0 }}</p>
-                                                <p class="text-muted small mb-1">Belum Sesuai</p>
+                                                <p class="text-muted small mb-1" style="letter-spacing: 1px;">Belum Sesuai</p>
                                                 <a href="{{ route('company.applications.index', ['job' => $job->id, 'status' => 'rejected']) }}"
                                                 class="text-primary small fw-bold text-decoration-none">Lihat</a>
                                             </div>
@@ -682,18 +756,18 @@
 
                                     {{-- Kiri: Boost --}}
                                     <div>
-                                        <button class="btn btn-outline-warning btn-sm fw-semibold">
+                                        <button class="btn btn-outline-warning btn-sm fw-semibold" style="letter-spacing: 1px;">
                                             <i class="fas fa-bolt me-1"></i> Boost Lowongan
                                         </button>
                                     </div>
 
                                     {{-- Kanan: tombol lain --}}
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center gap-2" style="letter-spacing: 1px;">
                                         <a href="{{ route('company.applications.index', ['job' => $job->id]) }}"
                                         class="btn btn-primary btn-sm fw-semibold">
                                             Kelola Kandidat
                                         </a>
-                                        <button class="btn btn-outline-secondary btn-sm fw-semibold">
+                                        <button class="btn btn-outline-secondary btn-sm fw-semibold" style="letter-spacing: 1px;">
                                             Recommended Talents
                                         </button>
 
@@ -726,17 +800,15 @@
                                 </div>
                             </div>
                         @endforeach
+                        <!-- PAGINATION -->
+                        <div class="d-flex justify-content-center mt-4 fw-semibold text-gray">
+                            <p>Anda telah mencapai batas maksimal</p>
+                        </div>
                     @else
                         <div class="text-center py-5">
                             <h5 class="text-muted mt-3">Belum memiliki item</h5>
                         </div>
                     @endif
-
-                    <!-- PAGINATION -->
-                    <div class="d-flex justify-content-center mt-4">
-{{-- ini cuman tampil ketika ada loker, kalo gak ada loker yang tampil hanya yang atas --}}
-                        <p>Anda telah mencapai batas maksimal</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -744,22 +816,26 @@
         <!-- SIDEBAR (kanan) -->
         <div class="col-md-4">
             <!-- NOTIFIKASI -->
-            <div class="card mb-4 border-0 shadow-sm">
-                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
-                    <span>Notifikasi (1)</span>
+            <div class="card mb-4" style="border: 1px solid #e0e0e0;">
+                <div class="card-header bg-white border-0 py-3">
+                    <span class="fw-bold">Notifikasi (1)</span>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <!-- Notifikasi 1: Verifikasi -->
-                    <div class="p-3">
-                        <div class="d-flex align-items-start gap-3 mb-2">
+                    <div class="border rounded p-3">
+                        <div class="d-flex align-items-start gap-2">
                             <div class="bg-light p-2 rounded">
-                                <i class="fas fa-shield-alt text-secondary" style="font-size:20px;"></i>
+                                <i class="fas fa-shield-alt text-secondary" style="font-size:16px;"></i>
                             </div>
                             <div>
                                 <h6 class="mb-1 fw-bold">Verifikasi Diperlukan</h6>
-                                <p class="text-muted small mb-2">Verifikasi perusahaan Anda untuk posting lowongan pekerjaan dan dapatkan akses ke banyak fitur.</p>
+                                <p class="text-muted small mb-2">
+                                    Verifikasi perusahaan anda untuk posting lowongan pekerjaan
+                                    dan dapatkan akses ke banyak fitur.
+                                </p>
                                 <a href="#"
-                                class="btn btn-outline-primary btn-sm"
+                                class="fw-bold text-primary"
+                                style="font-size: 14px; text-decoration: none;"
                                 data-bs-toggle="modal"
                                 data-bs-target="#verificationModal">
                                 Verifikasi Perusahaan
@@ -769,6 +845,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- VIP CARD -->
             <div class="card border-0 shadow-sm mb-3 text-white"
@@ -782,6 +859,7 @@
                 <h6 class="fw-bold mb-2">Fitur baru: Glints VIP!</h6>
                 <p class="small mb-3">Dapatkan fitur eksklusif untuk proses rekrutmen yang lebih cepat!</p>
                 <button class="btn btn-outline-light btn-sm fw-semibold px-3"
+                        style="letter-spacing: 1px;"
                         data-bs-toggle="modal"
                         data-bs-target="#verifikasiModal">
                     Upgrade ke VIP
@@ -798,7 +876,7 @@
 
                 <!-- Header -->
                 <div class="modal-header" style="border-top: 1px solid #dee2e6;">
-                    <h5 class="modal-title fw-bold" id="verifikasiLabel">Verifikasi Perusahaan Diperlukan</h5>
+                    <h5 class="modal-title fw-bold" id="verifikasiLabel" style="letter-spacing: 1px;">Verifikasi Perusahaan Diperlukan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -829,8 +907,8 @@
 
                 <!-- Footer -->
                 <div class="modal-footer" style="border-top: 1px solid #dee2e6;">
-                    <button type="button" class="btn btn-outline-secondary fw-semibold" data-bs-dismiss="modal">Tutup</button>
-                    <a href="{{ route('company.account-settings.index') }}" class="btn btn-primary fw-semibold">Verifikasi Perusahaan</a>
+                    <button type="button" class="btn btn-outline-secondary fw-semibold" style="letter-spacing: 1px;" data-bs-dismiss="modal">Tutup</button>
+                    <a href="{{ route('company.account-settings.index') }}" class="btn btn-primary fw-semibold" style="letter-spacing: 1px;">Verifikasi Perusahaan</a>
                 </div>
 
                 </div>
@@ -875,7 +953,7 @@
                     <h6 class="fw-bold mb-1">Lebih Mudah di Aplikasi</h6>
                     <p class="small mb-3">Tingkatin pengalaman rekrutmenmu dengan Aplikasi Glints!</p>
                     <a href="https://help.glints.com/hc/id-id/sections/29365279475993-Glints-App-for-Employers-FAQs"
-                    target="_blank" class="btn btn-outline-light btn-sm fw-semibold px-3">
+                    target="_blank" class="btn btn-outline-light btn-sm fw-semibold px-3" style="letter-spacing: 1px;">
                     Cara Menggunakan
                     </a>
                 </div>

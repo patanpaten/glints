@@ -3,6 +3,44 @@
 @section('title', 'Company Dashboard')
 
 @section('content')
+<style>
+    /* Hilangkan border default Bootstrap */
+.custom-tabs .nav-link {
+  border: none;
+  color: #6c757d;
+  font-weight: 500;
+  background: transparent;
+  position: relative;
+}
+
+.custom-tabs .nav-link.active {
+  color: #007bff; /* biru */
+  font-weight: 600;
+}
+
+.custom-tabs .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #007bff; /* garis biru bawah */
+  border-radius: 3px;
+}
+
+/* Badge abu-abu kecil */
+.custom-tabs .badge {
+  background-color: #f0f0f0;
+  color: #555;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 2px 6px;
+}
+
+
+</style>
 <div class="container-fluid py-4">
 
     <!-- HEADER PERUSAHAAN -->
@@ -20,30 +58,31 @@
                 <div class="card-body">
 
                     <!-- TABS -->
-                    <ul class="nav nav-tabs mb-3">
-                        <!-- Semua Fitur -->
-                        <li class="nav-item">
-                            <button class="nav-link active fw-semibold text-primary"
-                                    id="features-tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#features"
-                                    type="button">
-                                Semua Fitur
-                            </button>
-                        </li>
+<ul class="nav nav-tabs custom-tabs mb-3">
+    <!-- Semua Fitur -->
+    <li class="nav-item">
+        <button class="nav-link active"
+                id="features-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#features"
+                type="button">
+            Semua Fitur
+        </button>
+    </li>
 
-                        <!-- Dibeli -->
-                        <li class="nav-item">
-                            <button class="nav-link fw-semibold text-muted d-flex align-items-center gap-2"
-                                    id="purchases-tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#purchases"
-                                    type="button">
-                                Dibeli 
-                                <span class="badge bg-light text-dark border rounded-pill px-2">0</span>
-                            </button>
-                        </li>
-                    </ul>
+    <!-- Dibeli -->
+    <li class="nav-item">
+        <button class="nav-link d-flex align-items-center gap-2"
+                id="purchases-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#purchases"
+                type="button">
+            Dibeli
+            <span class="badge">0</span>
+        </button>
+    </li>
+</ul>
+
 
                     <!-- TAB CONTENT -->
                     <div class="tab-content">
@@ -54,10 +93,13 @@
                                 <div class="col-12 mb-3">
                                     <div class="border rounded p-3">
                                         <p class="mb-2">
-                                            <span style="background-color:#fdfa3a;">
-                                                <span class="fw-semibold text-dark">Promo Terbatas!</span> <span class="text-dark">Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!</span>
+                                            <span class="px-2 py-1 rounded-pill" 
+                                                style="background-color: #f0d807; color:#000000; display: inline-block;">
+                                                <span class="fw-semibold">Promo Terbatas!</span> 
+                                                Upgrade ke VIP, dapatkan 150 Glints Credits per bulan gratis!
                                             </span>
                                         </p>
+
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-start">
                                                 <img src="{{ asset('images/glints-vip-icon.svg') }}"
@@ -69,7 +111,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                            <button class="btn btn-primary fw-semibold px-4">Beli</button>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +130,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                            <button class="btn btn-primary fw-semibold px-4">Beli</button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +149,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                            <button class="btn btn-primary fw-semibold px-4">Beli</button>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +168,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary fw-semibold">Beli</button>
+                                            <button class="btn btn-primary fw-semibold px-4">Beli</button>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +221,7 @@
                         </svg>
                         <span class="fw-bold fs-5 text-dark">0</span>
                     </div>
-                    <button class="btn btn-outline-secondary w-100 fw-semibold">
+                    <button class="btn btn-outline-dark w-100 fw-semibold">
                         Top Up
                     </button>
                 </div>
@@ -196,7 +238,7 @@
                         <span class="fw-bold fs-6 text-dark">Standard</span>
                     </div>
                     <p class="text-muted small mb-3">0 / 5 lowongan sedang aktif</p>
-                    <a href="{{ route('company.pricing') }}" class="btn btn-outline-secondary w-100 fw-semibold">
+                    <a href="{{ route('company.pricing') }}" class="btn btn-outline-dark w-100 fw-semibold">
                         Lihat Paket
                     </a>
 
@@ -204,46 +246,53 @@
                 </div>
             </div>
 
-            <!-- MENU FITUR -->
-<div class="card border-0 shadow-sm mb-3">
-    <div class="list-group list-group-flush">
-        <!-- Riwayat Pembayaran -->
-        <a href="{{ route('company.riwayat', ['tab' => 'ORDER_HISTORY']) }}"
-           class="list-group-item list-group-item-action d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                <path d="m16 2 5 5v13.992A1 1 0 0 1 20.007 22H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.998 2H16Zm-1 2H5v16h14V8h-4V4Zm-2 5v4h3v2h-5V9h2Z"></path>
-            </svg>
-            <span class="text-muted">Riwayat Pembayaran</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-            </svg>
-        </a>
+            <!-- CARD UTAMA -->
+<div class="card shadow-sm mb-3 border-0">
+    <div class="card-body p-3">
 
-        <!-- Loker Aktif -->
-        <a href="{{ route('company.riwayat', ['tab' => 'ACTIVE_JOBS']) }}"
-           class="list-group-item list-group-item-action d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                <path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4ZM4 16v3h16v-3H4Zm0-2h16V7H4v7ZM9 3v2h6V3H9Zm2 8h2v2h-2v-2Z"></path>
-            </svg>
-            <span class="text-muted">Loker Aktif</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-            </svg>
-        </a>
+        <!-- LIST FITUR -->
+        <div class="list-group">
 
-        <!-- Riwayat Credits -->
-        <a href="{{ route('company.riwayat', ['tab' => 'CREDIT_HISTORY']) }}"
-           class="list-group-item list-group-item-action d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="me-2">
-                <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
-            </svg>
-            <span class="text-muted">Riwayat Credits</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="24" height="24" class="ms-auto">
-                <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
-            </svg>
-        </a>
+            <!-- Riwayat Pembayaran -->
+            <a href="{{ route('company.riwayat', ['tab' => 'ORDER_HISTORY']) }}"
+               class="list-group-item list-group-item-action d-flex align-items-center rounded mb-2 border">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="20" height="20" class="me-3">
+                    <path d="m16 2 5 5v13.992A1 1 0 0 1 20.007 22H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.998 2H16Zm-1 2H5v16h14V8h-4V4Zm-2 5v4h3v2h-5V9h2Z"></path>
+                </svg>
+                <span class="flex-grow-1 fw-medium text-dark">Riwayat Pembayaran</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#999999" width="18" height="18">
+                    <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                </svg>
+            </a>
+
+            <!-- Loker Aktif -->
+            <a href="{{ route('company.riwayat', ['tab' => 'ACTIVE_JOBS']) }}"
+               class="list-group-item list-group-item-action d-flex align-items-center rounded mb-2 border">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="20" height="20" class="me-3">
+                    <path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4ZM4 16v3h16v-3H4Zm0-2h16V7H4v7ZM9 3v2h6V3H9Zm2 8h2v2h-2v-2Z"></path>
+                </svg>
+                <span class="flex-grow-1 fw-medium text-dark">Loker Aktif</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#999999" width="18" height="18">
+                    <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                </svg>
+            </a>
+
+            <!-- Riwayat Credits -->
+            <a href="{{ route('company.riwayat', ['tab' => 'CREDIT_HISTORY']) }}"
+               class="list-group-item list-group-item-action d-flex align-items-center rounded mb-2 border">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#666666" width="20" height="20" class="me-3">
+                    <path d="m10.72 2 4.2 5.78L22 7.69l-4.15 5.64L20.26 20l-6.76-2.22L7.88 22v-7.08L2 10.86l6.73-2.09L10.72 2Z"></path>
+                </svg>
+                <span class="flex-grow-1 fw-medium text-dark">Riwayat Credits</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#999999" width="18" height="18">
+                    <path d="m13.172 12-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414 4.95-4.95Z"></path>
+                </svg>
+            </a>
+
+        </div>
     </div>
 </div>
+
 
         </div>
     </div>

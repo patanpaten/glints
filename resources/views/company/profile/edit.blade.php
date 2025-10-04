@@ -1,13 +1,13 @@
 @extends('company.layout-profil')
 
-@section('title', 'Edit Company Profile')
+@section('title', 'Profil Perusahaan')
 
 @section('content')
 <div x-data="companyForm()" class="max-w-2xl mx-auto bg-white border border-gray-200 rounded-md shadow-sm">
 
     {{-- Header --}}
     <div class="border-b px-6 py-3">
-        <h2 class="text-base font-semibold text-gray-800">Edit Profil Perusahaan</h2>
+        <h2 class="text-base font-semibold text-gray-800">Profil Perusahaan</h2>
     </div>
 
     {{-- Body --}}
@@ -22,7 +22,7 @@
                     <span class="text-lg text-gray-500 font-bold" id="logo-placeholder">+</span>
                     <span class="text-xs text-gray-600">Unggah</span>
                     <input type="file" name="logo" id="logo-input" class="hidden" accept=".jpg,.jpeg,.png">
-                    <img id="logo-preview" src="{{ $company->logo ? asset('storage/'.$company->logo) : '' }}" 
+                    <img id="logo-preview" src="{{ $company->logo ? asset('storage/'.$company->logo) : '' }}"
                          class="absolute inset-0 w-full h-full object-cover rounded-md border {{ $company->logo ? '' : 'hidden' }}">
                 </label>
                 <span class="text-sm text-gray-700">Logo Perusahaan</span>
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Logo upload + preview
     logoInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
-        
+
         if (file) {
             const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
             if (!allowedTypes.includes(file.type)) {
