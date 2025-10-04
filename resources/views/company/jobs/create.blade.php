@@ -24,7 +24,7 @@
 @section('content')
 <div class="card mb-4 border-1 rounded-0">
     <div class="card-header text-center bg-white border-bottom-0 py-4" style="min-height:70px; margin-top:-1px;">
-        <div class="fw-bold mb-3">Pasang Loker</div>
+        <div class="fw-bold mb-3 fs-4">Pasang Loker</div>
 
         {{-- STEP NAVIGATION --}}
         <div class="d-flex justify-content-center">
@@ -587,9 +587,9 @@
                             <small class="text-muted">Otomatis disimpan dalam DRAFT: {{ now()->diffForHumans() }}</small>
                         </div>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-secondary" type="button" disabled>Pratinjau</button>
-                            <button class="btn btn-secondary" type="button" disabled>Sebelumnya</button>
-                            <button class="btn btn-primary" type="submit">Selanjutnya</button>
+                            <button class="btn btn-secondary fw-semibold" type="button" disabled>Pratinjau</button>
+                            <button class="btn btn-secondary fw-semibold" type="button" disabled>Sebelumnya</button>
+                            <button class="btn btn-primary fw-semibold" type="submit">Selanjutnya</button>
                         </div>
                     </div>
                 </div>

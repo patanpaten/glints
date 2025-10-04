@@ -15,33 +15,60 @@
             </div>
 
             <!-- Tabs -->
-            <ul class="nav nav-tabs px-3">
-                <!-- Cari Kandidat -->
-                <li class="nav-item">
-                    <a class="nav-link active d-flex align-items-center gap-2" href="#">
-                        <i class="fas fa-search"></i>
-                        Cari Kandidat
-                    </a>
-                </li>
+<ul class="nav nav-tabs px-3 border-bottom">
+    <!-- Cari Kandidat -->
+    <li class="nav-item">
+        <a class="nav-link active d-flex align-items-center gap-2" href="#">
+            <i class="fas fa-search"></i>
+            <span>Cari Kandidat</span>
+        </a>
+    </li>
 
-                <!-- Kandidat Disimpan -->
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <i class="fas fa-bookmark"></i>
-                        Kandidat Disimpan
-                        <span class="badge bg-secondary ms-1">0</span>
-                    </a>
-                </li>
+    <!-- Kandidat Disimpan -->
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <i class="fas fa-bookmark"></i>
+            <span>Kandidat Disimpan</span>
+            <span class="badge rounded-pill bg-light text-muted border">1</span>
+        </a>
+    </li>
 
-                <!-- Kandidat Dibuka -->
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <i class="fas fa-lock-open"></i>
-                        Kandidat Dibuka
-                        <span class="badge bg-secondary ms-1">0</span>
-                    </a>
-                </li>
-            </ul>
+    <!-- Kandidat Dibuka -->
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <i class="fas fa-lock-open"></i>
+            <span>Kandidat Dibuka</span>
+            <span class="badge rounded-pill bg-light text-muted border">0</span>
+        </a>
+    </li>
+</ul>
+
+<style>
+    .nav-tabs .nav-link {
+        color: #6c757d; /* abu default */
+        border: none;
+        padding: 8px 16px;
+    }
+
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd;
+        background-color: transparent;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        font-weight: 600;
+        border: none;
+        border-bottom: 3px solid #0d6efd; /* garis biru bawah */
+        background-color: transparent;
+    }
+
+    .nav-tabs .badge {
+        font-size: 12px;
+        font-weight: 500;
+    }
+</style>
+
 
         </div>
     </div>
